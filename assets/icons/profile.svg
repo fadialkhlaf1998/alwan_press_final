@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Layer_2" data-name="Layer 2" transform="translate(0 -0.211)">
+    <g id="person">
+      <rect id="Rectangle_534" data-name="Rectangle 534" width="24" height="24" transform="translate(0 0.211)" fill="#8e8e8e" opacity="0"/>
+      <path id="Path_1313" data-name="Path 1313" d="M12,11A4,4,0,1,0,8,7a4,4,0,0,0,4,4Z" fill="#8e8e8e"/>
+      <path id="Path_1314" data-name="Path 1314" d="M18,21a1,1,0,0,0,1-1A7,7,0,1,0,5,20a1,1,0,0,0,1,1Z" fill="#8e8e8e"/>
+    </g>
+  </g>
+</svg>

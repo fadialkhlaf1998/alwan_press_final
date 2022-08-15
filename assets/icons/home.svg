@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Layer_2" data-name="Layer 2" transform="translate(0 -0.211)">
+    <g id="grid">
+      <rect id="Rectangle_468" data-name="Rectangle 468" width="24" height="24" transform="translate(0 0.211)" fill="#fff" opacity="0"/>
+      <path id="Path_1220" data-name="Path 1220" d="M9,3H5A2,2,0,0,0,3,5V9a2,2,0,0,0,2,2H9a2,2,0,0,0,2-2V5A2,2,0,0,0,9,3Z" fill="#fff"/>
+      <path id="Path_1221" data-name="Path 1221" d="M19,3H15a2,2,0,0,0-2,2V9a2,2,0,0,0,2,2h4a2,2,0,0,0,2-2V5A2,2,0,0,0,19,3Z" fill="#fff"/>
+      <path id="Path_1222" data-name="Path 1222" d="M9,13H5a2,2,0,0,0-2,2v4a2,2,0,0,0,2,2H9a2,2,0,0,0,2-2V15A2,2,0,0,0,9,13Z" fill="#fff"/>
+      <path id="Path_1223" data-name="Path 1223" d="M19,13H15a2,2,0,0,0-2,2v4a2,2,0,0,0,2,2h4a2,2,0,0,0,2-2V15A2,2,0,0,0,19,13Z" fill="#fff"/>
+    </g>
+  </g>
+</svg>
