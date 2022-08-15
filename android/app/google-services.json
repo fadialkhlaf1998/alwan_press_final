@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "29903051542",
+    "project_id": "alwan-press",
+    "storage_bucket": "alwan-press.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29903051542:android:cbe09266d8959a50b44e37",
+        "android_client_info": {
+          "package_name": "com.example.alwan_press"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29903051542-278gmk59jll406b1bocdutjd7m82rs66.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ0Vey-wSVOL2gpYCr35aICpE9goMJhrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29903051542-278gmk59jll406b1bocdutjd7m82rs66.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "29903051542-r5ucti9l2e712jp35gg6d6rrve5g0o9i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.alwanPress"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29903051542:android:e273fa0c29a9f231b44e37",
+        "android_client_info": {
+          "package_name": "com.maxart.alwan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29903051542-278gmk59jll406b1bocdutjd7m82rs66.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ0Vey-wSVOL2gpYCr35aICpE9goMJhrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29903051542-278gmk59jll406b1bocdutjd7m82rs66.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "29903051542-r5ucti9l2e712jp35gg6d6rrve5g0o9i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.alwanPress"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
