@@ -48,20 +48,23 @@ class IntroController extends GetxController{
           customerServiceList.value = data.customerService;
           searchSuggestionList.value = data.suggestionSearch;
           bannerList.value = data.banners;
+          print('****************');
           Store.loadAddress();
           Global.getUserInformation().then((value) {
-            if(Global.userId != -1){
-              Api.login(Global.username, Global.password).then((value) {
-                Get.offAll(()=>MainClass());
-              });
-            }else{
-              Get.offAll(()=>SignIn());
-            }
+            Future.delayed(const Duration(milliseconds: 750 )).then((value){
+              if(Global.userId != -1){
+
+                Api.login(Global.username, Global.password).then((value) {
+                  Get.offAll(()=>MainClass());
+                });
+              }else{
+                Get.offAll(()=>SignIn());
+              }
+            });
+
 
           });
-          // Future.delayed(const Duration(milliseconds: 2000 )).then((value){
-          //
-          // });
+
         });
       }else{
         //todo no internet

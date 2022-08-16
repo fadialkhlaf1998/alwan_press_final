@@ -265,7 +265,7 @@ class AllSubCategory extends StatelessWidget {
                   maxLines: 2,
                   style: TextStyle(
                       color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
-                      fontSize: 16,
+                      fontSize: 13,
                       overflow: TextOverflow.ellipsis
                   )
               ),

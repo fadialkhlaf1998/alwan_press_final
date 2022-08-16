@@ -31,13 +31,14 @@ class Api {
   }
 
   static Future getStartUpData() async {
+    print('request begin');
     var request = http.Request('GET', Uri.parse(url + 'api/new/start-up'));
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
       String data = await response.stream.bytesToString();
-
+      print(data);
       return StartUp.fromMap(jsonDecode(data));
     }
     else {

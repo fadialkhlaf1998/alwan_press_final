@@ -75,5 +75,7 @@
   "days": "Days",
   "hr": "Hours",
   "min": "Min",
-  "sec": "Sec"
+  "sec": "Sec",
+  "remaining_day": "Remaining Days",
+  "free_shipping": "Free Shipping"
 }

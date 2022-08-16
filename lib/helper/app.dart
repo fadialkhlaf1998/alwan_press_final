@@ -17,5 +17,11 @@ class App{
   //     colorText: Colors.white,
   //   );
   // }
-
+  static textColor(){
+    if(MyTheme.isDarkTheme.value){
+      return Colors.white;
+    }else{
+      return Colors.black;
+    }
+  }
 }

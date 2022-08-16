@@ -2,6 +2,7 @@ import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/controller/intro_controller.dart';
 import 'package:alwan_press/controller/sign_in_controller.dart';
 import 'package:alwan_press/helper/app.dart';
+import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/main.dart';
 import 'package:alwan_press/view/contact_information.dart';
 import 'package:alwan_press/view/forget_password.dart';
@@ -44,11 +45,12 @@ class _SignInState extends State<SignIn> {
     // });
   }
   _SignInState(){
-    Future.delayed(const Duration(milliseconds: 0)).then((value){
+    Future.delayed(const Duration(milliseconds: 500)).then((value){
       scrollController.animateTo(
         scrollController.position.maxScrollExtent,
-        duration: const Duration(milliseconds: 6000),
-        curve: Curves.fastOutSlowIn,
+        duration: const Duration(milliseconds: 2000),
+        curve: Curves.easeInQuart,
+        // curve: Curves.bounceIn,
       );
     });
   }
@@ -68,35 +70,41 @@ class _SignInState extends State<SignIn> {
           alignment: Alignment.topCenter,
           children: [
             Container(
+
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
+                decoration:MyTheme.isDarkTheme.value? const BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage('assets/image/background.png')
                     )
+                ):BoxDecoration(
+                  color: Colors.white
                 )
             ),
             _titleAnimation(context),
-            SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const SizedBox(height: 200),
-                   // _titleAnimation(context),
-                    _inputTextField(context),
-                    AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 600),
-                      child: signInController.signUpOption.isTrue
-                          ? _signUpOptions(context)
-                          : _signUpText(),
-                    ),
-                  ],
+            Positioned(bottom: 0,child: Container(
+              // color: Colors.red,
+              child: SingleChildScrollView(
+                child: Container(
+                  height: MediaQuery.of(context).size.height*0.6,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // const SizedBox(height: 200),
+                      // _titleAnimation(context),
+                      _inputTextField(context),
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 600),
+                        child: signInController.signUpOption.isTrue
+                            ? _signUpOptions(context)
+                            : _signUpText(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
+            ),)
           ],
         ),
       );
@@ -106,13 +114,16 @@ class _SignInState extends State<SignIn> {
   _titleAnimation(context){
     return Container(
       height: MediaQuery.of(context).size.height * 0.4,
+      width: MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         controller: scrollController,
         child: Container(
+            width: MediaQuery.of(context).size.width*3,
+            height: MediaQuery.of(context).size.height * 0.3,
             child: FittedBox(
               fit: BoxFit.cover,
-              child: Text('Welcome',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white.withOpacity(0.05))
+              child: Text('Welcome',style: TextStyle(fontWeight: FontWeight.bold,color: MyTheme.isDarkTheme.value?App.textColor().withOpacity(0.05):App.textColor().withOpacity(0.1))
               ),
             )
         ),
@@ -130,17 +141,17 @@ class _SignInState extends State<SignIn> {
           color: Colors.transparent,
           child: TextField(
             controller: signInController.username,
-            style: const TextStyle(color: Colors.white),
+            style: TextStyle(color: App.textColor()),
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(width: 1, color: Colors.white),
+                borderSide:  BorderSide(width: 1, color:App.textColor()),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(width: 1, color: Colors.white),
+                borderSide:  BorderSide(width: 1, color: App.textColor()),
               ),
-              label: Text(App_Localization.of(context).translate("email"), style: TextStyle(color: Colors.white))
+              label: Text(App_Localization.of(context).translate("email"), style: TextStyle(color:App.textColor()))
             ),
           ),
         ),
@@ -151,7 +162,7 @@ class _SignInState extends State<SignIn> {
           color: Colors.transparent,
           child: TextField(
             controller: signInController.password,
-            style: const TextStyle(color: Colors.white),
+            style:  TextStyle(color: App.textColor()),
             obscureText: !signInController.showPassword.value,
             decoration: InputDecoration(
               suffixIcon: signInController.showPassword.isFalse
@@ -159,23 +170,23 @@ class _SignInState extends State<SignIn> {
                 onTap: (){
                   signInController.showPassword.value = !signInController.showPassword.value;
                 },
-                child: const Icon(Icons.visibility_outlined, color: Colors.white,),
+                child: Icon(Icons.visibility_outlined, color: App.textColor(),),
               )
                 : GestureDetector(
                 onTap: (){
                   signInController.showPassword.value = !signInController.showPassword.value;
                 },
-                child: const Icon(Icons.visibility_off_outlined, color: Colors.white,),
+                child: Icon(Icons.visibility_off_outlined, color:App.textColor(),),
               ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(width: 1, color: Colors.white),
+                  borderSide:  BorderSide(width: 1, color: App.textColor()),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(width: 1, color: Colors.white),
+                  borderSide:  BorderSide(width: 1, color: App.textColor()),
                 ),
-                label: Text(App_Localization.of(context).translate("password"), style: TextStyle(color: Colors.white))
+                label: Text(App_Localization.of(context).translate("password"), style: TextStyle(color:App.textColor()))
             ),
           ),
         ),
@@ -196,7 +207,7 @@ class _SignInState extends State<SignIn> {
           child: Container(
             height: 25,
             color: Colors.transparent,
-            child: Text(App_Localization.of(context).translate("forget_password"),style: const TextStyle(fontSize: 14,color: Colors.white),),
+            child: Text(App_Localization.of(context).translate("forget_password"),style: TextStyle(fontSize: 14,color: App.textColor()),),
           ),
         ),
         const SizedBox(height: 30),
@@ -217,9 +228,9 @@ class _SignInState extends State<SignIn> {
                   ? Center(child: Container(
                 width: 25,
                   height: 25,
-                  child: CircularProgressIndicator(color: Colors.white,strokeWidth: 2.5)))
+                  child: CircularProgressIndicator(color: App.textColor(),strokeWidth: 2.5)))
                   : Text(App_Localization.of(context).translate("sign_in").toUpperCase(),
-                  style: TextStyle(color: Colors.white,fontSize: 16)),
+                  style: TextStyle(color: App.textColor(),fontSize: 16)),
             ),
           ),
         ),
@@ -238,7 +249,7 @@ class _SignInState extends State<SignIn> {
             ),
             child:  Center(
               child: Text(App_Localization.of(context).translate("login_us_guest").toUpperCase(),
-                  style: const TextStyle(color: Colors.white,fontSize: 16)),
+                  style: TextStyle(color: App.textColor(),fontSize: 16)),
             ),
           ),
         ),
@@ -253,7 +264,7 @@ class _SignInState extends State<SignIn> {
       children: [
         Container(
           child: Text(App_Localization.of(context).translate("don't_have_account"),
-            style: TextStyle(color: Colors.white.withOpacity(0.8),fontSize: 14),),
+            style: TextStyle(color: App.textColor().withOpacity(0.8),fontSize: 14),),
         ),
         const SizedBox(width: 5),
         GestureDetector(
@@ -263,7 +274,7 @@ class _SignInState extends State<SignIn> {
           child: Container(
             color: Colors.transparent,
           //  margin: const EdgeInsets.only(bottom: 60),
-            child: Text(App_Localization.of(context).translate("sign_up"),style: TextStyle(color: Colors.white.withOpacity(0.8),fontSize: 16,decoration: TextDecoration.underline),),
+            child: Text(App_Localization.of(context).translate("sign_up"),style: TextStyle(color: App.textColor().withOpacity(0.8),fontSize: 16,decoration: TextDecoration.underline),),
           ),
         ),
       ],
@@ -275,123 +286,60 @@ class _SignInState extends State<SignIn> {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Stack(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // GestureDetector(
-              //   onTap: (){
-              //     signInController.showWhatsAppList.value = !signInController.showWhatsAppList.value;
-              //   },
-              //   child: AnimatedContainer(
-              //     duration: const Duration(milliseconds: 400),
-              //     width: signInController.showWhatsAppList.value ? 200 : 60,
-              //     height: 60,
-              //     decoration: BoxDecoration(
-              //       color: App.darkGrey,
-              //      //shape: BoxShape.circle
-              //       borderRadius: BorderRadius.circular(30)
-              //     ),
-              //     child: Center(
-              //       child: AnimatedSwitcher(
-              //         duration: const Duration(milliseconds: 400),
-              //         child: signInController.showWhatsAppList.value
-              //             ? ListView.builder(
-              //             scrollDirection: Axis.horizontal,
-              //             itemCount: introController.customerServiceList.length+1,
-              //             itemBuilder: (context, index){
-              //             return index==0?
-              //             GestureDetector(
-              //               onTap: (){
-              //                 signInController.showWhatsAppList.value = false;
-              //               },
-              //               child: Container(
-              //                 width: 50,
-              //                 height: 50,
-              //                 decoration: BoxDecoration(
-              //                     color: App.darkGrey,
-              //                     shape: BoxShape.circle
-              //                 ),
-              //                 child: Center(
-              //                     child: SizedBox(
-              //                         width: 35,
-              //                         height: 35,
-              //                         child: AnimatedSwitcher(
-              //                           duration: const Duration(milliseconds: 400),
-              //                           child: signInController.showWhatsAppList.value ? const Icon(Icons.keyboard_backspace,color: Colors.white,size: 30,): SvgPicture.asset('assets/icons/whatsapp.svg'),
-              //                         )
-              //                     )
-              //                 ),
-              //               ),
-              //             )
-              //                 :Container(
-              //               margin: const EdgeInsets.symmetric(horizontal: 10),
-              //               width: 50,
-              //               height: 50,
-              //               child: Center(
-              //                   child: Image.network(introController.customerServiceList[index-1].image, fit: BoxFit.cover,)
-              //               ),
-              //             );
-              //           },
-              //         )
-              //             : SizedBox(
-              //           width: 35,
-              //           height: 35,
-              //           child: AnimatedSwitcher(
-              //             duration: const Duration(milliseconds: 400),
-              //             child:  SvgPicture.asset('assets/icons/whatsapp.svg'),
-              //           )
-              //         ),
-              //       )
-              //     ),
-              //   ),
-              // ),
-              GestureDetector(
-                onTap: (){
-                  introController.showWhatsAppList.value = true;
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (c, a1, a2) => ContactInformation(),
-                      transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
-                      transitionDuration: Duration(milliseconds: 500),
+          Container(
+            width: MediaQuery.of(context).size.width*0.9,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+
+                GestureDetector(
+                  onTap: (){
+                    introController.showWhatsAppList.value = true;
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (c, a1, a2) => ContactInformation(),
+                        transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
+                        transitionDuration: Duration(milliseconds: 500),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: App.darkGrey,
+                        shape: BoxShape.circle
                     ),
-                  );
-                },
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      color: App.darkGrey,
-                      shape: BoxShape.circle
-                  ),
-                  child: Center(child: SvgPicture.asset('assets/icons/whatsapp.svg',width: 30,height: 30,)),
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
-                  introController.showPhoneList.value = true;
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (c, a1, a2) => ContactInformation(),
-                      transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
-                      transitionDuration: const Duration(milliseconds: 500),
-                    ),
-                  );
-                },
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      color: App.darkGrey,
-                      shape: BoxShape.circle
-                  ),
-                  child: Center(
-                    child: Icon(Icons.phone,size: 30,color: Colors.white),
+                    child: Center(child: SvgPicture.asset('assets/icons/whatsapp.svg',width: 30,height: 30,)),
                   ),
                 ),
-              ),
-            ],
+                GestureDetector(
+                  onTap: (){
+                    introController.showPhoneList.value = true;
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (c, a1, a2) => ContactInformation(),
+                        transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
+                        transitionDuration: const Duration(milliseconds: 500),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: App.darkGrey,
+                        shape: BoxShape.circle
+                    ),
+                    child: Center(
+                      child: Icon(Icons.phone,size: 30,color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
