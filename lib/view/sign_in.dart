@@ -230,7 +230,7 @@ class _SignInState extends State<SignIn> {
                   height: 25,
                   child: CircularProgressIndicator(color: App.textColor(),strokeWidth: 2.5)))
                   : Text(App_Localization.of(context).translate("sign_in").toUpperCase(),
-                  style: TextStyle(color: App.textColor(),fontSize: 16)),
+                  style: TextStyle(color: Colors.white,fontSize: 16)),
             ),
           ),
         ),
@@ -249,7 +249,7 @@ class _SignInState extends State<SignIn> {
             ),
             child:  Center(
               child: Text(App_Localization.of(context).translate("login_us_guest").toUpperCase(),
-                  style: TextStyle(color: App.textColor(),fontSize: 16)),
+                  style: TextStyle(color: Colors.white,fontSize: 16)),
             ),
           ),
         ),

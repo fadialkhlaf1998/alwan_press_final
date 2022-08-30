@@ -66,17 +66,20 @@ class OrderPage extends StatelessWidget {
 
   _orderList(context){
     return RefreshIndicator(
-      onRefresh: () async {
-        orderController.getOrderData();
+        key: orderController.refreshIndicatorKey,
+        onRefresh: () async {
+        return Future.delayed(const Duration(milliseconds: 1200)).then((value){
+         orderController.getOrderData();
+        });
       },
       child: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.08),
         height: MediaQuery.of(context).size.height,
         color: !MyTheme.isDarkTheme.value ?  Colors.white : Colors.transparent,
         child: AnimatedSwitcher(
-          duration: Duration(milliseconds: 600),
+          duration: const Duration(milliseconds: 600),
           child:  orderController.loading.value
-              ? Center(child: CircularProgressIndicator(),)
+              ? const Center(child: CircularProgressIndicator(),)
               :ListView.builder(
             itemCount: orderController.myOrders.length,
             itemBuilder: (context, index){

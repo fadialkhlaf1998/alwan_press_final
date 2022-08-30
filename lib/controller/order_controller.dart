@@ -5,6 +5,7 @@ import 'package:alwan_press/helper/api.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/model/order.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
@@ -15,7 +16,7 @@ class OrderController extends GetxController{
   RxList <Order> myOrders = <Order>[].obs;
   RxBool loading = false.obs;
   RxBool fake = false.obs;
-
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
 
   @override
   void onInit() {
@@ -40,7 +41,7 @@ class OrderController extends GetxController{
   }
 
   getOrderData() async {
-    loading.value == true;
+    // loading.value = true;
     Api.checkInternet().then((internet){
       if(internet){
         Api.getCustomerOrder(Global.userId.toString()).then((value){

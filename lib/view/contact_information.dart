@@ -138,7 +138,7 @@ class ContactInformation extends StatelessWidget {
                                 onTap: (){
                                   if (introController.showWhatsAppList.isTrue){
                                     introController.openWhatApp(context, "We Need Some Information",introController.customerServiceList[introController.contactIndex.value].phone);
-                                  }else if (introController.showPhoneList.value){
+                                  }else if (introController.showPhoneList.isTrue){
                                     introController.openPhone(introController.customerServiceList[introController.contactIndex.value].phone);
                                   }
                                 },

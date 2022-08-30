@@ -257,7 +257,13 @@ class Addresses_2 extends StatelessWidget {
         keyboardType: TextInputType.phone,
         controller: addressController.phone,
         style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+        maxLength: 9,
         decoration: InputDecoration(
+          counterText: '',
+          prefixText: '+971 ',
+            prefixStyle:  TextStyle(
+              color: Theme.of(context).dividerColor,
+            ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(width: 1, color:  addressController.validate.value&&addressController.phone!.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
@@ -279,7 +285,7 @@ class Addresses_2 extends StatelessWidget {
       height: 55,
       color: Colors.transparent,
       child: TextField(
-        keyboardType: TextInputType.phone,
+        keyboardType: TextInputType.text,
         controller: addressController.ad_desc,
         style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
         decoration: InputDecoration(

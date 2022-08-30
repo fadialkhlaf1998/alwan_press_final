@@ -8,6 +8,7 @@ import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/address_2.dart';
+import 'package:alwan_press/view/contact_information.dart';
 import 'package:alwan_press/view/pdf_viwer.dart';
 import 'package:alwan_press/view/sign_in.dart';
 import 'package:flutter/foundation.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -120,7 +122,57 @@ class _ProfileState extends State<Profile> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       _socialMedia(context),
-                      _terms(context),
+                     // _terms(context),
+                      const SizedBox(height: 20),
+                      Text("© 2018 alwan_press. ALL RIGHTS RESERVED.",
+                        style: TextStyle(
+                            color: MyTheme.isDarkTheme.value ? Colors.white :
+                            Colors.black,
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Created by ",
+                              style: TextStyle(
+                                  color: MyTheme.isDarkTheme.value ? Colors.white :
+                                  Colors.black,
+                                  fontSize: 11,
+                                  // fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          GestureDetector(
+                            onTap: () async{
+                              if (!await launchUrl(
+                              Uri.parse('https://www.maxart.ae/'),
+                              // mode: LaunchMode.externalApplication,
+                                mode: LaunchMode.inAppWebView,
+                                webViewConfiguration: const WebViewConfiguration(
+                                    headers: <String, String>{'my_header_key': 'my_header_value'}),
+                                // webViewConfiguration: const WebViewConfiguration(enableJavaScript: false),
+                              )) {
+                              throw 'Could not launch';
+                              }
+                            },
+                            child: Text("MAXART",
+                              style: TextStyle(
+                                color: MyTheme.isDarkTheme.value ? Colors.white :
+                                Colors.black,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+
+                              ),
+                            ),
+                          )
+                          ],
+                        )
+                      ),
                     ],
                   ),
                 ],
@@ -179,13 +231,16 @@ class _ProfileState extends State<Profile> {
                 onTap: () async {
                   if(Global.user!=null){
                     print('not null ---');
-                    if(Global.user!.financialState.length > 0){
+                    if(false){
                       profileController.loading.value = true;
                       profileController.loadPdf().then((value){
                         var pdf = value.path;
                         profileController.loading.value = false;
                         Get.to(()=>PdfViewerPage(pdf));
                       });
+                    }else{
+                      noStatementDialog();
+                      profileController.loading.value = false;
                     }
                   }
                   // mainClassController.selectedIndex.value = 1;
@@ -215,7 +270,7 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                       Center(
-                          child: Text(App_Localization.of(context).translate("my_invoice"),
+                          child: Text(App_Localization.of(context).translate("my_statement"),
                               style: TextStyle(
                                   color: MyTheme.isDarkTheme.value ? Colors.white :
                                   Colors.black,
@@ -307,7 +362,7 @@ class _ProfileState extends State<Profile> {
                         style: TextStyle(
                             color: MyTheme.isDarkTheme.value ? Colors.white :
                             Colors.black,
-                            fontSize: 15,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold
                         )
                     )
@@ -330,7 +385,98 @@ class _ProfileState extends State<Profile> {
         children: [
           GestureDetector(
               onTap: () {
-                //todo
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: Text(App_Localization.of(context).translate('choose_option_to_connect')),
+                    titleTextStyle: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.black,
+                    ),
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                       GestureDetector(
+                         onTap: (){
+                           Get.back();
+                           introController.showWhatsAppList.value = true;
+                           introController.showPhoneList.value = false;
+                           Get.to(()=>ContactInformation());
+                         },
+                         child:  Container(
+                           width: 70,
+                           height: 55,
+                           child: Column(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               SvgPicture.asset('assets/icons/whatsapp-green.svg',width: 30,height: 30,),
+                               Text(
+                                 App_Localization.of(context).translate('whatsapp'),
+                                 style: const TextStyle(color: Colors.black, fontSize: 12),
+                               ),
+                             ],
+                           ),
+                         ),
+                       ),
+                       GestureDetector(
+                         onTap: (){
+                           Get.back();
+                           introController.showPhoneList.value = true;
+                           introController.showWhatsAppList.value = false;
+                           Get.to(()=>ContactInformation());
+                         },
+                         child:  Container(
+                           width: 70,
+                           height: 55,
+                           child: Column(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               Container(
+                                 width: 35,
+                                 height: 35,
+                                 // padding: EdgeInsets.all(10),
+                                 decoration: const BoxDecoration(
+                                     shape: BoxShape.circle,
+                                     color: Colors.black
+                                 ),
+                                 child: const Icon(Icons.phone,size: 20,
+                                   color:  Colors.white,
+                                 ),
+                               ),
+                               Text(
+                                 App_Localization.of(context).translate('phone'),
+                                 style: const TextStyle(color: Colors.black, fontSize: 12),                              ),
+                             ],
+                           ),
+                         )
+                       )
+                      ],
+                    ),
+                    // actions: <Widget>[
+                    //   TextButton(
+                    //     onPressed: () {
+                    //       // Navigator.of(ctx).pop();
+                    //       Get.back();
+                    //     },
+                    //     child: Container(
+                    //       padding: EdgeInsets.symmetric(vertical: 10,horizontal: 8),
+                    //       decoration: BoxDecoration(
+                    //         color: App.pink,
+                    //         borderRadius: BorderRadius.circular(5)
+                    //       ),
+                    //       child: Text(
+                    //           App_Localization.of(context).translate('cancel'),
+                    //         style: TextStyle(
+                    //           color: Colors.white,
+                    //           fontSize: 15
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ],
+                  ),
+                );
+               // Get.to(()=>ContactInformation());
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
@@ -568,7 +714,7 @@ class _ProfileState extends State<Profile> {
           ),
         ),
         SizedBox(height: 20,),
-        Text("© 2018alwan_press. ALL RIGHTS RESERVED.",
+        Text("© 2018 alwan_press. ALL RIGHTS RESERVED.",
           style: TextStyle(
               color: MyTheme.isDarkTheme.value ? Colors.white :
               Colors.black,
@@ -640,6 +786,29 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
+
+  noStatementDialog(){
+    return  showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(App_Localization.of(context).translate('no_statement')),
+        titleTextStyle: const TextStyle(
+          fontSize: 16,
+          color: Colors.black,
+          fontWeight: FontWeight.bold
+        ),
+        content: Text(
+          App_Localization.of(context).translate('request_last_statement'),
+          style: const TextStyle(
+              fontSize: 14,
+              color: Colors.black,
+          ),
+        ),
+      ),
+    );
+  }
+
+
 }
 
 

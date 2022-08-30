@@ -54,10 +54,13 @@ class AddressController_2 extends GetxController {
         adDesc: ad_desc!.text, phone: phone!.text);
     Store.saveAddress(address);
     Store.loadAddress();
+    print('-------------');
+    print(Global.phone);
+    print('------------');
     Get.snackbar(
         'Done!',
         'Address saved successfully',
-        margin: EdgeInsets.only(top: 30,left: 25,right: 25),
+        margin: const EdgeInsets.only(top: 30,left: 25,right: 25),
         backgroundColor: MyTheme.isDarkTheme.value ? Colors.grey.withOpacity(0.5) : Colors.black.withOpacity(0.5),
         colorText: Colors.white
     );

@@ -31,8 +31,8 @@ class MainClass extends StatelessWidget {
         appBar: AppBar(
             elevation: 0,
             toolbarHeight: 0,
-            systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Color(0XFF300A2A),//App.pink,//MyTheme.isDarkTheme.value ? App.black : Colors.white,
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarColor: Color(0XFF181818),
             ),
         ),
         bottomNavigationBar: BottomNavyBar(
