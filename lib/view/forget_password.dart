@@ -1,6 +1,8 @@
 import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/helper/app.dart';
+import 'package:alwan_press/helper/myTheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class ForgetPassword extends StatelessWidget {
@@ -8,6 +10,9 @@ class ForgetPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+    ));
     return Scaffold(
       body: Container(
           width: MediaQuery.of(context).size.width,

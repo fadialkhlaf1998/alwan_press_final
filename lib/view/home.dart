@@ -11,6 +11,7 @@ import 'package:alwan_press/view/search_text_field.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -28,6 +29,9 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx((){
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+      ));
       return Scaffold(
         body: SafeArea(
           child: Stack(

@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:alwan_press/controller/intro_controller.dart';
+import 'package:alwan_press/helper/myTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -36,14 +37,17 @@ class _IntroState extends State<Intro> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Color(0XFF181818)
+    ));
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        toolbarHeight: 0,
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Colors.black,
-        ),
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   toolbarHeight: 0,
+      //   systemOverlayStyle: const SystemUiOverlayStyle(
+      //     statusBarColor: Colors.black,
+      //   ),
+      // ),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,

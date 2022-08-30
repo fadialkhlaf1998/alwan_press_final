@@ -57,15 +57,18 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+
     return Obx((){
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+      ));
       return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          toolbarHeight: 0,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Color(0XFF300A2A),
-          ),
-        ),
+        // appBar: AppBar(
+        //   elevation: 0,
+        //
+        //   backgroundColor: MyTheme.isDarkTheme.value?Color(0XFF300A2A):Colors.white,
+        // ),
+
         body: Stack(
           alignment: Alignment.topCenter,
           children: [

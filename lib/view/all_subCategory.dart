@@ -6,6 +6,7 @@ import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/products_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -26,6 +27,9 @@ class AllSubCategory extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Obx((){
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+      ));
       return Scaffold(
         body: SafeArea(
           child: Stack(

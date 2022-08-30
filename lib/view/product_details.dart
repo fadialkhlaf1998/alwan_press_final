@@ -8,6 +8,7 @@ import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/model/product_list.dart';
 import 'package:alwan_press/view/contact_information.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -26,6 +27,9 @@ class ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx((){
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+      ));
       return Scaffold(
         body: Stack(
           alignment: Alignment.bottomCenter,

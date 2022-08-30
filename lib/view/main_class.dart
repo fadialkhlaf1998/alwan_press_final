@@ -27,14 +27,17 @@ class MainClass extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Obx((){
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+      ));
       return Scaffold(
-        appBar: AppBar(
-            elevation: 0,
-            toolbarHeight: 0,
-            systemOverlayStyle: const SystemUiOverlayStyle(
-              statusBarColor: Color(0XFF181818),
-            ),
-        ),
+        // appBar: AppBar(
+        //     elevation: 0,
+        //     toolbarHeight: 0,
+        //     systemOverlayStyle: const SystemUiOverlayStyle(
+        //       statusBarColor: Color(0XFF181818),
+        //     ),
+        // ),
         bottomNavigationBar: BottomNavyBar(
           backgroundColor: MyTheme.isDarkTheme.value ? App.darkGrey : Colors.white,
           selectedIndex: mainClassController.selectedIndex.value,

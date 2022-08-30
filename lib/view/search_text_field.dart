@@ -106,6 +106,7 @@ class SearchTextField extends SearchDelegate<String> {
                 ),
                 onTap: () {
                   query = suggestions.elementAt(index).title;
+                  Get.to(()=>SearchPage(query));
                   // close(context, query);
                 },
               );

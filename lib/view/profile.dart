@@ -13,6 +13,7 @@ import 'package:alwan_press/view/pdf_viwer.dart';
 import 'package:alwan_press/view/sign_in.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -34,6 +35,9 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+    ));
     return Obx(() => Scaffold(
       body: SafeArea(
         child: Stack(

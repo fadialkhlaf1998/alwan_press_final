@@ -139,6 +139,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    print( MyTheme.isDarkTheme.value);
+    print( "MyTheme.isDarkTheme.value");
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF300A2A):Colors.white
+    ));
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         themeMode: myTheme.value.myTheme,

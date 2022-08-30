@@ -3,6 +3,7 @@ import 'package:alwan_press/controller/sign_in_controller.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
@@ -17,6 +18,9 @@ class ContactInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+    ));
     introController.contactIndex.value = 0;
     return WillPopScope(
       onWillPop: () async {
