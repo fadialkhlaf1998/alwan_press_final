@@ -73,11 +73,15 @@ class Category {
   Category({
     required this.id,
     required this.title,
+    required this.image,
+    required this.color,
     required this.subCategories,
   });
 
   int id;
   String title;
+  dynamic image;
+  dynamic color;
   List<SubCategories> subCategories;
 
   factory Category.fromJson(String str) => Category.fromMap(json.decode(str));
@@ -87,14 +91,19 @@ class Category {
   factory Category.fromMap(Map<String, dynamic> json) => Category(
     id: json["id"],
     title: json["title"],
+    image: json["image"] ?? "",
+    color: json["color"] ?? "",
     subCategories: List<SubCategories>.from(json["sub_categories"].map((x) => SubCategories.fromMap(x))),
   );
 
   Map<String, dynamic> toMap() => {
     "id": id,
     "title": title,
+    "image": image,
+    "color": color,
     "sub_categories": List<dynamic>.from(subCategories.map((x) => x.toMap())),
   };
+
 }
 
 class CustomerService {

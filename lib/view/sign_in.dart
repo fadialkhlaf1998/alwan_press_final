@@ -60,54 +60,52 @@ class _SignInState extends State<SignIn> {
 
     return Obx((){
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-          statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+          statusBarColor: MyTheme.isDarkTheme.value ? const Color(0XFF181818) : Colors.white
       ));
       return Scaffold(
-        // appBar: AppBar(
-        //   elevation: 0,
-        //
-        //   backgroundColor: MyTheme.isDarkTheme.value?Color(0XFF300A2A):Colors.white,
-        // ),
-
         body: Stack(
-          alignment: Alignment.topCenter,
+          alignment: Alignment.center,
           children: [
             Container(
-
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                decoration:MyTheme.isDarkTheme.value? const BoxDecoration(
+                decoration:MyTheme.isDarkTheme.value ? const BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage('assets/image/background.png')
                     )
-                ):BoxDecoration(
+                ) : const BoxDecoration(
                   color: Colors.white
                 )
             ),
-            _titleAnimation(context),
-            Positioned(bottom: 0,child: Container(
-              // color: Colors.red,
-              child: SingleChildScrollView(
-                child: Container(
-                  height: MediaQuery.of(context).size.height*0.6,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      // const SizedBox(height: 200),
-                      // _titleAnimation(context),
-                      _inputTextField(context),
-                      AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 600),
-                        child: signInController.signUpOption.isTrue
-                            ? _signUpOptions(context)
-                            : _signUpText(),
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  _titleAnimation(context),
+                  Container(
+                    // color: Colors.red,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.7,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          // const SizedBox(height: 200),
+                          // _titleAnimation(context),
+                          _inputTextField(context),
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 600),
+                            child: signInController.signUpOption.isTrue
+                                ? _signUpOptions(context)
+                                : _signUpText(),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                  )
+                ],
               ),
-            ),)
+            ),
+
           ],
         ),
       );
@@ -116,7 +114,7 @@ class _SignInState extends State<SignIn> {
 
   _titleAnimation(context){
     return Container(
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: MediaQuery.of(context).size.height * 0.3,
       width: MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -223,7 +221,7 @@ class _SignInState extends State<SignIn> {
             width: MediaQuery.of(context).size.width * 0.9,
             height: 55,
             decoration: BoxDecoration(
-              color: App.pink,
+              color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.circular(10)
             ),
             child:  Center(
@@ -237,7 +235,7 @@ class _SignInState extends State<SignIn> {
             ),
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 15),
         GestureDetector(
           onTap: (){
             FocusManager.instance.primaryFocus?.unfocus();

@@ -9,6 +9,9 @@ class App{
   static Color darkGrey = const Color(0XFF31323B);
   static Color black = const Color(0XFF181818);
   static Color grey = const Color(0XFF8e8e8e);
+  static Color lightGrey = const Color(0XFFf5f5f5);
+  static Color blue = const Color(0XFF0f6db3);
+
   // static mySnackBar(title, description){
   //   return Get.snackbar(
   //     title,

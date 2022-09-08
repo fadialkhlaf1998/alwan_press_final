@@ -8,6 +8,7 @@ import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/all_subCategory.dart';
 import 'package:alwan_press/view/products_list.dart';
 import 'package:alwan_press/view/search_text_field.dart';
+import 'package:alwan_press/widget/darkModeBacground.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 
 
@@ -36,16 +38,7 @@ class Home extends StatelessWidget {
         body: SafeArea(
           child: Stack(
             children: [
-              MyTheme.isDarkTheme.value ? Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage('assets/image/background.png')
-                      )
-                  )
-              ) : const Text(''),
+              DarkModeBackground(),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: SingleChildScrollView(
@@ -53,7 +46,7 @@ class Home extends StatelessWidget {
                     children: [
                       const SizedBox(height: 10),
                       _header(context),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       _body(context)
                     ],
                   ),
@@ -67,27 +60,27 @@ class Home extends StatelessWidget {
   }
 
   _header(context){
-    return SizedBox(
+    return Container(
       width: MediaQuery.of(context).size.width * 0.9,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          homeController.logoMove.value ?
-          SizedBox(
-              height: MediaQuery.of(context).size.width * 0.17,
-              child: Lottie.asset('assets/icons/ICONS.json',fit: BoxFit.cover)
-          )
-          : GestureDetector(
-            onTap: (){
-              homeController.move();
-            },
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.17,
-              height: MediaQuery.of(context).size.width * 0.17,
-              child: Image.asset('assets/icons/Logo-Header.png',fit: BoxFit.cover,)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                color: Colors.transparent,
+                child: const Icon(Icons.menu,size: 25,color: Colors.transparent,),
               ),
+              _logo(context),
+              Container(
+                color: Colors.transparent,
+                child: const Icon(Icons.menu,size: 25),
+              ),
+            ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 15),
           GestureDetector(
             onTap: (){
               showSearch(
@@ -100,10 +93,10 @@ class Home extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               width: MediaQuery.of(context).size.width,
-              height: 45,//MediaQuery.of(context).size.height * 0.06,
+              height: 40,
               decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(25)
+                color: MyTheme.isDarkTheme.value ? App.darkGrey.withOpacity(0.9) : App.lightGrey,
+                borderRadius: BorderRadius.circular(10)
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -127,6 +120,46 @@ class Home extends StatelessWidget {
       ),
     );
   }
+
+  _logo(context){
+    return  Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.fastOutSlowIn,
+          width: homeController.logoMove.value ? MediaQuery.of(context).size.width * 0.3 : MediaQuery.of(context).size.width * 0.12,
+          child: homeController.logoMove.value ?
+          SizedBox(
+              height: MediaQuery.of(context).size.width * 0.12,
+              child: Lottie.asset('assets/icons/ICONS.json',fit: BoxFit.cover)
+          )
+              : GestureDetector(
+            onTap: (){
+              homeController.move();
+            },
+            child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.12,
+                height: MediaQuery.of(context).size.width * 0.12,
+                child: Image.asset('assets/icons/Logo-Header.png',fit: BoxFit.cover,)
+            ),
+          ),
+        ),
+        const SizedBox(width: 7),
+        Container(
+          height: MediaQuery.of(context).size.width * 0.1,
+          width: MediaQuery.of(context).size.width * 0.28,
+          decoration: const BoxDecoration(
+            // color: Colors.red,
+              image: DecorationImage(
+                  fit: BoxFit.contain,
+                  image: AssetImage('assets/icons/logo_text.png')
+              )
+          ),
+        )
+      ],
+    );
+  }
   _body(context){
     return  Column(
         children: [
@@ -142,13 +175,13 @@ class Home extends StatelessWidget {
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.width * 0.45,
-          color: App.grey,
+            height: MediaQuery.of(context).size.height * 0.2,
+          color: Colors.transparent,
           child: CarouselSlider(
             options: CarouselOptions(
               autoPlay: true,
               viewportFraction: 1,
-              autoPlayAnimationDuration: Duration(milliseconds: 1000),
+              autoPlayAnimationDuration: const Duration(milliseconds: 1000),
               autoPlayCurve: Curves.fastOutSlowIn,
               onPageChanged: (index, _){
                 homeController.sliderIndex.value = index;
@@ -160,7 +193,7 @@ class Home extends StatelessWidget {
                 imageUrl: e.image,
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                  //  borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                       image: imageProvider,
                       fit: BoxFit.cover,
@@ -219,19 +252,14 @@ class Home extends StatelessWidget {
   }
   _categoryBar(context){
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 15),
       width: MediaQuery.of(context).size.width * 0.9,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(App_Localization.of(context).translate("category"),
-              style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,
-              color: Theme.of(context).disabledColor
-              )
-          ),
           SizedBox(
-            height: 45,
+            height: 100,
             child: ScrollablePositionedList.builder(
               scrollDirection: Axis.horizontal,
               itemScrollController: homeController.itemScrollController,
@@ -242,7 +270,6 @@ class Home extends StatelessWidget {
                    Obx((){
                      return  GestureDetector(
                        onTap: () async {
-                         // if(settingsController)
                          if(Global.langCode == 'en'){
                            homeController.categoryIndex.value = index;
                            if(MediaQuery.of(context).size.shortestSide < 600){
@@ -252,27 +279,73 @@ class Home extends StatelessWidget {
                            homeController.categoryIndex.value = index;
                          }
                        },
-                       child: Container(
-                           color: Colors.transparent,
-                           child: Center(
-                             child: Text(
-                               introController.categoriesList[index].title,
-                               style: homeController.categoryIndex.value == index
-                                 ? Theme.of(context).textTheme.headline2
-                                   : TextStyle(
-                                 fontSize: 16,
-                                 fontWeight:  homeController.categoryIndex.value == index ? FontWeight.bold : null,
-                                 color:  homeController.categoryIndex.value == index ? Colors.black : App.grey,
+                       child: AnimatedContainer(
+                         duration: const Duration(milliseconds: 500),
+                           width: MediaQuery.of(context).size.width * 0.19,
+                           height: 90,
+                           decoration: BoxDecoration(
+                             color: homeController.categoryIndex.value == index
+                                 ? Color(int.parse('0xFF${introController.categoriesList[index].color.toString().substring(1)}'))
+                                 : MyTheme.isDarkTheme.value ? App.darkGrey : App.lightGrey,
+                             borderRadius: BorderRadius.circular(10)
+                           ),
+                           child: Column(
+                             mainAxisAlignment: MainAxisAlignment.spaceAround,
+                             children: [
+                               Container(
+                                 padding: const EdgeInsets.only(top: 5),
+                                 child: AnimatedSwitcher(
+                                   duration: const Duration(milliseconds: 400),
+                                   child: homeController.categoryIndex.value == index
+                                     ? SvgPicture.network(
+                                     introController.categoriesList[index].image,
+                                     key: const ValueKey('1'),
+                                     fit: BoxFit.contain,
+                                     color: Colors.white,
+                                     width:  MediaQuery.of(context).size.width * 0.15,
+                                     height: 50,
+                                   )
+                                       : SvgPicture.network(
+                                     introController.categoriesList[index].image,
+                                     key: const ValueKey('2'),
+                                     fit: BoxFit.contain,
+                                     color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
+                                     width:  MediaQuery.of(context).size.width * 0.15,
+                                     height: 50,
+                                   ),
+                                 )
                                ),
-                             ),
+                               Container(
+                                 margin: EdgeInsets.symmetric(horizontal: 1),
+                                 child: Text(
+                                   introController.categoriesList[index].title,
+                                   textAlign: TextAlign.center,
+                                   maxLines: 2,
+                                   overflow: TextOverflow.ellipsis,
+                                   style: TextStyle(
+                                     fontSize: 9,
+                                     fontWeight:  homeController.categoryIndex.value == index ? FontWeight.bold : null,
+                                     color:  homeController.categoryIndex.value == index ? Colors.white : MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
+                                   ),
+                                 ),
+                               ),
+                             ],
                            )
                        ),
                      );
                    }),
-                    const SizedBox(width: 20)
+                    const SizedBox(width: 7)
                   ],
                 );
               },
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 10),
+            child: Text(introController.categoriesList[homeController.categoryIndex.value].title,
+                style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,
+                color: Theme.of(context).disabledColor
+                )
             ),
           ),
         ],
@@ -370,7 +443,7 @@ class Home extends StatelessWidget {
                 maxLines: 2,
                   style: TextStyle(
                   color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
-                  fontSize: 16,
+                  fontSize: 12,
                   overflow: TextOverflow.ellipsis
                 )
               ),
