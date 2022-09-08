@@ -57,7 +57,6 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-
     return Obx((){
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
           statusBarColor: MyTheme.isDarkTheme.value ? const Color(0XFF181818) : Colors.white
@@ -66,40 +65,24 @@ class _SignInState extends State<SignIn> {
         body: Stack(
           alignment: Alignment.center,
           children: [
-            Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                decoration:MyTheme.isDarkTheme.value ? const BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/image/background.png')
-                    )
-                ) : const BoxDecoration(
-                  color: Colors.white
-                )
-            ),
+            Dar(),
             SingleChildScrollView(
               child: Column(
                 children: [
                   _titleAnimation(context),
                   Container(
-                    // color: Colors.red,
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.7,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          // const SizedBox(height: 200),
-                          // _titleAnimation(context),
-                          _inputTextField(context),
-                          AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 600),
-                            child: signInController.signUpOption.isTrue
-                                ? _signUpOptions(context)
-                                : _signUpText(),
-                          ),
-                        ],
-                      ),
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _inputTextField(context),
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 600),
+                          child: signInController.signUpOption.isTrue
+                              ? _signUpOptions(context)
+                              : _signUpText(),
+                        ),
+                      ],
                     ),
                   )
                 ],
