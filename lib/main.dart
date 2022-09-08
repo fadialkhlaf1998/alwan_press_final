@@ -19,7 +19,7 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
   description:  'This channel is used for important notifications.', // description
   importance: Importance.max,
 );
-
+///final from Fadi Alkhlaf
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 FlutterLocalNotificationsPlugin();
 
