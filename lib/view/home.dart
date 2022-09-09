@@ -1,19 +1,17 @@
 import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/controller/home_controller.dart';
 import 'package:alwan_press/controller/intro_controller.dart';
-import 'package:alwan_press/controller/settings_controller.dart';
 import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/all_subCategory.dart';
 import 'package:alwan_press/view/products_list.dart';
 import 'package:alwan_press/view/search_text_field.dart';
-import 'package:alwan_press/widget/darkModeBacground.dart';
+import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
@@ -24,21 +22,25 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class Home extends StatelessWidget {
 
+  Home({Key? key}) : super(key: key);
+
   IntroController introController = Get.find();
   HomeController homeController = Get.put(HomeController());
   final dataKey = GlobalKey();
+
+
 
   @override
   Widget build(BuildContext context) {
     return Obx((){
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-          statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+          statusBarColor: MyTheme.isDarkTheme.value ? const Color(0XFF181818) : Colors.white
       ));
       return Scaffold(
         body: SafeArea(
           child: Stack(
             children: [
-              DarkModeBackground(),
+              const DarkModeBackground(),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: SingleChildScrollView(
@@ -60,7 +62,7 @@ class Home extends StatelessWidget {
   }
 
   _header(context){
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.9,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -187,7 +189,7 @@ class Home extends StatelessWidget {
                 homeController.sliderIndex.value = index;
               }
             ),
-            items: introController.bannerList.map((e) => Container(
+            items: introController.bannerList.map((e) => SizedBox(
               width:MediaQuery.of(context).size.width,
               child: CachedNetworkImage(
                 imageUrl: e.image,
@@ -203,25 +205,6 @@ class Home extends StatelessWidget {
               ),
             )).toList(),
           )
-          // ImageSlideshow(
-          //   width: double.infinity,
-          //   height: MediaQuery.of(context).size.height*0.2,
-          //   initialPage: 0,
-          //   indicatorColor: Theme.of(context).primaryColor,
-          //   indicatorBackgroundColor: App.grey,
-          //   children:
-          //   introController.bannerList.map((e) => Container(
-          //     decoration: BoxDecoration(
-          //         //borderRadius: BorderRadius.circular(10),
-          //         image: DecorationImage(
-          //             image: NetworkImage(e.image),
-          //             fit: BoxFit.cover
-          //         )
-          //     ),
-          //   )).toList(),
-          //   autoPlayInterval: 5000,
-          //   isLoop: true,
-          // ),
         ),
         Positioned(
           bottom: 10,
@@ -316,7 +299,7 @@ class Home extends StatelessWidget {
                                  )
                                ),
                                Container(
-                                 margin: EdgeInsets.symmetric(horizontal: 1),
+                                 margin: const EdgeInsets.symmetric(horizontal: 1),
                                  child: Text(
                                    introController.categoriesList[index].title,
                                    textAlign: TextAlign.center,
@@ -341,7 +324,7 @@ class Home extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 10),
             child: Text(introController.categoriesList[homeController.categoryIndex.value].title,
                 style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,
                 color: Theme.of(context).disabledColor
@@ -371,10 +354,7 @@ class Home extends StatelessWidget {
         itemCount: listLength < 5 ? listLength : 6,
         itemBuilder: (context, index){
           return listLength == 0
-              ? Container(
-            /// TODO
-                 child: Text('empty'),
-              )
+              ?  const Text('empty')
               : index == 5
               ?
          Bounce(

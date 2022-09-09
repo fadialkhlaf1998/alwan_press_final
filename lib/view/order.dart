@@ -9,10 +9,10 @@ import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/address_2.dart';
 import 'package:alwan_press/view/pdf_viwer.dart';
 import 'package:alwan_press/view/sign_in.dart';
+import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class OrderPage extends StatelessWidget {
@@ -25,26 +25,17 @@ class OrderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx((){
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-          statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+          statusBarColor: MyTheme.isDarkTheme.value ? const Color(0XFF181818) : Colors.white
       ));
       return Scaffold(
         body: SafeArea(
           child: Stack(
             children: [
-              MyTheme.isDarkTheme.value ? Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage('assets/image/background.png')
-                      )
-                  )
-              ) : Text(''),
+              const DarkModeBackground(),
               Global.userId == -1?_notLogedIn(context):
-              orderController.myOrders.length>0
-                  ?_orderList(context)
-                  :_noOrder(context),
+              orderController.myOrders.isEmpty
+                  ? _orderList(context)
+                  : _noOrder(context),
               _header(context),
             ],
           ),
@@ -101,7 +92,7 @@ class OrderPage extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 20),
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width * 0.95,
           child: Text(orderController.convertTime(orderController.myOrders[index].deadline.toString()),
             style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14),
@@ -125,31 +116,30 @@ class OrderPage extends StatelessWidget {
             ],
           ),
           child: Center(
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width ,
               height: 190,
               child: Column(
                 children: [
                   Expanded(
-                    child: Container(
+                    child: SizedBox(
                       width: MediaQuery.of(context).size.width*0.9,
                       child: Row(
                         children: [
-
                           Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(height: 7,),
+                                  const SizedBox(height: 7,),
                                   Text(orderController.myOrders[index].title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,overflow: TextOverflow.ellipsis,color: App.textColor()),),
-                                  SizedBox(height: 7,),
-                                  Text("ID - "+orderController.myOrders[index].orderId ,style: TextStyle(fontSize: 12,overflow: TextOverflow.ellipsis,color: Colors.grey),),
-                                  SizedBox(height: 15,),
+                                  const SizedBox(height: 7,),
+                                  Text("ID - "+orderController.myOrders[index].orderId ,style: const TextStyle(fontSize: 12,overflow: TextOverflow.ellipsis,color: Colors.grey),),
+                                  const SizedBox(height: 15,),
                                   Text(orderController.myOrders[index].price.toString()+" "+App_Localization.of(context).translate("aed") ,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,overflow: TextOverflow.ellipsis,color: App.textColor()),),
-                                  SizedBox(height: 3,),
+                                  const SizedBox(height: 3,),
                                   Text(App_Localization.of(context).translate("state" + orderController.myOrders[index].state.toString()) ,style: TextStyle(fontSize: 10,overflow: TextOverflow.ellipsis,color: orderController.myOrders[index].state==0?
                                   Colors.red:orderController.myOrders[index].state==1?Colors.orange:orderController.myOrders[index].state==2?Colors.red:orderController.myOrders[index].state==3?Colors.green:Colors.blue,),),
-                                  SizedBox(height: 15,),
+                                  const SizedBox(height: 15,),
                                 ],
                               ),
                           ),
@@ -168,7 +158,7 @@ class OrderPage extends StatelessWidget {
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(10),
                                             color: Colors.white,
-                                            gradient: LinearGradient(
+                                            gradient: const LinearGradient(
                                                 colors: [
                                                   Color(0xffA4218E),
                                                   Color(0xff49103F),
@@ -177,16 +167,16 @@ class OrderPage extends StatelessWidget {
                                                 end: Alignment.bottomCenter
                                             )
                                         ),
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 70,
                                           width: 50,
                                           child: Center(
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                Text(current==null?"0":current.days.toString(),style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold)),
+                                                Text(current == null ? "0" : current.days.toString() ,style: const TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold)),
                                                 Container(height: 1,color: Colors.white.withOpacity(0.5),width: 60),
-                                                Text(App_Localization.of(context).translate("days"),style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold)),
+                                                Text(App_Localization.of(context).translate("days"),style: const TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold)),
                                               ],
                                             ),
                                           ),
@@ -197,8 +187,6 @@ class OrderPage extends StatelessWidget {
                                   Center(),
                                   Center(),
                                   Center(),
-
-
                                 ],
                               ),
                           )
@@ -206,7 +194,7 @@ class OrderPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: 30,
                     child: Stack(
                       children: [
@@ -234,7 +222,7 @@ class OrderPage extends StatelessWidget {
                                   ),
                                   child:  Center(
                                     child:Text(App_Localization.of(context).translate("invoice"),
-                                        style: TextStyle(color: Colors.white,fontSize: 14)),
+                                        style: const TextStyle(color: Colors.white,fontSize: 14)),
                                   ),
                                 ),
                               ),
@@ -408,14 +396,14 @@ class OrderPage extends StatelessWidget {
                                         child: CountdownTimer(
                                           endTime:  orderController.myOrders[index].deadline.millisecondsSinceEpoch,
                                           textStyle: TextStyle(fontSize: 16, color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),
-                                          widgetBuilder: (cuntext,current){
+                                          widgetBuilder: (context, current){
                                             return Container(
                                               child: Row(
                                                 children: [
                                                   Container(
                                                     height:MediaQuery.of(context).size.width/5*2/4,
                                                     width: MediaQuery.of(context).size.width/5*2/4,
-                                                    decoration: BoxDecoration(
+                                                    decoration: const BoxDecoration(
                                                       shape: BoxShape.circle,
                                                       // border: Border.all(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black)
                                                     ),

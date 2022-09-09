@@ -8,6 +8,7 @@ import 'package:alwan_press/view/contact_information.dart';
 import 'package:alwan_press/view/forget_password.dart';
 import 'package:alwan_press/view/home.dart';
 import 'package:alwan_press/view/main_class.dart';
+import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class _SignInState extends State<SignIn> {
         body: Stack(
           alignment: Alignment.center,
           children: [
-            Dar(),
+            DarkModeBackground(),
             SingleChildScrollView(
               child: Column(
                 children: [

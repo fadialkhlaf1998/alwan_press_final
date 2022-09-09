@@ -11,7 +11,7 @@ class ForgetPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+        statusBarColor: MyTheme.isDarkTheme.value ? const Color(0XFF181818):Colors.white
     ));
     return Scaffold(
       body: Container(

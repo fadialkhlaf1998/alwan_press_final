@@ -5,6 +5,7 @@ import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/helper/store.dart';
+import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -25,26 +26,17 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+        statusBarColor: MyTheme.isDarkTheme.value ? const Color(0XFF181818) : Colors.white
     ));
     return Obx(() => Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
-            MyTheme.isDarkTheme.value ? Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/image/background.png')
-                    )
-                )
-            ) : Text(''),
+            const DarkModeBackground(),
             Column(
               children: [
                 _header(context),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 _body(context),
               ],
             )
@@ -72,7 +64,7 @@ class Settings extends StatelessWidget {
     );
   }
   _body(BuildContext context) {
-    return Container(
+    return SizedBox(
       child: Column(
         children: [
           Container(
@@ -93,7 +85,7 @@ class Settings extends StatelessWidget {
               ],
             ),
             child: Center(
-              child: Container(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: 50,
                 child: Row(
@@ -126,7 +118,7 @@ class Settings extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.1,
@@ -170,7 +162,7 @@ class Settings extends StatelessWidget {
                                   settingsController.languageValue = settingsController.languages[index]["id"];
                                 }
                               },
-                              child: Container(
+                              child: SizedBox(
                                // width: MediaQuery.of(context).size.width * 0.18,
                                   child: Row(
                                     children: [

@@ -19,30 +19,20 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
   final Completer<PDFViewController> _controller =
   Completer<PDFViewController>();
 
-  bool _isLoading = true;
-
   @override
   Widget build(BuildContext context) {
-    // final name = basename(widget.src.path);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(''),
-        backgroundColor: Color(0XFF181818),
+        title: const Text(''),
+        backgroundColor: const Color(0XFF181818),
       ),
       body: Center(
           child:  PDFView(
             filePath: widget.src,
             enableSwipe: true,
-            // swipeHorizontal: true,
             autoSpacing: false,
             pageFling: false,
-            // onRender: (_pages) {
-            //   setState(() {
-            //     pages = _pages;
-            //     isReady = true;
-            //   });
-            // },
             onError: (error) {
               print(error.toString());
             },
@@ -52,9 +42,6 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
             onViewCreated: (PDFViewController pdfViewController) {
               _controller.complete(pdfViewController);
             },
-            // onPageChanged: (int page, int total) {
-            //   print('page change: $page/$total');
-            // },
           ),
       ),
     );
