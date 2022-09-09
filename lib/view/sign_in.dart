@@ -122,7 +122,7 @@ class _SignInState extends State<SignIn> {
       children: [
         Container(
           width: MediaQuery.of(context).size.width * 0.9,
-          height: 60,
+          height: 55,
           color: Colors.transparent,
           child: TextField(
             controller: signInController.username,
