@@ -234,7 +234,6 @@ class _ProfileState extends State<Profile> {
             child: GestureDetector(
                 onTap: () async {
                   if(Global.user!=null){
-                    print('not null ---');
                     if(false){
                       profileController.loading.value = true;
                       profileController.loadPdf().then((value){
@@ -247,17 +246,6 @@ class _ProfileState extends State<Profile> {
                       profileController.loading.value = false;
                     }
                   }
-                  // mainClassController.selectedIndex.value = 1;
-                  // mainClassController.pageController.animateToPage(1,
-                  //     duration: const Duration(milliseconds: 700), curve: Curves.fastOutSlowIn);
-                  // Navigator.push(
-                  //   context,
-                  //   PageRouteBuilder(
-                  //     pageBuilder: (c, a1, a2) => InvoicePage(),
-                  //     transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
-                  //     transitionDuration: Duration(milliseconds: 500),
-                  //   ),
-                  // );
                 },
                 child: Container(
                   color: Colors.transparent,
@@ -278,7 +266,7 @@ class _ProfileState extends State<Profile> {
                               style: TextStyle(
                                   color: MyTheme.isDarkTheme.value ? Colors.white :
                                   Colors.black,
-                                  fontSize: 14,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.bold
                               )
                           )
@@ -298,14 +286,6 @@ class _ProfileState extends State<Profile> {
             child: GestureDetector(
               onTap: () {
                 Get.to(()=>Addresses_2(-1));
-                // Navigator.push(
-                //   context,
-                //   PageRouteBuilder(
-                //     pageBuilder: (c, a1, a2) => Addresses(),
-                //     transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
-                //     transitionDuration: Duration(milliseconds: 200),
-                //   ),
-                // );
               },
               child: Container(
                 color: Colors.transparent,
@@ -325,48 +305,7 @@ class _ProfileState extends State<Profile> {
                         style: TextStyle(
                             color: MyTheme.isDarkTheme.value ? Colors.white :
                             Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold
-                        )
-                    )
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          VerticalDivider(
-            color: MyTheme.isDarkTheme.value ? Colors.white :
-            Colors.black,
-            width: 1,
-            thickness: 1,
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                mainClassController.selectedIndex.value = 3;
-                mainClassController.pageController.animateToPage(3,
-                    duration: const Duration(milliseconds: 700), curve: Curves.fastOutSlowIn);
-              },
-              child: Container(
-                color: Colors.transparent,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      width: 30,
-                      height: 30,
-                      child: SvgPicture.asset("assets/icons/setting.svg",
-                        color: MyTheme.isDarkTheme.value ? Colors.white :
-                        Colors.black,
-                      ),
-                    ),
-                    Center(child: Text(App_Localization.of(context).translate("settings"),
-                        style: TextStyle(
-                            color: MyTheme.isDarkTheme.value ? Colors.white :
-                            Colors.black,
-                            fontSize: 14,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold
                         )
                     )

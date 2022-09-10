@@ -84,7 +84,7 @@ class ProductDetails extends StatelessWidget {
           child: Container(
             margin: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top,left: 15,right: 15),
             height: MediaQuery.of(context).size.height * 0.1,
-            child: const Icon(Icons.arrow_back_ios_outlined,color: Colors.white ,size: 30,),
+            child: const Icon(Icons.arrow_back_ios_outlined,color: Colors.white ,size: 25,),
           ),
         ),
       ],
@@ -104,14 +104,14 @@ class ProductDetails extends StatelessWidget {
                 children: [
                   Text(App_Localization.of(context).translate("title") + ': ',
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black
                       )
                   ),
                   Text(product.title,
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : App.grey)
                     ,textAlign: TextAlign.justify,),
                 ],
@@ -120,7 +120,7 @@ class ProductDetails extends StatelessWidget {
                 children: [
                   Text(App_Localization.of(context).translate("price") + ': ',
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black
                       )
@@ -147,7 +147,7 @@ class ProductDetails extends StatelessWidget {
                       : Text(
                       productDetailsController.productDetails.value.price.toString(),
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 15,
                           color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : App.grey),
                       textAlign: TextAlign.justify
                   ),
@@ -159,7 +159,7 @@ class ProductDetails extends StatelessWidget {
           Divider(height: 30,color: Theme.of(context).dividerColor),
           Text(App_Localization.of(context).translate("description"),
             style: TextStyle(
-                fontSize: 20,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black
             ),
@@ -189,7 +189,7 @@ class ProductDetails extends StatelessWidget {
               productDetailsController.productDetails.value.description,
               style: TextStyle(
                 height: 1.2,
-                  fontSize: 16,
+                  fontSize: 13,
                   color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : App.grey),
               textAlign: TextAlign.justify,
             ),

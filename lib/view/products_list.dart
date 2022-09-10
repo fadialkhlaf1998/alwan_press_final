@@ -1,10 +1,17 @@
 import 'package:alwan_press/app_localization.dart';
+import 'package:alwan_press/controller/home_controller.dart';
+import 'package:alwan_press/controller/intro_controller.dart';
 import 'package:alwan_press/controller/product_list_controller.dart';
 import 'package:alwan_press/helper/app.dart';
+import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
+import 'package:alwan_press/view/all_subCategory.dart';
 import 'package:alwan_press/view/product_details.dart';
+import 'package:alwan_press/view/search_text_field.dart';
+import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -12,28 +19,22 @@ import 'package:lottie/lottie.dart';
 class ProductList extends StatelessWidget {
 
   ProductListController productListController = Get.put(ProductListController());
+  HomeController homeController = Get.find();
+  IntroController introController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Obx((){
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-          statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
+          statusBarColor: MyTheme.isDarkTheme.value ? const Color(0XFF181818) : Colors.white
       ));
       return Scaffold(
         body: SafeArea(
           child: Stack(
             children: [
-              MyTheme.isDarkTheme.value ? Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage('assets/image/background.png')
-                      )
-                  )
-              ) : Text(''),
-              SizedBox(
+             const DarkModeBackground(),
+              Container(
+                padding: const EdgeInsets.only(top: 20),
                 width: MediaQuery.of(context).size.width,
                 child: SingleChildScrollView(
                   child: Column(
@@ -52,7 +53,202 @@ class ProductList extends StatelessWidget {
     });
   }
 
-  _header(context){
+  _header(context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.9,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Global.langCode == 'en' ?
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.15,
+                  height: MediaQuery.of(context).size.width * 0.15,
+                  child: Lottie.asset('assets/icons/Arrow.json'),
+                ),
+              )
+              : Container(
+                width: MediaQuery.of(context).size.width * 0.15,
+                color: Colors.transparent,
+                child: const Align(
+                    alignment: Alignment.centerRight,
+                    child: Icon(Icons.menu, size: 25)),
+              ),
+              _logo(context),
+              Global.langCode == 'en' ?
+              Container(
+                width: MediaQuery.of(context).size.width * 0.15,
+                color: Colors.transparent,
+                child: const Align(
+                    alignment: Alignment.centerRight,
+                    child: Icon(Icons.menu, size: 25)),
+              )
+                  : GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.15,
+                  height: MediaQuery.of(context).size.width * 0.15,
+                  child: Lottie.asset('assets/icons/Arrow.json'),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 15),
+          GestureDetector(
+            onTap: () {
+              showSearch(
+                  context: context,
+                  delegate: SearchTextField(
+                      suggestionList: introController.searchSuggestionList,
+                      homeController: homeController));
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              width: MediaQuery.of(context).size.width,
+              height: 40,
+              decoration: BoxDecoration(
+                  color: MyTheme.isDarkTheme.value
+                      ? App.darkGrey.withOpacity(0.9)
+                      : App.lightGrey,
+                  borderRadius: BorderRadius.circular(10)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Icon(Icons.search),
+                  const SizedBox(width: 10),
+                  Text(App_Localization.of(context).translate("search"),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: MyTheme.isDarkTheme.value
+                            ? Colors.white.withOpacity(0.2)
+                            : Colors.grey,
+                      )),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _logo(context) {
+    return  Container(
+      height: MediaQuery.of(context).size.width * 0.1,
+      width: MediaQuery.of(context).size.width * 0.28,
+      decoration: const BoxDecoration(
+        // color: Colors.red,
+          image: DecorationImage(
+              fit: BoxFit.contain,
+              image: AssetImage('assets/icons/logo_text.png'))),
+    );
+  }
+
+  _gridBody(context) {
+    int listLength = productListController.tempProductsList.length;
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.9,
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: MediaQuery.of(context).size.shortestSide < 600
+              ? MediaQuery.of(context).size.width * 0.5
+              : MediaQuery.of(context).size.width * 0.3,
+          childAspectRatio: 4 / 5,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+        ),
+        itemCount:  listLength ,
+        itemBuilder: (context, index) {
+          return listLength == 0
+              ? const Text('empty')
+              : _product(context, index);
+        },
+      ),
+    );
+  }
+  _product(context,index){
+    return GestureDetector(
+      onTap: (){
+        // productListController.productId.value = productListController.productsList[index].id;
+        Get.to(()=>ProductDetails(productListController.tempProductsList[index]));
+      },
+      child: SizedBox(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 5,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.5,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  child: Hero(
+                    transitionOnUserGestures: true,
+                    tag: productListController.tempProductsList[index],
+                    child: Image.network(
+                        productListController.tempProductsList[index].image,
+                        fit: BoxFit.cover,
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          } else {
+                            return Center(
+                              child: Lottie.asset('assets/icons/LogoAnimation.json'),
+                            );
+                          }
+                        }
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  decoration: BoxDecoration(
+                      color: MyTheme.isDarkTheme.value ? App.darkGrey : App.grey,
+                      borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10))),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                        productListController.tempProductsList[index].title,
+                        maxLines: 2,
+                        style: TextStyle(
+                            color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
+                            fontSize: 12,
+                            overflow: TextOverflow.ellipsis
+                        )
+                    ),
+                  )
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+  _header1(context){
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 15),
@@ -142,7 +338,7 @@ class ProductList extends StatelessWidget {
       ),
     );
   }
-  _gridBody(context){
+  _gridBody1(context){
     int listLength = productListController.tempProductsList.length;
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -152,7 +348,7 @@ class ProductList extends StatelessWidget {
           child: Container(
               width: 25,
               height: 25,
-              child: CircularProgressIndicator(color: Colors.white,strokeWidth: 2.5)))
+              child: const CircularProgressIndicator(color: Colors.white,strokeWidth: 2.5)))
           : listLength == 0
           ? Center(
             child: Text(App_Localization.of(context).translate('empty_list')),
@@ -174,7 +370,7 @@ class ProductList extends StatelessWidget {
     );
   }
 
-  _product(context,index){
+  _product1(context,index){
     return GestureDetector(
       onTap: (){
        // productListController.productId.value = productListController.productsList[index].id;

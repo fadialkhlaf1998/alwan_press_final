@@ -14,12 +14,6 @@ class DarkModeBackground extends StatelessWidget {
             'assets/animation/BG.json',
           fit: BoxFit.cover
         ),
-        // decoration: const BoxDecoration(
-        //     image: DecorationImage(
-        //         fit: BoxFit.cover,
-        //         image: AssetImage('assets/image/background.png')
-        //     )
-        // )
     ) : const Text('');
   }
 }

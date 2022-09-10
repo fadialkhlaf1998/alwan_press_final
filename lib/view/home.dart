@@ -154,11 +154,12 @@ class Home extends StatelessWidget {
         Container(
           height: MediaQuery.of(context).size.width * 0.1,
           width: MediaQuery.of(context).size.width * 0.28,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               // color: Colors.red,
               image: DecorationImage(
                   fit: BoxFit.contain,
-                  image: AssetImage('assets/icons/logo_text.png'))),
+                  image: MyTheme.isDarkTheme.value ? const AssetImage('assets/icons/logo_text.png') : const AssetImage('assets/icons/logo_text_black.png')
+              )),
         )
       ],
     );
@@ -385,7 +386,7 @@ class Home extends StatelessWidget {
           maxCrossAxisExtent: MediaQuery.of(context).size.shortestSide < 600
               ? MediaQuery.of(context).size.width * 0.5
               : MediaQuery.of(context).size.width * 0.3,
-          childAspectRatio: 3 / 4,
+          childAspectRatio: 4 / 5,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
         ),
@@ -430,10 +431,10 @@ class Home extends StatelessWidget {
           children: [
             Expanded(
                 flex: 4,
-                child: Container(
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10)),
                     child: Hero(
@@ -461,21 +462,25 @@ class Home extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
                 width: MediaQuery.of(context).size.width * 0.5,
                 decoration: BoxDecoration(
                     color: MyTheme.isDarkTheme.value ? App.darkGrey : App.grey,
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10))),
-                child: Text(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
                       introController.categoriesList[categoryIndex].subCategories[index].title,
                       maxLines: 2,
-                        style: TextStyle(
-                        color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
-                        fontSize: 14,
-                        overflow: TextOverflow.ellipsis
+                      style: TextStyle(
+                          color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
+                          fontSize: 12,
+                          overflow: TextOverflow.ellipsis
                       )
-                    ),
+                  ),
+                )
               ),
             ),
             // Expanded(
