@@ -249,9 +249,9 @@ class Home extends StatelessWidget {
         children: [
           SizedBox(
             height: 100,
-            child: ScrollablePositionedList.builder(
+            child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemScrollController: homeController.itemScrollController,
+              // itemScrollController: homeController.itemScrollController,
               itemCount: introController.categoriesList.length,
               itemBuilder: (BuildContext context, index) {
                 return Row(

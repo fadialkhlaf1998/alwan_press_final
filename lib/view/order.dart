@@ -737,7 +737,7 @@ class OrderPage extends StatelessWidget {
           Icon(Icons.remove_shopping_cart_outlined,color:  MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
           SizedBox(height: 15,),
           Text(App_Localization.of(context).translate("not_have_order"),
-            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14),
+            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

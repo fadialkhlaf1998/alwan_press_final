@@ -328,98 +328,98 @@ class _ProfileState extends State<Profile> {
         children: [
           GestureDetector(
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (ctx) => AlertDialog(
-                    title: Text(App_Localization.of(context).translate('choose_option_to_connect')),
-                    titleTextStyle: const TextStyle(
-                      fontSize: 15,
-                      color: Colors.black,
-                    ),
-                    content: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                       GestureDetector(
-                         onTap: (){
-                           Get.back();
-                           introController.showWhatsAppList.value = true;
-                           introController.showPhoneList.value = false;
-                           Get.to(()=>ContactInformation());
-                         },
-                         child:  Container(
-                           width: 70,
-                           height: 55,
-                           child: Column(
-                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                             children: [
-                               SvgPicture.asset('assets/icons/whatsapp-green.svg',width: 30,height: 30,),
-                               Text(
-                                 App_Localization.of(context).translate('whatsapp'),
-                                 style: const TextStyle(color: Colors.black, fontSize: 12),
-                               ),
-                             ],
-                           ),
-                         ),
-                       ),
-                       GestureDetector(
-                         onTap: (){
-                           Get.back();
-                           introController.showPhoneList.value = true;
-                           introController.showWhatsAppList.value = false;
-                           Get.to(()=>ContactInformation());
-                         },
-                         child:  Container(
-                           width: 70,
-                           height: 55,
-                           child: Column(
-                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                             children: [
-                               Container(
-                                 width: 35,
-                                 height: 35,
-                                 // padding: EdgeInsets.all(10),
-                                 decoration: const BoxDecoration(
-                                     shape: BoxShape.circle,
-                                     color: Colors.black
-                                 ),
-                                 child: const Icon(Icons.phone,size: 20,
-                                   color:  Colors.white,
-                                 ),
-                               ),
-                               Text(
-                                 App_Localization.of(context).translate('phone'),
-                                 style: const TextStyle(color: Colors.black, fontSize: 12),                              ),
-                             ],
-                           ),
-                         )
-                       )
-                      ],
-                    ),
-                    // actions: <Widget>[
-                    //   TextButton(
-                    //     onPressed: () {
-                    //       // Navigator.of(ctx).pop();
-                    //       Get.back();
-                    //     },
-                    //     child: Container(
-                    //       padding: EdgeInsets.symmetric(vertical: 10,horizontal: 8),
-                    //       decoration: BoxDecoration(
-                    //         color: App.pink,
-                    //         borderRadius: BorderRadius.circular(5)
-                    //       ),
-                    //       child: Text(
-                    //           App_Localization.of(context).translate('cancel'),
-                    //         style: TextStyle(
-                    //           color: Colors.white,
-                    //           fontSize: 15
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ],
-                  ),
-                );
-               // Get.to(()=>ContactInformation());
+                // showDialog(
+                //   context: context,
+                //   builder: (ctx) => AlertDialog(
+                //     title: Text(App_Localization.of(context).translate('choose_option_to_connect')),
+                //     titleTextStyle: const TextStyle(
+                //       fontSize: 15,
+                //       color: Colors.black,
+                //     ),
+                //     content: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //       children: [
+                //        GestureDetector(
+                //          onTap: (){
+                //            Get.back();
+                //            introController.showWhatsAppList.value = true;
+                //            introController.showPhoneList.value = false;
+                //            Get.to(()=>ContactInformation());
+                //          },
+                //          child:  Container(
+                //            width: 70,
+                //            height: 55,
+                //            child: Column(
+                //              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //              children: [
+                //                SvgPicture.asset('assets/icons/whatsapp-green.svg',width: 30,height: 30,),
+                //                Text(
+                //                  App_Localization.of(context).translate('whatsapp'),
+                //                  style: const TextStyle(color: Colors.black, fontSize: 12),
+                //                ),
+                //              ],
+                //            ),
+                //          ),
+                //        ),
+                //        GestureDetector(
+                //          onTap: (){
+                //            Get.back();
+                //            introController.showPhoneList.value = true;
+                //            introController.showWhatsAppList.value = false;
+                //            Get.to(()=>ContactInformation());
+                //          },
+                //          child:  Container(
+                //            width: 70,
+                //            height: 55,
+                //            child: Column(
+                //              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //              children: [
+                //                Container(
+                //                  width: 35,
+                //                  height: 35,
+                //                  // padding: EdgeInsets.all(10),
+                //                  decoration: const BoxDecoration(
+                //                      shape: BoxShape.circle,
+                //                      color: Colors.black
+                //                  ),
+                //                  child: const Icon(Icons.phone,size: 20,
+                //                    color:  Colors.white,
+                //                  ),
+                //                ),
+                //                Text(
+                //                  App_Localization.of(context).translate('phone'),
+                //                  style: const TextStyle(color: Colors.black, fontSize: 12),                              ),
+                //              ],
+                //            ),
+                //          )
+                //        )
+                //       ],
+                //     ),
+                //     // actions: <Widget>[
+                //     //   TextButton(
+                //     //     onPressed: () {
+                //     //       // Navigator.of(ctx).pop();
+                //     //       Get.back();
+                //     //     },
+                //     //     child: Container(
+                //     //       padding: EdgeInsets.symmetric(vertical: 10,horizontal: 8),
+                //     //       decoration: BoxDecoration(
+                //     //         color: App.pink,
+                //     //         borderRadius: BorderRadius.circular(5)
+                //     //       ),
+                //     //       child: Text(
+                //     //           App_Localization.of(context).translate('cancel'),
+                //     //         style: TextStyle(
+                //     //           color: Colors.white,
+                //     //           fontSize: 15
+                //     //         ),
+                //     //       ),
+                //     //     ),
+                //     //   ),
+                //     // ],
+                //   ),
+                // );
+               Get.to(()=>ContactInformation());
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,

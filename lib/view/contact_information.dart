@@ -2,6 +2,7 @@ import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/controller/intro_controller.dart';
 import 'package:alwan_press/controller/sign_in_controller.dart';
 import 'package:alwan_press/helper/app.dart';
+import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/search_text_field.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
@@ -35,14 +36,93 @@ class ContactInformation extends StatelessWidget {
       },
       child: Scaffold(
         body: Stack(
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.center,
           children: [
-            DarkModeBackground(),
+            const DarkModeBackground(),
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   _header(context),
+                  const SizedBox(height: 50),
+                  Column(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Text(
+                          App_Localization.of(context).translate('choose_your_language_and_contact_us'),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Container(
+                        width: MediaQuery.of(context).size.width  * 0.9,
+                        height: MediaQuery.of(context).size.height * 0.6,
+                        child:  ListView.builder(
+                            itemCount: introController.customerServiceList.length,
+                            itemBuilder: (BuildContext context, index){
+                              return Container(
+                                margin: const EdgeInsets.symmetric(vertical: 5),
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                height: 70,
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              margin: const EdgeInsets.symmetric(horizontal: 10),
+                                              width: 50,
+                                              height: 50,
+                                              decoration: BoxDecoration(
+                                                color: Colors.red,
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                    image: NetworkImage(introController.customerServiceList[index].image)
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                                introController.customerServiceList[index].language,
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Theme.of(context).dividerColor
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset('assets/icons/whatsapp-green.svg',width: 26,height: 26),
+                                            const SizedBox(width: 10),
+                                            SizedBox(
+                                              width: 35,
+                                              height: 35,
+                                              child: Icon(Icons.phone,size: 20,
+                                                color:  Theme.of(context).dividerColor,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(color: Theme.of(context).dividerColor.withOpacity(0.4), indent: 10)
+                                  ],
+                                ),
+                              );
+                            }
+                        ),
+                      ),
+
+                    ],
+                  ),
                 ],
               ),
             )
@@ -54,23 +134,53 @@ class ContactInformation extends StatelessWidget {
 
   _header(context) {
     return Container(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 30),
       width: MediaQuery.of(context).size.width * 0.9,
-      child:  Row(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            color: Colors.transparent,
-            child: const Icon(
-              Icons.menu,
-              size: 25,
-              color: Colors.transparent,
-            ),
-          ),
-          _logo(context),
-          Container(
-            color: Colors.transparent,
-            child: const Icon(Icons.menu, size: 25),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Global.langCode == 'en' ?
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.15,
+                  height: MediaQuery.of(context).size.width * 0.15,
+                  child: Lottie.asset('assets/icons/Arrow.json'),
+                ),
+              )
+                  : Container(
+                width: MediaQuery.of(context).size.width * 0.15,
+                color: Colors.transparent,
+                child: const Align(
+                    alignment: Alignment.centerRight,
+                    child: Icon(Icons.menu, size: 25)),
+              ),
+              _logo(context),
+              Global.langCode == 'en' ?
+              Container(
+                width: MediaQuery.of(context).size.width * 0.15,
+                color: Colors.transparent,
+                child: const Align(
+                    alignment: Alignment.centerRight,
+                    child: Icon(Icons.menu, size: 25)),
+              )
+                  : GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.15,
+                  height: MediaQuery.of(context).size.width * 0.15,
+                  child: Lottie.asset('assets/icons/Arrow.json'),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -78,32 +188,15 @@ class ContactInformation extends StatelessWidget {
   }
 
   _logo(context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.1,
-      // color: Colors.amber,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-              width: MediaQuery.of(context).size.width * 0.12,
-              height: MediaQuery.of(context).size.width * 0.12,
-              child: Image.asset(
-                'assets/icons/Logo-Header.png',
-                fit: BoxFit.cover,
-              )),
-          const SizedBox(width: 7),
-          Container(
-            height: MediaQuery.of(context).size.width * 0.1,
-            width: MediaQuery.of(context).size.width * 0.28,
-            decoration: BoxDecoration(
-              // color: Colors.red,
-                image: DecorationImage(
-                    fit: BoxFit.contain,
-                    image: MyTheme.isDarkTheme.value ? const AssetImage('assets/icons/logo_text.png') : const AssetImage('assets/icons/logo_text_black.png')
-                )),
-          )
-        ],
-      ),
+    return  Container(
+      height: MediaQuery.of(context).size.width * 0.1,
+      width: MediaQuery.of(context).size.width * 0.28,
+      decoration: BoxDecoration(
+        // color: Colors.red,
+          image: DecorationImage(
+              fit: BoxFit.contain,
+              image:  MyTheme.isDarkTheme.value ? AssetImage('assets/icons/logo_text.png') : AssetImage('assets/icons/logo_text_black.png')
+          )),
     );
   }
 

@@ -146,12 +146,11 @@ class ProductList extends StatelessWidget {
     return  Container(
       height: MediaQuery.of(context).size.width * 0.1,
       width: MediaQuery.of(context).size.width * 0.28,
-      decoration: const BoxDecoration(
-        // color: Colors.red,
+      decoration:  BoxDecoration(
           image: DecorationImage(
               fit: BoxFit.contain,
-              image: AssetImage('assets/icons/logo_text.png'))),
-    );
+        image:  MyTheme.isDarkTheme.value ? AssetImage('assets/icons/logo_text.png') : AssetImage('assets/icons/logo_text_black.png')
+    )));
   }
 
   _gridBody(context) {
