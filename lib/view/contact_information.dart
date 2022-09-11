@@ -82,7 +82,6 @@ class ContactInformation extends StatelessWidget {
                                               width: 50,
                                               height: 50,
                                               decoration: BoxDecoration(
-                                                color: Colors.red,
                                                 shape: BoxShape.circle,
                                                 image: DecorationImage(
                                                     image: NetworkImage(introController.customerServiceList[index].image)

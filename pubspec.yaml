@@ -61,6 +61,8 @@ dependencies:
   advance_pdf_viewer: ^2.0.1
   flutter_pdfview:
   persistent_bottom_nav_bar: ^4.0.2
+  myfatoorah_flutter: ^2.1.5
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:

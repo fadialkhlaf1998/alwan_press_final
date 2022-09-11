@@ -41,12 +41,12 @@ class OrderController extends GetxController{
   }
 
   getOrderData() async {
-    // loading.value = true;
+    loading.value = true;
     Api.checkInternet().then((internet){
       if(internet){
         Api.getCustomerOrder(Global.userId.toString()).then((value){
           if(value.isNotEmpty){
-            print('done');
+            print('done orders');
             myOrders.value = value;
             loading.value = false;
           }else{

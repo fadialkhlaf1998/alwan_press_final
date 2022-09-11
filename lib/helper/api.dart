@@ -267,7 +267,7 @@ class Api {
       "floor": floor,
       "flat": flat,
       "additional_description": additional_description,
-      "phone": phone,
+      "phone": "+971"+phone,
       "order_id": order_id
     });
     request.headers.addAll(headers);
@@ -282,6 +282,52 @@ class Api {
       print(response.reasonPhrase);
       return false;
     }
+  }
+
+  static Future<Order?> getOrderInfo(int id)async{
+
+    var request = http.Request('GET', Uri.parse(url+'/api/order-info/$id'));
+
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      // print(await response.stream.bytesToString());
+      String data = await response.stream.bytesToString();
+      print('data');
+      print(data);
+      return Order.fromJson(data);
+    }
+    else {
+      print(response.reasonPhrase);
+      return null;
+    }
+
+  }
+
+  static Future<bool> pay(int order_id,double amount)async{
+    var headers = {
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request('PUT', Uri.parse('http://localhost:3000/api/pay'));
+    request.body = json.encode({
+      "id": order_id,
+      "amount": amount,
+      "secrit": "FadiAlKlaF1998AlwanMaXaRt2022"
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      return true;
+    }
+    else {
+    print(response.reasonPhrase);
+    return false;
+    }
+
   }
 
 }

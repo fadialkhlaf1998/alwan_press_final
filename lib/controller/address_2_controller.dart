@@ -1,5 +1,6 @@
 import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/controller/order_controller.dart';
+import 'package:alwan_press/controller/order_details_controller.dart';
 import 'package:alwan_press/helper/api.dart';
 import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
@@ -12,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddressController_2 extends GetxController {
-
 
 
   TextEditingController? nick_name;
@@ -93,7 +93,10 @@ class AddressController_2 extends GetxController {
           print("loading.value");
           print(value);
 
+
           if(value){
+            OrderDetailsController orderDetailsController = Get.find();
+            orderDetailsController.animation();
             String title = App_Localization.of(context).translate("req_shipping_succ_t");
             String desc = App_Localization.of(context).translate("req_shipping_succ_d");
             Get.back();

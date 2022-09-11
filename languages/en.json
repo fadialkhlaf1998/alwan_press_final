@@ -79,8 +79,23 @@
   "remaining_day": "Remaining Days",
   "free_shipping": "Free Shipping",
   "choose_option_to_connect" : "Choose an option to contact",
+  "choose_your_language_and_contact_us" : "Choose your language to contact us",
   "whatsapp" : "Whatsapp",
   "no_statement" : "No statement yet!",
   "request_last_statement" : "Please request the latest statement",
-  "choose_your_language_and_contact_us" : "Choose your language and contact us"
+
+  "pleaced_on": "Placed On",
+  "ready_on": "Ready On",
+  "view_details": "View Details",
+  "do_u_want": "Do you want it delivered?",
+  "yes_order_delivery": "Yes, order delivery",
+  "your_order_will": "Your order will arrive soon!",
+  "tax_invoices": "Tax Invoices",
+  "total": "Total",
+  "sub_total": "Sub Total",
+  "order_summery": "Order Summery",
+  "calculating_when_request": "Calculating When Request",
+  "inclusive_vat": "( Inclusive Of VAT )",
+  "pay": "Pay",
+  "shipping_address": "Shipping Address"
 }

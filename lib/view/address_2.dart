@@ -16,8 +16,6 @@ class Addresses_2 extends StatelessWidget {
 
   Addresses_2(int orderId){
     addressController.orderId = orderId;
-    //Global.getUserInformation();
-    // Store.loadAddress();
     addressController.validate.value = false;
     print(Global.nick_name);
     addressController.nick_name = TextEditingController(text: Global.nick_name);

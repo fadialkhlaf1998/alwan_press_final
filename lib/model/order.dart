@@ -25,47 +25,61 @@ class Order {
     required this.price,
     required this.shippingState,
     required this.shippingPrice,
-    required this.address,
     required this.invoice,
     required this.orderId,
+    required this.pickUp,
+    required this.created_at,
+    required this.paid_amount,
+    required this.customer,
     required this.shippingRequestCount,
+    required this.shippingAddress,
     required this.ready,
   });
 
   int id;
+  RxBool ready = false.obs;
   String quickBookId;
   DateTime deadline;
   int customerId;
+  int shippingRequestCount;
   int state;
   String title;
   String description;
   int price;
   int shippingState;
   int shippingPrice;
-  String address;
   String invoice;
   String orderId;
-  int shippingRequestCount;
-  RxBool ready = false.obs;
-  String orderState = '';
-  RxBool openDescription = false.obs;
+  int pickUp;
+  DateTime created_at;
+  double paid_amount;
+  String customer;
+  ShippingAddress? shippingAddress;
+
+  factory Order.fromJson(String str) => Order.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
 
   factory Order.fromMap(Map<String, dynamic> json) => Order(
     id: json["id"],
-    quickBookId: json["quick_book_id"] ?? -1,
-    deadline: DateTime.parse(json["deadline"] ?? ""),
-    customerId: json["customer_id"] ?? -1,
-    state: json["state"] ?? -1,
-    title: json["title"] ?? "",
-    description: json["description"] ?? "",
-    price: json["price"] ?? -1,
-    shippingState: json["shipping_state"] ?? -1,
-    shippingPrice: json["shipping_price"] ?? -1,
-    address: json["address"] ?? "",
-    invoice: json["invoice"] ?? "",
-    orderId: json["order_id"] ?? -1,
-    shippingRequestCount: json["shipping_request_count"] ?? -1,
-    ready: DateTime.now().isBefore(DateTime.parse(json["deadline"] ?? ""))?true.obs:false.obs
+    quickBookId: json["quick_book_id"],
+    deadline: DateTime.parse(json["deadline"]),
+    customerId: json["customer_id"],
+    state: json["state"],
+    title: json["title"],
+    description: json["description"],
+    price: json["price"],
+    shippingState: json["shipping_state"],
+    shippingPrice: json["shipping_price"],
+    invoice: json["invoice"],
+    orderId: json["order_id"],
+    pickUp: json["pick_up"],
+    shippingRequestCount: json["shipping_request_count"],
+    created_at: DateTime.parse(json["created_at"]),
+    paid_amount: json["paid_amount"].toDouble(),
+    customer: json["customer"]??"",
+    shippingAddress:json["shipping_address"] == null ?null : ShippingAddress.fromMap(json["shipping_address"]),
+      ready: DateTime.now().isBefore(DateTime.parse(json["deadline"] ?? ""))?true.obs:false.obs
   );
 
   Map<String, dynamic> toMap() => {
@@ -79,48 +93,86 @@ class Order {
     "price": price,
     "shipping_state": shippingState,
     "shipping_price": shippingPrice,
-    "address": address,
     "invoice": invoice,
     "order_id": orderId,
-    "shipping_request_count": shippingRequestCount,
+    "pick_up": pickUp,
+    "created_at": created_at.toIso8601String(),
+    "paid_amount": paid_amount,
+    "customer": customer,
+    "shipping_address": shippingAddress!.toMap(),
   };
+
+
   getState(BuildContext context) {
     return App_Localization.of(context).translate("state" + state.toString());
   }
-
-  // factory Order.fromJson(Map<String, dynamic> json) => Order(
-  //   id: json["id"],
-  //   quickBookId: json["quick_book_id"],
-  //   deadline: DateTime.parse(json["deadline"]),
-  //   customerId: json["customer_id"],
-  //   state: json["state"],
-  //   title: json["title"],
-  //   description: json["description"],
-  //   price: json["price"],
-  //   shippingState: json["shipping_state"],
-  //   shippingPrice: json["shipping_price"],
-  //   address: json["address"],
-  //   invoice: json["invoice"],
-  //   orderId: json["order_id"],
-  //   shippingRequestCount: json["shipping_request_count"],
-  //
-  // );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "quick_book_id": quickBookId,
-    "deadline": deadline.toIso8601String(),
-    "customer_id": customerId,
-    "state": state,
-    "title": title,
-    "description": description,
-    "price": price,
-    "shipping_state": shippingState,
-    "shipping_price": shippingPrice,
-    "address": address,
-    "invoice": invoice,
-    "order_id": orderId,
-    "shipping_request_count": shippingRequestCount,
-  };
+  getStateManual(BuildContext context,int state) {
+    return App_Localization.of(context).translate("state" + state.toString());
+  }
 
 }
+
+class ShippingAddress {
+  ShippingAddress({
+    required this.id,
+    required this.nickName,
+    required this.streetName,
+    required this.building,
+    required this.floor,
+    required this.flat,
+    required this.additionalDescription,
+    required this.phone,
+    required this.state,
+    required this.orderId,
+    required this.customer,
+    required this.orderId2,
+  });
+
+  int id;
+  String nickName;
+  String streetName;
+  String building;
+  String floor;
+  String flat;
+  String additionalDescription;
+  String phone;
+  int state;
+  int orderId;
+  String customer;
+  String orderId2;
+
+  factory ShippingAddress.fromJson(String str) => ShippingAddress.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory ShippingAddress.fromMap(Map<String, dynamic> json) => ShippingAddress(
+    id: json["id"],
+    nickName: json["nick_name"],
+    streetName: json["street_name"],
+    building: json["building"],
+    floor: json["floor"],
+    flat: json["flat"],
+    additionalDescription: json["additional_description"],
+    phone: json["phone"],
+    state: json["state"],
+    orderId: json["order_id"],
+    customer: json["customer"],
+    orderId2: json["order_id2"],
+  );
+
+  Map<String, dynamic> toMap() => {
+    "id": id,
+    "nick_name": nickName,
+    "street_name": streetName,
+    "building": building,
+    "floor": floor,
+    "flat": flat,
+    "additional_description": additionalDescription,
+    "phone": phone,
+    "state": state,
+    "order_id": orderId,
+    "customer": customer,
+    "order_id2": orderId2,
+  };
+}
+
