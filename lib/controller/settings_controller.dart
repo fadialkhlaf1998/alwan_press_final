@@ -8,7 +8,8 @@ class SettingsController extends GetxController {
 
   Rx<MyTheme> myTheme = MyTheme().obs;
   var selectedLanguage = 0.obs;
-  String languageValue = "non";
+  RxString languageValue = "non".obs;
+  RxString languageCode = "".obs;
   List languages = [
     { "name" : "English", "id" : "en" },
     { "name" : "العربية", "id" : "ar" }

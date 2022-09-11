@@ -17,11 +17,6 @@ class Global {
   static String token = '';
   static int userId = -1;
   static String name = '';
-  // static String address1 = '';
-  // static String address2 = '';
-  // static String emirate = '';
-  // static String apartment = '';
-  // static String phone = '';
   static String nick_name = '';
   static String street_name = '';
   static String building = '';

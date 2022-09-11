@@ -97,5 +97,8 @@
   "calculating_when_request": "Calculating When Request",
   "inclusive_vat": "( Inclusive Of VAT )",
   "pay": "Pay",
-  "shipping_address": "Shipping Address"
+  "shipping_address": "Shipping Address",
+  "save" : "Save",
+  "connect_us" : "Connect us",
+  "about_us" : "About us"
 }

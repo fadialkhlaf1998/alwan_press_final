@@ -1,14 +1,14 @@
-import 'dart:ui';
 import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/controller/settings_controller.dart';
 import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/helper/store.dart';
+import 'package:alwan_press/view/connect_us.dart';
+import 'package:alwan_press/view/language_list.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
@@ -32,7 +32,7 @@ class Settings extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            DarkModeBackground(),
+            const DarkModeBackground(),
             Column(
               children: [
                 _header(context),
@@ -56,20 +56,101 @@ class Settings extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(App_Localization.of(context).translate("settings"),
-            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 24),
-          ),
+          Global.langCode == 'en' ?
+          SizedBox(
+              width: MediaQuery.of(context).size.width * 0.1,
+              height: MediaQuery.of(context).size.width * 0.1,
+              child: Image.asset(
+                'assets/icons/Logo-Header.png',
+                fit: BoxFit.cover,
+              )) : _logo(context),
+          const SizedBox(width: 7),
+          Global.langCode == 'en' ?
+          _logo(context)
+          : SizedBox(
+              width: MediaQuery.of(context).size.width * 0.1,
+              height: MediaQuery.of(context).size.width * 0.1,
+              child: Image.asset(
+                'assets/icons/Logo-Header.png',
+                fit: BoxFit.cover,
+              )),
         ],
       ),
     );
   }
+  _logo(context) {
+    return  Container(
+      height: MediaQuery.of(context).size.width * 0.1,
+      width: MediaQuery.of(context).size.width * 0.28,
+      decoration: BoxDecoration(
+        // color: Colors.red,
+          image: DecorationImage(
+              fit: BoxFit.contain,
+              image:  MyTheme.isDarkTheme.value ? AssetImage('assets/icons/logo_text.png') : AssetImage('assets/icons/logo_text_black.png')
+          )),
+    );
+  }
+
+
   _body(BuildContext context) {
     return SizedBox(
       child: Column(
         children: [
+          GestureDetector(
+            onTap: (){
+              Get.to(()=>LanguageList());
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.08,
+              decoration: BoxDecoration(
+                color: MyTheme.isDarkTheme.value ?
+                Colors.white.withOpacity(0.05) : Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: MyTheme.isDarkTheme.value ?
+                    Colors.transparent :
+                    Colors.grey.withOpacity(0.5),
+                    blurRadius: 3,
+                    offset: const Offset(1, 1),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(App_Localization.of(context).translate("language"),
+                          maxLines: 1,
+                          style: Theme.of(context).textTheme.headline2,),
+                        Row(
+                          children: [
+                            Text(
+                              settingsController.languageValue.value,
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: Theme.of(context).dividerColor
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: Theme.of(context).dividerColor,
+                            )
+                          ],
+                        )
+                      ],
+                    )
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
           Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.1,
+            height: MediaQuery.of(context).size.height * 0.08,
             decoration: BoxDecoration(
               color: MyTheme.isDarkTheme.value ?
               Colors.white.withOpacity(0.05) :
@@ -119,91 +200,82 @@ class Settings extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.1,
-            decoration: BoxDecoration(
-              color: MyTheme.isDarkTheme.value ?
-              Colors.white.withOpacity(0.05) : Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: MyTheme.isDarkTheme.value ?
-                  Colors.transparent :
-                  Colors.grey.withOpacity(0.5),
-                  blurRadius: 3,
-                  offset: const Offset(1, 1),
+          GestureDetector(
+            onTap: (){
+              Get.to(()=> ConnectUs());
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.08,
+              decoration: BoxDecoration(
+                color: MyTheme.isDarkTheme.value ?
+                Colors.white.withOpacity(0.05) : Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: MyTheme.isDarkTheme.value ?
+                    Colors.transparent :
+                    Colors.grey.withOpacity(0.5),
+                    blurRadius: 3,
+                    offset: const Offset(1, 1),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(App_Localization.of(context).translate("connect_us"),
+                          maxLines: 1,
+                          style: Theme.of(context).textTheme.headline2,),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Theme.of(context).dividerColor,
+                        )
+                      ],
+                    )
                 ),
-              ],
+              ),
             ),
-            child: Center(
-              child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(App_Localization.of(context).translate("language"),
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.headline2,),
-                      SizedBox(
-                        //width: MediaQuery.of(context).size.width * 0.35,
-                        child: ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: settingsController.languages.length,
-                          itemBuilder: (context, index){
-                            return GestureDetector(
-                              onTap: () {
-                                Global.saveLanguage(context,settingsController.languages[index]["id"]);
-                                settingsController.selectedLanguage.value = index;
-                                if(settingsController.languages[index]["id"] == 'en'){
-                                  settingsController.languageValue = settingsController.languages[index]["id"];
-                                }else{
-                                  settingsController.languageValue = settingsController.languages[index]["id"];
-                                }
-                              },
-                              child: SizedBox(
-                               // width: MediaQuery.of(context).size.width * 0.18,
-                                  child: Row(
-                                    children: [
-                                      Transform.scale(
-                                        scale: 1.2,
-                                        child: Checkbox(
-                                          side: MaterialStateBorderSide.resolveWith(
-                                                (states) => BorderSide(width: 1.0, color: Theme.of(context).dividerColor,),
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                          value: settingsController.selectedLanguage.value == index ?
-                                          true :  false,
-                                          onChanged: (value) {
-                                            Global.saveLanguage(context,settingsController.languages[index]["id"]);
-                                            settingsController.selectedLanguage.value = index;
-                                            if(settingsController.languages[index]["id"] == 'en'){
-                                              settingsController.languageValue = settingsController.languages[index]["id"];
-                                            }else{
-                                              settingsController.languageValue = settingsController.languages[index]["id"];
-                                            }
-                                          },
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          settingsController.languages[index]["id"] == "en" ?
-                                          "English" : "العربية",
-                                          style: Theme.of(context).textTheme.bodyText2,
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  )
+          ),
+          const SizedBox(height: 2),
+          GestureDetector(
+            onTap: (){
+
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.08,
+              decoration: BoxDecoration(
+                color: MyTheme.isDarkTheme.value ?
+                Colors.white.withOpacity(0.05) : Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: MyTheme.isDarkTheme.value ?
+                    Colors.transparent :
+                    Colors.grey.withOpacity(0.5),
+                    blurRadius: 3,
+                    offset: const Offset(1, 1),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(App_Localization.of(context).translate("about_us"),
+                          maxLines: 1,
+                          style: Theme.of(context).textTheme.headline2,),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Theme.of(context).dividerColor,
+                        )
+                      ],
+                    )
+                ),
               ),
             ),
           ),

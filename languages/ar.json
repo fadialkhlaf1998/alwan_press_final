@@ -81,6 +81,8 @@
   "choose_option_to_connect" : "اختر طريقة للتواصل",
   "whatsapp" : "واتساب",
   "no_statement" : "لا يوجد كشف حساب حالياً",
-  "request_last_statement" : "الرجاء طلب أخر كشف حساب"
-
+  "request_last_statement" : "الرجاء طلب أخر كشف حساب",
+  "save" : "حفظ",
+  "connect_us" : "اتصل بنا",
+  "about_us" : "من نحن"
 }
