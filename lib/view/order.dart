@@ -33,6 +33,7 @@ class OrderPage extends StatelessWidget {
       return Scaffold(
         body: SafeArea(
           child: Stack(
+            alignment: Alignment.topCenter,
             children: [
               const DarkModeBackground(),
               Global.userId == -1?_notLogedIn(context):
@@ -72,7 +73,7 @@ class OrderPage extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.08),
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height * 0.8,
         color: !MyTheme.isDarkTheme.value ?  Colors.white : Colors.transparent,
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 600),
@@ -368,14 +369,14 @@ class OrderPage extends StatelessWidget {
             child: Center(
               child: Text(
                 '$text',
-                style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),
+                style: const TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),
               ),
             ),
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
               '$title',
-            style: TextStyle(fontSize: 10, color: Colors.white),
+            style: const TextStyle(fontSize: 10, color: Colors.white),
           )
         ],
       ),

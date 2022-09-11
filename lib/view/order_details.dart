@@ -69,7 +69,8 @@ class OrderDetails extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(height: MediaQuery.of(context).size.height*0.1,),
+                      _header(context),
+                      // SizedBox(height: MediaQuery.of(context).size.height*0.1,),
                       Container(
                         width: MediaQuery.of(context).size.width*0.95,
                         // height: 190,
@@ -204,7 +205,7 @@ class OrderDetails extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
                       Container(
                         width: MediaQuery.of(context).size.width*0.95,
                         height: 135,
@@ -261,7 +262,7 @@ class OrderDetails extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
                       Container(
                         width: MediaQuery.of(context).size.width*0.95,
                         height: 150,
@@ -345,9 +346,9 @@ class OrderDetails extends StatelessWidget {
                           ),
                         ),
                       ),
-
-                      SizedBox(height: 20,),
-                      orderDetailsController.totalForPayment>0?GestureDetector(
+                      const SizedBox(height: 20,),
+                      orderDetailsController.totalForPayment > 0 ?
+                      GestureDetector(
                         onTap: (){
                           //todo pay
                           Get.to(()=>MyFatoraahPage("Payment", orderDetailsController.totalForPayment.toStringAsFixed(2)))!.then((value) {
@@ -363,17 +364,18 @@ class OrderDetails extends StatelessWidget {
                           ),
                           child:  Center(
                             child:  Text(
-
                                 App_Localization.of(context).translate("pay").toUpperCase()+" "+orderDetailsController.totalForPayment.toStringAsFixed(2)+App_Localization.of(context).translate("aed"),
-                                style: TextStyle(color: Colors.white,fontSize: 13)),
+                                style: const TextStyle(color: Colors.white,fontSize: 13)),
                           ),
                         ),
-                      ):Center(),
+                      )
+                          : const Center(),
+                      const SizedBox(height: 30)
                     ],
                   ),
                 ),
               ),
-              _header(context),
+
             ],
           ),
         ),
@@ -409,7 +411,7 @@ class OrderDetails extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(Icons.price_change_outlined),
+          const Icon(Icons.price_change_outlined),
           Text(orderDetailsController.order!.getStateManual(context,state),
               style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 8,fontWeight: FontWeight.bold,),maxLines: 2,textAlign: TextAlign.center),
           Container(
