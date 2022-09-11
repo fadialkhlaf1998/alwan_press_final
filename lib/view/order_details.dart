@@ -10,6 +10,7 @@ import 'package:alwan_press/view/my_fatoraah.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -236,22 +237,37 @@ class OrderDetails extends StatelessWidget {
                                     orderController.loadPdf(orderDetailsController.order!.invoice);
                                   },
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Icon(Icons.price_change_outlined,color:MyTheme.isDarkTheme.value ? Colors.white: Colors.black,size: 22),
-                                      SizedBox(width: 10,),
-                                      Text(App_Localization.of(context).translate("tax_invoices"),
-                                        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.price_change_outlined,color:MyTheme.isDarkTheme.value ? Colors.white: Colors.black,size: 22),
+                                        const SizedBox(width: 10,),
+                                        Text(App_Localization.of(context).translate("tax_invoices"),
+                                          style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        s
+                                        Container(
+                                          child: Center(
+                                            child: Text(App_Localization.of(context).translate('reorder')),
+                                          ),
+                                        )
+                                      ],
+                                    )
                                     ],
                                   ),
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    stateCard(0,context),
-                                    stateCard(1,context),
-                                    stateCard(2,context),
-                                    stateCard(3,context),
-                                    stateCard(4,context),
+                                    stateCard(0,context, 'wait'),
+                                    stateCard(1,context, 'in_progress'),
+                                    stateCard(2,context, 'credit_card'),
+                                    stateCard(3,context, 'check'),
+                                    stateCard(4,context, 'send'),
                                   ],
                                 ),
                                 Text(orderDetailsController.order!.getState(context),
@@ -404,14 +420,18 @@ class OrderDetails extends StatelessWidget {
     );
   }
 
-  stateCard(int state,BuildContext context){
+  stateCard(int state,BuildContext context, String icon){
     return Container(
       width: MediaQuery.of(context).size.width*0.9/5 - 10,
       height: 60,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Icon(Icons.price_change_outlined),
+          Container(
+            width: 21,
+            height: 21,
+            child: SvgPicture.asset('assets/orderIcons/$icon.svg'),
+          ),
           Text(orderDetailsController.order!.getStateManual(context,state),
               style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 8,fontWeight: FontWeight.bold,),maxLines: 2,textAlign: TextAlign.center),
           Container(

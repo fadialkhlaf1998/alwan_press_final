@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14.768" height="13.291" viewBox="0 0 14.768 13.291">
+  <g id="Credit_Card" data-name="Credit Card" transform="translate(-42.5 -20.928)">
+    <g id="Icon_Credit_Card" data-name="Icon_Credit Card" transform="translate(42.5 20.928)">
+      <g id="Group_329" data-name="Group 329" transform="translate(0 0)">
+        <path id="Path_82" data-name="Path 82" d="M12.907,2.983l-.945-1.772A2.4,2.4,0,0,0,9.865,0,2.2,2.2,0,0,0,8.743.3L3.84,2.954H2.363A2.37,2.37,0,0,0,0,5.316v5.612a2.37,2.37,0,0,0,2.363,2.363H12.4a2.37,2.37,0,0,0,2.363-2.363V5.316A2.38,2.38,0,0,0,12.907,2.983ZM9.451,1.595a.738.738,0,0,1,.413-.118.851.851,0,0,1,.768.473l.532,1H6.941Zm3.84,9.333a.889.889,0,0,1-.886.886H2.363a.889.889,0,0,1-.886-.886V5.316a.889.889,0,0,1,.886-.886H12.4a.889.889,0,0,1,.886.886Z" transform="translate(0 0)" fill="#bebebe"/>
+        <path id="Path_83" data-name="Path 83" d="M18.122,21.477H10.738A.731.731,0,0,1,10,20.738h0A.731.731,0,0,1,10.738,20h7.384a.731.731,0,0,1,.738.738h0A.75.75,0,0,1,18.122,21.477Z" transform="translate(-7.046 -14.093)" fill="#bebebe"/>
+      </g>
+    </g>
+  </g>
+</svg>

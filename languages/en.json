@@ -100,5 +100,7 @@
   "shipping_address": "Shipping Address",
   "save" : "Save",
   "connect_us" : "Connect us",
-  "about_us" : "About us"
+  "about_us" : "About us",
+  "follow" : "Follow",
+  "reorder" : "Reorder"
 }

@@ -104,6 +104,7 @@ flutter:
     - assets/image/
     - assets/icons/
     - assets/animation/
+    - assets/orderIcons/
     - languages/en.json
     - languages/ar.json
 

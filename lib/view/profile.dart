@@ -11,6 +11,7 @@ import 'package:alwan_press/view/address_2.dart';
 import 'package:alwan_press/view/contact_information.dart';
 import 'package:alwan_press/view/pdf_viwer.dart';
 import 'package:alwan_press/view/sign_in.dart';
+import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
@@ -40,16 +41,7 @@ class _ProfileState extends State<Profile> {
       body: SafeArea(
         child: Stack(
           children: [
-            MyTheme.isDarkTheme.value ? Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/image/background.png')
-                    )
-                )
-            ) : Text(''),
+           DarkModeBackground(),
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -119,64 +111,63 @@ class _ProfileState extends State<Profile> {
                   _optionBar(context),
                   const SizedBox(height: 25),
                   _contactHelp(context),
-                  const SizedBox(height: 35),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _socialMedia(context),
-                     // _terms(context),
-                      const SizedBox(height: 20),
-                      Text("© 2018 alwan_press. ALL RIGHTS RESERVED.",
-                        style: TextStyle(
-                            color: MyTheme.isDarkTheme.value ? Colors.white :
-                            Colors.black,
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text("Created by ",
-                              style: TextStyle(
-                                  color: MyTheme.isDarkTheme.value ? Colors.white :
-                                  Colors.black,
-                                  fontSize: 11,
-                                  // fontWeight: FontWeight.bold
-                              ),
-                            ),
-                          GestureDetector(
-                            onTap: () async{
-                              if (!await launchUrl(
-                              Uri.parse('https://www.maxart.ae/'),
-                              // mode: LaunchMode.externalApplication,
-                                mode: LaunchMode.inAppWebView,
-                                webViewConfiguration: const WebViewConfiguration(
-                                    headers: <String, String>{'my_header_key': 'my_header_value'}),
-                                // webViewConfiguration: const WebViewConfiguration(enableJavaScript: false),
-                              )) {
-                              throw 'Could not launch';
-                              }
-                            },
-                            child: Text("MAXART",
-                              style: TextStyle(
-                                color: MyTheme.isDarkTheme.value ? Colors.white :
-                                Colors.black,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline,
-
-                              ),
-                            ),
-                          )
-                          ],
-                        )
-                      ),
-                    ],
-                  ),
+                  // Column(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     _socialMedia(context),
+                  //    // _terms(context),
+                  //     const SizedBox(height: 20),
+                  //     Text("© 2018 alwan_press. ALL RIGHTS RESERVED.",
+                  //       style: TextStyle(
+                  //           color: MyTheme.isDarkTheme.value ? Colors.white :
+                  //           Colors.black,
+                  //           fontSize: 11,
+                  //           fontWeight: FontWeight.bold
+                  //       ),
+                  //     ),
+                  //     Container(
+                  //       padding: EdgeInsets.symmetric(vertical: 20),
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.center,
+                  //         crossAxisAlignment: CrossAxisAlignment.center,
+                  //         children: [
+                  //           Text("Created by ",
+                  //             style: TextStyle(
+                  //                 color: MyTheme.isDarkTheme.value ? Colors.white :
+                  //                 Colors.black,
+                  //                 fontSize: 11,
+                  //                 // fontWeight: FontWeight.bold
+                  //             ),
+                  //           ),
+                  //         GestureDetector(
+                  //           onTap: () async{
+                  //             if (!await launchUrl(
+                  //             Uri.parse('https://www.maxart.ae/'),
+                  //             // mode: LaunchMode.externalApplication,
+                  //               mode: LaunchMode.inAppWebView,
+                  //               webViewConfiguration: const WebViewConfiguration(
+                  //                   headers: <String, String>{'my_header_key': 'my_header_value'}),
+                  //               // webViewConfiguration: const WebViewConfiguration(enableJavaScript: false),
+                  //             )) {
+                  //             throw 'Could not launch';
+                  //             }
+                  //           },
+                  //           child: Text("MAXART",
+                  //             style: TextStyle(
+                  //               color: MyTheme.isDarkTheme.value ? Colors.white :
+                  //               Colors.black,
+                  //               fontSize: 12,
+                  //               fontWeight: FontWeight.bold,
+                  //               decoration: TextDecoration.underline,
+                  //
+                  //             ),
+                  //           ),
+                  //         )
+                  //         ],
+                  //       )
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               )
 
@@ -459,7 +450,7 @@ class _ProfileState extends State<Profile> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: 50,
                 decoration: BoxDecoration(
-                    color: Theme.of(context).disabledColor,
+                    color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(10)
                 ),
                 child: Row(
@@ -469,15 +460,17 @@ class _ProfileState extends State<Profile> {
                     Container(
                         width: 28,
                         height: 28,
-                        child:Icon(Icons.update_outlined,color:!MyTheme.isDarkTheme.value ? Colors.white : Colors.black,size: 28,)
+                        child: const Icon(
+                          Icons.update_outlined,
+                          color:  Colors.white,
+                          size: 28,)
                     ),
                     const SizedBox(width: 10),
                     Center(
                         child: Text(App_Localization.of(context).translate("req_last_state"),
-
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 16,
-                                color: Theme.of(context).backgroundColor,
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold
                             )))
                   ],

@@ -65,7 +65,22 @@ class ConnectUs extends StatelessWidget {
         children: [
           ConnectUsWidget(
               icon: 'facebook',
-              title: 'Facbook')
+              title: 'Facebook',
+            followButton: (){},
+          ),
+          const SizedBox(height: 20),
+          ConnectUsWidget(
+              icon: 'instagram',
+              title: 'Instagram',
+            followButton: (){},
+          ),
+          const SizedBox(height: 20),
+          ConnectUsWidget(
+              icon: 'twitter',
+              title: 'Twitter',
+            followButton: (){},
+          ),
+
         ],
       ),
     );
