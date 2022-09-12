@@ -1,5 +1,9 @@
 import 'package:alwan_press/helper/api.dart';
+import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/model/order.dart';
+import 'package:alwan_press/view/success.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrderDetailsController extends GetxController{
@@ -45,6 +49,26 @@ class OrderDetailsController extends GetxController{
         refreshData();
       }
     });
+  }
+
+  reorder(){
+    loading.value = true;
+    Api.reOrder(Global.user!.id,order!.id).then((success) {
+      loading.value = false;
+      if(success){
+        Get.to(()=>Success());
+      }else{
+        mySnackBar('Something is wrong', 'Please try again');
+      }
+    });
+  }
+  mySnackBar(title, description){
+    return Get.snackbar(
+      title,
+      description,
+      margin: EdgeInsets.only(top: 30,left: 25,right: 25),
+      colorText: Colors.white,
+    );
   }
 
 }

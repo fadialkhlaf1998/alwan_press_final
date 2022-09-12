@@ -330,4 +330,30 @@ class Api {
 
   }
 
+  static reOrder(int customer_id,int order_id)async{
+    print('************'+order_id.toString());
+    print('************'+customer_id.toString());
+    var headers = {
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request('POST', Uri.parse(url+'/api/re-order'));
+    request.body = json.encode({
+      "customer_id": customer_id,
+      "order_id": order_id,
+      "notes": "I need this order"
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      return true;
+    }
+    else {
+    print(response.reasonPhrase);
+      return false;
+    }
+
+  }
 }

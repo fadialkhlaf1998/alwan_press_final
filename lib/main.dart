@@ -4,6 +4,7 @@ import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/helper/store.dart';
 import 'package:alwan_press/view/home.dart';
 import 'package:alwan_press/view/intro.dart';
+import 'package:alwan_press/view/success.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';

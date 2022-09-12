@@ -241,21 +241,28 @@ class OrderDetails extends StatelessWidget {
                                     children: [
                                     Row(
                                       children: [
-                                        Icon(Icons.price_change_outlined,color:MyTheme.isDarkTheme.value ? Colors.white: Colors.black,size: 22),
-                                        const SizedBox(width: 10,),
+                                        // Icon(Icons.price_change_outlined,color:MyTheme.isDarkTheme.value ? Colors.white: Colors.black,size: 22),
+                                        SvgPicture.asset("assets/icons/tax_invoice.svg",width: 22,),
+                                        const SizedBox(width: 7,),
                                         Text(App_Localization.of(context).translate("tax_invoices"),
                                           style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
                                       ],
                                     ),
-                                    Row(
-                                      children: [
-                                        s
-                                        Container(
-                                          child: Center(
-                                            child: Text(App_Localization.of(context).translate('reorder')),
-                                          ),
-                                        )
-                                      ],
+                                    GestureDetector(
+                                      onTap: (){
+                                        orderDetailsController.reorder();
+                                      },
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset("assets/icons/reorder.svg",width: 18,),
+                                          const SizedBox(width: 7,),
+                                          Container(
+                                            child: Center(
+                                              child: Text(App_Localization.of(context).translate('reorder')),
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     )
                                     ],
                                   ),
@@ -263,11 +270,11 @@ class OrderDetails extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    stateCard(0,context, 'wait'),
-                                    stateCard(1,context, 'in_progress'),
-                                    stateCard(2,context, 'credit_card'),
-                                    stateCard(3,context, 'check'),
-                                    stateCard(4,context, 'send'),
+                                    stateCard(0,context, 'state_0'),
+                                    stateCard(1,context, 'state_1'),
+                                    stateCard(2,context, 'state_2'),
+                                    stateCard(3,context, 'state_3'),
+                                    stateCard(4,context, 'state_4'),
                                   ],
                                 ),
                                 Text(orderDetailsController.order!.getState(context),
@@ -430,7 +437,7 @@ class OrderDetails extends StatelessWidget {
           Container(
             width: 21,
             height: 21,
-            child: SvgPicture.asset('assets/orderIcons/$icon.svg'),
+            child: SvgPicture.asset('assets/icons/$icon.svg'),
           ),
           Text(orderDetailsController.order!.getStateManual(context,state),
               style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 8,fontWeight: FontWeight.bold,),maxLines: 2,textAlign: TextAlign.center),

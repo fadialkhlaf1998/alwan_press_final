@@ -4,6 +4,7 @@ import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/helper/store.dart';
+import 'package:alwan_press/view/about_us.dart';
 import 'package:alwan_press/view/connect_us.dart';
 import 'package:alwan_press/view/language_list.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
@@ -17,8 +18,10 @@ class Settings extends StatelessWidget {
   Settings() {
     if(Global.langCode == "en"){
       settingsController.selectedLanguage.value = 0;
+      settingsController.languageName.value = "English";
     }else{
       settingsController.selectedLanguage.value = 1;
+      settingsController.languageName.value = "العربية";
     }
   }
   SettingsController settingsController = Get.put(SettingsController());
@@ -32,7 +35,7 @@ class Settings extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            const DarkModeBackground(),
+            MyTheme.isDarkTheme.value? const DarkModeBackground():Center(),
             Column(
               children: [
                 _header(context),
@@ -128,7 +131,7 @@ class Settings extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              settingsController.languageValue.value,
+                              settingsController.languageName.value,
                               style: TextStyle(
                                   fontSize: 14,
                                   color: Theme.of(context).dividerColor
@@ -242,7 +245,7 @@ class Settings extends StatelessWidget {
           const SizedBox(height: 2),
           GestureDetector(
             onTap: (){
-
+              Get.to(()=> AboutUs());
             },
             child: Container(
               width: MediaQuery.of(context).size.width,

@@ -4,6 +4,7 @@ import 'package:alwan_press/widget/connect_us_widget.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ConnectUs extends StatelessWidget {
   const ConnectUs({Key? key}) : super(key: key);
@@ -66,19 +67,25 @@ class ConnectUs extends StatelessWidget {
           ConnectUsWidget(
               icon: 'facebook',
               title: 'Facebook',
-            followButton: (){},
+            followButton: (){
+              _launchUrl("");
+            },
           ),
           const SizedBox(height: 20),
           ConnectUsWidget(
               icon: 'instagram',
               title: 'Instagram',
-            followButton: (){},
+            followButton: (){
+              _launchUrl("");
+            },
           ),
           const SizedBox(height: 20),
           ConnectUsWidget(
               icon: 'twitter',
               title: 'Twitter',
-            followButton: (){},
+            followButton: (){
+              _launchUrl("");
+            },
           ),
 
         ],
@@ -86,6 +93,11 @@ class ConnectUs extends StatelessWidget {
     );
   }
 
+  Future<void> _launchUrl(String url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw 'Could not launch $url';
+    }
+  }
 
 
 }

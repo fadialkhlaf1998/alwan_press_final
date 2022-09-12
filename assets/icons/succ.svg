@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="216.111" height="185.105" viewBox="0 0 216.111 185.105">
+  <g id="Group_11798" data-name="Group 11798" transform="translate(-71.359 -287)">
+    <g id="Group_11797" data-name="Group 11797" transform="translate(15.106 3.767)">
+      <g id="Group_11795" data-name="Group 11795" transform="translate(33.045 16.146)">
+        <line id="Line_4" data-name="Line 4" y2="13.935" transform="matrix(0.914, -0.407, 0.407, 0.914, 94.707, 316.097)" fill="none" stroke="#8a8a8a" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+        <line id="Line_3" data-name="Line 3" x1="13.936" transform="matrix(0.914, -0.407, 0.407, 0.914, 91.175, 325.297)" fill="none" stroke="#8a8a8a" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      </g>
+      <g id="Group_11796" data-name="Group 11796" transform="translate(255.046 384.269) rotate(-22)">
+        <line id="Line_4-2" data-name="Line 4" y1="13.935" transform="matrix(-0.914, -0.407, 0.407, -0.914, 3.531, 12.731)" fill="none" stroke="#8a8a8a" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+        <line id="Line_3-2" data-name="Line 3" x1="13.936" transform="matrix(-0.914, -0.407, 0.407, -0.914, 12.731, 9.2)" fill="none" stroke="#8a8a8a" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      </g>
+      <circle id="bg_3" data-name="bg 3" cx="5.621" cy="5.621" r="5.621" transform="translate(215.956 285.233)" fill="none" stroke="#8a8a8a" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      <ellipse id="bg_3-2" data-name="bg 3" cx="5.621" cy="5.621" rx="5.621" ry="5.621" transform="translate(91.175 455.313) rotate(-22)" fill="none" stroke="#8a8a8a" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      <ellipse id="bg_2" data-name="bg 2" cx="8.259" cy="8.259" rx="8.259" ry="8.259" transform="matrix(0.914, -0.407, 0.407, 0.914, 58.894, 351.691)" fill="none" stroke="#8a8a8a" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      <ellipse id="bg_2-2" data-name="bg 2" cx="8.259" cy="8.259" rx="8.259" ry="8.259" transform="translate(243.705 465.735) rotate(-178)" fill="none" stroke="#8a8a8a" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      <g id="Group_11794" data-name="Group 11794" transform="translate(-90.756 65.432)">
+        <path id="icon_tick" data-name="icon tick" d="M-421.181,445.736l35.362,39.77,83.45-93.852" transform="translate(625.157 -121.301)" fill="none" stroke="#8a8a8a" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/>
+      </g>
+    </g>
+  </g>
+</svg>
