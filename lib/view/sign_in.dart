@@ -175,26 +175,26 @@ class _SignInState extends State<SignIn> {
             ),
           ),
         ),
-        const SizedBox(height: 10),
-        GestureDetector(
-          onTap: () async {
-
-            // FocusManager.instance.primaryFocus?.unfocus();
-            // Navigator.push(
-            //   context,
-            //   PageRouteBuilder(
-            //     pageBuilder: (c, a1, a2) => ForgetPassword(),
-            //     transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
-            //     transitionDuration: const Duration(milliseconds: 500),
-            //   ),
-            // );
-          },
-          child: Container(
-            height: 25,
-            color: Colors.transparent,
-            child: Text(App_Localization.of(context).translate("forget_password"),style: TextStyle(fontSize: 14,color: App.textColor()),),
-          ),
-        ),
+        // const SizedBox(height: 10),
+        // GestureDetector(
+        //   onTap: () async {
+        //
+        //     // FocusManager.instance.primaryFocus?.unfocus();
+        //     // Navigator.push(
+        //     //   context,
+        //     //   PageRouteBuilder(
+        //     //     pageBuilder: (c, a1, a2) => ForgetPassword(),
+        //     //     transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
+        //     //     transitionDuration: const Duration(milliseconds: 500),
+        //     //   ),
+        //     // );
+        //   },
+        //   child: Container(
+        //     height: 25,
+        //     color: Colors.transparent,
+        //     child: Text(App_Localization.of(context).translate("forget_password"),style: TextStyle(fontSize: 14,color: App.textColor()),),
+        //   ),
+        // ),
         const SizedBox(height: 30),
         GestureDetector(
           onTap: (){
