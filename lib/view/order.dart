@@ -80,6 +80,7 @@ class OrderPage extends StatelessWidget {
           child:  orderController.loading.value
               ? const Center(child: CircularProgressIndicator(),)
               :ListView.builder(
+            padding: EdgeInsets.only(bottom: 20),
             itemCount: orderController.myOrders.length,
             itemBuilder: (context, index){
               // var dateTime = orderController.calculateTime(index);

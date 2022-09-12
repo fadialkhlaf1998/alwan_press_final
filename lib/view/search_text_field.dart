@@ -66,6 +66,7 @@ class SearchTextField extends SearchDelegate<String> {
     final suggestions = suggestionList.where((name) {
       return name.title.toLowerCase().contains(query.toLowerCase());
     });
+
     print("query");
     // print(query);
     // Get.to(()=>SearchPage(query));

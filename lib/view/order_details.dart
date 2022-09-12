@@ -242,7 +242,7 @@ class OrderDetails extends StatelessWidget {
                                     Row(
                                       children: [
                                         // Icon(Icons.price_change_outlined,color:MyTheme.isDarkTheme.value ? Colors.white: Colors.black,size: 22),
-                                        SvgPicture.asset("assets/icons/tax_invoice.svg",width: 22,),
+                                        SvgPicture.asset("assets/icons/tax_invoice.svg",width: 22,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
                                         const SizedBox(width: 7,),
                                         Text(App_Localization.of(context).translate("tax_invoices"),
                                           style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
@@ -254,7 +254,7 @@ class OrderDetails extends StatelessWidget {
                                       },
                                       child: Row(
                                         children: [
-                                          SvgPicture.asset("assets/icons/reorder.svg",width: 18,),
+                                          SvgPicture.asset("assets/icons/reorder.svg",width: 16,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
                                           const SizedBox(width: 7,),
                                           Container(
                                             child: Center(

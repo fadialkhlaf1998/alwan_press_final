@@ -37,7 +37,7 @@ class Home extends StatelessWidget {
         body: SafeArea(
           child: Stack(
             children: [
-              const DarkModeBackground(),
+              MyTheme.isDarkTheme.value?const DarkModeBackground():Center(),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: SingleChildScrollView(
@@ -184,7 +184,7 @@ class Home extends StatelessWidget {
         _slider(context),
         _categoryBar(context),
         _gridBody(context, homeController.categoryIndex.value),
-        const SizedBox(height: 20),
+        const SizedBox(height: 40),
       ],
     );
   }
