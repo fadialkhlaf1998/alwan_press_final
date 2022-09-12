@@ -4,6 +4,7 @@ import 'package:alwan_press/controller/intro_controller.dart';
 import 'package:alwan_press/controller/product_list_controller.dart';
 import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
+import 'package:alwan_press/view/contact_information.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/all_subCategory.dart';
 import 'package:alwan_press/view/product_details.dart';
@@ -80,18 +81,27 @@ class ProductList extends StatelessWidget {
               : Container(
                 width: MediaQuery.of(context).size.width * 0.15,
                 color: Colors.transparent,
-                child: const Align(
-                    alignment: Alignment.centerRight,
-                    child: Icon(Icons.menu, size: 25)),
+                child: GestureDetector(
+                  onTap: (){
+                    Get.to(()=>ContactInformation());
+                  },
+                  child: const Align(
+                      alignment: Alignment.centerRight,
+                      child: Icon(Icons.menu, size: 25)),
+                ),
               ),
               _logo(context),
               Global.langCode == 'en' ?
               Container(
                 width: MediaQuery.of(context).size.width * 0.15,
                 color: Colors.transparent,
-                child: const Align(
+                child: Align(
                     alignment: Alignment.centerRight,
-                    child: Icon(Icons.menu, size: 25)),
+                    child: GestureDetector(
+                        onTap: (){
+                          Get.to(()=>ContactInformation());
+                        },
+                        child: Icon(Icons.menu, size: 25))),
               )
                   : GestureDetector(
                 onTap: () {
