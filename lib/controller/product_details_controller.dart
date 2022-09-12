@@ -16,8 +16,9 @@ class ProductDetailsController extends GetxController{
     Api.getProductDetails(itemId).then((value){
       productDetails.value = value;
       // TODO
+      loading.value = false;
       Future.delayed(const Duration(milliseconds: 1000)).then((value){
-        loading.value = false;
+
       });
     });
   }

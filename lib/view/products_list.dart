@@ -17,6 +17,9 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class ProductList extends StatelessWidget {
+  ProductList(){
+    productListController.getData();
+  }
 
   ProductListController productListController = Get.put(ProductListController());
   HomeController homeController = Get.find();
@@ -157,7 +160,19 @@ class ProductList extends StatelessWidget {
     int listLength = productListController.tempProductsList.length;
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.9,
-      child: GridView.builder(
+      child: productListController.loading.value?Container(
+        height: MediaQuery.of(context).size.height*0.5,
+        child: Center(
+          child: CircularProgressIndicator(color: App.blue,),
+        ),
+      ):listLength == 0
+          ? Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('No Element For This Category',style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),)
+        ],
+      )
+          :GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -170,9 +185,7 @@ class ProductList extends StatelessWidget {
         ),
         itemCount:  listLength ,
         itemBuilder: (context, index) {
-          return listLength == 0
-              ? const Text('empty')
-              : _product(context, index);
+          return  _product(context, index);
         },
       ),
     );

@@ -116,44 +116,44 @@ class ProductDetails extends StatelessWidget {
                     ,textAlign: TextAlign.justify,),
                 ],
               ),
-              Row(
-                children: [
-                  Text(App_Localization.of(context).translate("price") + ': ',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black
-                      )
-                  ),
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: productDetailsController.loading.value ?
-                  Container(
-                    width: 50,
-                    height: 20,
-                    child: Shimmer.fromColors(
-                        baseColor: Colors.grey,
-                        highlightColor:Colors.white,
-                        child:  Container(
-                          width: 50,
-                          height: 20,
-                          decoration: BoxDecoration(
-                              color: Colors.grey.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(20)
-                          ),
-                        )
-                    ),
-                  )
-                      : Text(
-                      productDetailsController.productDetails.value.price.toString(),
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : App.grey),
-                      textAlign: TextAlign.justify
-                  ),
-                )
-                ],
-              ),
+              // Row(
+              //   children: [
+              //     Text(App_Localization.of(context).translate("price") + ': ',
+              //         style: TextStyle(
+              //             fontSize: 16,
+              //             fontWeight: FontWeight.bold,
+              //             color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black
+              //         )
+              //     ),
+              //   AnimatedSwitcher(
+              //     duration: const Duration(milliseconds: 300),
+              //     child: productDetailsController.loading.value ?
+              //     Container(
+              //       width: 50,
+              //       height: 20,
+              //       child: Shimmer.fromColors(
+              //           baseColor: Colors.grey,
+              //           highlightColor:Colors.white,
+              //           child:  Container(
+              //             width: 50,
+              //             height: 20,
+              //             decoration: BoxDecoration(
+              //                 color: Colors.grey.withOpacity(0.2),
+              //                 borderRadius: BorderRadius.circular(20)
+              //             ),
+              //           )
+              //       ),
+              //     )
+              //         : Text(
+              //         productDetailsController.productDetails.value.price.toString(),
+              //         style: TextStyle(
+              //             fontSize: 15,
+              //             color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : App.grey),
+              //         textAlign: TextAlign.justify
+              //     ),
+              //   )
+              //   ],
+              // ),
             ],
           ),
           Divider(height: 30,color: Theme.of(context).dividerColor),

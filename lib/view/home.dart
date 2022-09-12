@@ -5,6 +5,7 @@ import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/all_subCategory.dart';
+import 'package:alwan_press/view/contact_information.dart';
 import 'package:alwan_press/view/products_list.dart';
 import 'package:alwan_press/view/search_text_field.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
@@ -67,18 +68,30 @@ class Home extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                color: Colors.transparent,
-                child: const Icon(
-                  Icons.menu,
-                  size: 25,
+              GestureDetector(
+                onTap: (){
+                  print('*-*-*');
+                },
+                child: Container(
                   color: Colors.transparent,
+                  child: const Icon(
+                    Icons.menu,
+                    size: 25,
+                    color: Colors.transparent,
+                  ),
                 ),
               ),
               _logo(context),
-              Container(
-                color: Colors.transparent,
-                child: const Icon(Icons.menu, size: 25),
+              GestureDetector(
+                onTap: (){
+                  print('*-*-*');
+                  Get.to(()=>ContactInformation());
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  child: const Icon(Icons.menu, size: 25),
+                ),
+
               ),
             ],
           ),

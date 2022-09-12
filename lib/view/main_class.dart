@@ -179,7 +179,7 @@ class MainClass extends StatelessWidget {
           screenTransitionAnimation: const ScreenTransitionAnimation(
             animateTabTransition: true,
             curve: Curves.fastOutSlowIn,
-            duration: Duration(milliseconds: 800),
+            duration: Duration(milliseconds: 600),
           ),
         ),
       );

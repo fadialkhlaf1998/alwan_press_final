@@ -38,7 +38,7 @@ class SearchTextField extends SearchDelegate<String> {
     return IconButton(
       icon: const Icon(Icons.arrow_back),
       onPressed: () {
-        Get.back();
+        close(context, "");
       },
     );
   }
@@ -47,6 +47,7 @@ class SearchTextField extends SearchDelegate<String> {
   @override
   ThemeData appBarTheme(BuildContext context) {
     return super.appBarTheme(context).copyWith(
+
       appBarTheme: AppBarTheme(
         color: App.pink,
         elevation: 0,
@@ -65,6 +66,9 @@ class SearchTextField extends SearchDelegate<String> {
     final suggestions = suggestionList.where((name) {
       return name.title.toLowerCase().contains(query.toLowerCase());
     });
+    print("query");
+    // print(query);
+    // Get.to(()=>SearchPage(query));
     homeController.getResult(query);
    // close(context, query);
     return Center(
