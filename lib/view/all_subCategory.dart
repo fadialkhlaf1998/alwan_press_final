@@ -8,6 +8,7 @@ import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/products_list.dart';
 import 'package:alwan_press/view/search_text_field.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
+import 'package:alwan_press/widget/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
@@ -21,6 +22,9 @@ class AllSubCategory extends StatelessWidget {
   IntroController introController = Get.find();
   HomeController homeController = Get.find();
   AllSubCategoryController allSubCategoryController = Get.put(AllSubCategoryController());
+
+  final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
+
   AllSubCategory(this.categoryIndex){
     allSubCategoryController.categoryIndex.value = categoryIndex;
     introController.tempCategoriesList.clear();
@@ -35,6 +39,8 @@ class AllSubCategory extends StatelessWidget {
           statusBarColor: MyTheme.isDarkTheme.value ? const Color(0XFF181818) : Colors.white
       ));
       return Scaffold(
+        endDrawer: MyDrawer(_scaffoldkey),
+        key: _scaffoldkey,
         body: SafeArea(
           child: Stack(
             children: [
@@ -81,21 +87,31 @@ class AllSubCategory extends StatelessWidget {
                   child: Lottie.asset('assets/icons/Arrow.json'),
                 ),
               )
-                  : Container(
+                  : GestureDetector(
+                onTap: (){
+                  _scaffoldkey.currentState!.openEndDrawer();
+                },
+                child: Container(
                 width: MediaQuery.of(context).size.width * 0.15,
                 color: Colors.transparent,
                 child: const Align(
-                    alignment: Alignment.centerRight,
-                    child: Icon(Icons.menu, size: 25)),
+                      alignment: Alignment.centerRight,
+                      child: Icon(Icons.menu, size: 25)),
               ),
+                  ),
               _logo(context),
               Global.langCode == 'en' ?
-              Container(
-                width: MediaQuery.of(context).size.width * 0.15,
-                color: Colors.transparent,
-                child: const Align(
-                    alignment: Alignment.centerRight,
-                    child: Icon(Icons.menu, size: 25)),
+              GestureDetector(
+                onTap: (){
+                  _scaffoldkey.currentState!.openEndDrawer();
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.15,
+                  color: Colors.transparent,
+                  child: const Align(
+                      alignment: Alignment.centerRight,
+                      child: Icon(Icons.menu, size: 25)),
+                ),
               )
                   : GestureDetector(
                 onTap: () {
@@ -325,7 +341,7 @@ class AllSubCategory extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   width: MediaQuery.of(context).size.width * 0.5,
                   decoration: BoxDecoration(
-                      color: MyTheme.isDarkTheme.value ? App.darkGrey : App.grey,
+                      color: MyTheme.isDarkTheme.value ? App.darkGrey : App.lightGrey,
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10))),

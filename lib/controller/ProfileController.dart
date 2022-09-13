@@ -49,6 +49,7 @@ class ProfileController extends GetxController {
     Future<File> loadPdf() async {
       Completer<File> completer = Completer();
       final url = Global.user!.financialState;
+      print(url);
       final filename = url.substring(url.lastIndexOf("/") + 1);
       var request = await HttpClient().getUrl(Uri.parse(url));
       var response = await request.close();

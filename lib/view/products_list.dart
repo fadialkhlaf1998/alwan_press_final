@@ -184,7 +184,7 @@ class ProductList extends StatelessWidget {
           ? Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('No Element For This Category',style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),)
+          Text(App_Localization.of(context).translate("no_data"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),)
         ],
       )
           :GridView.builder(

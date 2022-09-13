@@ -198,7 +198,7 @@ class Home extends StatelessWidget {
       children: [
         Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: MediaQuery.of(context).size.width*0.4,
             color: Colors.transparent,
             child: CarouselSlider(
               options: CarouselOptions(
@@ -228,21 +228,21 @@ class Home extends StatelessWidget {
                   .toList(),
             )),
         Positioned(
-          bottom: 10,
+          bottom: 5,
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: introController.bannerList.map((e) {
                 return Padding(
-                  padding: const EdgeInsets.all(4.0),
+                  padding: const EdgeInsets.all(2.0),
                   child: Container(
-                    width: 8,
-                    height: 8,
+                    width: 5,
+                    height: 5,
                     decoration: BoxDecoration(
                       color: homeController.sliderIndex.value ==
                               introController.bannerList.indexOf(e)
-                          ? App.pink
+                          ? App.blue
                           : Colors.grey,
                       shape: BoxShape.circle,
                     ),

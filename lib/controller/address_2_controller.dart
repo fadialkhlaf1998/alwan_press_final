@@ -49,21 +49,24 @@ class AddressController_2 extends GetxController {
 
   saveAddress() async {
     // loading.value = true;
-    Address address = Address(nickName: nick_name!.text, streetName: street_name!.text,
-        building: building!.text, floor: floor!.text, flat: flat!.text,
-        adDesc: ad_desc!.text, phone: phone!.text);
-    Store.saveAddress(address);
-    Store.loadAddress();
-    print('-------------');
-    print(Global.phone);
-    print('------------');
-    Get.snackbar(
-        'Done!',
-        'Address saved successfully',
-        margin: const EdgeInsets.only(top: 30,left: 25,right: 25),
-        backgroundColor: MyTheme.isDarkTheme.value ? Colors.grey.withOpacity(0.5) : Colors.black.withOpacity(0.5),
-        colorText: Colors.white
-    );
+    if(nick_name!.text.isNotEmpty&&street_name!.text.isNotEmpty&&building!.text.isNotEmpty&&floor!.text.isNotEmpty&&flat!.text.isNotEmpty&&phone!.text.isNotEmpty){
+      Address address = Address(nickName: nick_name!.text, streetName: street_name!.text,
+          building: building!.text, floor: floor!.text, flat: flat!.text,
+          adDesc: ad_desc!.text, phone: phone!.text);
+      Store.saveAddress(address);
+      Store.loadAddress();
+      print('-------------');
+      print(Global.phone);
+      print('------------');
+      Get.back();
+      Get.snackbar(
+          'Done!',
+          'Address saved successfully',
+          margin: const EdgeInsets.only(top: 30,left: 25,right: 25),
+          backgroundColor: MyTheme.isDarkTheme.value ? Colors.grey.withOpacity(0.5) : Colors.black.withOpacity(0.5),
+          colorText: Colors.white
+      );
+    }
 
   }
 

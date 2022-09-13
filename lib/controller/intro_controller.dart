@@ -2,6 +2,8 @@
 
 import 'dart:io';
 
+import 'package:alwan_press/controller/ProfileController.dart';
+import 'package:alwan_press/controller/order_controller.dart';
 import 'package:alwan_press/helper/api.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/store.dart';
@@ -25,7 +27,8 @@ class IntroController extends GetxController{
 
   RxBool showPhoneList = false.obs;
   RxBool showWhatsAppList = false.obs;
-
+  ProfileController profileController = Get.put(ProfileController());
+  OrderController orderController = Get.put(OrderController());
   @override
   void onInit() async{
     super.onInit();

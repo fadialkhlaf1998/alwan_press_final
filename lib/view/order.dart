@@ -19,7 +19,7 @@ import 'package:get/get.dart';
 class OrderPage extends StatelessWidget {
 
   IntroController introController = Get.find();
-  OrderController orderController = Get.put(OrderController());
+  OrderController orderController = Get.find();
   MainClassController mainClassController = Get.find();
   
   @override

@@ -58,7 +58,9 @@ class SignInController extends GetxController{
                     colorText: Colors.white
                 );
                 loading.value = false;
-                Get.to(()=>MainClass());
+                username.clear();
+                password.clear();
+                Get.offAll(()=>MainClass());
               }else{
                 print('can not send token');
               }

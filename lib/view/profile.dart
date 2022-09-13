@@ -29,7 +29,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
 
   IntroController introController = Get.find();
-  ProfileController profileController = Get.put(ProfileController());
+  ProfileController profileController = Get.find();
   MainClassController mainClassController = Get.find();
 
   @override
@@ -69,9 +69,10 @@ class _ProfileState extends State<Profile> {
               IconButton(onPressed: (){}, icon: Icon(Icons.logout ,color: Colors.transparent)),
               GestureDetector(
                 onTap: () {
-                  mainClassController.selectedIndex.value = 0;
-                  mainClassController.pageController.animateToPage(0,
-                      duration: const Duration(milliseconds: 700), curve: Curves.fastOutSlowIn);
+                  // mainClassController.selectedIndex.value = 0;
+                  // mainClassController.pageController.animateToPage(0,
+                  //     duration: const Duration(milliseconds: 700), curve: Curves.fastOutSlowIn);
+                  mainClassController.bottomBarController.jumpToTab(0);
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.17,
@@ -223,7 +224,7 @@ class _ProfileState extends State<Profile> {
             child: GestureDetector(
                 onTap: () async {
                   if(Global.user!=null){
-                    if(false){
+                    if(Global.user!.financialState.endsWith("pdf")){
                       profileController.loading.value = true;
                       profileController.loadPdf().then((value){
                         var pdf = value.path;
@@ -234,6 +235,8 @@ class _ProfileState extends State<Profile> {
                       noStatementDialog();
                       profileController.loading.value = false;
                     }
+                  }else{
+                    Get.to(()=>SignIn());
                   }
                 },
                 child: Container(
