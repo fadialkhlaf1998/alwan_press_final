@@ -69,10 +69,10 @@ class MyDrawer extends StatelessWidget {
                       height: MediaQuery.of(context).size.width/2*0.75,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: MyTheme.isDarkTheme.value
+                              image:
                                   ///dark mode
-                                  ?AssetImage("assets/drawer/dark_new_about_us.jpg")
-                                  :AssetImage("assets/drawer/new_about_us.jpg"),
+                                  AssetImage("assets/drawer/dark_new_about_us.jpg"),
+                                  // :AssetImage("assets/drawer/new_about_us.jpg"),
                               fit: BoxFit.cover
                           )
                       ),
