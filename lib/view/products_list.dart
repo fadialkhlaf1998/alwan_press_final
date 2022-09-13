@@ -250,7 +250,7 @@ class ProductList extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   width: MediaQuery.of(context).size.width * 0.5,
                   decoration: BoxDecoration(
-                      color: MyTheme.isDarkTheme.value ? App.darkGrey : App.grey,
+                      color: MyTheme.isDarkTheme.value ? App.darkGrey : App.lightGrey,
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10))),

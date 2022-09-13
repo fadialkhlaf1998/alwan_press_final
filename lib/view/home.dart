@@ -482,7 +482,7 @@ class Home extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 width: MediaQuery.of(context).size.width * 0.5,
                 decoration: BoxDecoration(
-                    color: MyTheme.isDarkTheme.value ? App.darkGrey : App.grey,
+                    color: MyTheme.isDarkTheme.value ? App.darkGrey : App.lightGrey,
                     borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10))),
@@ -500,18 +500,6 @@ class Home extends StatelessWidget {
                 )
               ),
             ),
-            // Expanded(
-            //   flex: 1,
-            //   child: Text(
-            //     introController.categoriesList[categoryIndex].subCategories[index].title,
-            //     maxLines: 2,
-            //       style: TextStyle(
-            //       color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
-            //       fontSize: 12,
-            //       overflow: TextOverflow.ellipsis
-            //     )
-            //   ),
-            // )
           ],
         ),
       ),
