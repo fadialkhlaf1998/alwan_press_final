@@ -158,7 +158,7 @@ class ContactInformation extends StatelessWidget {
                 color: Colors.transparent,
                 child: const Align(
                     alignment: Alignment.centerRight,
-                    child: Icon(Icons.menu, size: 25)),
+                    child: Icon(Icons.menu, size: 25,color: Colors.transparent,)),
               ),
               _logo(context),
               Global.langCode == 'en' ?
@@ -167,7 +167,7 @@ class ContactInformation extends StatelessWidget {
                 color: Colors.transparent,
                 child: const Align(
                     alignment: Alignment.centerRight,
-                    child: Icon(Icons.menu, size: 25)),
+                    child: Icon(Icons.menu, size: 25,color: Colors.transparent)),
               )
                   : GestureDetector(
                 onTap: () {

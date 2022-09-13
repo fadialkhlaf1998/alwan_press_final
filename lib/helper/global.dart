@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class Global {
@@ -26,6 +27,16 @@ class Global {
   static String phone = '';
   static String username = '';
   static String password = '';
+  static String facebook = '';
+  static String insta = '';
+  static String twitter = '';
+
+
+  static openUrl(String url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw 'Could not launch $url';
+    }
+  }
 
   static saveLanguage(BuildContext context , String lang){
     SharedPreferences.getInstance().then((prefs){

@@ -18,6 +18,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:alwan_press/widget/my_drawer.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class Home extends StatelessWidget {
   IntroController introController = Get.find();
   HomeController homeController = Get.put(HomeController());
   final dataKey = GlobalKey();
-
+  final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -34,6 +35,8 @@ class Home extends StatelessWidget {
               ? const Color(0XFF181818)
               : Colors.white));
       return Scaffold(
+        endDrawer: MyDrawer(_scaffoldkey),
+        key: _scaffoldkey,
         body: SafeArea(
           child: Stack(
             children: [
@@ -85,7 +88,8 @@ class Home extends StatelessWidget {
               GestureDetector(
                 onTap: (){
                   print('*-*-*');
-                  Get.to(()=>ContactInformation());
+                  // Get.to(()=>ContactInformation());
+                  _scaffoldkey.currentState!.openEndDrawer();
                 },
                 child: Container(
                   color: Colors.transparent,

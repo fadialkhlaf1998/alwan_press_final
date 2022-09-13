@@ -10,6 +10,7 @@ import 'package:alwan_press/view/all_subCategory.dart';
 import 'package:alwan_press/view/product_details.dart';
 import 'package:alwan_press/view/search_text_field.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
+import 'package:alwan_press/widget/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
@@ -25,7 +26,7 @@ class ProductList extends StatelessWidget {
   ProductListController productListController = Get.put(ProductListController());
   HomeController homeController = Get.find();
   IntroController introController = Get.find();
-
+  final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Obx((){
@@ -33,6 +34,8 @@ class ProductList extends StatelessWidget {
           statusBarColor: MyTheme.isDarkTheme.value ? const Color(0XFF181818) : Colors.white
       ));
       return Scaffold(
+        endDrawer: MyDrawer(_scaffoldkey),
+        key: _scaffoldkey,
         body: SafeArea(
           child: Stack(
             children: [
@@ -83,7 +86,8 @@ class ProductList extends StatelessWidget {
                 color: Colors.transparent,
                 child: GestureDetector(
                   onTap: (){
-                    Get.to(()=>ContactInformation());
+                    // Get.to(()=>ContactInformation());
+                    _scaffoldkey.currentState!.openEndDrawer();
                   },
                   child: const Align(
                       alignment: Alignment.centerRight,
@@ -99,7 +103,8 @@ class ProductList extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                         onTap: (){
-                          Get.to(()=>ContactInformation());
+                          // Get.to(()=>ContactInformation());
+                          _scaffoldkey.currentState!.openEndDrawer();
                         },
                         child: Icon(Icons.menu, size: 25))),
               )

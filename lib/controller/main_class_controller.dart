@@ -12,5 +12,4 @@ class MainClassController extends GetxController{
   PersistentTabController bottomBarController = PersistentTabController(initialIndex: 0);
 
 
-
 }

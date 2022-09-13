@@ -1,4 +1,5 @@
 import 'package:alwan_press/app_localization.dart';
+import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/widget/connect_us_widget.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
@@ -68,7 +69,7 @@ class ConnectUs extends StatelessWidget {
               icon: 'facebook',
               title: 'Facebook',
             followButton: (){
-              _launchUrl("");
+              Global.openUrl(Global.facebook);
             },
           ),
           const SizedBox(height: 20),
@@ -76,7 +77,7 @@ class ConnectUs extends StatelessWidget {
               icon: 'instagram',
               title: 'Instagram',
             followButton: (){
-              _launchUrl("");
+              Global.openUrl(Global.insta);
             },
           ),
           const SizedBox(height: 20),
@@ -84,7 +85,7 @@ class ConnectUs extends StatelessWidget {
               icon: 'twitter',
               title: 'Twitter',
             followButton: (){
-              _launchUrl("");
+                Global.openUrl(Global.twitter);
             },
           ),
 
@@ -93,11 +94,7 @@ class ConnectUs extends StatelessWidget {
     );
   }
 
-  Future<void> _launchUrl(String url) async {
-    if (!await launchUrl(Uri.parse(url))) {
-      throw 'Could not launch $url';
-    }
-  }
+
 
 
 }
