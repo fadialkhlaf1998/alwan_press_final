@@ -95,7 +95,7 @@ class OrderDetails extends StatelessWidget {
                             children: [
                               Container(
                                 width: MediaQuery.of(context).size.width*0.9,
-                                height: 75,
+                                height: 77,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -118,7 +118,7 @@ class OrderDetails extends StatelessWidget {
                               orderDetailsController.fake.value ?Center():Center(),
                               Container(
                                 width: MediaQuery.of(context).size.width*0.9,
-                                height: 90,
+                                height: 94,
                                 child: orderDetailsController.order!.shippingAddress!=null?
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -250,7 +250,7 @@ class OrderDetails extends StatelessWidget {
                                     ),
                                     GestureDetector(
                                       onTap: (){
-                                        orderDetailsController.reorder();
+                                        orderDetailsController.reorder(context);
                                       },
                                       child: Row(
                                         children: [

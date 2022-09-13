@@ -19,7 +19,7 @@ class MyDrawer extends StatelessWidget {
   MainClassController mainClassController = Get.find();
   ProfileController profileController = Get.find();
   OrderController orderController = Get.find();
-
+  var statement_loading = false.obs;
   MyDrawer(this._scaffoldkey);
 
   @override
@@ -69,7 +69,10 @@ class MyDrawer extends StatelessWidget {
                       height: MediaQuery.of(context).size.width/2*0.75,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage("assets/image/about_us.webp"),
+                              image: MyTheme.isDarkTheme.value
+                                  ///dark mode
+                                  ?AssetImage("assets/drawer/dark_new_about_us.jpg")
+                                  :AssetImage("assets/drawer/new_about_us.jpg"),
                               fit: BoxFit.cover
                           )
                       ),
@@ -101,20 +104,26 @@ class MyDrawer extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: (){
-                        if(Global.user != null){
-                          // orderController.loadPdf(Global.user!.financialState);
-                          if(Global.user!.financialState.endsWith("pdf")){
-                            // profileController.loading.value = true;
-                            profileController.loadPdf().then((value){
-                              var pdf = value.path;
-                              // profileController.loading.value = false;
-                              Get.to(()=>PdfViewerPage(pdf));
-                            });
+                        if(statement_loading.isFalse){
+                          if(Global.user != null){
+                            // orderController.loadPdf(Global.user!.financialState);
+
+                            if(Global.user!.financialState.endsWith("pdf")){
+                              // profileController.loading.value = true;
+                              statement_loading.value = true;
+                              profileController.loadPdf().then((value){
+                                var pdf = value.path;
+                                // profileController.loading.value = false;
+                                statement_loading.value = false;
+                                Get.to(()=>PdfViewerPage(pdf));
+                              });
+                            }
+                            // profileController.loadPdf();
+                          }else{
+                            Get.to(()=>SignIn());
                           }
-                          // profileController.loadPdf();
-                        }else{
-                          Get.to(()=>SignIn());
                         }
+
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width*0.75*0.75,
@@ -125,14 +134,14 @@ class MyDrawer extends StatelessWidget {
                           BorderRadius.only(topLeft: Radius.circular(10),bottomLeft:  Radius.circular(10))
                               :BorderRadius.only(bottomRight: Radius.circular(10),topRight:  Radius.circular(10)),
                         ),
-                        child: Row(
+                        child: Obx(() => statement_loading.value?Center(child: Container(width: MediaQuery.of(context).size.width*0.75*0.75/1.6,child: LinearProgressIndicator(color: Colors.white,),),):Row(
                           children: [
                             SizedBox(width: 20,),
                             SvgPicture.asset("assets/drawer/my_statement.svg",color: Colors.white,),
                             SizedBox(width: 10,),
                             Text(App_Localization.of(context).translate("my_statement"),style: TextStyle(color: Colors.white,fontSize: 16),)
                           ],
-                        ),
+                        ),),
                       ),
                     ),
                     GestureDetector(

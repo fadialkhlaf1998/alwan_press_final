@@ -1,3 +1,4 @@
+import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/helper/api.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/model/order.dart';
@@ -51,14 +52,14 @@ class OrderDetailsController extends GetxController{
     });
   }
 
-  reorder(){
+  reorder(BuildContext context){
     loading.value = true;
     Api.reOrder(Global.user!.id,order!.id).then((success) {
       loading.value = false;
       if(success){
         Get.to(()=>Success());
       }else{
-        mySnackBar('Something is wrong', 'Please try again');
+        mySnackBar(App_Localization.of(context).translate("something_wrong"),App_Localization.of(context).translate("Please_try_again"));
       }
     });
   }

@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/controller/ProfileController.dart';
 import 'package:alwan_press/controller/order_controller.dart';
 import 'package:alwan_press/helper/api.dart';
@@ -116,7 +117,7 @@ class IntroController extends GetxController{
         }else{
           showTopSnackBar(
             context,
-            const CustomSnackBar.error(message: "whatsapp no installed"),
+            CustomSnackBar.error(message: App_Localization.of(context).translate("whatsapp_no_installed")),
           );
         }
       }else{
@@ -126,7 +127,7 @@ class IntroController extends GetxController{
         }else{
           showTopSnackBar(
             context,
-            const CustomSnackBar.error(message: "whatsapp no installed"),
+            CustomSnackBar.error(message: App_Localization.of(context).translate("whatsapp_no_installed")),
           );
         }
       }

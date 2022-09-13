@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/helper/api.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
@@ -28,7 +29,7 @@ class SignInController extends GetxController{
   }
 
 
-  login(){
+  login(BuildContext context){
     if(username.text.isNotEmpty){
       if(password.text.isNotEmpty){
         loading.value = true;
@@ -36,10 +37,10 @@ class SignInController extends GetxController{
           print(username.text);
           print(password.text);
           if(value.id == -1){
-            mySnackBar('Wrong Email or password', 'Please try again');
+            mySnackBar(App_Localization.of(context).translate("wrong_email_pass"),App_Localization.of(context).translate("Please_try_again"));
             loading.value = false;
           }else if (value.id == -2){
-            mySnackBar('Something is wrong', 'Please try again');
+            mySnackBar(App_Localization.of(context).translate("something_wrong"),App_Localization.of(context).translate("Please_try_again"));
             loading.value = false;
           }else{
             /// todo
@@ -51,8 +52,8 @@ class SignInController extends GetxController{
                     password.text,
                  );
                 Get.snackbar(
-                    'Successfully login',
-                    'Welcome to alwan_press app',
+                    App_Localization.of(context).translate("login_success"),
+                    App_Localization.of(context).translate("welcome_to_alwan"),
                     margin: EdgeInsets.only(top: 30,left: 25,right: 25),
                     backgroundColor: MyTheme.isDarkTheme.value ? Colors.grey.withOpacity(0.5) : Colors.black.withOpacity(0.5),
                     colorText: Colors.white
@@ -69,11 +70,11 @@ class SignInController extends GetxController{
         });
       }else{
         /// password empty
-        mySnackBar('Password is empty', 'Please enter your password');
+        mySnackBar(App_Localization.of(context).translate("password_empty"), App_Localization.of(context).translate("enter_pass"));
       }
     }else{
       /// username empty
-      mySnackBar('Email is empty', 'Please enter your email');
+      mySnackBar(App_Localization.of(context).translate("email_empty"), App_Localization.of(context).translate("enter_email"));
     }
   }
 

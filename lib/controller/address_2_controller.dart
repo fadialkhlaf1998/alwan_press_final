@@ -47,7 +47,7 @@ class AddressController_2 extends GetxController {
     // phone = TextEditingController(text: Global.phone);
   }
 
-  saveAddress() async {
+  saveAddress(BuildContext context) async {
     // loading.value = true;
     if(nick_name!.text.isNotEmpty&&street_name!.text.isNotEmpty&&building!.text.isNotEmpty&&floor!.text.isNotEmpty&&flat!.text.isNotEmpty&&phone!.text.isNotEmpty){
       Address address = Address(nickName: nick_name!.text, streetName: street_name!.text,
@@ -60,8 +60,8 @@ class AddressController_2 extends GetxController {
       print('------------');
       Get.back();
       Get.snackbar(
-          'Done!',
-          'Address saved successfully',
+          App_Localization.of(context).translate("done")+"!",
+          App_Localization.of(context).translate("address_saved_success"),
           margin: const EdgeInsets.only(top: 30,left: 25,right: 25),
           backgroundColor: MyTheme.isDarkTheme.value ? Colors.grey.withOpacity(0.5) : Colors.black.withOpacity(0.5),
           colorText: Colors.white

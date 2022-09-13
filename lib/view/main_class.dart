@@ -208,7 +208,7 @@ class MainClass extends StatelessWidget {
               'assets/icons/order.svg',
           color: Colors.white,
         ),
-        title: App_Localization.of(context).translate('orders'),
+        title: Global.langCode=="ar"?"   "+App_Localization.of(context).translate('orders'):App_Localization.of(context).translate('orders'),
         activeColorSecondary: Colors.white,
         activeColorPrimary: Theme.of(context).primaryColor,
         inactiveColorPrimary: App.grey,
