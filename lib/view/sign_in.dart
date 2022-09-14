@@ -223,7 +223,7 @@ class _SignInState extends State<SignIn> {
         GestureDetector(
           onTap: (){
             FocusManager.instance.primaryFocus?.unfocus();
-            Get.to(()=>MainClass());
+            Get.offAll(()=>MainClass());
           },
           child: Container(
             width: MediaQuery.of(context).size.width * 0.9,

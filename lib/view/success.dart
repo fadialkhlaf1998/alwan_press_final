@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 
 class Success extends StatelessWidget {
   Success(){
-    Future.delayed(Duration(milliseconds: 2500)).then((value) {
+    Future.delayed(Duration(milliseconds: 3500)).then((value) {
       Get.back();
     });
   }

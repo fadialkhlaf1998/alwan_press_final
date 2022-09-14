@@ -104,6 +104,7 @@ class MyDrawer extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: (){
+
                         if(statement_loading.isFalse){
                           if(Global.user != null){
                             // orderController.loadPdf(Global.user!.financialState);
@@ -117,6 +118,9 @@ class MyDrawer extends StatelessWidget {
                                 statement_loading.value = false;
                                 Get.to(()=>PdfViewerPage(pdf));
                               });
+                            }else{
+                              _scaffoldkey.currentState!.closeEndDrawer();
+                              noStatementDialog(context);
                             }
                             // profileController.loadPdf();
                           }else{
@@ -285,6 +289,28 @@ class MyDrawer extends StatelessWidget {
               )),
         )
       ],
+    );
+  }
+
+  noStatementDialog(BuildContext context){
+    Get.back();
+    return  showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(App_Localization.of(context).translate('no_statement')),
+        titleTextStyle: const TextStyle(
+            fontSize: 16,
+            color: Colors.black,
+            fontWeight: FontWeight.bold
+        ),
+        content: Text(
+          App_Localization.of(context).translate('request_last_statement'),
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.black,
+          ),
+        ),
+      ),
     );
   }
 }

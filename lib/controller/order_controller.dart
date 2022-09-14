@@ -60,7 +60,26 @@ class OrderController extends GetxController{
       }
     });
   }
-
+  Future<void> getOrderDataIndicater() async {
+    loading.value = true;
+    var internet = await Api.checkInternet();
+    if(internet){
+     var value = await Api.getCustomerOrder(Global.userId.toString());
+        if(value.isNotEmpty){
+          print('done orders');
+          myOrders.value = value;
+          loading.value = false;
+        }else{
+          print('no orders');
+          loading.value = false;
+        }
+      return ;
+    }else{
+      print('no internet');
+      loading.value = false;
+      return ;
+    }
+  }
   calculateTime(index){
     DateTime now = DateTime.now();
     int month = myOrders[index].deadline.month - now.month;

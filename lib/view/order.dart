@@ -67,9 +67,7 @@ class OrderPage extends StatelessWidget {
     return RefreshIndicator(
         key: orderController.refreshIndicatorKey,
         onRefresh: () async {
-        return Future.delayed(const Duration(milliseconds: 1200)).then((value){
-         orderController.getOrderData();
-        });
+         return await orderController.getOrderDataIndicater();
       },
       child: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.08),
@@ -94,84 +92,90 @@ class OrderPage extends StatelessWidget {
   }
 
   _orderItem(BuildContext context,int index){
-    return Column(
-      children: [
-        const SizedBox(height: 20),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.95,
-          child: Text(App_Localization.of(context).translate("pleaced_on") +" "+orderController.convertTime(orderController.myOrders[index].created_at.toString()),
-            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),
-          ),
-        ),
-        const SizedBox(height: 10),
-        Container(
-          width: MediaQuery.of(context).size.width*0.95,
-          decoration: BoxDecoration(
-            color: MyTheme.isDarkTheme.value ?
-            Colors.white.withOpacity(0.05) :
-            Colors.white,
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: [
-              BoxShadow(
-                color: MyTheme.isDarkTheme.value ?
-                Colors.transparent :
-                Colors.grey.withOpacity(0.5),
-                blurRadius: 3,
-                offset: const Offset(1, 1),
-              ),
-            ],
-          ),
-          child: Center(
-            child: Container(
-              width: MediaQuery.of(context).size.width*0.9 ,
-              height: 100,
+    return GestureDetector(
+      onTap: (){
+        Get.to(()=>OrderDetails(orderController.myOrders[index].id));
+      },
+      child: Column(
 
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(orderController.myOrders[index].title,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),
-                  Text("#"+orderController.myOrders[index].orderId,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),),
-                  Center(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Text(App_Localization.of(context).translate("ready_on"),
-                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13,fontWeight: FontWeight.bold),
-                          ),
-                          Text(" "+orderController.convertTime(orderController.myOrders[index].deadline.toString()),
-                            style: TextStyle(color: Colors.green,fontSize: 13,fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      GestureDetector(
-                        onTap: (){
-                          //orderController.myOrders[index].orderId
-                          Get.to(()=>OrderDetails(orderController.myOrders[index].id));
-                        },
-                        child: Row(
+        children: [
+          const SizedBox(height: 20),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.95,
+            child: Text(App_Localization.of(context).translate("pleaced_on") +" "+orderController.convertTime(orderController.myOrders[index].created_at.toString()),
+              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            width: MediaQuery.of(context).size.width*0.95,
+            decoration: BoxDecoration(
+              color: MyTheme.isDarkTheme.value ?
+              Colors.white.withOpacity(0.05) :
+              Colors.white,
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [
+                BoxShadow(
+                  color: MyTheme.isDarkTheme.value ?
+                  Colors.transparent :
+                  Colors.grey.withOpacity(0.5),
+                  blurRadius: 3,
+                  offset: const Offset(1, 1),
+                ),
+              ],
+            ),
+            child: Center(
+              child: Container(
+                width: MediaQuery.of(context).size.width*0.9 ,
+                height: 100,
+
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(orderController.myOrders[index].title,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),
+                    Text("#"+orderController.myOrders[index].orderId,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),),
+                    Center(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
                           children: [
-                            Text(App_Localization.of(context).translate("view_details"),style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 15),),
-                            SizedBox(width: 5,),
-                            Icon(Icons.arrow_forward_ios,color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),size: 15,)
+                            Text(App_Localization.of(context).translate("ready_on"),
+                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13,fontWeight: FontWeight.bold),
+                            ),
+                            Text(" "+orderController.convertTime(orderController.myOrders[index].deadline.toString()),
+                              style: TextStyle(color: Colors.green,fontSize: 13,fontWeight: FontWeight.bold),
+                            ),
                           ],
                         ),
-                      )
-                    ],
-                  ),
+                        GestureDetector(
+                          onTap: (){
+                            //orderController.myOrders[index].orderId
+                            Get.to(()=>OrderDetails(orderController.myOrders[index].id));
+                          },
+                          child: Row(
+                            children: [
+                              Text(App_Localization.of(context).translate("view_details"),style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 15),),
+                              SizedBox(width: 5,),
+                              Icon(Icons.arrow_forward_ios,color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),size: 15,)
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
 
 
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        // orderController.myOrders[index].openDescription.value?
+          // orderController.myOrders[index].openDescription.value?
 
 
-      ],
+        ],
+      ),
     );
   }
 

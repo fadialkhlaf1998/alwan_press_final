@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:alwan_press/app_localization.dart';
+import 'package:alwan_press/controller/order_controller.dart';
 import 'package:alwan_press/helper/api.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
@@ -16,6 +17,7 @@ class SignInController extends GetxController{
 
 
   RxBool signUpOption = false.obs;
+  OrderController orderController = Get.find();
   RxBool showPassword = false.obs;
 
   TextEditingController username = TextEditingController();
@@ -43,6 +45,7 @@ class SignInController extends GetxController{
             mySnackBar(App_Localization.of(context).translate("something_wrong"),App_Localization.of(context).translate("Please_try_again"));
             loading.value = false;
           }else{
+            orderController.getOrderData();
             /// todo
             Api.sendUserToken(Global.token, value.id).then((done){
               if(done){

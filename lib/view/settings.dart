@@ -1,4 +1,5 @@
 import 'package:alwan_press/app_localization.dart';
+import 'package:alwan_press/controller/main_class_controller.dart';
 import 'package:alwan_press/controller/settings_controller.dart';
 import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
@@ -25,7 +26,7 @@ class Settings extends StatelessWidget {
     }
   }
   SettingsController settingsController = Get.put(SettingsController());
-
+  MainClassController mainClassController = Get.find();
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -60,37 +61,52 @@ class Settings extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Global.langCode == 'en' ?
-          SizedBox(
-              width: MediaQuery.of(context).size.width * 0.1,
-              height: MediaQuery.of(context).size.width * 0.1,
-              child: Image.asset(
-                'assets/icons/Logo-Header.png',
-                fit: BoxFit.cover,
-              )) : _logo(context),
+          GestureDetector(
+            onTap: (){
+              mainClassController.bottomBarController.jumpToTab(0);
+            },
+            child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.1,
+                height: MediaQuery.of(context).size.width * 0.1,
+                child: Image.asset(
+                  'assets/icons/Logo-Header.png',
+                  fit: BoxFit.cover,
+                )),
+          ) : _logo(context),
           const SizedBox(width: 7),
           Global.langCode == 'en' ?
           _logo(context)
-          : SizedBox(
-              width: MediaQuery.of(context).size.width * 0.1,
-              height: MediaQuery.of(context).size.width * 0.1,
-              child: Image.asset(
-                'assets/icons/Logo-Header.png',
-                fit: BoxFit.cover,
-              )),
+          : GestureDetector(
+            onTap: (){
+              mainClassController.bottomBarController.jumpToTab(0);
+            },
+            child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.1,
+                height: MediaQuery.of(context).size.width * 0.1,
+                child: Image.asset(
+                  'assets/icons/Logo-Header.png',
+                  fit: BoxFit.cover,
+                )),
+          ),
         ],
       ),
     );
   }
   _logo(context) {
-    return  Container(
-      height: MediaQuery.of(context).size.width * 0.1,
-      width: MediaQuery.of(context).size.width * 0.28,
-      decoration: BoxDecoration(
-        // color: Colors.red,
-          image: DecorationImage(
-              fit: BoxFit.contain,
-              image:  MyTheme.isDarkTheme.value ? AssetImage('assets/icons/logo_text.png') : AssetImage('assets/icons/logo_text_black.png')
-          )),
+    return  GestureDetector(
+      onTap: (){
+        mainClassController.bottomBarController.jumpToTab(0);
+      },
+      child: Container(
+        height: MediaQuery.of(context).size.width * 0.1,
+        width: MediaQuery.of(context).size.width * 0.28,
+        decoration: BoxDecoration(
+          // color: Colors.red,
+            image: DecorationImage(
+                fit: BoxFit.contain,
+                image:  MyTheme.isDarkTheme.value ? AssetImage('assets/icons/logo_text.png') : AssetImage('assets/icons/logo_text_black.png')
+            )),
+      ),
     );
   }
 

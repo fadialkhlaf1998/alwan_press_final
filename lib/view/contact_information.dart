@@ -99,13 +99,23 @@ class ContactInformation extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            SvgPicture.asset('assets/icons/whatsapp-green.svg',width: 26,height: 26),
+                                            GestureDetector(
+                                                onTap: (){
+                                                  Global.openwhatsapp(context,introController.customerServiceList[index].phone);
+                                                },
+                                                child: SvgPicture.asset('assets/icons/whatsapp-green.svg',width: 26,height: 26),
+                                            ),
                                             const SizedBox(width: 10),
-                                            SizedBox(
-                                              width: 35,
-                                              height: 35,
-                                              child: Icon(Icons.phone,size: 20,
-                                                color:  Theme.of(context).dividerColor,
+                                            GestureDetector(
+                                              onTap: (){
+                                                Global.openUrl("tel://"+introController.customerServiceList[index].phone);
+                                              },
+                                              child: SizedBox(
+                                                width: 35,
+                                                height: 35,
+                                                child: Icon(Icons.phone,size: 20,
+                                                  color:  Theme.of(context).dividerColor,
+                                                ),
                                               ),
                                             ),
                                           ],

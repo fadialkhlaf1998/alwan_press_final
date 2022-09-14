@@ -15,6 +15,7 @@ class OrderDetailsController extends GetxController{
   var shippingAnimationSucc = false.obs;
   double totalForPayment = 0;
   Order? order;
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
   getData(int id){
 
   }
@@ -50,6 +51,32 @@ class OrderDetailsController extends GetxController{
         refreshData();
       }
     });
+  }
+  Future<void> refreshIndicater()async{
+    // loading.value = true;
+    var orderRes = await Api.getOrderInfo(order!.id);
+      if(orderRes != null){
+        order = orderRes;
+        if(order!.shippingRequestCount > 0){
+          shippingSucc.value = true;
+          shippingAnimationSucc.value = true;
+        }
+        totalForPayment = order!.price.toDouble() - order!.paid_amount.toDouble();
+        if(order!.shippingState != 0 ){
+          totalForPayment += order!.shippingPrice;
+        }
+        if(order!.state == 0 ){
+          totalForPayment = totalForPayment / 4 ;
+        }
+        fake.value = ! fake.value;
+        print('check');
+        print(order!.shippingAddress);
+        // loading.value = false;
+        return ;
+      }else{
+        return refreshIndicater();
+      }
+
   }
 
   reorder(BuildContext context){
