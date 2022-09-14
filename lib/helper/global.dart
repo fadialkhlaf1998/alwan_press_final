@@ -123,14 +123,14 @@ class Global {
 
 
   static openwhatsapp(BuildContext context,String whatsapp) async{
-    String url = WA_url(whatsapp);
-
-    if( await canLaunch(url)){
-      await launch(url);
-    }else{
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Can not open whatsapp")));
-    }
+    String url = WA_url(whatsapp.replaceAll("+", "").replaceAll(" ", "").replaceAll("-", "").replaceAll("(", "").replaceAll(")", ""));
+    await launch(url);
+    // if( await canLaunch(url)){
+    //   await launch(url);
+    // }else{
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(content: Text("Can not open whatsapp")));
+    // }
   }
 
   static String WA_url(String phone) {
