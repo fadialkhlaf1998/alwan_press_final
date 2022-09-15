@@ -3,10 +3,13 @@ import 'package:alwan_press/controller/order_controller.dart';
 import 'package:alwan_press/controller/order_details_controller.dart';
 import 'package:alwan_press/helper/api.dart';
 import 'package:alwan_press/helper/app.dart';
+import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/model/order.dart';
 import 'package:alwan_press/view/address_2.dart';
 import 'package:alwan_press/view/my_fatoraah.dart';
+import 'package:alwan_press/view/pdf_viwer.dart';
+import 'package:alwan_press/view/sign_in.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,6 +21,7 @@ class OrderDetails extends StatelessWidget {
 
   OrderDetailsController orderDetailsController = Get.put(OrderDetailsController());
   OrderController orderController = Get.find();
+  var statement_loading = false.obs;
   OrderDetails(int id){
     orderDetailsController.loading.value = true;
     Api.getOrderInfo(id).then((order) {
@@ -237,40 +241,74 @@ class OrderDetails extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  GestureDetector(
-                                    onTap: (){
-                                      orderController.loadPdf(orderDetailsController.order!.invoice);
-                                    },
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                      Row(
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                    GestureDetector(
+                                      onTap:(){
+                                        if(statement_loading.isFalse){
+                                          if(Global.user != null){
+                                            // orderController.loadPdf(Global.user!.financialState);
+
+                                            if(orderDetailsController.order!.invoice.endsWith("pdf")){
+                                              // profileController.loading.value = true;
+                                              statement_loading.value = true;
+                                              orderController.loadPdf(orderDetailsController.order!.invoice).then((value){
+                                                var pdf = value.path;
+                                                // profileController.loading.value = false;
+                                                statement_loading.value = false;
+                                                Get.to(()=>PdfViewerPage(pdf));
+                                              });
+                                            }else{
+                                              noStatementDialog(context);
+                                            }
+                                            // profileController.loadPdf();
+                                          }else{
+                                            Get.to(()=>SignIn());
+                                          }
+                                        }
+                                      },
+                                      child: statement_loading.value?
+                                            Container(
+                                              height: 32,
+                                              // color: Colors.red,
+                                              child: Center(
+                                                child: Container(
+                                                  width: MediaQuery.of(context).size.width*0.25,
+                                                  height: 2,
+                                                  child: Center(
+                                                    child: LinearProgressIndicator(),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          :Row(
                                         children: [
                                           // Icon(Icons.price_change_outlined,color:MyTheme.isDarkTheme.value ? Colors.white: Colors.black,size: 22),
                                           SvgPicture.asset("assets/icons/tax_invoice.svg",width: 22,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
                                           const SizedBox(width: 7,),
                                           Text(App_Localization.of(context).translate("tax_invoices"),
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
+                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 2,),),
                                         ],
                                       ),
-                                      GestureDetector(
-                                        onTap: (){
-                                          orderDetailsController.reorder(context);
-                                        },
-                                        child: Row(
-                                          children: [
-                                            SvgPicture.asset("assets/icons/reorder.svg",width: 16,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
-                                            const SizedBox(width: 7,),
-                                            Container(
-                                              child: Center(
-                                                child: Text(App_Localization.of(context).translate('reorder')),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                      ],
                                     ),
+                                    GestureDetector(
+                                      onTap: (){
+                                        orderDetailsController.reorder(context);
+                                      },
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset("assets/icons/reorder.svg",width: 16,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
+                                          const SizedBox(width: 7,),
+                                          Container(
+                                            child: Center(
+                                              child: Text(App_Localization.of(context).translate('reorder')),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                    ],
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -459,5 +497,25 @@ class OrderDetails extends StatelessWidget {
       ),
     );
   }
-
+  noStatementDialog(BuildContext context){
+    Get.back();
+    return  showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(App_Localization.of(context).translate('no_statement')),
+        titleTextStyle: const TextStyle(
+            fontSize: 16,
+            color: Colors.black,
+            fontWeight: FontWeight.bold
+        ),
+        content: Text(
+          App_Localization.of(context).translate('request_last_statement'),
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
+  }
 }
