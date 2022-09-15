@@ -28,7 +28,7 @@ class IntroController extends GetxController{
 
   RxBool showPhoneList = false.obs;
   RxBool showWhatsAppList = false.obs;
-  ProfileController profileController = Get.put(ProfileController());
+
   OrderController orderController = Get.put(OrderController());
   @override
   void onInit() async{
@@ -59,9 +59,11 @@ class IntroController extends GetxController{
               if(Global.userId != -1){
 
                 Api.login(Global.username, Global.password).then((value) {
+                  ProfileController profileController = Get.put(ProfileController());
                   Get.offAll(()=>MainClass());
                 });
               }else{
+                ProfileController profileController = Get.put(ProfileController());
                 Get.offAll(()=>SignIn());
               }
             });

@@ -122,5 +122,6 @@
   "email_empty": "البريد الإلكتروني فارغ",
   "enter_email": "الرجاء إدخال بريدك الإلكتروني",
   "whatsapp_no_installed": "whatsapp غير مثبت",
-  "address_saved_success": "تم حفظ العنوان بنجاح"
+  "address_saved_success": "تم حفظ العنوان بنجاح",
+  "logout": "تسجيل الخروج"
 }

@@ -121,5 +121,11 @@
   "email_empty": "Email is empty",
   "enter_email": "Please enter your email",
   "whatsapp_no_installed": "whatsapp no installed",
-  "address_saved_success": "Address saved successfully"
+  "address_saved_success": "Address saved successfully",
+  "logout": "Logout",
+  "my_image": "My Image",
+  "camera": "Camera",
+  "gallery": "Gallery",
+  "or": "or",
+  "name": "Name"
 }

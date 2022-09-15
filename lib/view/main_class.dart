@@ -33,6 +33,8 @@ class MainClass extends StatelessWidget {
           statusBarColor: MyTheme.isDarkTheme.value ? const Color(0XFF181818) : Colors.white
       ));
       return Scaffold(
+        resizeToAvoidBottomInset: false,
+
         // bottomNavigationBar: BottomNavyBar(
         //   backgroundColor: MyTheme.isDarkTheme.value ? App.darkGrey : Colors.white,
         //   selectedIndex: mainClassController.selectedIndex.value,
@@ -148,6 +150,7 @@ class MainClass extends StatelessWidget {
             Settings()
           ],
           items: _navBarsItems(context),
+          resizeToAvoidBottomInset: false,
           controller: mainClassController.bottomBarController,
           navBarStyle: NavBarStyle.style7,
           backgroundColor: MyTheme.isDarkTheme.value ? App.darkGrey : Colors.white,

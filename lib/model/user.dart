@@ -19,6 +19,8 @@ class User {
     required this.emirate,
     required this.apartment,
     required this.phone,
+    required this.email,
+    required this.image,
   });
 
   int id;
@@ -32,7 +34,9 @@ class User {
   dynamic address2;
   dynamic emirate;
   dynamic apartment;
-  dynamic phone;
+  String phone;
+  String image;
+  String email;
 
   factory User.fromJson(String str) => User.fromMap(json.decode(str));
 
@@ -43,14 +47,16 @@ class User {
     quickBookId: json["quick_book_id"],
     name: json["name"],
     token: json["token"],
-    financialState: json["financial_state"],
+    financialState: json["financial_state"]==null?"":json["financial_state"],
     username: json["username"],
     password: json["password"],
     address1: json["address1"],
     address2: json["address2"],
     emirate: json["emirate"],
     apartment: json["apartment"],
-    phone: json["phone"],
+    phone: json["phone"]==null?"":json["phone"],
+    email: json["email"]==null?"":json["email"],
+    image: json["image"]==null?"":json["image"],
   );
 
   Map<String, dynamic> toMap() => {

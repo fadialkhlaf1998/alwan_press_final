@@ -126,7 +126,7 @@ class Api {
       if(jsonData.length < 3){
         /// alert (username and password is wrong)
         return User(id: -1, quickBookId: "", name: "", token: "",
-            financialState: "", username: "", password:"", address1: "", address2: "", emirate: "", apartment: "", phone: "") ;
+            financialState: "", username: "", password:"", address1: "", address2: "", emirate: "", apartment: "", phone: "",image: "",email: "") ;
       }else{
         jsonData = jsonData.replaceRange(0,1, '');
         jsonData = jsonData.replaceRange(jsonData.length -1 ,jsonData.length ,'');
@@ -145,7 +145,7 @@ class Api {
     } else {
       /// alert (something went wrong)
       return User(id: -2, quickBookId: "", name: "", token: "",
-          financialState: "", username: "", password:"", address1: "", address2: "", emirate: "", apartment: "", phone: "") ;
+          financialState: "", username: "", password:"", address1: "", address2: "", emirate: "", apartment: "", phone: "",email: "",image: "") ;
     }
 
   }
@@ -354,6 +354,53 @@ class Api {
     print(response.reasonPhrase);
       return false;
     }
+
+  }
+
+  static Future<bool> uploadAvatar(String path,int customer_id)async{
+    var request = http.MultipartRequest('PUT', Uri.parse(url+'/api/customer-upload-image'));
+    request.fields.addAll({
+      'id': customer_id.toString()
+    });
+    request.files.add(await http.MultipartFile.fromPath('file', path));
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+    print(await response.stream.bytesToString());
+    return true;
+    }
+    else {
+    print(response.reasonPhrase);
+    return false;
+    }
+
+  }
+
+  static Future<bool> updateCustomerData(String email,String phone,String name,int customer_id)async{
+    var headers = {
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request('PUT', Uri.parse(url+'/api/customer-data'));
+    request.body = json.encode({
+      "email": email,
+      "phone": "+971"+phone,
+      "name": name,
+      "id": customer_id.toString()
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      return true;
+    }
+    else {
+      print(response.reasonPhrase);
+      return false;
+    }
+
 
   }
 }

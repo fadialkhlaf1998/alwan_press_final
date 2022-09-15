@@ -17,27 +17,36 @@ import 'package:flutter/services.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+  Profile(){
+
+  }
 
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-
+  _ProfileState(){
+    profileController.name.text = Global.user!.name;
+    profileController.email.text = Global.user!.email;
+    profileController.phone.text = Global.user!.phone.length>6&&Global.user!.phone.contains("+971")?Global.user!.phone.split("+971")[1]:"";
+  }
   IntroController introController = Get.find();
   ProfileController profileController = Get.find();
   MainClassController mainClassController = Get.find();
-
+  final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF181818):Colors.white
     ));
     return Obx(() => Scaffold(
+        // resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Stack(
           children: [
@@ -45,12 +54,13 @@ class _ProfileState extends State<Profile> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  _header(context),
+                  _logo(context),
                   const SizedBox(height: 10),
                   _body(context)
                 ],
               ),
             ),
+            profileController.showChoose.value?_chooseImage(context):Center(),
           ],
         ),
       ),
@@ -64,9 +74,9 @@ class _ProfileState extends State<Profile> {
         children: [
           const SizedBox(height: 10),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(onPressed: (){}, icon: Icon(Icons.logout ,color: Colors.transparent)),
+
               GestureDetector(
                 onTap: () {
                   // mainClassController.selectedIndex.value = 0;
@@ -85,9 +95,6 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
               ),
-              Global.userId==-1
-                  ?  IconButton(onPressed: (){}, icon: Icon(Icons.logout ,color: Colors.transparent))
-                  :IconButton(onPressed: (){Global.logout();}, icon: Icon(Icons.logout ,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black)),
 
             ],
           ),
@@ -103,80 +110,202 @@ class _ProfileState extends State<Profile> {
         children: [
           Column(
             children: [
-              _slider(context),
+
               profileController.loading.value
                   ? _loading(context)
-                  : Column(
-                children: [
-                  const SizedBox(height: 30),
-                  _optionBar(context),
-                  const SizedBox(height: 25),
-                  _contactHelp(context),
-                  // Column(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     _socialMedia(context),
-                  //    // _terms(context),
-                  //     const SizedBox(height: 20),
-                  //     Text("© 2018 alwan_press. ALL RIGHTS RESERVED.",
-                  //       style: TextStyle(
-                  //           color: MyTheme.isDarkTheme.value ? Colors.white :
-                  //           Colors.black,
-                  //           fontSize: 11,
-                  //           fontWeight: FontWeight.bold
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       padding: EdgeInsets.symmetric(vertical: 20),
-                  //       child: Row(
-                  //         mainAxisAlignment: MainAxisAlignment.center,
-                  //         crossAxisAlignment: CrossAxisAlignment.center,
-                  //         children: [
-                  //           Text("Created by ",
-                  //             style: TextStyle(
-                  //                 color: MyTheme.isDarkTheme.value ? Colors.white :
-                  //                 Colors.black,
-                  //                 fontSize: 11,
-                  //                 // fontWeight: FontWeight.bold
-                  //             ),
-                  //           ),
-                  //         GestureDetector(
-                  //           onTap: () async{
-                  //             if (!await launchUrl(
-                  //             Uri.parse('https://www.maxart.ae/'),
-                  //             // mode: LaunchMode.externalApplication,
-                  //               mode: LaunchMode.inAppWebView,
-                  //               webViewConfiguration: const WebViewConfiguration(
-                  //                   headers: <String, String>{'my_header_key': 'my_header_value'}),
-                  //               // webViewConfiguration: const WebViewConfiguration(enableJavaScript: false),
-                  //             )) {
-                  //             throw 'Could not launch';
-                  //             }
-                  //           },
-                  //           child: Text("MAXART",
-                  //             style: TextStyle(
-                  //               color: MyTheme.isDarkTheme.value ? Colors.white :
-                  //               Colors.black,
-                  //               fontSize: 12,
-                  //               fontWeight: FontWeight.bold,
-                  //               decoration: TextDecoration.underline,
-                  //
-                  //             ),
-                  //           ),
-                  //         )
-                  //         ],
-                  //       )
-                  //     ),
-                  //   ],
-                  // ),
-                ],
-              )
+                  : Global.user == null?
+                    Container(
+                      height: MediaQuery.of(context).size.height*0.7,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // SizedBox(height: 100,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(onTap:(){
+                                Get.to(()=>SignIn());
+                              } ,child: Text(App_Localization.of(context).translate("sign_in"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 1),)),
+                              SizedBox(width: 5,),
+                              Text(App_Localization.of(context).translate("or"),style: TextStyle(color: Colors.grey),),
+                              SizedBox(width: 5,),
+                              GestureDetector(onTap:(){
+                                Get.to(()=>ContactInformation());
+                              } ,child: Text(App_Localization.of(context).translate("sign_up"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 1),)),
+
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  :Column(
+                      children: [
+                        _slider(context),
+                        Text(Global.user!.name,style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
+                        const SizedBox(height: 15),
+                        _optionBar(context),
+                        const SizedBox(height: 15),
+                        _details(context),
+                        const SizedBox(height: 25),
+                        _contactHelp(context),
+                      ],
+                   )
 
             ],
           ),
 
         ],
       ),
+    );
+  }
+  _details(BuildContext context){
+    return Obx(() => Column(
+
+      children: [
+        profileController.fake.value?Center():Center(),
+        _textField(context,profileController.name,"name"),
+        SizedBox(height: 10,),
+        _emailTextField(context,profileController.email,"email"),
+        SizedBox(height: 10,),
+        _phone(context),
+
+      ],
+    ));
+  }
+  _emailTextField(context,TextEditingController textEditingController,String hint){
+    return  Container(
+
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: 40,
+      color: Colors.transparent,
+      child: TextField(
+        onChanged: (q){
+          profileController.onChange();
+        },
+        controller: textEditingController,
+        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,height: 1),
+        // textAlign: TextAlign.start,
+        decoration: InputDecoration(
+            // prefixText: 'Nike name: ',
+            // prefixStyle: TextStyle(
+            //     color: Theme.of(context).dividerColor
+            // ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(width: 1, color: profileController.validate.value&&(textEditingController.text.isEmpty||!RegExp(r'\S+@\S+\.\S+').hasMatch(textEditingController.text))?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide:  BorderSide(width: 1, color: profileController.validate.value&&(textEditingController.text.isEmpty||!RegExp(r'\S+@\S+\.\S+').hasMatch(textEditingController.text))?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            ),
+
+            label: Text(App_Localization.of(context).translate(hint),
+                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12))
+        ),
+      ),
+    );
+  }
+  _textField(context,TextEditingController textEditingController,String hint){
+    return  Container(
+
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: 40,
+      color: Colors.transparent,
+      child: TextField(
+        onChanged: (q){
+          profileController.onChange();
+        },
+        controller: textEditingController,
+        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,height: 1),
+        // textAlign: TextAlign.start,
+        decoration: InputDecoration(
+            // prefixText: 'Nike name: ',
+            // prefixStyle: TextStyle(
+            //     color: Theme.of(context).dividerColor
+            // ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(width: 1, color: profileController.validate.value&&(textEditingController.text.isEmpty)?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide:  BorderSide(width: 1, color: profileController.validate.value&&textEditingController.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            ),
+
+            label: Text(App_Localization.of(context).translate(hint),
+                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12))
+        ),
+      ),
+    );
+  }
+  _phone(context){
+    return  Container(
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: 40,
+      color: Colors.transparent,
+      child: TextField(
+        onChanged: (q){
+          profileController.onChange();
+        },
+        keyboardType: TextInputType.phone,
+        controller: profileController.phone,
+        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,height: 1),
+        maxLength: 9,
+        decoration: InputDecoration(
+            counterText: '',
+            prefixText: '+971 ',
+            prefixStyle:  TextStyle(
+              color: Theme.of(context).dividerColor,fontSize: 12,height: 1
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(width: 1, color:  profileController.validate.value&&profileController.phone.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide:  BorderSide(width: 1, color:  profileController.validate.value&&profileController.phone.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            ),
+            label: Text(App_Localization.of(context).translate("phone"),
+                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black))
+        ),
+      ),
+    );
+  }
+  _logo(context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.fastOutSlowIn,
+          width: MediaQuery.of(context).size.width * 0.12,
+          child: GestureDetector(
+            onTap: () {
+              // homeController.move();
+              // _scaffoldkey.currentState!.closeEndDrawer();
+              mainClassController.bottomBarController.jumpToTab(0);
+            },
+            child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.12,
+                height: MediaQuery.of(context).size.width * 0.12,
+                child: Image.asset(
+                  'assets/icons/Logo-Header.png',
+                  fit: BoxFit.cover,
+                )),
+          ),
+        ),
+        const SizedBox(width: 7),
+        Container(
+          height: MediaQuery.of(context).size.width * 0.1,
+          width: MediaQuery.of(context).size.width * 0.28,
+          decoration: BoxDecoration(
+            // color: Colors.red,
+              image: DecorationImage(
+                  fit: BoxFit.contain,
+                  image: MyTheme.isDarkTheme.value ? const AssetImage('assets/icons/logo_text.png') : const AssetImage('assets/icons/logo_text_black.png')
+              )),
+        )
+      ],
     );
   }
   _loading(BuildContext context){
@@ -191,26 +320,163 @@ class _ProfileState extends State<Profile> {
   _slider(context){
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.width * 0.45,
-      color: App.grey,
-      child:ImageSlideshow(
-        width: double.infinity,
-        height: MediaQuery.of(context).size.height*0.2,
-        initialPage: 0,
-        indicatorColor: Theme.of(context).primaryColor,
-        indicatorBackgroundColor: App.grey,
-        children:
-        introController.bannerList.map((e) => Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                  image: NetworkImage(e.image),
-                  fit: BoxFit.cover
+      height: MediaQuery.of(context).size.width * 0.4/3*2+25,
+      child:  GestureDetector(
+        onTap: () {
+          //todo edit image
+
+        },
+        child: Container(
+          color: Colors.transparent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              (Global.user!.image=="")?
+              CircleAvatar(
+                child: Icon(Icons.person,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,size: MediaQuery.of(context).size.width * 0.4/2,),
+                backgroundColor: Colors.grey,
+                radius: MediaQuery.of(context).size.width * 0.4/3,
               )
+                  :Stack(
+                    children: [
+                      GestureDetector(
+
+                        child: Container(
+                          height:  MediaQuery.of(context).size.width * 0.4/3*2 +20,
+                          child: Center(
+                            child: GestureDetector(
+                              onTap: (){
+                                profileController.showChoose.value = true;
+                              },
+                              child: CircleAvatar(
+                                backgroundColor: Colors.grey,
+                                backgroundImage: NetworkImage(Global.user!.image),
+                                radius: MediaQuery.of(context).size.width * 0.4/3,
+                              ),
+                            )
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: (){
+
+                        },
+                        child: Container(
+                          height:  MediaQuery.of(context).size.width * 0.4/3*2 +20,
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: GestureDetector(
+                              onTap: (){
+                                profileController.showChoose.value = true;
+                              },
+                              child: CircleAvatar(
+                                backgroundColor: MyTheme.isDarkTheme.value?Colors.white:Colors.black,
+                                child: Icon(Icons.edit,color: MyTheme.isDarkTheme.value?Colors.black:Colors.white,size: 20,),
+                                radius: 13,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+
+            ],
           ),
-        )).toList(),
-        autoPlayInterval: 0,
-        isLoop: true,
+        ),
+      ),
+      // child:ImageSlideshow(
+      //   width: double.infinity,
+      //   height: MediaQuery.of(context).size.height*0.2,
+      //   initialPage: 0,
+      //   indicatorColor: Theme.of(context).primaryColor,
+      //   indicatorBackgroundColor: App.grey,
+      //   children:
+      //   introController.bannerList.map((e) => Container(
+      //     decoration: BoxDecoration(
+      //         // borderRadius: BorderRadius.circular(10),
+      //         image: DecorationImage(
+      //             image: NetworkImage(e.image),
+      //             fit: BoxFit.cover
+      //         )
+      //     ),
+      //   )).toList(),
+      //   autoPlayInterval: 0,
+      //   isLoop: true,
+      // ),
+    );
+  }
+  _chooseImage(BuildContext context){
+    return SafeArea(
+      
+      child: GestureDetector(
+        onTap: (){
+          //todo
+          profileController.showChoose.value = false;
+        },
+        child: Container(
+          color: Colors.black.withOpacity(0.5),
+          child: Center(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: 180,
+                child: Center(
+                  child: Container(
+                      width: 150,
+                      height: 65,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            GestureDetector(
+                              onTap: ()async{
+                                //todo camera
+                                final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+                                profileController.showChoose.value=false;
+                                if(image!=null){
+                                  profileController.uploadAvatar(image,context);
+                                }
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.camera_alt,size: 35,color: App.blue,),
+                                  Text(App_Localization.of(context).translate("camera"),style: TextStyle(color: App.blue,fontSize: 11,fontWeight: FontWeight.bold),)
+                                ],
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: ()async{
+                                //todo gallery
+                                final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+                                profileController.showChoose.value=false;
+                                if(image!=null){
+                                  profileController.uploadAvatar(image,context);
+                                }
+                              },
+                              child:Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.photo,size: 35,color: App.pink,),
+                                  Text(App_Localization.of(context).translate("gallery"),style: TextStyle(color: App.pink,fontSize: 11,fontWeight: FontWeight.bold),)
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -269,8 +535,8 @@ class _ProfileState extends State<Profile> {
             ),
           ),
           VerticalDivider(
-            color: MyTheme.isDarkTheme.value ? Colors.white :
-            Colors.black,
+            color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) :
+            Colors.black.withOpacity(0.5),
             width: 1,
             thickness: 1,
           ),
@@ -318,104 +584,56 @@ class _ProfileState extends State<Profile> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          profileController.dataUpdated.value?Column(
+            children: [
+              GestureDetector(
+                  onTap: () {
+                    //todo save data
+                    print('/*/*');
+                          profileController.updateData(context);
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            width: 28,
+                            height: 28,
+                            child: const Icon(
+                              Icons.check_circle_outline_sharp,
+                              color:  Colors.white,
+                              size: 28,)
+                        ),
+                        const SizedBox(width: 10),
+                        Center(
+                            child: Text(App_Localization.of(context).translate("submit"),
+                                style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold
+                                )))
+                      ],
+                    ),
+                  )
+              ),
+              SizedBox(height: 10,),
+            ],
+          ):Center(),
           GestureDetector(
               onTap: () {
-                // showDialog(
-                //   context: context,
-                //   builder: (ctx) => AlertDialog(
-                //     title: Text(App_Localization.of(context).translate('choose_option_to_connect')),
-                //     titleTextStyle: const TextStyle(
-                //       fontSize: 15,
-                //       color: Colors.black,
-                //     ),
-                //     content: Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //       children: [
-                //        GestureDetector(
-                //          onTap: (){
-                //            Get.back();
-                //            introController.showWhatsAppList.value = true;
-                //            introController.showPhoneList.value = false;
-                //            Get.to(()=>ContactInformation());
-                //          },
-                //          child:  Container(
-                //            width: 70,
-                //            height: 55,
-                //            child: Column(
-                //              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //              children: [
-                //                SvgPicture.asset('assets/icons/whatsapp-green.svg',width: 30,height: 30,),
-                //                Text(
-                //                  App_Localization.of(context).translate('whatsapp'),
-                //                  style: const TextStyle(color: Colors.black, fontSize: 12),
-                //                ),
-                //              ],
-                //            ),
-                //          ),
-                //        ),
-                //        GestureDetector(
-                //          onTap: (){
-                //            Get.back();
-                //            introController.showPhoneList.value = true;
-                //            introController.showWhatsAppList.value = false;
-                //            Get.to(()=>ContactInformation());
-                //          },
-                //          child:  Container(
-                //            width: 70,
-                //            height: 55,
-                //            child: Column(
-                //              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //              children: [
-                //                Container(
-                //                  width: 35,
-                //                  height: 35,
-                //                  // padding: EdgeInsets.all(10),
-                //                  decoration: const BoxDecoration(
-                //                      shape: BoxShape.circle,
-                //                      color: Colors.black
-                //                  ),
-                //                  child: const Icon(Icons.phone,size: 20,
-                //                    color:  Colors.white,
-                //                  ),
-                //                ),
-                //                Text(
-                //                  App_Localization.of(context).translate('phone'),
-                //                  style: const TextStyle(color: Colors.black, fontSize: 12),                              ),
-                //              ],
-                //            ),
-                //          )
-                //        )
-                //       ],
-                //     ),
-                //     // actions: <Widget>[
-                //     //   TextButton(
-                //     //     onPressed: () {
-                //     //       // Navigator.of(ctx).pop();
-                //     //       Get.back();
-                //     //     },
-                //     //     child: Container(
-                //     //       padding: EdgeInsets.symmetric(vertical: 10,horizontal: 8),
-                //     //       decoration: BoxDecoration(
-                //     //         color: App.pink,
-                //     //         borderRadius: BorderRadius.circular(5)
-                //     //       ),
-                //     //       child: Text(
-                //     //           App_Localization.of(context).translate('cancel'),
-                //     //         style: TextStyle(
-                //     //           color: Colors.white,
-                //     //           fontSize: 15
-                //     //         ),
-                //     //       ),
-                //     //     ),
-                //     //   ),
-                //     // ],
-                //   ),
-                // );
+
                Get.to(()=>ContactInformation());
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: 50,
+                height: 40,
                 decoration: BoxDecoration(
                     color: Theme.of(context).disabledColor,
                     borderRadius: BorderRadius.circular(10)
@@ -451,7 +669,7 @@ class _ProfileState extends State<Profile> {
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: 50,
+                height: 40,
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(10)
@@ -471,6 +689,42 @@ class _ProfileState extends State<Profile> {
                     const SizedBox(width: 10),
                     Center(
                         child: Text(App_Localization.of(context).translate("req_last_state"),
+                            style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold
+                            )))
+                  ],
+                ),
+              )
+          ),
+          SizedBox(height: 10,),
+          GestureDetector(
+              onTap: () {
+                Global.logout();
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: 40,
+                decoration: BoxDecoration(
+                    color: App.pink,
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                        width: 28,
+                        height: 28,
+                        child: const Icon(
+                          Icons.logout,
+                          color:  Colors.white,
+                          size: 28,)
+                    ),
+                    const SizedBox(width: 10),
+                    Center(
+                        child: Text(App_Localization.of(context).translate("logout"),
                             style: const TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
@@ -744,7 +998,6 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
-
 
 }
 

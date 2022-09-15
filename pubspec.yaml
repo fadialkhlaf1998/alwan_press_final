@@ -63,6 +63,8 @@ dependencies:
   persistent_bottom_nav_bar: ^4.0.2
   myfatoorah_flutter: ^2.1.5
   fluttertoast: ^8.0.9
+  image_picker: ^0.8.5+3
+  intl_phone_number_input: ^0.7.0+2
 
 dev_dependencies:
   flutter_test:
