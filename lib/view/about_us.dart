@@ -10,9 +10,14 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AboutUs extends StatelessWidget {
+class AboutUs extends StatefulWidget {
+  const AboutUs({Key? key}) : super(key: key);
 
+  @override
+  State<AboutUs> createState() => _AboutUsState();
+}
 
+class _AboutUsState extends State<AboutUs> {
   late GoogleMapController googleMapController;
   final initialCameraPosition = CameraPosition(
     target: LatLng(25.277441828720047, 55.39181012164881),
@@ -20,13 +25,15 @@ class AboutUs extends StatelessWidget {
   );
   Set<Marker> marker = Set();
   void onMapCreated(GoogleMapController controller)  async {
-    marker.add(
-        Marker(
-          markerId: MarkerId('Alwan Printing'),
-          position: LatLng(25.277441828720047, 55.39181012164881),
-          visible: true,
-          icon: BitmapDescriptor.defaultMarker,
-        ));
+    setState(() {
+      marker.add(
+          Marker(
+            markerId: MarkerId('Alwan Printing'),
+            position: LatLng(25.277441828720047, 55.39181012164881),
+            visible: true,
+            icon: BitmapDescriptor.defaultMarker,
+          ));
+    });
   }
   void openMap() async {
     String googleUrl = 'https://www.google.com/maps/place/Alwan+Printing+Press+-+%D9%85%D8%B7%D8%A8%D8%B9%D8%A9+%D8%A7%D9%84%D9%88%D8%A7%D9%86%E2%80%AD/@25.276656,55.390351,16z/data=!4m5!3m4!1s0x0:0xa7a2084ccd16fff!8m2!3d25.2773172!4d55.3918622';
@@ -111,7 +118,7 @@ class AboutUs extends StatelessWidget {
               style: TextStyle(
                   color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,
                   fontSize: 20,
-                fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold
               ),
             ),
             SizedBox(height: 10,),
@@ -119,36 +126,36 @@ class AboutUs extends StatelessWidget {
               height: 5,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    App.blue.withOpacity(0.0),
-                    App.blue.withOpacity(0.0),
-                    App.blue.withOpacity(0.0),
-                    App.blue.withOpacity(0.0),
-                    App.blue.withOpacity(0.0),
-                    App.blue.withOpacity(0.0),
-                    App.blue.withOpacity(0.0),
-                    App.blue.withOpacity(0.1),
-                    App.blue.withOpacity(0.2),
-                    App.blue.withOpacity(0.3),
-                    App.blue.withOpacity(0.4),
-                    App.blue.withOpacity(0.5),
-                    App.blue.withOpacity(0.6),
-                    App.blue.withOpacity(0.8),
-                  ],
-                )
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      App.blue.withOpacity(0.0),
+                      App.blue.withOpacity(0.0),
+                      App.blue.withOpacity(0.0),
+                      App.blue.withOpacity(0.0),
+                      App.blue.withOpacity(0.0),
+                      App.blue.withOpacity(0.0),
+                      App.blue.withOpacity(0.0),
+                      App.blue.withOpacity(0.1),
+                      App.blue.withOpacity(0.2),
+                      App.blue.withOpacity(0.3),
+                      App.blue.withOpacity(0.4),
+                      App.blue.withOpacity(0.5),
+                      App.blue.withOpacity(0.6),
+                      App.blue.withOpacity(0.8),
+                    ],
+                  )
               ),
             ),
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.width*0.6,
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/image/about_us.webp"),
-                  fit: BoxFit.cover
-                )
+                  image: DecorationImage(
+                      image: AssetImage("assets/image/about_us.webp"),
+                      fit: BoxFit.cover
+                  )
               ),
             ),
             SizedBox(height: 10,),
@@ -186,6 +193,5 @@ class AboutUs extends StatelessWidget {
     );
   }
 
-
-
 }
+
