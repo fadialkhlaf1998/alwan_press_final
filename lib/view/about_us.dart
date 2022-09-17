@@ -168,6 +168,7 @@ class _AboutUsState extends State<AboutUs> {
                   color: MyTheme.isDarkTheme.value?Colors.white.withOpacity(0.5):Colors.black.withOpacity(0.5),
                   fontSize: 14,
                 ),
+                textAlign: TextAlign.justify,
               ),
             ),
             SizedBox(height: 20,),
