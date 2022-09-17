@@ -41,11 +41,14 @@ class AboutUs extends StatelessWidget {
           child: Stack(
             children: [
               const DarkModeBackground(),
-              Column(
-                children: [
-                  _header(context),
-                  _body(context)
-                ],
+              Container(
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  children: [
+                    _header(context),
+                    _body(context)
+                  ],
+                ),
               )
             ],
           ),
