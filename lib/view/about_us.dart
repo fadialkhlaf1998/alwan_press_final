@@ -49,6 +49,7 @@ class _AboutUsState extends State<AboutUs> {
             children: [
               const DarkModeBackground(),
               Container(
+
                 height: MediaQuery.of(context).size.height,
                 child: Column(
                   children: [
@@ -169,14 +170,14 @@ class _AboutUsState extends State<AboutUs> {
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 20,),
             GestureDetector(
               onTap: (){
                 openMap();
               },
               child: Container(
                 height: MediaQuery.of(context).size.width/2,
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery.of(context).size.width*0.9,
                 child: GoogleMap(
                   mapType: MapType.normal,
                   zoomGesturesEnabled: false,
