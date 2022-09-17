@@ -179,7 +179,7 @@ class _AboutUsState extends State<AboutUs> {
                   width: MediaQuery.of(context).size.width*0.9/2,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/drawer/dark_new_about_us.jpg"),
+                      image: AssetImage("assets/drawer/new_about_us.jpg"),
                       fit: BoxFit.cover
                     )
                   ),
