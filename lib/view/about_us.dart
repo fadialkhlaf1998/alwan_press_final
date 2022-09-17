@@ -171,25 +171,40 @@ class _AboutUsState extends State<AboutUs> {
               ),
             ),
             SizedBox(height: 20,),
-            GestureDetector(
-              onTap: (){
-                openMap();
-              },
-              child: Container(
-                height: MediaQuery.of(context).size.width/2,
-                width: MediaQuery.of(context).size.width*0.9,
-                child: GoogleMap(
-                  mapType: MapType.normal,
-                  zoomGesturesEnabled: false,
-                  zoomControlsEnabled: false,
-                  onMapCreated: onMapCreated,
-                  markers: marker,
-                  onTap: (pos){
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.width*0.9/2,
+                  width: MediaQuery.of(context).size.width*0.9/2,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/drawer/dark_new_about_us.jpg"),
+                      fit: BoxFit.cover
+                    )
+                  ),
+                ),
+                GestureDetector(
+                  onTap: (){
                     openMap();
                   },
-                  initialCameraPosition: initialCameraPosition,
+                  child: Container(
+                    height: MediaQuery.of(context).size.width*0.9/2,
+                    width: MediaQuery.of(context).size.width*0.9/2,
+                    child: GoogleMap(
+                      mapType: MapType.normal,
+                      zoomGesturesEnabled: false,
+                      zoomControlsEnabled: false,
+                      onMapCreated: onMapCreated,
+                      markers: marker,
+                      onTap: (pos){
+                        openMap();
+                      },
+                      initialCameraPosition: initialCameraPosition,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             )
           ],
         ),
