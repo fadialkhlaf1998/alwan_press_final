@@ -183,6 +183,9 @@ class _AboutUsState extends State<AboutUs> {
                   zoomControlsEnabled: false,
                   onMapCreated: onMapCreated,
                   markers: marker,
+                  onTap: (pos){
+                    openMap();
+                  },
                   initialCameraPosition: initialCameraPosition,
                 ),
               ),
