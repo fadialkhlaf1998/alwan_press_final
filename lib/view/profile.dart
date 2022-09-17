@@ -32,9 +32,11 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   _ProfileState(){
-    profileController.name.text = Global.user!.name;
-    profileController.email.text = Global.user!.email;
-    profileController.phone.text = Global.user!.phone.length>6&&Global.user!.phone.contains("+971")?Global.user!.phone.split("+971")[1]:"";
+    if(Global.user!=null){
+      profileController.name.text = Global.user!.name;
+      profileController.email.text = Global.user!.email;
+      profileController.phone.text = Global.user!.phone.length>6&&Global.user!.phone.contains("+971")?Global.user!.phone.split("+971")[1]:"";
+    }
   }
   IntroController introController = Get.find();
   ProfileController profileController = Get.find();

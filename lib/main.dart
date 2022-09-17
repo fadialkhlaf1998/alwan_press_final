@@ -146,6 +146,10 @@ class _MyAppState extends State<MyApp> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF300A2A):Colors.white
     ));
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         themeMode: myTheme.value.myTheme,
