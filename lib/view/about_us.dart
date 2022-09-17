@@ -36,7 +36,7 @@ class AboutUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SafeArea(
         child: Container(
           child: Stack(
             children: [
@@ -102,7 +102,7 @@ class AboutUs extends StatelessWidget {
   _body(context){
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height- 100 - MediaQuery.of(context).padding.top,
+      height: MediaQuery.of(context).size.height- 140 - MediaQuery.of(context).padding.top,
       child: SingleChildScrollView(
         child: Column(
           children: [
