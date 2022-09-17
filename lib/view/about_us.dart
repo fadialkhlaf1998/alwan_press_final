@@ -57,6 +57,7 @@ class AboutUs extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(top: 30,bottom: 30),
       width: MediaQuery.of(context).size.width,
+      height: 100,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -96,7 +97,7 @@ class AboutUs extends StatelessWidget {
   _body(context){
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height-140,
+      height: MediaQuery.of(context).size.height- 100 - MediaQuery.of(context).padding.top,
       child: SingleChildScrollView(
         child: Column(
           children: [
