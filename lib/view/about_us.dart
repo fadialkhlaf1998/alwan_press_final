@@ -37,16 +37,18 @@ class AboutUs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            const DarkModeBackground(),
-            Column(
-              children: [
-                _header(context),
-                _body(context)
-              ],
-            )
-          ],
+        child: Container(
+          child: Stack(
+            children: [
+              const DarkModeBackground(),
+              Column(
+                children: [
+                  _header(context),
+                  _body(context)
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
