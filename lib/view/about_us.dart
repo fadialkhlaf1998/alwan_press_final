@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/myTheme.dart';
@@ -5,9 +7,31 @@ import 'package:alwan_press/widget/connect_us_widget.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutUs extends StatelessWidget {
-  const AboutUs({Key? key}) : super(key: key);
+
+
+  late GoogleMapController googleMapController;
+  final initialCameraPosition = CameraPosition(
+    target: LatLng(25.277441828720047, 55.39181012164881),
+    zoom: 11.5,
+  );
+  Set<Marker> marker = Set();
+  void onMapCreated(GoogleMapController controller)  async {
+    marker.add(
+        Marker(
+          markerId: MarkerId('Alwan Printing'),
+          position: LatLng(25.277441828720047, 55.39181012164881),
+          visible: true,
+          icon: BitmapDescriptor.defaultMarker,
+        ));
+  }
+  void openMap() async {
+    String googleUrl = 'https://www.google.com/maps/place/Alwan+Printing+Press+-+%D9%85%D8%B7%D8%A8%D8%B9%D8%A9+%D8%A7%D9%84%D9%88%D8%A7%D9%86%E2%80%AD/@25.276656,55.390351,16z/data=!4m5!3m4!1s0x0:0xa7a2084ccd16fff!8m2!3d25.2773172!4d55.3918622';
+    await launchUrl(Uri.parse(googleUrl));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +82,21 @@ class AboutUs extends StatelessWidget {
       ),
     );
   }
+  static final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
 
+  static final CameraPosition _kLake = CameraPosition(
+      bearing: 192.8334901395799,
+      target: LatLng(37.43296265331129, -122.08832357078792),
+      tilt: 59.440717697143555,
+      zoom: 19.151926040649414);
+  Completer<GoogleMapController> _controller = Completer();
   _body(context){
     return Container(
       width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height-140,
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -121,7 +156,24 @@ class AboutUs extends StatelessWidget {
                 ),
               ),
             ),
-
+            SizedBox(height: 10,),
+            GestureDetector(
+              onTap: (){
+                openMap();
+              },
+              child: Container(
+                height: MediaQuery.of(context).size.width/2,
+                width: MediaQuery.of(context).size.width,
+                child: GoogleMap(
+                  mapType: MapType.normal,
+                  zoomGesturesEnabled: false,
+                  zoomControlsEnabled: false,
+                  onMapCreated: onMapCreated,
+                  markers: marker,
+                  initialCameraPosition: initialCameraPosition,
+                ),
+              ),
+            )
           ],
         ),
       ),
