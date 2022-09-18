@@ -138,7 +138,7 @@ class MyDrawer extends StatelessWidget {
                           BorderRadius.only(topLeft: Radius.circular(10),bottomLeft:  Radius.circular(10))
                               :BorderRadius.only(bottomRight: Radius.circular(10),topRight:  Radius.circular(10)),
                         ),
-                        child: Obx(() => statement_loading.value?Center(child: Container(width: MediaQuery.of(context).size.width*0.75*0.75/1.6,child: LinearProgressIndicator(color: Colors.white,),),):Row(
+                        child: Obx(() => statement_loading.value?Center(child: Container(width: MediaQuery.of(context).size.width*0.75*0.75/1.6,child: LinearProgressIndicator(color: Colors.white,backgroundColor: App.blue),),):Row(
                           children: [
                             SizedBox(width: 20,),
                             SvgPicture.asset("assets/drawer/my_statement.svg",color: Colors.white,),
