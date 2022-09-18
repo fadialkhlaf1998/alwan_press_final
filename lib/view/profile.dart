@@ -663,10 +663,15 @@ class _ProfileState extends State<Profile> {
           SizedBox(height: 10,),
           GestureDetector(
               onTap: () {
-                if(Global.userId == -1){
+                if(Global.user == null){
                   Get.offAll(()=>SignIn());
                 }else{
-                  _showMyDialog(context);
+                  if(Global.user!.request_statment > 0){
+                     profileController.mySnackBar(App_Localization.of(context).translate("u_req_under_process_title"),
+                         App_Localization.of(context).translate("u_req_under_process_desc"));
+                  }else{
+                    _showMyDialog(context);
+                  }
                 }
               },
               child: Container(

@@ -21,9 +21,11 @@ class User {
     required this.phone,
     required this.email,
     required this.image,
+    required this.request_statment,
   });
 
   int id;
+  int request_statment;
   String quickBookId;
   String name;
   dynamic token;
@@ -57,6 +59,7 @@ class User {
     phone: json["phone"]==null?"":json["phone"],
     email: json["email"]==null?"":json["email"],
     image: json["image"]==null?"":json["image"],
+    request_statment: json["request_statment"]==null?0:json["request_statment"],
   );
 
   Map<String, dynamic> toMap() => {

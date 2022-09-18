@@ -1,7 +1,7 @@
 {
   "email": "Email",
   "password": "Password",
-  "forget_password": "Forget Password?",
+  "forget_password": "Forgot Password?",
   "sign_in": "Sign In",
   "login_us_guest": "Login As Guest",
   "don't_have_account": "Don't have an account?",
@@ -127,5 +127,9 @@
   "camera": "Camera",
   "gallery": "Gallery",
   "or": "or",
-  "name": "Name"
+  "name": "Name",
+  "***---**": "*******************************--------------***********************",
+  "u_req_under_process_title": "Your request is under processing",
+  "u_req_under_process_desc": "We appreciate your patience, we will send your statement report shortly.",
+  "reach_us": "Reach Us"
 }

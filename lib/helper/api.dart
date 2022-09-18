@@ -126,7 +126,7 @@ class Api {
       if(jsonData.length < 3){
         /// alert (username and password is wrong)
         return User(id: -1, quickBookId: "", name: "", token: "",
-            financialState: "", username: "", password:"", address1: "", address2: "", emirate: "", apartment: "", phone: "",image: "",email: "") ;
+            financialState: "", username: "", password:"", address1: "", address2: "", request_statment: 0,emirate: "", apartment: "", phone: "",image: "",email: "") ;
       }else{
         jsonData = jsonData.replaceRange(0,1, '');
         jsonData = jsonData.replaceRange(jsonData.length -1 ,jsonData.length ,'');
@@ -145,7 +145,7 @@ class Api {
     } else {
       /// alert (something went wrong)
       return User(id: -2, quickBookId: "", name: "", token: "",
-          financialState: "", username: "", password:"", address1: "", address2: "", emirate: "", apartment: "", phone: "",email: "",image: "") ;
+          financialState: "", username: "", password:"", address1: "", address2: "", request_statment: 0,emirate: "", apartment: "", phone: "",email: "",image: "") ;
     }
 
   }

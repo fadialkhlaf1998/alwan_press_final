@@ -6,6 +6,7 @@ import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/widget/connect_us_widget.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -49,15 +50,17 @@ class _AboutUsState extends State<AboutUs> {
             children: [
               const DarkModeBackground(),
               Container(
+                // height: MediaQuery.of(context).size.height,
+                child:  SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _header(context),
+                      _body(context)
+                    ],
+                  ),
+                )
+              ),
 
-                height: MediaQuery.of(context).size.height,
-                child: Column(
-                  children: [
-                    _header(context),
-                    _body(context)
-                  ],
-                ),
-              )
             ],
           ),
         ),
@@ -69,6 +72,7 @@ class _AboutUsState extends State<AboutUs> {
   _header(context){
     return Container(
       padding: const EdgeInsets.only(top: 30,bottom: 30),
+      // color: MyTheme.isDarkTheme.value?App.black:Colors.white.withOpacity(0.5),
       width: MediaQuery.of(context).size.width,
       height: 100,
       child: Row(
@@ -108,107 +112,188 @@ class _AboutUsState extends State<AboutUs> {
       zoom: 19.151926040649414);
   Completer<GoogleMapController> _controller = Completer();
   _body(context){
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height- 140 - MediaQuery.of(context).padding.top,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              App_Localization.of(context).translate("alwan_printing_press"),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // SizedBox(height: 100,),
+          Text(
+            App_Localization.of(context).translate("alwan_printing_press"),
+            style: TextStyle(
+                color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+          SizedBox(height: 10,),
+          // Container(
+          //   height: 5,
+          //   width: MediaQuery.of(context).size.width,
+          //   decoration: BoxDecoration(
+          //       gradient: LinearGradient(
+          //         begin: Alignment.topRight,
+          //         end: Alignment.bottomLeft,
+          //         colors: [
+          //           App.blue.withOpacity(0.0),
+          //           App.blue.withOpacity(0.0),
+          //           App.blue.withOpacity(0.0),
+          //           App.blue.withOpacity(0.0),
+          //           App.blue.withOpacity(0.0),
+          //           App.blue.withOpacity(0.0),
+          //           App.blue.withOpacity(0.0),
+          //           App.blue.withOpacity(0.1),
+          //           App.blue.withOpacity(0.2),
+          //           App.blue.withOpacity(0.3),
+          //           App.blue.withOpacity(0.4),
+          //           App.blue.withOpacity(0.5),
+          //           App.blue.withOpacity(0.6),
+          //           App.blue.withOpacity(0.8),
+          //         ],
+          //       )
+          //   ),
+          // ),
+          // Container(
+          //   width: MediaQuery.of(context).size.width,
+          //   height: MediaQuery.of(context).size.width*0.6,
+          //   decoration: BoxDecoration(
+          //       image: DecorationImage(
+          //           image: AssetImage("assets/image/about_us.webp"),
+          //           fit: BoxFit.cover
+          //       )
+          //   ),
+          // ),
+          SizedBox(height: 10,),
+          Container(
+            width: MediaQuery.of(context).size.width*0.9,
+            child: Text(
+              App_Localization.of(context).translate("about_content"),
               style: TextStyle(
-                  color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
+                color: MyTheme.isDarkTheme.value?Colors.white.withOpacity(0.5):Colors.black.withOpacity(0.5),
+                fontSize: 14,
               ),
+              textAlign: TextAlign.justify,
             ),
-            SizedBox(height: 10,),
-            Container(
-              height: 5,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                      App.blue.withOpacity(0.0),
-                      App.blue.withOpacity(0.0),
-                      App.blue.withOpacity(0.0),
-                      App.blue.withOpacity(0.0),
-                      App.blue.withOpacity(0.0),
-                      App.blue.withOpacity(0.0),
-                      App.blue.withOpacity(0.0),
-                      App.blue.withOpacity(0.1),
-                      App.blue.withOpacity(0.2),
-                      App.blue.withOpacity(0.3),
-                      App.blue.withOpacity(0.4),
-                      App.blue.withOpacity(0.5),
-                      App.blue.withOpacity(0.6),
-                      App.blue.withOpacity(0.8),
-                    ],
-                  )
-              ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.width*0.6,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/image/about_us.webp"),
-                      fit: BoxFit.cover
-                  )
-              ),
-            ),
-            SizedBox(height: 10,),
-            Container(
-              width: MediaQuery.of(context).size.width*0.9,
-              child: Text(
-                App_Localization.of(context).translate("about_content"),
-                style: TextStyle(
-                  color: MyTheme.isDarkTheme.value?Colors.white.withOpacity(0.5):Colors.black.withOpacity(0.5),
-                  fontSize: 14,
-                ),
-                textAlign: TextAlign.justify,
-              ),
-            ),
-            SizedBox(height: 20,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          ),
+          SizedBox(height: 20,),
+          Text(App_Localization.of(context).translate("reach_us"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
+          SizedBox(height: 10,),
+          Container(
+            width: MediaQuery.of(context).size.width*0.9,
+            child: Row(
               children: [
+                Icon(Icons.location_on,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),
+                SizedBox(width: 15,),
                 Container(
-                  height: MediaQuery.of(context).size.width*0.9/2,
-                  width: MediaQuery.of(context).size.width*0.9/2,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/drawer/new_about_us.jpg"),
-                      fit: BoxFit.cover
+                    height:40,
+                    width: MediaQuery.of(context).size.width*0.9 - 70,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Al- Qasis industrial city 2 - Back Side of Aster Hospital - Dubai",style: TextStyle(fontSize: 12,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
+                      ],
                     )
-                  ),
-                ),
-                GestureDetector(
-                  onTap: (){
-                    openMap();
-                  },
-                  child: Container(
-                    height: MediaQuery.of(context).size.width*0.9/2,
-                    width: MediaQuery.of(context).size.width*0.9/2,
-                    child: GoogleMap(
-                      mapType: MapType.normal,
-                      zoomGesturesEnabled: false,
-                      zoomControlsEnabled: false,
-                      onMapCreated: onMapCreated,
-                      markers: marker,
-                      onTap: (pos){
-                        openMap();
-                      },
-                      initialCameraPosition: initialCameraPosition,
-                    ),
-                  ),
                 ),
               ],
-            )
-          ],
-        ),
+            ),
+          ),
+          SizedBox(height: 10,),
+          GestureDetector(
+            onTap: ()async{
+              await launchUrl(Uri.parse("tel://+971 4 267 6552"));
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width*0.9,
+              child: Row(
+                children: [
+                  Icon(Icons.phone,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),
+                  SizedBox(width: 15,),
+                  Container(
+                      height:40,
+                      width: MediaQuery.of(context).size.width*0.9 - 70,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("+971 4 267 6552",style: TextStyle(fontSize: 12,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
+                        ],
+                      )
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // SizedBox(height: 10,),
+          Container(
+            width: MediaQuery.of(context).size.width*0.9,
+            child: Row(
+              children: [
+                Icon(Icons.mail,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),
+                SizedBox(width: 15,),
+                Container(
+                    height:40,
+                    width: MediaQuery.of(context).size.width*0.9 - 70,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("P.O. Box: 234985",style: TextStyle(fontSize: 12,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
+                      ],
+                    )
+                ),
+              ],
+            ),
+          ),
+          GestureDetector(
+            onTap: ()async{
+              await launchUrl(Uri.parse("https://alwanpress.ae"));
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width*0.9,
+              child: Row(
+                children: [
+                  Icon(Icons.add_photo_alternate,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),
+                  SizedBox(width: 15,),
+                  Container(
+                      height:40,
+                      width: MediaQuery.of(context).size.width*0.9 - 70,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          //
+                          Text("www.alwanpress.ae",style: TextStyle(fontSize: 12,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
+                        ],
+                      )
+                  ),
+                ],
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: (){
+              openMap();
+            },
+            child: Container(
+              height: MediaQuery.of(context).size.width*0.9/2,
+              width: MediaQuery.of(context).size.width*0.9,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10)
+              ),
+              child: GoogleMap(
+                mapType: MapType.normal,
+                zoomGesturesEnabled: false,
+                zoomControlsEnabled: false,
+                onMapCreated: onMapCreated,
+                markers: marker,
+                onTap: (pos){
+                  openMap();
+                },
+                initialCameraPosition: initialCameraPosition,
+              ),
+            ),
+          ),
+          SizedBox(height: 40,),
+        ],
       ),
     );
   }
