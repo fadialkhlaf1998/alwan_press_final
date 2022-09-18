@@ -275,7 +275,7 @@ class _AboutUsState extends State<AboutUs> {
               openMap();
             },
             child: Container(
-              height: MediaQuery.of(context).size.width*0.9/3,
+              height: MediaQuery.of(context).size.width*0.9/2,
               width: MediaQuery.of(context).size.width*0.9,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20)
