@@ -269,15 +269,16 @@ class _AboutUsState extends State<AboutUs> {
               ),
             ),
           ),
+          SizedBox(height: 30,),
           GestureDetector(
             onTap: (){
               openMap();
             },
             child: Container(
-              height: MediaQuery.of(context).size.width*0.9/2,
+              height: MediaQuery.of(context).size.width*0.9/3,
               width: MediaQuery.of(context).size.width*0.9,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10)
+                borderRadius: BorderRadius.circular(20)
               ),
               child: GoogleMap(
                 mapType: MapType.normal,
