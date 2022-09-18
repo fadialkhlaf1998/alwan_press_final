@@ -251,7 +251,8 @@ class _AboutUsState extends State<AboutUs> {
               width: MediaQuery.of(context).size.width*0.9,
               child: Row(
                 children: [
-                  Icon(Icons.add_photo_alternate,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),
+                  // Icon(Icons.add_photo_alternate,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),
+                  SvgPicture.asset("assets/icons/web.svg",width: 22.5,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
                   SizedBox(width: 15,),
                   Container(
                       height:40,
