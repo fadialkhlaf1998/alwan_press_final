@@ -41,7 +41,7 @@ class OrderDetailsController extends GetxController{
           totalForPayment += order!.shippingPrice;
         }
         if(order!.state == 0 ){
-          totalForPayment = totalForPayment / 4 ;
+          totalForPayment = totalForPayment / 2 ;
         }
         fake.value = ! fake.value;
         print('check');
