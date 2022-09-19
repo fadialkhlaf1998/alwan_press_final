@@ -133,7 +133,7 @@ class Addresses_2 extends StatelessWidget {
         controller: addressController.nick_name,
         style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
         decoration: InputDecoration(
-          prefixText: 'Nike name: ',
+          // prefixText: 'Nike name: ',
             prefixStyle: TextStyle(
               color: Theme.of(context).dividerColor
             ),
