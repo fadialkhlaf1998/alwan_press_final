@@ -388,25 +388,7 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ),
-      // child:ImageSlideshow(
-      //   width: double.infinity,
-      //   height: MediaQuery.of(context).size.height*0.2,
-      //   initialPage: 0,
-      //   indicatorColor: Theme.of(context).primaryColor,
-      //   indicatorBackgroundColor: App.grey,
-      //   children:
-      //   introController.bannerList.map((e) => Container(
-      //     decoration: BoxDecoration(
-      //         // borderRadius: BorderRadius.circular(10),
-      //         image: DecorationImage(
-      //             image: NetworkImage(e.image),
-      //             fit: BoxFit.cover
-      //         )
-      //     ),
-      //   )).toList(),
-      //   autoPlayInterval: 0,
-      //   isLoop: true,
-      // ),
+
     );
   }
   _chooseImage(BuildContext context){

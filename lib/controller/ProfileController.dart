@@ -56,15 +56,16 @@ class ProfileController extends GetxController {
 
 
     requsetLastStatment(BuildContext context){
-      if(Global.userId==-1){
+      if(Global.user==null){
         Get.offAll(()=>SignIn());
       }else{
         //Get.back();
         loading.value = true;
-        Api.requestStatement(note.text, Global.userId).then((value) {
+        Api.requestStatement(note.text, Global.user!.id).then((value) {
           loading.value = false;
           note.clear();
           if(value){
+            Global.user!.request_statment = 1;
             Get.snackbar(
               App_Localization.of(context).translate("req_state_succ_t"),
               App_Localization.of(context).translate("req_state_succ_d"),
