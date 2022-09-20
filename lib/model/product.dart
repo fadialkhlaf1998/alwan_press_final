@@ -21,6 +21,8 @@ class Product {
     required this.price,
     required this.images,
     required this.reviews,
+    required this.ar_desc,
+    required this.ar_title,
   });
 
   int id;
@@ -32,6 +34,8 @@ class Product {
   int rate;
   int rateCount;
   String description;
+  String ar_title;
+  String ar_desc;
   double price;
   List<ProductImage> images;
   List<dynamic> reviews;
@@ -46,6 +50,8 @@ class Product {
     rate: json["rate"],
     rateCount: json["rate_count"],
     description: json["description"],
+    ar_title: json["ar_title"],
+    ar_desc: json["ar_desc"],
     price: json["price"].toDouble(),
     images: List<ProductImage>.from(json["images"].map((x) => ProductImage.fromJson(x))),
     reviews: List<dynamic>.from(json["reviews"].map((x) => x)),
@@ -76,6 +82,8 @@ class Product {
     rate: json["rate"],
     rateCount: json["rate_count"],
     description: json["description"],
+    ar_title: json["ar_title"],
+    ar_desc: json["ar_desc"],
     price: json["price"].toDouble(),
     images: List<ProductImage>.from(json["images"].map((x) => ProductImage.fromMap(x))),
     reviews: List<dynamic>.from(json["reviews"].map((x) => x)),

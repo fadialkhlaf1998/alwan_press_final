@@ -4,6 +4,7 @@ import 'package:alwan_press/controller/product_details_controller.dart';
 import 'package:alwan_press/controller/product_list_controller.dart';
 import 'package:alwan_press/controller/sign_in_controller.dart';
 import 'package:alwan_press/helper/app.dart';
+import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/model/product_list.dart';
 import 'package:alwan_press/view/contact_information.dart';
@@ -109,7 +110,7 @@ class ProductDetails extends StatelessWidget {
                           color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black
                       )
                   ),
-                  Text(product.title,
+                  Text(Global.langCode == "en"?product.title:product.ar_title,
                     style: TextStyle(
                         fontSize: 16,
                         color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : App.grey)
@@ -186,7 +187,9 @@ class ProductDetails extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.9,
               // height: 200,
               child: Text(
-              productDetailsController.productDetails.value.description,
+                Global.langCode == "en"?
+              productDetailsController.productDetails.value.description
+              :productDetailsController.productDetails.value.ar_desc,
               style: TextStyle(
                 height: 1.2,
                   fontSize: 13,

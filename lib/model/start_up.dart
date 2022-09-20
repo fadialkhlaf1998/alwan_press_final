@@ -76,10 +76,12 @@ class Category {
     required this.image,
     required this.color,
     required this.subCategories,
+    required this.ar_title,
   });
 
   int id;
   String title;
+  String ar_title;
   dynamic image;
   dynamic color;
   List<SubCategories> subCategories;
@@ -91,6 +93,7 @@ class Category {
   factory Category.fromMap(Map<String, dynamic> json) => Category(
     id: json["id"],
     title: json["title"],
+    ar_title: json["ar_title"],
     image: json["image"] ?? "",
     color: json["color"] ?? "",
     subCategories: List<SubCategories>.from(json["sub_categories"].map((x) => SubCategories.fromMap(x))),
@@ -146,18 +149,21 @@ class SubCategories{
  SubCategories({
  required this.id,
  required this.title,
+ required this.ar_title,
  required this.image,
  required this.categoryId,
 });
 
  late final int id;
  late final String title;
+ late final String ar_title;
  late final String image;
  late final int categoryId;
 
  SubCategories.fromJson(Map<String, dynamic> json){
  id = json['id'];
  title = json['title'];
+ ar_title = json['ar_title'];
  image = json['image'];
  categoryId = json['category_id'];
  }
@@ -172,6 +178,7 @@ class SubCategories{
  factory SubCategories.fromMap(Map<String, dynamic> json) => SubCategories(
    id: json["id"],
    title: json["title"] ?? "",
+   ar_title: json["ar_title"] ?? "",
    image: json["image"],
    categoryId: json["category_id"],
  );
@@ -189,12 +196,14 @@ class SuggestionSearch {
   SuggestionSearch({
     required this.id,
     required this.title,
+    required this.ar_title,
     required this.subTitle,
     required this.image,
   });
 
   int id;
   String title;
+  String ar_title;
   String subTitle;
   String image;
 
@@ -205,6 +214,7 @@ class SuggestionSearch {
   factory SuggestionSearch.fromMap(Map<String, dynamic> json) => SuggestionSearch(
     id: json["id"],
     title: json["title"]?? "",
+    ar_title: json["ar_title"]?? "",
     subTitle: json["sub_title"] ?? "",
     image: json["image"] ?? "",
   );

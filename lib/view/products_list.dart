@@ -257,7 +257,10 @@ class ProductList extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                        productListController.tempProductsList[index].title,
+                        Global.langCode == "en"
+                            ?
+                        productListController.tempProductsList[index].title
+                        :productListController.tempProductsList[index].ar_title,
                         maxLines: 2,
                         style: TextStyle(
                             color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
@@ -438,7 +441,9 @@ class ProductList extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Text(
-                  productListController.tempProductsList[index].title,
+                Global.langCode == "en"?
+                  productListController.tempProductsList[index].title
+                  :productListController.tempProductsList[index].ar_title,
                   maxLines: 2,
                   style: TextStyle(
                       color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,

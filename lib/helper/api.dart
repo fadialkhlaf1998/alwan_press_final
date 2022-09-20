@@ -57,7 +57,7 @@ class Api {
       return Product.fromJson(jsonDecode(data));
     }
     else {
-      return Product(id: -1, subCategoryId: -1, title: "", subTitle: "", search: "", image: "", rate: 0, rateCount: 0, description: "", price: -1, images: [], reviews: []);
+      return Product(id: -1, subCategoryId: -1, title: "", subTitle: "", search: "", image: "", rate: 0, rateCount: 0, description: "", price: -1, images: [], reviews: [],ar_desc: "",ar_title: "");
     }
   }
 
@@ -84,6 +84,7 @@ class Api {
     var headers = {
       'Content-Type': 'application/json'
     };
+    print("|"+query+"|");
     var request = http.Request('POST', Uri.parse(url + 'api/product/search'));
     request.body = json.encode({
       "query": query

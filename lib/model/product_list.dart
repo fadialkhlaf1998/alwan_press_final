@@ -21,23 +21,29 @@ class ProductList {
     required this.rateCount,
     required this.description,
     required this.price,
+    required this.ar_title,
+    required this.ar_desc,
   });
 
   int id;
   int subCategoryId;
   String title;
+  String ar_title;
   String subTitle;
   String search;
   String image;
   int rate;
   int rateCount;
   String description;
+  String ar_desc;
   double price;
 
   factory ProductList.fromMap(Map<String, dynamic> json) => ProductList(
     id: json["id"],
     subCategoryId: json["sub_category_id"],
     title: json["title"],
+    ar_desc: json["ar_desc"],
+    ar_title: json["ar_title"],
     subTitle: json["sub_title"],
     search: json["search"],
     image: json["image"],
@@ -67,6 +73,8 @@ class ProductList {
     search: json["search"],
     image: json["image"],
     rate: json["rate"],
+    ar_desc: json["ar_desc"],
+    ar_title: json["ar_title"],
     rateCount: json["rate_count"],
     description: json["description"],
     price: json["price"].toDouble(),

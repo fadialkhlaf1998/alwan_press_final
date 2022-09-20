@@ -224,7 +224,10 @@ class AllSubCategory extends StatelessWidget {
                                 margin:
                                 const EdgeInsets.symmetric(horizontal: 1),
                                 child: Text(
-                                  introController.categoriesList[index].title,
+                                  Global.langCode == "en"
+                                      ?
+                                  introController.categoriesList[index].title
+                                  :introController.categoriesList[index].ar_title,
                                   textAlign: TextAlign.center,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
@@ -257,8 +260,12 @@ class AllSubCategory extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(top: 15,bottom: 15),
             child: Text(
+                Global.langCode == "en"
+                    ?
                 introController
-                    .categoriesList[homeController.categoryIndex.value].title,
+                    .categoriesList[homeController.categoryIndex.value].title
+                :introController
+                    .categoriesList[homeController.categoryIndex.value].ar_title,
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
@@ -348,7 +355,10 @@ class AllSubCategory extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                        introController.categoriesList[categoryIndex].subCategories[index].title,
+                        Global.langCode == "en"
+                            ?
+                        introController.categoriesList[categoryIndex].subCategories[index].title
+                        :introController.categoriesList[categoryIndex].subCategories[index].ar_title,
                         maxLines: 2,
                         style: TextStyle(
                             color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
@@ -493,7 +503,10 @@ class AllSubCategory extends StatelessWidget {
                             color: Colors.transparent,
                             child: Center(
                               child: Text(
-                                introController.categoriesList[index].title,
+                                Global.langCode == "en"
+                                    ?
+                                introController.categoriesList[index].title
+                                :introController.categoriesList[index].ar_title,
                                 style: allSubCategoryController.categoryIndex.value == index
                                     ? Theme.of(context).textTheme.headline2
                                     : TextStyle(
@@ -579,7 +592,10 @@ class AllSubCategory extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Text(
-                  introController.tempCategoriesList[index].title,
+                  Global.langCode == "en"
+                      ?
+                  introController.tempCategoriesList[index].title
+                  :introController.tempCategoriesList[index].ar_title,
                   //introController.categoriesList[categoryIndex].subCategories[index].title,
                   maxLines: 2,
                   style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:alwan_press/controller/home_controller.dart';
 import 'package:alwan_press/helper/app.dart';
+import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/model/start_up.dart';
 import 'package:alwan_press/view/searchPage.dart';
@@ -64,7 +65,7 @@ class SearchTextField extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     final suggestions = suggestionList.where((name) {
-      return name.title.toLowerCase().contains(query.toLowerCase());
+      return (name.title.toLowerCase().contains(query.toLowerCase()) || name.ar_title.toLowerCase().contains(query.toLowerCase()));
     });
 
     print("query");
@@ -80,7 +81,7 @@ class SearchTextField extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) {
     final suggestions = suggestionList.where((name) {
-      return name.title.toLowerCase().contains(query.toLowerCase());
+      return (name.title.toLowerCase().contains(query.toLowerCase()) || name.ar_title.toLowerCase().contains(query.toLowerCase()));
     });
     return Stack(
       children: [
@@ -103,15 +104,23 @@ class SearchTextField extends SearchDelegate<String> {
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
                 title: Text(
-                  suggestions.elementAt(index).title,
+                  Global.langCode == "en"?
+                  suggestions.elementAt(index).title
+                  :suggestions.elementAt(index).ar_title,
                   style: TextStyle(
                       color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
                       fontSize: 16
                   ),
                 ),
                 onTap: () {
-                  query = suggestions.elementAt(index).title;
-                  Get.to(()=>SearchPage(query));
+                  if(Global.langCode == "en"){
+                    query = suggestions.elementAt(index).title;
+                    Get.to(()=>SearchPage(query));
+                  }else{
+                    query = suggestions.elementAt(index).ar_title;
+                    Get.to(()=>SearchPage(query));
+                  }
+
                   // close(context, query);
                 },
               );

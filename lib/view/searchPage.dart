@@ -2,6 +2,7 @@ import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/controller/product_list_controller.dart';
 import 'package:alwan_press/controller/search_page_controller.dart';
 import 'package:alwan_press/helper/app.dart';
+import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/product_details.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
@@ -154,7 +155,8 @@ class SearchPage extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Text(
-                  searchPageController.searchResultList[index].title,
+                  Global.langCode == "en"?
+                  searchPageController.searchResultList[index].title:searchPageController.searchResultList[index].ar_title,
                   maxLines: 2,
                   style: TextStyle(
                       color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,

@@ -342,7 +342,9 @@ class Home extends StatelessWidget {
                                   margin:
                                       const EdgeInsets.symmetric(horizontal: 1),
                                   child: Text(
-                                    introController.categoriesList[index].title,
+                                    Global.langCode == "en"
+                                        ?introController.categoriesList[index].title
+                                        :introController.categoriesList[index].ar_title,
                                     textAlign: TextAlign.center,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
@@ -376,8 +378,12 @@ class Home extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(top: 10),
             child: Text(
-                introController
-                    .categoriesList[homeController.categoryIndex.value].title,
+                Global.langCode == "en"
+                    ?introController
+                    .categoriesList[homeController.categoryIndex.value].title
+                    :introController
+                    .categoriesList[homeController.categoryIndex.value].ar_title,
+
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
@@ -489,7 +495,9 @@ class Home extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                      introController.categoriesList[categoryIndex].subCategories[index].title,
+                    Global.langCode == "en"?
+                      introController.categoriesList[categoryIndex].subCategories[index].title
+                      :introController.categoriesList[categoryIndex].subCategories[index].ar_title,
                       maxLines: 2,
                       style: TextStyle(
                           color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
