@@ -27,8 +27,8 @@ class Global {
   static String phone = '';
   static String username = '';
   static String password = '';
-  static String facebook = '';
-  static String insta = '';
+  static String facebook = 'https://www.facebook.com/ALWAN-Printing-Press-LLC-1438279683104014/';
+  static String insta = 'https://instagram.com/alwan.printing?igshid=NDc0ODY0MjQ=';
   static String twitter = '';
 
 
