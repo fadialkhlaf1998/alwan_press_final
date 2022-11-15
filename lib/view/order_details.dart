@@ -33,12 +33,14 @@ class OrderDetails extends StatelessWidget {
           orderDetailsController.shippingAnimationSucc.value = true;
         }
         orderDetailsController.totalForPayment = order.price.toDouble() - order.paid_amount.toDouble();
-        if(order.shippingState != 0 ){
+        if(order.shippingState != 0  && order.state != 0 ){
           orderDetailsController.totalForPayment += order.shippingPrice;
         }
+        print(orderDetailsController.totalForPayment);
         if(order.state == 0 ){
           orderDetailsController.totalForPayment = orderDetailsController.totalForPayment / 4 ;
         }
+        print(orderDetailsController.totalForPayment);
         orderDetailsController.loading.value = false;
       }else{
         Get.back();
@@ -175,6 +177,7 @@ class OrderDetails extends StatelessWidget {
                                           //todo shipping
                                       Get.to(()=>Addresses_2(orderDetailsController.order!.id))!.then((value) {
                                         orderDetailsController.fake.value = !orderDetailsController.fake.value;
+
                                       });
                                     },
                                     child:  Container(

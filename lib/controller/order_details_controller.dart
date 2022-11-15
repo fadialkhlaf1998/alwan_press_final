@@ -60,7 +60,8 @@ class OrderDetailsController extends GetxController{
           shippingAnimationSucc.value = true;
         }
         totalForPayment = order!.price.toDouble() - order!.paid_amount.toDouble();
-        if(order!.shippingState != 0 ){
+        print(totalForPayment);
+      if(order!.shippingState != 0 && order!.state != 0 ){
           totalForPayment += order!.shippingPrice;
         }
         if(order!.state == 0 ){
