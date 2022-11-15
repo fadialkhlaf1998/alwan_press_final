@@ -160,7 +160,7 @@ class _MyHomePageState extends State<MyFatoraahPage> {
     if(succ){
       Get.back();
       // Get.back();
-      Get.snackbar("Suxx", "payment not succ").show();
+      // Get.snackbar("Suxx", "payment not succ").show();
       return true;
     }
     else{
