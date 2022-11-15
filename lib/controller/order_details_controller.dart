@@ -29,26 +29,24 @@ class OrderDetailsController extends GetxController{
   
   refreshData(){
     loading.value = true;
-    Api.getOrderInfo(order!.id).then((orderRes) {
-      if(orderRes != null){
-        order = orderRes;
-        if(order!.shippingRequestCount > 0){
+    Api.getOrderInfo(order!.id).then((order) {
+      if(order != null){
+
+        order = order;
+        if(order.shippingRequestCount > 0){
           shippingSucc.value = true;
           shippingAnimationSucc.value = true;
         }
-        totalForPayment = order!.price.toDouble() - order!.paid_amount.toDouble();
-        if(order!.shippingState != 0 ){
-          totalForPayment += order!.shippingPrice;
+        totalForPayment = order.price.toDouble() - order.paid_amount.toDouble();
+        if(order.shippingState != 0 ){
+          totalForPayment += order.shippingPrice;
         }
-        if(order!.state == 0 ){
-          totalForPayment = totalForPayment / 2 ;
+        if(order.state == 0 ){
+          totalForPayment = totalForPayment / 4 ;
         }
-        fake.value = ! fake.value;
-        print('check');
-        print(order!.shippingAddress);
         loading.value = false;
       }else{
-        refreshData();
+        Get.back();
       }
     });
   }
