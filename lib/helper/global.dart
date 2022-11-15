@@ -83,6 +83,7 @@ class Global {
     // IntroController introController = Get.find();
     // Get.delete<IntroController>();
     Get.to(()=>SignIn());
+    Global.user = null;
   }
 
   static Future<bool> getUserInformation() async {

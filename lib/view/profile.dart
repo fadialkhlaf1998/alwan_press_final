@@ -334,13 +334,7 @@ class _ProfileState extends State<Profile> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              (Global.user!.image=="")?
-              CircleAvatar(
-                child: Icon(Icons.person,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,size: MediaQuery.of(context).size.width * 0.4/2,),
-                backgroundColor: Colors.grey,
-                radius: MediaQuery.of(context).size.width * 0.4/3,
-              )
-                  :Stack(
+              Stack(
                     children: [
                       GestureDetector(
 
@@ -351,7 +345,13 @@ class _ProfileState extends State<Profile> {
                               onTap: (){
                                 profileController.showChoose.value = true;
                               },
-                              child: CircleAvatar(
+                              child: (Global.user!.image=="")?
+                              CircleAvatar(
+                                child: Icon(Icons.person,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,size: MediaQuery.of(context).size.width * 0.4/2,),
+                                backgroundColor: Colors.grey,
+                                radius: MediaQuery.of(context).size.width * 0.4/3,
+                              )
+                                  :CircleAvatar(
                                 backgroundColor: Colors.grey,
                                 backgroundImage: NetworkImage(Global.user!.image),
                                 radius: MediaQuery.of(context).size.width * 0.4/3,
