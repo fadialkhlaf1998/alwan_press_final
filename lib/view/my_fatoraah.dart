@@ -1,6 +1,7 @@
 import 'package:alwan_press/controller/order_details_controller.dart';
 import 'package:alwan_press/helper/api.dart';
 import 'package:alwan_press/helper/app.dart';
+import 'package:alwan_press/helper/global.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -55,6 +56,7 @@ class _MyHomePageState extends State<MyFatoraahPage> {
         _response =
         "Missing API Token Key.. You can get it from here: https://myfatoorah.readme.io/docs/test-token";
       });
+
       return;
     }
 
@@ -123,7 +125,7 @@ class _MyHomePageState extends State<MyFatoraahPage> {
    */
   void initiatePayment() {
     var request = new MFInitiatePaymentRequest(
-        double.parse(amount), MFCurrencyISO.KUWAIT_KWD);
+        double.parse(amount), MFCurrencyISO.UAE_AED);
 
     MFSDK.initiatePayment(
         request,
@@ -157,6 +159,8 @@ class _MyHomePageState extends State<MyFatoraahPage> {
     var succ  = await Api.pay(order_id, amount);
     if(succ){
       Get.back();
+      // Get.back();
+      Get.snackbar("Suxx", "payment not succ").show();
       return true;
     }
     else{
@@ -180,19 +184,23 @@ class _MyHomePageState extends State<MyFatoraahPage> {
 
         MFAPILanguage.EN,
            onPaymentResponse:  (String invoiceId, MFResult<MFPaymentStatusResponse> result) => {
+
+
           if (result.isSuccess())
             {
               //todo sucss msg
               setState(() {
                 OrderDetailsController or = Get.find();
                 addToDashboard(or.order!.id,double.parse(amount));
+                print('*****************SUCC****************');
               })
 
             }
           else
             {
               setState(() {
-
+                print('*****************fail****************');
+                // Get.snackbar("Payment Fail", "We Are Sorry Your Payment Fail").show();
               })
             }
         });
@@ -232,6 +240,8 @@ class _MyHomePageState extends State<MyFatoraahPage> {
                 print(invoiceId);
                 print(result.response!.toJson());
                 _response = result.response!.toJson().toString();
+                OrderDetailsController or = Get.find();
+                addToDashboard(or.order!.id,double.parse(amount));
               })
             }
           else
@@ -404,6 +414,7 @@ class _MyHomePageState extends State<MyFatoraahPage> {
   }
 
   void pay() {
+    print('');
     if (selectedPaymentMethodIndex == -1) {
       Fluttertoast.showToast(
           msg: "Please select payment method first",

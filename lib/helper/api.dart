@@ -310,7 +310,7 @@ class Api {
     var headers = {
       'Content-Type': 'application/json'
     };
-    var request = http.Request('PUT', Uri.parse('http://localhost:3000/api/pay'));
+    var request = http.Request('PUT', Uri.parse(url+'/api/pay'));
     request.body = json.encode({
       "id": order_id,
       "amount": amount,
