@@ -33,7 +33,7 @@ class OrderDetails extends StatelessWidget {
           orderDetailsController.shippingAnimationSucc.value = true;
         }
         orderDetailsController.totalForPayment = order.price.toDouble() - order.paid_amount.toDouble();
-        if(order.shippingState != 0  && order.state != 0 ){
+        if(order.shippingState != 0  && order.state != 0 && order.shippingRequestCount > 0){
           orderDetailsController.totalForPayment += order.shippingPrice;
         }
         print(orderDetailsController.totalForPayment);
@@ -403,7 +403,7 @@ class OrderDetails extends StatelessWidget {
                                             style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 10,fontWeight: FontWeight.bold),)
                                         ],
                                       ),
-                                      Text( orderDetailsController.order!.shippingPrice>0&&orderDetailsController.order!.shippingState==1?App_Localization.of(context).translate("aed")+" "+
+                                      Text( orderDetailsController.order!.shippingPrice>0&&orderDetailsController.order!.shippingState==1&&orderDetailsController.order!.shippingRequestCount>0?App_Localization.of(context).translate("aed")+" "+
                                           (orderDetailsController.order!.shippingPrice+orderDetailsController.order!.price).toString():
                                       App_Localization.of(context).translate("aed")+" "+orderDetailsController.order!.price.toString(),
                                         style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 14),)
