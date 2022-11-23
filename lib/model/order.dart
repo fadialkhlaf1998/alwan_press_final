@@ -34,6 +34,8 @@ class Order {
     required this.shippingRequestCount,
     required this.shippingAddress,
     required this.ready,
+    required this.vat,
+    required this.hold,
   });
 
   int id;
@@ -45,14 +47,16 @@ class Order {
   int state;
   String title;
   String description;
-  int price;
+  double price;
   int shippingState;
-  int shippingPrice;
+  double shippingPrice;
   String invoice;
   String orderId;
   int pickUp;
   DateTime created_at;
   double paid_amount;
+  double vat;
+  int hold;
   String customer;
   ShippingAddress? shippingAddress;
 
@@ -68,11 +72,14 @@ class Order {
     state: json["state"],
     title: json["title"],
     description: json["description"],
-    price: json["price"],
+    price: double.parse(json["price"].toString()),
     shippingState: json["shipping_state"],
-    shippingPrice: json["shipping_price"],
+    shippingPrice: double.parse(json["shipping_price"].toString()),
     invoice: json["invoice"],
-    orderId: json["order_id"],
+    // orderId: json["order_id"],
+    orderId: json["quick_book_id"],
+    hold: json["hold"],
+    vat: double.parse(json["vat"].toString()),
     pickUp: json["pick_up"],
     shippingRequestCount: json["shipping_request_count"],
     created_at: DateTime.parse(json["created_at"]),

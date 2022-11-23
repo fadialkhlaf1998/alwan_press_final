@@ -77,15 +77,18 @@ class OrderPage extends StatelessWidget {
           duration: const Duration(milliseconds: 600),
           child:  orderController.loading.value
               ? const Center(child: CircularProgressIndicator(),)
-              :ListView.builder(
-            padding: EdgeInsets.only(bottom: 20),
+              :Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: ListView.builder(
+            padding: EdgeInsets.only(bottom: 0),
             itemCount: orderController.myOrders.length,
             itemBuilder: (context, index){
-              // var dateTime = orderController.calculateTime(index);
-              // orderController.setOrderState(index);
-              return _orderItem(context,index);
+                // var dateTime = orderController.calculateTime(index);
+                // orderController.setOrderState(index);
+                return _orderItem(context,index);
             },
           ),
+              ),
         ),
       )
     );
@@ -141,12 +144,19 @@ class OrderPage extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Text(App_Localization.of(context).translate("ready_on"),
+                            orderController.myOrders[index].state == 0
+                                ? Text(orderController.myOrders[index].getStateManual(context,0),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),)
+                                :orderController.myOrders[index].state == 2
+                              ?Text(orderController.myOrders[index].getStateManual(context,2),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),)
+                            :Text(App_Localization.of(context).translate("ready_on"),
                               style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13,fontWeight: FontWeight.bold),
                             ),
-                            Text(" "+orderController.convertTime(orderController.myOrders[index].deadline.toString()),
-                              style: TextStyle(color: Colors.green,fontSize: 13,fontWeight: FontWeight.bold),
-                            ),
+
+                            orderController.myOrders[index].state == 0 || orderController.myOrders[index].state == 2
+                                ?Center()
+                                : Text(" "+orderController.convertTime(orderController.myOrders[index].deadline.toString()),
+                                  style: TextStyle(color: Colors.green,fontSize: 13,fontWeight: FontWeight.bold),
+                                ),
                           ],
                         ),
                         GestureDetector(

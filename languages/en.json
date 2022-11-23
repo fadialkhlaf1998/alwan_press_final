@@ -131,5 +131,7 @@
   "***---**": "*******************************--------------***********************",
   "u_req_under_process_title": "Your request is under processing",
   "u_req_under_process_desc": "We appreciate your patience, we will send your statement report shortly.",
-  "reach_us": "Reach Us"
+  "reach_us": "Reach Us",
+  "vat": "VAT",
+  "hold": "Hold"
 }
