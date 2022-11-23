@@ -144,7 +144,9 @@ class OrderPage extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            orderController.myOrders[index].state == 0
+                            orderController.myOrders[index].hold == 1
+                                ? Text(App_Localization.of(context).translate("hold"),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),)
+                            :orderController.myOrders[index].state == 0
                                 ? Text(orderController.myOrders[index].getStateManual(context,0),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),)
                                 :orderController.myOrders[index].state == 2
                               ?Text(orderController.myOrders[index].getStateManual(context,2),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),)
@@ -152,7 +154,9 @@ class OrderPage extends StatelessWidget {
                               style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13,fontWeight: FontWeight.bold),
                             ),
 
-                            orderController.myOrders[index].state == 0 || orderController.myOrders[index].state == 2
+                            orderController.myOrders[index].state == 0
+                                || orderController.myOrders[index].state == 2
+                                || orderController.myOrders[index].hold == 1
                                 ?Center()
                                 : Text(" "+orderController.convertTime(orderController.myOrders[index].deadline.toString()),
                                   style: TextStyle(color: Colors.green,fontSize: 13,fontWeight: FontWeight.bold),
