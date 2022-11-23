@@ -18,7 +18,7 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class IntroController extends GetxController{
-
+  RxBool logoMove = false.obs;
   RxList<Category> categoriesList = <Category>[].obs;
   RxList<SubCategories> tempCategoriesList = <SubCategories>[].obs;
   RxList<CustomerService> customerServiceList = <CustomerService>[].obs;
@@ -39,7 +39,12 @@ class IntroController extends GetxController{
     await fetchUserToken();
   }
 
-
+  move(){
+    logoMove.value = true;
+    Future.delayed(const Duration(milliseconds: 2300)).then((value){
+      logoMove.value = false;
+    });
+  }
 
   getData()async{
     /// todo

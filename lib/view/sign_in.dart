@@ -16,6 +16,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 
 class SignIn extends StatefulWidget {
@@ -76,6 +77,7 @@ class _SignInState extends State<SignIn> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        _logo(context),
                         _inputTextField(context),
                         AnimatedSwitcher(
                           duration: const Duration(milliseconds: 600),
@@ -94,6 +96,49 @@ class _SignInState extends State<SignIn> {
         ),
       );
     });
+  }
+
+  _logo(context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.fastOutSlowIn,
+          width: introController.logoMove.value
+              ? MediaQuery.of(context).size.width * 0.3
+              : MediaQuery.of(context).size.width * 0.12,
+          child: introController.logoMove.value
+              ? SizedBox(
+              height: MediaQuery.of(context).size.width * 0.12,
+              child: Lottie.asset('assets/icons/ICONS.json',
+                  fit: BoxFit.cover))
+              : GestureDetector(
+            onTap: () {
+              introController.move();
+            },
+            child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.12,
+                height: MediaQuery.of(context).size.width * 0.12,
+                child: Image.asset(
+                  'assets/icons/Logo-Header.png',
+                  fit: BoxFit.cover,
+                )),
+          ),
+        ),
+        const SizedBox(width: 7),
+        Container(
+          height: MediaQuery.of(context).size.width * 0.1,
+          width: MediaQuery.of(context).size.width * 0.28,
+          decoration: BoxDecoration(
+            // color: Colors.red,
+              image: DecorationImage(
+                  fit: BoxFit.contain,
+                  image: MyTheme.isDarkTheme.value ? const AssetImage('assets/icons/logo_text.png') : const AssetImage('assets/icons/logo_text_black.png')
+              )),
+        )
+      ],
+    );
   }
 
   _titleAnimation(context){
