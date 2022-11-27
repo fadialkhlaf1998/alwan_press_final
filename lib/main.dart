@@ -4,6 +4,7 @@ import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/helper/store.dart';
 import 'package:alwan_press/view/home.dart';
 import 'package:alwan_press/view/intro.dart';
+import 'package:alwan_press/view/order_details.dart';
 import 'package:alwan_press/view/success.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -103,6 +104,7 @@ class _MyAppState extends State<MyApp> {
     });
     super.initState();
     FirebaseMessaging.instance.getToken().then((value) {
+      print('Token Here');
       print(value);
       setState(() {
         if(value!=null){
@@ -111,9 +113,13 @@ class _MyAppState extends State<MyApp> {
 
       });
     });
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
     FirebaseMessaging.onMessage.listen((RemoteMessage message){
+
       RemoteNotification notification = message.notification!;
       AndroidNotification androd = message.notification!.android!;
+
+
       if(notification != null && androd !=null){
         flutterLocalNotificationsPlugin.show(
             notification.hashCode,
@@ -133,6 +139,17 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void _handleMessage(RemoteMessage message) {
+    print(message.data);
+    try{
+      if (message.data!=null&&message.data['page'].toString() == 'order') {
+        Get.to(()=>OrderDetails(int.parse(message.data['id'])));
+      }
+    }catch(e){
+
+    }
+  }
+
   void setDark(){
     setState(() {
       myTheme.value.myTheme;
@@ -141,8 +158,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    print( MyTheme.isDarkTheme.value);
-    print( "MyTheme.isDarkTheme.value");
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF300A2A):Colors.white
     ));
