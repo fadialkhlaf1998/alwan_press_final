@@ -1,4 +1,5 @@
 import 'package:alwan_press/app_localization.dart';
+import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/helper/store.dart';
@@ -45,6 +46,7 @@ Future<void> main() async {
     sound: true,
   );
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackhroundHadler);
+  // FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
 
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
@@ -113,7 +115,7 @@ class _MyAppState extends State<MyApp> {
 
       });
     });
-    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+    // FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
     FirebaseMessaging.onMessage.listen((RemoteMessage message){
 
       RemoteNotification notification = message.notification!;
@@ -139,16 +141,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void _handleMessage(RemoteMessage message) {
-    print(message.data);
-    try{
-      if (message.data!=null&&message.data['page'].toString() == 'order') {
-        Get.to(()=>OrderDetails(int.parse(message.data['id'])));
-      }
-    }catch(e){
 
-    }
-  }
 
   void setDark(){
     setState(() {
