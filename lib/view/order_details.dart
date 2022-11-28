@@ -223,142 +223,186 @@ class OrderDetails extends StatelessWidget {
                             Stack(
                               children: [
                                 Container(
-                                  width: MediaQuery.of(context).size.width*0.95,
-                                  height: 135,
-                                  decoration: BoxDecoration(
-                                    color: MyTheme.isDarkTheme.value ?
-                                    Colors.white.withOpacity(0.05) :
-                                    Colors.white,
-                                    borderRadius: BorderRadius.circular(5),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: MyTheme.isDarkTheme.value ?
-                                        Colors.transparent :
-                                        Colors.grey.withOpacity(0.5),
-                                        blurRadius: 3,
-                                        offset: const Offset(1, 1),
-                                      ),
-                                    ],
-                                  ),
+                                  width: MediaQuery.of(context).size.width,
                                   child: Center(
                                     child: Container(
-                                      width: MediaQuery.of(context).size.width*0.9,
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                            GestureDetector(
-                                              onTap:(){
-                                                if(statement_loading.isFalse){
-                                                  if(Global.user != null){
-                                                    // orderController.loadPdf(Global.user!.financialState);
-
-                                                    if(orderDetailsController.order!.invoice.endsWith("pdf")){
-                                                      // profileController.loading.value = true;
-                                                      statement_loading.value = true;
-                                                      orderController.loadPdf(orderDetailsController.order!.invoice).then((value){
-                                                        var pdf = value.path;
-                                                        // profileController.loading.value = false;
-                                                        statement_loading.value = false;
-                                                        Get.to(()=>PdfViewerPage(pdf));
-                                                      });
-                                                    }else{
-                                                      noStatementDialog(context);
-                                                    }
-                                                    // profileController.loadPdf();
-                                                  }else{
-                                                    Get.to(()=>SignIn());
-                                                  }
-                                                }
-                                              },
-                                              child: statement_loading.value?
-                                                    Container(
-                                                      height: 32,
-                                                      // color: Colors.red,
-                                                      child: Center(
-                                                        child: Container(
-                                                          width: MediaQuery.of(context).size.width*0.25,
-                                                          height: 2,
-                                                          child: Center(
-                                                            child: LinearProgressIndicator(),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    )
-                                                  :Row(
-                                                children: [
-                                                  // Icon(Icons.price_change_outlined,color:MyTheme.isDarkTheme.value ? Colors.white: Colors.black,size: 22),
-                                                  SvgPicture.asset("assets/icons/tax_invoice.svg",width: 22,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
-                                                  const SizedBox(width: 7,),
-                                                  Text(App_Localization.of(context).translate("tax_invoices"),
-                                                    style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 2,),),
-                                                ],
-                                              ),
-                                            ),
-                                            GestureDetector(
-                                              onTap: (){
-                                                orderDetailsController.reorder(context);
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  SvgPicture.asset("assets/icons/reorder.svg",width: 16,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
-                                                  const SizedBox(width: 7,),
-                                                  Container(
-                                                    child: Center(
-                                                      child: Text(App_Localization.of(context).translate('reorder')),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            )
-                                            ],
+                                      width: MediaQuery.of(context).size.width*0.95,
+                                      height: 135,
+                                      decoration: BoxDecoration(
+                                        color: MyTheme.isDarkTheme.value ?
+                                        Colors.white.withOpacity(0.05) :
+                                        Colors.white,
+                                        borderRadius: BorderRadius.circular(5),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: MyTheme.isDarkTheme.value ?
+                                            Colors.transparent :
+                                            Colors.grey.withOpacity(0.5),
+                                            blurRadius: 3,
+                                            offset: const Offset(1, 1),
                                           ),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              stateCard(0,context, 'state_0'),
-                                              stateCard(1,context, 'state_1'),
-                                              stateCard(2,context, 'state_2'),
-                                              stateCard(3,context, 'state_3'),
-                                              stateCard(4,context, 'state_4'),
-                                            ],
-                                          ),
-                                          Text(orderDetailsController.order!.getState(context),
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,fontWeight: FontWeight.bold),),
-
                                         ],
+                                      ),
+                                      child: Center(
+                                        child: Container(
+                                          width: MediaQuery.of(context).size.width*0.9,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                GestureDetector(
+                                                  onTap:(){
+                                                    if(statement_loading.isFalse){
+                                                      if(Global.user != null){
+                                                        // orderController.loadPdf(Global.user!.financialState);
+
+                                                        if(orderDetailsController.order!.invoice.endsWith("pdf")){
+                                                          // profileController.loading.value = true;
+                                                          statement_loading.value = true;
+                                                          orderController.loadPdf(orderDetailsController.order!.invoice).then((value){
+                                                            var pdf = value.path;
+                                                            // profileController.loading.value = false;
+                                                            statement_loading.value = false;
+                                                            Get.to(()=>PdfViewerPage(pdf));
+                                                          });
+                                                        }else{
+                                                          noStatementDialog(context);
+                                                        }
+                                                        // profileController.loadPdf();
+                                                      }else{
+                                                        Get.to(()=>SignIn());
+                                                      }
+                                                    }
+                                                  },
+                                                  child: statement_loading.value?
+                                                        Container(
+                                                          height: 32,
+                                                          // color: Colors.red,
+                                                          child: Center(
+                                                            child: Container(
+                                                              width: MediaQuery.of(context).size.width*0.25,
+                                                              height: 2,
+                                                              child: Center(
+                                                                child: LinearProgressIndicator(),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      :Row(
+                                                    children: [
+                                                      // Icon(Icons.price_change_outlined,color:MyTheme.isDarkTheme.value ? Colors.white: Colors.black,size: 22),
+                                                      SvgPicture.asset("assets/icons/tax_invoice.svg",width: 22,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
+                                                      const SizedBox(width: 7,),
+                                                      Text(App_Localization.of(context).translate("tax_invoices"),
+                                                        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 2,),),
+                                                    ],
+                                                  ),
+                                                ),
+                                                GestureDetector(
+                                                  onTap: (){
+                                                    orderDetailsController.reorder(context);
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      SvgPicture.asset("assets/icons/reorder.svg",width: 16,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
+                                                      const SizedBox(width: 7,),
+                                                      Container(
+                                                        child: Center(
+                                                          child: Text(App_Localization.of(context).translate('reorder')),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  stateCard(0,context, 'state_0'),
+                                                  stateCard(1,context, 'state_1'),
+                                                  stateCard(2,context, 'state_2'),
+                                                  stateCard(3,context, 'state_3'),
+                                                  stateCard(4,context, 'state_4'),
+                                                ],
+                                              ),
+
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                                 orderDetailsController.order!.hold == 1
                                     ?Container(
+                                  width: MediaQuery.of(context).size.width,
+                                      child: Center(
+                                        child: Container(
                                   width: MediaQuery.of(context).size.width*0.95,
                                   height: 135,
                                   decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/image/blur_background.png"),
-                                      fit: BoxFit.cover
-                                    ),
-                                    color: MyTheme.isDarkTheme.value?Colors.black.withAlpha(150):Colors.black.withAlpha(50),
-                                    borderRadius: BorderRadius.circular(5),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: MyTheme.isDarkTheme.value ?
-                                        Colors.transparent :
-                                        Colors.grey.withOpacity(0.5),
-                                        blurRadius: 3,
-                                        offset: const Offset(1, 1),
-                                      ),
-                                    ],
+                                        image: DecorationImage(
+                                          image: AssetImage("assets/image/blur_background.png"),
+                                          fit: BoxFit.cover
+                                        ),
+                                        color: MyTheme.isDarkTheme.value?Colors.black.withAlpha(150):Colors.black.withAlpha(50),
+                                        borderRadius: BorderRadius.circular(5),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: MyTheme.isDarkTheme.value ?
+                                            Colors.transparent :
+                                            Colors.grey.withOpacity(0.5),
+                                            blurRadius: 3,
+                                            offset: const Offset(1, 1),
+                                          ),
+                                        ],
                                   ),
                                 child: Center(child: Text(App_Localization.of(context).translate("hold"),style: TextStyle( color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),)),
-                                )
+                                ),
+                                      ),
+                                    )
                                     :Center()
                               ],
+                            ),
+                            const SizedBox(height: 20,),
+                            Container(
+                              width: MediaQuery.of(context).size.width*0.95,
+                              height: 135,
+                              decoration: BoxDecoration(
+                                color: MyTheme.isDarkTheme.value ?
+                                Colors.white.withOpacity(0.05) :
+                                Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: MyTheme.isDarkTheme.value ?
+                                    Colors.transparent :
+                                    Colors.grey.withOpacity(0.5),
+                                    blurRadius: 3,
+                                    offset: const Offset(1, 1),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(orderDetailsController.order!.getState(context),
+                                    style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,fontWeight: FontWeight.bold),),
+                                  
+                                  Container(
+                                    height: 100,
+                                    width: 100,
+                                    child: Center(
+                                      child: _getAnimation(orderDetailsController.order!.state,orderDetailsController.order!.hold),
+                                    ),
+                                  )
+
+                                ],
+                              ),
                             ),
                             const SizedBox(height: 20,),
                             Container(
@@ -489,6 +533,23 @@ class OrderDetails extends StatelessWidget {
         ),
       );
     });
+  }
+
+  _getAnimation(int state, int hold){
+    if(hold == 1){
+      return Lottie.asset("assets/animation/6.json");
+    }else if (state == 0){
+      return Lottie.asset("assets/animation/1.json");
+    }else if (state == 1){
+      return Lottie.asset("assets/animation/2.json");
+    }else if (state == 2){
+      return Lottie.asset("assets/animation/3.json");
+    }else if (state == 3){
+      return Lottie.asset("assets/animation/4.json");
+    }else{
+      return Lottie.asset("assets/animation/5.json");
+    }
+
   }
   _header(context){
     return Container(
