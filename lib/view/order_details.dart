@@ -73,10 +73,10 @@ class OrderDetails extends StatelessWidget {
                 ),
               )
                   :RefreshIndicator(
-                key: orderDetailsController.refreshIndicatorKey,
-                onRefresh: () async {
-                  return await orderDetailsController.refreshIndicater();
-                },
+                  key: orderDetailsController.refreshIndicatorKey,
+                  onRefresh: () async {
+                    return await orderDetailsController.refreshIndicater();
+                  },
                 
                     child: SingleChildScrollView(
                       physics: const AlwaysScrollableScrollPhysics(),
@@ -128,7 +128,7 @@ class OrderDetails extends StatelessWidget {
                                     ),
                                     SizedBox(height: 15,),
                                     orderDetailsController.fake.value ?Center():Center(),
-                                    Container(
+                                    orderDetailsController.order!.state != 3?Center():Container(
                                       width: MediaQuery.of(context).size.width*0.9,
                                       height: 94,
                                       child: orderDetailsController.order!.shippingAddress!=null?
@@ -152,7 +152,7 @@ class OrderDetails extends StatelessWidget {
                                         ],
                                       )
                                           : orderDetailsController.shippingAnimationSucc.value?
-                                      Column(
+                                             Column(
                                         children: [
                                           Container(
                                             height: 50,
@@ -167,6 +167,7 @@ class OrderDetails extends StatelessWidget {
                                             style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),),
                                         ],
                                       ):
+
                                           Column(
                                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                             children: [
@@ -197,8 +198,8 @@ class OrderDetails extends StatelessWidget {
                                             ],
                                           ),
                                     ),
-                                    SizedBox(height: 15,),
-                                    Container(
+                                    orderDetailsController.order!.state != 3?Center():SizedBox(height: 15,),
+                                    orderDetailsController.order!.state != 3?Center():Container(
                                         height: 1,
                                         width: MediaQuery.of(context).size.width*0.9,
                                         color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)
@@ -217,6 +218,42 @@ class OrderDetails extends StatelessWidget {
                                     SizedBox(height: 15,),
                                   ],
                                 ),
+                              ),
+                            ),
+                            const SizedBox(height: 20,),
+                            Container(
+                              width: MediaQuery.of(context).size.width*0.95,
+                              height: 135,
+                              decoration: BoxDecoration(
+                                color: MyTheme.isDarkTheme.value ?
+                                Colors.white.withOpacity(0.05) :
+                                Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: MyTheme.isDarkTheme.value ?
+                                    Colors.transparent :
+                                    Colors.grey.withOpacity(0.5),
+                                    blurRadius: 3,
+                                    offset: const Offset(1, 1),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(orderDetailsController.order!.getState(context),
+                                    style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,fontWeight: FontWeight.bold),),
+
+                                  Container(
+                                    height: 100,
+                                    width: 100,
+                                    child: Center(
+                                      child: _getAnimation(orderDetailsController.order!.state,orderDetailsController.order!.hold),
+                                    ),
+                                  )
+
+                                ],
                               ),
                             ),
                             const SizedBox(height: 20,),
@@ -368,42 +405,7 @@ class OrderDetails extends StatelessWidget {
                                     :Center()
                               ],
                             ),
-                            const SizedBox(height: 20,),
-                            Container(
-                              width: MediaQuery.of(context).size.width*0.95,
-                              height: 135,
-                              decoration: BoxDecoration(
-                                color: MyTheme.isDarkTheme.value ?
-                                Colors.white.withOpacity(0.05) :
-                                Colors.white,
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: MyTheme.isDarkTheme.value ?
-                                    Colors.transparent :
-                                    Colors.grey.withOpacity(0.5),
-                                    blurRadius: 3,
-                                    offset: const Offset(1, 1),
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(orderDetailsController.order!.getState(context),
-                                    style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,fontWeight: FontWeight.bold),),
-                                  
-                                  Container(
-                                    height: 100,
-                                    width: 100,
-                                    child: Center(
-                                      child: _getAnimation(orderDetailsController.order!.state,orderDetailsController.order!.hold),
-                                    ),
-                                  )
 
-                                ],
-                              ),
-                            ),
                             const SizedBox(height: 20,),
                             Container(
                               width: MediaQuery.of(context).size.width*0.95,

@@ -71,13 +71,14 @@ class _SignInState extends State<SignIn> {
             SingleChildScrollView(
               child: Column(
                 children: [
+                  SizedBox(height: 20),
                   _titleAnimation(context),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.7,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _logo(context),
+
                         _inputTextField(context),
                         AnimatedSwitcher(
                           duration: const Duration(milliseconds: 600),
@@ -142,22 +143,33 @@ class _SignInState extends State<SignIn> {
   }
 
   _titleAnimation(context){
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.3,
-      width: MediaQuery.of(context).size.width,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        controller: scrollController,
-        child: Container(
-            width: MediaQuery.of(context).size.width*3,
-            height: MediaQuery.of(context).size.height * 0.3,
-            child: FittedBox(
-              fit: BoxFit.cover,
-              child: Text('Welcome',style: TextStyle(fontWeight: FontWeight.bold,color: MyTheme.isDarkTheme.value?App.textColor().withOpacity(0.05):App.textColor().withOpacity(0.1))
-              ),
-            )
+    return Stack(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.3,
+          width: MediaQuery.of(context).size.width,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            controller: scrollController,
+            child: Container(
+                width: MediaQuery.of(context).size.width*3,
+                height: MediaQuery.of(context).size.height * 0.3,
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: Text('Welcome',style: TextStyle(fontWeight: FontWeight.bold,color: MyTheme.isDarkTheme.value?App.textColor().withOpacity(0.05):App.textColor().withOpacity(0.1))
+                  ),
+                )
+            ),
+          ),
         ),
-      ),
+        Container(
+          height: MediaQuery.of(context).size.height * 0.3,
+          width: MediaQuery.of(context).size.width,
+          child: Center(
+            child:  _logo(context),
+          ),
+        )
+      ],
     );
   }
 
