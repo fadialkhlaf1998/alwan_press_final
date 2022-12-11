@@ -36,6 +36,7 @@ class _ProfileState extends State<Profile> {
       profileController.name.text = Global.user!.name;
       profileController.email.text = Global.user!.email;
       profileController.phone.text = Global.user!.phone.length>6&&Global.user!.phone.contains("+971")?Global.user!.phone.split("+971")[1]:"";
+      profileController.landLine.text = Global.user!.land_line.length>6&&Global.user!.land_line.contains("+971")?Global.user!.land_line.split("+971")[1]:"";
     }
   }
   IntroController introController = Get.find();
@@ -170,6 +171,8 @@ class _ProfileState extends State<Profile> {
         _emailTextField(context,profileController.email,"email"),
         SizedBox(height: 10,),
         _phone(context),
+        SizedBox(height: 10,),
+        _landLine(context),
 
       ],
     ));
@@ -268,6 +271,39 @@ class _ProfileState extends State<Profile> {
               borderSide:  BorderSide(width: 1, color:  profileController.validate.value&&profileController.phone.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
             ),
             label: Text(App_Localization.of(context).translate("phone"),
+                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black))
+        ),
+      ),
+    );
+  }
+  _landLine(context){
+    return  Container(
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: 40,
+      color: Colors.transparent,
+      child: TextField(
+        onChanged: (q){
+          profileController.onChange();
+        },
+        keyboardType: TextInputType.phone,
+        controller: profileController.landLine,
+        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,height: 1),
+        maxLength: 9,
+        decoration: InputDecoration(
+            counterText: '',
+            prefixText: '+971 ',
+            prefixStyle:  TextStyle(
+                color: Theme.of(context).dividerColor,fontSize: 12,height: 1
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(width: 1, color:  MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide:  BorderSide(width: 1, color:  MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            ),
+            label: Text(App_Localization.of(context).translate("land_line"),
                 style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black))
         ),
       ),
@@ -467,9 +503,155 @@ class _ProfileState extends State<Profile> {
   _optionBar(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.1,
-      child: Row(
+      child: Global.user!.type == 0?Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Expanded(
+            child: GestureDetector(
+                onTap: () async {
+                  if(Global.user!=null){
+                    if(Global.user!.financialState.endsWith("pdf")){
+                      profileController.loading.value = true;
+                      profileController.loadPdf().then((value){
+                        var pdf = value.path;
+                        profileController.loading.value = false;
+                        Get.to(()=>PdfViewerPage(pdf));
+                      });
+                    }else{
+                      noStatementDialog();
+                      profileController.loading.value = false;
+                    }
+                  }else{
+                    Get.to(()=>SignIn());
+                  }
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: 25,
+                        height: 25,
+                        child: SvgPicture.asset("assets/icons/invoice.svg",
+                            color: MyTheme.isDarkTheme.value ? Colors.white :
+                            Colors.black
+                        ),
+                      ),
+                      Center(
+                          child: Text(App_Localization.of(context).translate("my_statement"),
+                              style: TextStyle(
+                                  color: MyTheme.isDarkTheme.value ? Colors.white :
+                                  Colors.black,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold
+                              )
+                          )
+                      )
+                    ],
+                  ),
+                )
+            ),
+          ),
+          VerticalDivider(
+            color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) :
+            Colors.black.withOpacity(0.5),
+            width: 1,
+            thickness: 1,
+          ),
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                Get.to(()=>Addresses_2(-1));
+              },
+              child: Container(
+                color: Colors.transparent,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 30,
+                      height: 30,
+                      child: SvgPicture.asset("assets/icons/address.svg",
+                          color: MyTheme.isDarkTheme.value ? Colors.white :
+                          Colors.black
+                      ),
+                    ),
+                    Center(child: Text(App_Localization.of(context).translate("my_address"),
+                        style: TextStyle(
+                            color: MyTheme.isDarkTheme.value ? Colors.white :
+                            Colors.black,
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold
+                        )
+                    )
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      )
+      :Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: GestureDetector(
+                onTap: () async {
+                  if(Global.user!=null){
+                    if(Global.user!.trade_license.endsWith("pdf")){
+                      profileController.loading.value = true;
+                      profileController.loadPdfTradLicence().then((value){
+                        var pdf = value.path;
+                        profileController.loading.value = false;
+                        Get.to(()=>PdfViewerPage(pdf));
+                      });
+                    }else{
+                      noTradeLicense();
+                      profileController.loading.value = false;
+                    }
+                  }else{
+                    Get.to(()=>SignIn());
+                  }
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: 25,
+                        height: 25,
+                        child: Icon(Icons.library_books ,
+                            color: MyTheme.isDarkTheme.value ? Colors.white :
+                            Colors.black
+                        ),
+                      ),
+                      Center(
+                          child: Text(App_Localization.of(context).translate("trad_license"),
+                              style: TextStyle(
+                                  color: MyTheme.isDarkTheme.value ? Colors.white :
+                                  Colors.black,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold
+                              )
+                          )
+                      )
+                    ],
+                  ),
+                )
+            ),
+          ),
+          VerticalDivider(
+            color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) :
+            Colors.black.withOpacity(0.5),
+            width: 1,
+            thickness: 1,
+          ),
           Expanded(
             child: GestureDetector(
                 onTap: () async {
@@ -966,19 +1148,38 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
-
   noStatementDialog(){
     return  showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(App_Localization.of(context).translate('no_statement')),
         titleTextStyle: const TextStyle(
+            fontSize: 16,
+            color: Colors.black,
+            fontWeight: FontWeight.bold
+        ),
+        content: Text(
+          App_Localization.of(context).translate('request_last_statement'),
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
+  }
+  noTradeLicense(){
+    return  showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(App_Localization.of(context).translate('trad_license')),
+        titleTextStyle: const TextStyle(
           fontSize: 16,
           color: Colors.black,
           fontWeight: FontWeight.bold
         ),
         content: Text(
-          App_Localization.of(context).translate('request_last_statement'),
+          App_Localization.of(context).translate('no_trad_license'),
           style: const TextStyle(
               fontSize: 14,
               color: Colors.black,

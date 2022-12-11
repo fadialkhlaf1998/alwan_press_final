@@ -78,16 +78,19 @@ class ProductDetails extends StatelessWidget {
             ),
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            Get.back();
-          },
-          child: Container(
-            margin: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top,left: 15,right: 15),
-            height: MediaQuery.of(context).size.height * 0.1,
-            child: const Icon(Icons.arrow_back_ios_outlined,color: Colors.white ,size: 25,),
+        Padding(
+          padding: const EdgeInsets.only(top: 15),
+          child: GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.15,
+              height: MediaQuery.of(context).size.width * 0.15,
+              child: Lottie.asset('assets/icons/Arrow.json'),
+            ),
           ),
-        ),
+        )
       ],
     );
   }

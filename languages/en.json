@@ -133,5 +133,8 @@
   "u_req_under_process_desc": "We appreciate your patience, we will send your statement report shortly.",
   "reach_us": "Reach Us",
   "vat": "VAT",
-  "hold": "Hold"
+  "hold": "Hold",
+  "trad_license": "Trade License",
+  "no_trad_license": "No Trade License Yet",
+  "land_line": "Land Line"
 }

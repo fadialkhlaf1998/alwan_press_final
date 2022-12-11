@@ -22,6 +22,10 @@ class User {
     required this.email,
     required this.image,
     required this.request_statment,
+    required this.type,
+    required this.land_line,
+    required this.trade_license,
+    required this.trn_number,
   });
 
   int id;
@@ -39,6 +43,10 @@ class User {
   String phone;
   String image;
   String email;
+  int type;
+  String land_line;
+  String trn_number;
+  String trade_license;
 
   factory User.fromJson(String str) => User.fromMap(json.decode(str));
 
@@ -59,6 +67,10 @@ class User {
     phone: json["phone"]==null?"":json["phone"],
     email: json["email"]==null?"":json["email"],
     image: json["image"]==null?"":json["image"],
+    type: json["type"]==null?0:json["type"],
+    trn_number: json["trn_number"]==null?"":json["trn_number"],
+    trade_license: json["trade_license"]==null?"":json["trade_license"],
+    land_line: json["land_line"]==null?"":json["land_line"],
     request_statment: json["request_statment"]==null?0:json["request_statment"],
   );
 

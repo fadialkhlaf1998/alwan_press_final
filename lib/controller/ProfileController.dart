@@ -35,14 +35,15 @@ class ProfileController extends GetxController {
   }
 
   var note = TextEditingController();
-    var name = TextEditingController();
-    var email = TextEditingController();
-    var phone = TextEditingController();
+  var name = TextEditingController();
+  var email = TextEditingController();
+  var phone = TextEditingController();
+  var landLine = TextEditingController();
 
     onChange(){
       if(name.text != Global.user!.name||
           email.text!=Global.user!.email||
-          ("+971"+phone.text!=Global.user!.phone)){
+          ("+971"+phone.text!=Global.user!.phone)||("+971"+landLine.text!=Global.user!.land_line)){
         dataUpdated.value = true;
         print(dataUpdated.value);
       }else{
@@ -94,7 +95,7 @@ class ProfileController extends GetxController {
             loading.value = true;
             try{
 
-              Api.updateCustomerData(email.text,phone.text,name.text, Global.user!.id).then((value) {
+              Api.updateCustomerData(email.text,phone.text,name.text,landLine.text, Global.user!.id).then((value) {
                 if(value){
                   Api.login(Global.user!.username, Global.user!.password).then((value) {
                     if(value.id != -1){
@@ -162,6 +163,22 @@ class ProfileController extends GetxController {
     Future<File> loadPdf() async {
       Completer<File> completer = Completer();
       final url = Global.user!.financialState;
+      print(url);
+      final filename = url.substring(url.lastIndexOf("/") + 1);
+      var request = await HttpClient().getUrl(Uri.parse(url));
+      var response = await request.close();
+      var bytes = await consolidateHttpClientResponseBytes(response);
+      var dir = await getApplicationDocumentsDirectory();
+      File file = File("${dir.path}/$filename");
+      await file.writeAsBytes(bytes, flush: true);
+      completer.complete(file);
+      return completer.future;
+
+    }
+
+    Future<File> loadPdfTradLicence() async {
+      Completer<File> completer = Completer();
+      final url = Global.user!.trade_license;
       print(url);
       final filename = url.substring(url.lastIndexOf("/") + 1);
       var request = await HttpClient().getUrl(Uri.parse(url));

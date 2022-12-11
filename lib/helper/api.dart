@@ -127,7 +127,7 @@ class Api {
       if(jsonData.length < 3){
         /// alert (username and password is wrong)
         return User(id: -1, quickBookId: "", name: "", token: "",
-            financialState: "", username: "", password:"", address1: "", address2: "", request_statment: 0,emirate: "", apartment: "", phone: "",image: "",email: "") ;
+            financialState: "", username: "", password:"", address1: "", address2: "", request_statment: 0,emirate: "", apartment: "", phone: "",image: "",email: "",land_line: "",trade_license: "",trn_number: "",type: 0) ;
       }else{
         jsonData = jsonData.replaceRange(0,1, '');
         jsonData = jsonData.replaceRange(jsonData.length -1 ,jsonData.length ,'');
@@ -146,7 +146,9 @@ class Api {
     } else {
       /// alert (something went wrong)
       return User(id: -2, quickBookId: "", name: "", token: "",
-          financialState: "", username: "", password:"", address1: "", address2: "", request_statment: 0,emirate: "", apartment: "", phone: "",email: "",image: "") ;
+          financialState: "", username: "", password:"", address1: "", address2: "",
+          request_statment: 0,emirate: "", apartment: "", phone: "",email: "",image: "",
+      type: 0,trn_number: "",trade_license: "",land_line: "") ;
     }
 
   }
@@ -378,7 +380,7 @@ class Api {
 
   }
 
-  static Future<bool> updateCustomerData(String email,String phone,String name,int customer_id)async{
+  static Future<bool> updateCustomerData(String email,String phone,String name,String land_line,int customer_id)async{
     var headers = {
       'Content-Type': 'application/json'
     };
@@ -387,6 +389,7 @@ class Api {
       "email": email,
       "phone": "+971"+phone,
       "name": name,
+      "land_line": land_line,
       "id": customer_id.toString()
     });
     request.headers.addAll(headers);
