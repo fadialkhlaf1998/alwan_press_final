@@ -547,7 +547,7 @@ class OrderDetails extends StatelessWidget {
     }else if (state == 2){
       return Lottie.asset("assets/animation/3.json");
     }else if (state == 3){
-      return Lottie.asset("assets/animation/4.json");
+      return Lottie.asset("assets/animation/4(2).json");
     }else{
       return Lottie.asset("assets/animation/5.json");
     }
