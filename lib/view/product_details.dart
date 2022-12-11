@@ -79,7 +79,7 @@ class ProductDetails extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 15),
+          padding: const EdgeInsets.only(top: 30),
           child: GestureDetector(
             onTap: () {
               Get.back();
