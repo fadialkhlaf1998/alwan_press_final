@@ -338,22 +338,22 @@ class OrderDetails extends StatelessWidget {
                                                     ],
                                                   ),
                                                 ),
-                                                GestureDetector(
-                                                  onTap: (){
-                                                    orderDetailsController.reorder(context);
-                                                  },
-                                                  child: Row(
-                                                    children: [
-                                                      SvgPicture.asset("assets/icons/reorder.svg",width: 16,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
-                                                      const SizedBox(width: 7,),
-                                                      Container(
-                                                        child: Center(
-                                                          child: Text(App_Localization.of(context).translate('reorder')),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
+                                                // GestureDetector(
+                                                //   onTap: (){
+                                                //     orderDetailsController.reorder(context);
+                                                //   },
+                                                //   child: Row(
+                                                //     children: [
+                                                //       SvgPicture.asset("assets/icons/reorder.svg",width: 16,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
+                                                //       const SizedBox(width: 7,),
+                                                //       Container(
+                                                //         child: Center(
+                                                //           child: Text(App_Localization.of(context).translate('reorder')),
+                                                //         ),
+                                                //       )
+                                                //     ],
+                                                //   ),
+                                                // )
                                                 ],
                                               ),
                                               Row(
