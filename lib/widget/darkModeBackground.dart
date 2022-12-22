@@ -10,10 +10,12 @@ class DarkModeBackground extends StatelessWidget {
     return MyTheme.isDarkTheme.value ? Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Lottie.asset(
-            'assets/animation/BG.json',
-          fit: BoxFit.cover
-        ),
+
+        color: Colors.black,
+        // child: Lottie.asset(
+        //     'assets/animation/BG.json',
+        //   fit: BoxFit.cover
+        // ),
     ) : const Text('');
   }
 }

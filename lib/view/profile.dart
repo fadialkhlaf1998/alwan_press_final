@@ -9,6 +9,7 @@ import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/address_2.dart';
 import 'package:alwan_press/view/contact_information.dart';
+import 'package:alwan_press/view/image_view.dart';
 import 'package:alwan_press/view/pdf_viwer.dart';
 import 'package:alwan_press/view/sign_in.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
@@ -609,6 +610,11 @@ class _ProfileState extends State<Profile> {
                         profileController.loading.value = false;
                         Get.to(()=>PdfViewerPage(pdf));
                       });
+                    }else if(Global.user!.trade_license.endsWith("png")||
+                        Global.user!.trade_license.endsWith("webp")||
+                        Global.user!.trade_license.endsWith("jpg")){
+                      Get.to(()=>ImageViewerPage(Global.user!.trade_license));
+                      profileController.loading.value = false;
                     }else{
                       noTradeLicense();
                       profileController.loading.value = false;

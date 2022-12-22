@@ -15,6 +15,7 @@ import 'package:alwan_press/view/sign_in.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -215,6 +216,19 @@ class OrderDetails extends StatelessWidget {
                                         ],
                                       ),
                                     ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width*0.9,
+                                      child: orderDetailsController.order!.note.isNotEmpty
+                                          ?Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(App_Localization.of(context).translate("note")+":",
+                                            style: TextStyle(color: Colors.red.withOpacity(0.7),fontSize: 14,fontWeight: FontWeight.bold),),
+                                          Text(orderDetailsController.order!.note,
+                                            style: TextStyle(color: Colors.red.withOpacity(0.7),fontSize: 14,),),
+                                        ],
+                                      ):Center(),
+                                    ),
                                     SizedBox(height: 15,),
                                   ],
                                 ),
@@ -244,8 +258,179 @@ class OrderDetails extends StatelessWidget {
                                 children: [
                                   Text(orderDetailsController.order!.getState(context),
                                     style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,fontWeight: FontWeight.bold),),
+                                  orderDetailsController.order!.state == 1 && orderDetailsController.order!.hold==0?
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          CountdownTimer(
+                                            endTime: orderDetailsController.order!.deadline.millisecondsSinceEpoch + 1000 * 30,
+                                            widgetBuilder: (context , deadline){
+                                              return Container(
+                                                width: 100,
+                                                height: 80,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(15),
+                                                  color: App.pink,
+                                                  gradient: LinearGradient(colors: [Color(0xff962092),Color(0xff4d1043)],begin: Alignment.topCenter,end: Alignment.bottomCenter)
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      width: 49,
 
-                                  Container(
+                                                      child: Column(
+                                                        children: [
+                                                          Container(
+                                                            width: 49,
+                                                            height: 50,
+                                                            // color: Colors.black,
+                                                            child: Center(
+                                                              child: Text((deadline==null||deadline.days == null) ?"0": deadline.days.toString(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            height: 1,
+                                                            width: 49,
+                                                            margin: EdgeInsets.symmetric(horizontal: 5),
+                                                            color: Colors.white.withOpacity(0.5),
+                                                          ),
+                                                          Container(
+                                                            width: 49,
+                                                            height: 29,
+                                                            // color: Colors.black,
+                                                            child: Center(
+                                                              child: Text(App_Localization.of(context).translate("days").toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 10),),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 80,
+                                                      width: 1,
+                                                      color: Colors.white.withOpacity(0.5),
+                                                    ),
+                                                    Container(
+                                                      width: 49,
+                                                      child: Column(
+                                                        children: [
+                                                          Container(
+                                                            width: 49,
+                                                            height: 50,
+                                                            // color: Colors.black,
+                                                            child: Center(
+                                                              child: Text((deadline==null||deadline.hours == null) ?"0": deadline.hours.toString(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            height: 1,
+                                                            width: 49,
+                                                            margin: EdgeInsets.symmetric(horizontal: 5),
+                                                            color: Colors.white.withOpacity(0.5),
+                                                          ),
+                                                          Container(
+                                                            width: 49,
+                                                            height: 29,
+                                                            // color: Colors.black,
+                                                            child: Center(
+                                                              child: Text(App_Localization.of(context).translate("hr").toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 10),),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                            endWidget: Container(
+                                              width: 100,
+                                              height: 80,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(15),
+                                                color: App.pink,
+                                                gradient: LinearGradient(colors: [Color(0xff962092),Color(0xff4d1043)],begin: Alignment.topCenter,end: Alignment.bottomCenter)
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    width: 49,
+
+                                                    child: Column(
+                                                      children: [
+                                                        Container(
+                                                          width: 49,
+                                                          height: 50,
+                                                          // color: Colors.black,
+                                                          child: Center(
+                                                            child: Text("0",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          height: 1,
+                                                          width: 49,
+                                                          margin: EdgeInsets.symmetric(horizontal: 5),
+                                                          color: Colors.white.withOpacity(0.5),
+                                                        ),
+                                                        Container(
+                                                          width: 49,
+                                                          height: 29,
+                                                          // color: Colors.black,
+                                                          child: Center(
+                                                            child: Text(App_Localization.of(context).translate("days").toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 10),),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 80,
+                                                    width: 1,
+                                                    color: Colors.white.withOpacity(0.5),
+                                                  ),
+                                                  Container(
+                                                    width: 49,
+                                                    child: Column(
+                                                      children: [
+                                                        Container(
+                                                          width: 49,
+                                                          height: 50,
+                                                          // color: Colors.black,
+                                                          child: Center(
+                                                            child: Text("0",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          height: 1,
+                                                          width: 49,
+                                                          margin: EdgeInsets.symmetric(horizontal: 5),
+                                                          color: Colors.white.withOpacity(0.5),
+                                                        ),
+                                                        Container(
+                                                          width: 49,
+                                                          height: 29,
+                                                          // color: Colors.black,
+                                                          child: Center(
+                                                            child: Text(App_Localization.of(context).translate("hr").toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 10),),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 100,
+                                            height: 100,
+                                            child: Center(
+                                              child: Lottie.asset("assets/animation/2.json"),
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                  :Container(
                                     height: 100,
                                     width: 100,
                                     child: Center(
@@ -409,7 +594,7 @@ class OrderDetails extends StatelessWidget {
                             const SizedBox(height: 20,),
                             Container(
                               width: MediaQuery.of(context).size.width*0.95,
-                              height: 150,
+                              height: 170,
                               decoration: BoxDecoration(
                                 color: MyTheme.isDarkTheme.value ?
                                 Colors.white.withOpacity(0.05) :

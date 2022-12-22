@@ -53,7 +53,7 @@ class OrderPage extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.1,
       decoration: BoxDecoration(
-        color: MyTheme.isDarkTheme.value ?  Colors.transparent : Colors.white,
+        color: MyTheme.isDarkTheme.value ?  Colors.black : Colors.white,
       ),
       child: Center(
         child: Text(App_Localization.of(context).translate("orders"),
@@ -72,7 +72,7 @@ class OrderPage extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.08),
         height: MediaQuery.of(context).size.height * 0.8,
-        color: !MyTheme.isDarkTheme.value ?  Colors.white : Colors.transparent,
+        color: !MyTheme.isDarkTheme.value ?  Colors.white : Colors.black,
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 600),
           child:  orderController.loading.value
@@ -95,6 +95,113 @@ class OrderPage extends StatelessWidget {
   }
 
   _orderItem(BuildContext context,int index){
+    return GestureDetector(
+      onTap: (){
+        Get.to(()=>OrderDetails(orderController.myOrders[index].id));
+      },
+      child: Column(
+
+        children: [
+          const SizedBox(height: 20),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.95,
+            child: Text(App_Localization.of(context).translate("pleaced_on") +" "+orderController.convertTime(orderController.myOrders[index].created_at.toString()),
+              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            width: MediaQuery.of(context).size.width*0.95,
+            decoration: BoxDecoration(
+              color: MyTheme.isDarkTheme.value ?
+              Colors.white.withOpacity(0.15) :
+              Colors.black.withOpacity(0.075),
+              borderRadius: BorderRadius.circular(5),
+
+            ),
+            child: Center(
+              child: Container(
+                width: MediaQuery.of(context).size.width*0.9 ,
+                height: 160,
+
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(orderController.myOrders[index].title,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),
+                    Text("#"+orderController.myOrders[index].orderId,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),),
+                    Center(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            orderController.myOrders[index].hold == 1
+                                ? Text(App_Localization.of(context).translate("hold"),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),)
+                            :orderController.myOrders[index].state == 0
+                                ? Text(orderController.myOrders[index].getStateManual(context,0),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),)
+                                :orderController.myOrders[index].state == 2
+                              ?Text(orderController.myOrders[index].getStateManual(context,2),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),)
+                            :Text(App_Localization.of(context).translate("ready_on"),
+                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13,fontWeight: FontWeight.bold),
+                            ),
+
+                            orderController.myOrders[index].state == 0
+                                || orderController.myOrders[index].state == 2
+                                || orderController.myOrders[index].hold == 1
+                                ?Center()
+                                : Text(" "+orderController.convertTime(orderController.myOrders[index].deadline.toString()),
+                                  style: TextStyle(color: Colors.green,fontSize: 13,fontWeight: FontWeight.bold),
+                                ),
+                          ],
+                        ),
+
+                      ],
+                    ),
+                    SizedBox(height: 5,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 40,
+                          width: Get.width * 0.9,
+                          decoration: BoxDecoration(
+                            color: App.pink,
+                            borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Center(
+                            child: GestureDetector(
+                              onTap: (){
+                                //orderController.myOrders[index].orderId
+                                Get.to(()=>OrderDetails(orderController.myOrders[index].id));
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(App_Localization.of(context).translate("view_details"),style:  TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.bold),),
+                                  SizedBox(width: 10,),
+                                  Icon(Icons.arrow_circle_right_outlined,color: Colors.white,size: 20,)
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 5,)
+                  ],
+                ),
+              ),
+            ),
+          ),
+          // orderController.myOrders[index].openDescription.value?
+
+
+        ],
+      ),
+    );
+  }
+  _orderItemArchive(BuildContext context,int index){
     return GestureDetector(
       onTap: (){
         Get.to(()=>OrderDetails(orderController.myOrders[index].id));
@@ -146,11 +253,11 @@ class OrderPage extends StatelessWidget {
                           children: [
                             orderController.myOrders[index].hold == 1
                                 ? Text(App_Localization.of(context).translate("hold"),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),)
-                            :orderController.myOrders[index].state == 0
+                                :orderController.myOrders[index].state == 0
                                 ? Text(orderController.myOrders[index].getStateManual(context,0),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),)
                                 :orderController.myOrders[index].state == 2
-                              ?Text(orderController.myOrders[index].getStateManual(context,2),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),)
-                            :Text(App_Localization.of(context).translate("ready_on"),
+                                ?Text(orderController.myOrders[index].getStateManual(context,2),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),)
+                                :Text(App_Localization.of(context).translate("ready_on"),
                               style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13,fontWeight: FontWeight.bold),
                             ),
 
@@ -159,8 +266,8 @@ class OrderPage extends StatelessWidget {
                                 || orderController.myOrders[index].hold == 1
                                 ?Center()
                                 : Text(" "+orderController.convertTime(orderController.myOrders[index].deadline.toString()),
-                                  style: TextStyle(color: Colors.green,fontSize: 13,fontWeight: FontWeight.bold),
-                                ),
+                              style: TextStyle(color: Colors.green,fontSize: 13,fontWeight: FontWeight.bold),
+                            ),
                           ],
                         ),
                         GestureDetector(
@@ -192,7 +299,6 @@ class OrderPage extends StatelessWidget {
       ),
     );
   }
-
 
   _requestShipping(context,int index){
     return  Container(

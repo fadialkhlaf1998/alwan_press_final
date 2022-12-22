@@ -36,6 +36,7 @@ class Order {
     required this.ready,
     required this.vat,
     required this.hold,
+    required this.note,
   });
 
   int id;
@@ -58,6 +59,7 @@ class Order {
   double vat;
   int hold;
   String customer;
+  String note;
   ShippingAddress? shippingAddress;
 
   factory Order.fromJson(String str) => Order.fromMap(json.decode(str));
@@ -70,6 +72,7 @@ class Order {
     deadline: DateTime.parse(json["deadline"]),
     customerId: json["customer_id"],
     state: json["state"],
+    note: json["note"]==null?"":json["note"],
     title: json["title"],
     description: json["description"],
     price: double.parse(json["price"].toString()),
