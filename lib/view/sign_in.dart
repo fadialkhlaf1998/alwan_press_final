@@ -72,7 +72,7 @@ class _SignInState extends State<SignIn> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: 20),
+                  SizedBox(height: 50),
                   Container(
                     height: 100,
                     width: MediaQuery.of(context).size.width,
