@@ -1,6 +1,7 @@
 import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/controller/home_controller.dart';
 import 'package:alwan_press/controller/intro_controller.dart';
+import 'package:alwan_press/controller/main_class_controller.dart';
 import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
@@ -31,8 +32,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   IntroController introController = Get.find();
+  MainClassController mainClassController = Get.find();
 
-  HomeController homeController = Get.put(HomeController());
+  HomeController homeController = Get.find();
 
   final dataKey = GlobalKey();
 
@@ -92,6 +94,7 @@ class _HomeState extends State<Home> {
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: SingleChildScrollView(
+                  physics: NeverScrollableScrollPhysics(),
                   child: Column(
                     children: [
                       const SizedBox(height: 10),
@@ -112,14 +115,30 @@ class _HomeState extends State<Home> {
   _header(context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.9,
+      height: 215,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Global.user!=null?
               GestureDetector(
+                onTap: (){
+                  mainClassController.bottomBarController.jumpToTab(2);
+                },
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(image: NetworkImage(Global.user!.image),fit: BoxFit.cover),
+                  ),
+                ),
+              )
+                  :GestureDetector(
                 onTap: (){
                   print('*-*-*');
                 },
@@ -148,6 +167,8 @@ class _HomeState extends State<Home> {
             ],
           ),
           const SizedBox(height: 15),
+          _categoryBar(context),
+          const SizedBox(height: 5),
           GestureDetector(
             onTap: () {
               showSearch(
@@ -159,7 +180,7 @@ class _HomeState extends State<Home> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               width: MediaQuery.of(context).size.width,
-              height: 40,
+              height: 35,
               decoration: BoxDecoration(
                   color: MyTheme.isDarkTheme.value
                       ? App.darkGrey.withOpacity(0.9)
@@ -173,7 +194,7 @@ class _HomeState extends State<Home> {
                   const SizedBox(width: 10),
                   Text(App_Localization.of(context).translate("search"),
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: MyTheme.isDarkTheme.value
                             ? Colors.white.withOpacity(0.2)
                             : Colors.grey,
@@ -182,62 +203,72 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
+          const SizedBox(height: 5),
         ],
       ),
     );
   }
 
   _logo(context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.fastOutSlowIn,
-          width: homeController.logoMove.value
-              ? MediaQuery.of(context).size.width * 0.3
-              : MediaQuery.of(context).size.width * 0.12,
-          child: homeController.logoMove.value
-              ? SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.12,
-                  child: Lottie.asset('assets/icons/ICONS.json',
-                      fit: BoxFit.cover))
-              : GestureDetector(
-                  onTap: () {
-                    homeController.move();
-                  },
-                  child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.12,
-                      height: MediaQuery.of(context).size.width * 0.12,
-                      child: Image.asset(
-                        'assets/icons/Logo-Header.png',
-                        fit: BoxFit.cover,
-                      )),
-                ),
-        ),
-        const SizedBox(width: 7),
-        Container(
-          height: MediaQuery.of(context).size.width * 0.1,
-          width: MediaQuery.of(context).size.width * 0.28,
-          decoration: BoxDecoration(
-              // color: Colors.red,
-              image: DecorationImage(
-                  fit: BoxFit.contain,
-                  image: MyTheme.isDarkTheme.value ? const AssetImage('assets/icons/logo_text.png') : const AssetImage('assets/icons/logo_text_black.png')
-              )),
-        )
-      ],
+    return Container(
+      height: 45,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.fastOutSlowIn,
+
+            width: homeController.logoMove.value
+                ? MediaQuery.of(context).size.width * 0.25
+                : MediaQuery.of(context).size.width * 0.1,
+            child: homeController.logoMove.value
+                ? SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.1,
+                    child: Lottie.asset('assets/icons/ICONS.json',
+                        fit: BoxFit.cover))
+                : GestureDetector(
+                    onTap: () {
+                      homeController.move();
+                    },
+                    child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.1,
+                        height: MediaQuery.of(context).size.width * 0.1,
+                        child: Image.asset(
+                          'assets/icons/Logo-Header.png',
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+          ),
+          const SizedBox(width: 7),
+          Container(
+            height: MediaQuery.of(context).size.width * 0.08,
+            width: MediaQuery.of(context).size.width * 0.23,
+            decoration: BoxDecoration(
+                // color: Colors.red,
+                image: DecorationImage(
+                    fit: BoxFit.contain,
+                    image: MyTheme.isDarkTheme.value ? const AssetImage('assets/icons/logo_text.png') : const AssetImage('assets/icons/logo_text_black.png')
+                )),
+          )
+        ],
+      ),
     );
   }
 
   _body(context) {
-    return Column(
-      children: [
-        _slider(context),
-        _categoryBar(context),
-        _gridBody(context, homeController.categoryIndex.value),
-        const SizedBox(height: 40),
-      ],
+    return Container(
+      height: 500,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            _slider(context),
+            const SizedBox(height: 15),
+            _gridBody(context, homeController.categoryIndex.value),
+            const SizedBox(height: 40),
+          ],
+        ),
+      ),
     );
   }
 
@@ -245,9 +276,12 @@ class _HomeState extends State<Home> {
     return Stack(
       children: [
         Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.width*0.4,
-            color: Colors.transparent,
+            width: MediaQuery.of(context).size.width*0.9,
+            height: MediaQuery.of(context).size.width*0.9 * 40 / 100,
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(10)
+            ),
             child: CarouselSlider(
               options: CarouselOptions(
                   autoPlay: true,
@@ -264,10 +298,10 @@ class _HomeState extends State<Home> {
                           imageUrl: e.image,
                           imageBuilder: (context, imageProvider) => Container(
                             decoration: BoxDecoration(
-                              //  borderRadius: BorderRadius.circular(10),
+                               borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(
                                 image: imageProvider,
-                                fit: BoxFit.cover,
+                                fit: BoxFit.contain,
                               ),
                             ),
                           ),
@@ -313,7 +347,7 @@ class _HomeState extends State<Home> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 100,
+            height: 80,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               // itemScrollController: homeController.itemScrollController,
@@ -397,7 +431,7 @@ class _HomeState extends State<Home> {
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                      fontSize: 9,
+                                      fontSize: 8,
                                       fontWeight:
                                           homeController.categoryIndex.value ==
                                                   index
@@ -417,26 +451,13 @@ class _HomeState extends State<Home> {
                             )),
                       );
                     }),
-                    const SizedBox(width: 7)
+                    const SizedBox(width: 10)
                   ],
                 );
               },
             ),
           ),
-          Container(
-            padding: const EdgeInsets.only(top: 10),
-            child: Text(
-                Global.langCode == "en"
-                    ?introController
-                    .categoriesList[homeController.categoryIndex.value].title
-                    :introController
-                    .categoriesList[homeController.categoryIndex.value].ar_title,
 
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).disabledColor)),
-          ),
         ],
       ),
     );
@@ -448,43 +469,63 @@ class _HomeState extends State<Home> {
       listLength =
           introController.categoriesList[categoryIndex].subCategories.length;
     }
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.9,
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: MediaQuery.of(context).size.shortestSide < 600
-              ? MediaQuery.of(context).size.width * 0.5
-              : MediaQuery.of(context).size.width * 0.3,
-          childAspectRatio: 4 / 5,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.only(top: 10),
+          child: Text(
+              Global.langCode == "en"
+                  ?introController
+                  .categoriesList[homeController.categoryIndex.value].title
+                  :introController
+                  .categoriesList[homeController.categoryIndex.value].ar_title,
+
+              style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).disabledColor.withOpacity(0.5))),
         ),
-        itemCount: listLength < 5 ? listLength : 6,
-        itemBuilder: (context, index) {
-          return listLength == 0
-              ? const Text('empty')
-              : index == 5
-                  ? Bounce(
-                      child: Container(
-                          width: 100,
-                          height: 100,
-                          color: Colors.transparent,
-                          child: Center(
-                              child: Text(
-                                  App_Localization.of(context)
-                                      .translate("see_more"),
-                                  style:
-                                      Theme.of(context).textTheme.headline1))),
-                      duration: const Duration(milliseconds: 150),
-                      onPressed: () {
-                        Get.to(() =>
-                            AllSubCategory(homeController.categoryIndex.value));
-                      })
-                  : _subCategory(context, index, categoryIndex);
-        },
-      ),
+        SizedBox(height: 15,),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: MediaQuery.of(context).size.shortestSide < 600
+                  ? MediaQuery.of(context).size.width * 0.5
+                  : MediaQuery.of(context).size.width * 0.3,
+              childAspectRatio: 4 / 5,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
+            itemCount: listLength < 5 ? listLength : 6,
+            itemBuilder: (context, index) {
+              return listLength == 0
+                  ? const Text('empty')
+                  : index == 5
+                      ? Bounce(
+                          child: Container(
+                              width: 100,
+                              height: 100,
+                              color: Colors.transparent,
+                              child: Center(
+                                  child: Text(
+                                      App_Localization.of(context)
+                                          .translate("see_more"),
+                                      style:
+                                          Theme.of(context).textTheme.headline1))),
+                          duration: const Duration(milliseconds: 150),
+                          onPressed: () {
+                            Get.to(() =>
+                                AllSubCategory(homeController.categoryIndex.value));
+                          })
+                      : _subCategory(context, index, categoryIndex);
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -541,7 +582,7 @@ class _HomeState extends State<Home> {
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10))),
                 child: Align(
-                  alignment: Alignment.centerLeft,
+                  alignment: Alignment.center,
                   child: Text(
                     Global.langCode == "en"?
                       introController.categoriesList[categoryIndex].subCategories[index].title

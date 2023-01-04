@@ -38,6 +38,7 @@ class _SignInState extends State<SignIn> {
   @override
   void initState()  {
      super.initState();
+     // signInController.username.text = "";
     // Future.delayed(const Duration(milliseconds: 0)).then((value){
     //   scrollController.animateTo(
     //     scrollController.position.maxScrollExtent,
@@ -72,20 +73,35 @@ class _SignInState extends State<SignIn> {
               child: Column(
                 children: [
                   SizedBox(height: 20),
-                  _titleAnimation(context),
+                  Container(
+                    height: 100,
+                    width: MediaQuery.of(context).size.width,
+                    child: Center(
+                      child:  _logo(context),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(App_Localization.of(context).translate("hala_welcome_back"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold,fontSize: 20),)
+                    ],
+                  ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.7,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-
+                        Spacer(),
                         _inputTextField(context),
+                        Spacer(),
+                        Spacer(),
                         AnimatedSwitcher(
                           duration: const Duration(milliseconds: 600),
                           child: signInController.signUpOption.isTrue
                               ? _signUpOptions(context)
                               : _signUpText(),
                         ),
+                        SizedBox(height: 10,),
                       ],
                     ),
                   )
@@ -185,16 +201,21 @@ class _SignInState extends State<SignIn> {
             controller: signInController.username,
             style: TextStyle(color: App.textColor()),
             decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide:  BorderSide(width: 1, color:App.textColor()),
+              focusedBorder: UnderlineInputBorder(
+                borderRadius: BorderRadius.circular(0),
+                borderSide:  BorderSide(width: 1, color:App.textColor().withOpacity(0.5)),
               ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide:  BorderSide(width: 1, color: App.textColor()),
+              enabledBorder: UnderlineInputBorder(
+                borderRadius: BorderRadius.circular(0),
+                borderSide:  BorderSide(width: 1, color:App.textColor().withOpacity(0.5)),
               ),
-              label: Text(App_Localization.of(context).translate("email"), style: TextStyle(color:App.textColor()))
+              label: Text(App_Localization.of(context).translate("username"), style: TextStyle(color:App.textColor(),fontSize: 15)),
+              hintText: App_Localization.of(context).translate("please_enter_email"),
+              hintStyle: TextStyle(color:App.textColor().withOpacity(0.5),fontSize: 10),
+              floatingLabelBehavior: FloatingLabelBehavior.always
+              // alignLabelWithHint: true,
             ),
+            // autofocus: true,
           ),
         ),
         const SizedBox(height: 20),
@@ -212,23 +233,27 @@ class _SignInState extends State<SignIn> {
                 onTap: (){
                   signInController.showPassword.value = !signInController.showPassword.value;
                 },
-                child: Icon(Icons.visibility_outlined, color: App.textColor(),),
+                child: Icon(Icons.visibility_outlined, color: App.textColor().withOpacity(0.5),size: 20),
               )
                 : GestureDetector(
                 onTap: (){
                   signInController.showPassword.value = !signInController.showPassword.value;
                 },
-                child: Icon(Icons.visibility_off_outlined, color:App.textColor(),),
+                child: Icon(Icons.visibility_off_outlined, color:App.textColor().withOpacity(0.5),size: 20),
               ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide:  BorderSide(width: 1, color: App.textColor()),
+                focusedBorder: UnderlineInputBorder(
+                  borderRadius: BorderRadius.circular(0),
+                  borderSide:  BorderSide(width: 1, color:App.textColor().withOpacity(0.5)),
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide:  BorderSide(width: 1, color: App.textColor()),
+                enabledBorder: UnderlineInputBorder(
+                  borderRadius: BorderRadius.circular(0),
+                  borderSide:  BorderSide(width: 1, color:App.textColor().withOpacity(0.5)),
                 ),
-                label: Text(App_Localization.of(context).translate("password"), style: TextStyle(color:App.textColor()))
+
+                label: Text(App_Localization.of(context).translate("password"), style: TextStyle(color:App.textColor(),fontSize: 15)),
+                hintText: App_Localization.of(context).translate("please_enter_password"),
+                hintStyle: TextStyle(color:App.textColor().withOpacity(0.5),fontSize: 10),
+                floatingLabelBehavior: FloatingLabelBehavior.always
             ),
           ),
         ),
@@ -260,10 +285,10 @@ class _SignInState extends State<SignIn> {
           },
           child: Container(
             width: MediaQuery.of(context).size.width * 0.9,
-            height: 55,
+            height: 40,
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(10)
+              borderRadius: BorderRadius.circular(5)
             ),
             child:  Center(
               child: signInController.loading.value
@@ -284,10 +309,10 @@ class _SignInState extends State<SignIn> {
           },
           child: Container(
             width: MediaQuery.of(context).size.width * 0.9,
-            height: 55,
+            height: 40,
             decoration: BoxDecoration(
                 color: App.darkGrey,
-                borderRadius: BorderRadius.circular(10)
+                borderRadius: BorderRadius.circular(5)
             ),
             child:  Center(
               child: Text(App_Localization.of(context).translate("login_us_guest").toUpperCase(),
@@ -306,7 +331,7 @@ class _SignInState extends State<SignIn> {
       children: [
         Container(
           child: Text(App_Localization.of(context).translate("don't_have_account"),
-            style: TextStyle(color: App.textColor().withOpacity(0.8),fontSize: 14),),
+            style: TextStyle(color: App.textColor().withOpacity(0.8),fontSize: 12),),
         ),
         const SizedBox(width: 5),
         GestureDetector(
@@ -316,7 +341,7 @@ class _SignInState extends State<SignIn> {
           child: Container(
             color: Colors.transparent,
           //  margin: const EdgeInsets.only(bottom: 60),
-            child: Text(App_Localization.of(context).translate("sign_up"),style: TextStyle(color: App.textColor().withOpacity(0.8),fontSize: 16,decoration: TextDecoration.underline),),
+            child: Text(App_Localization.of(context).translate("sign_up"),style: TextStyle(color: App.textColor().withOpacity(0.8),fontSize: 14,decoration: TextDecoration.underline),),
           ),
         ),
       ],

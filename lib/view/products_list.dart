@@ -255,7 +255,7 @@ class ProductList extends StatelessWidget {
                           bottomLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10))),
                   child: Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     child: Text(
                         Global.langCode == "en"
                             ?

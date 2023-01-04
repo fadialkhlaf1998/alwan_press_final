@@ -4,6 +4,8 @@ import 'dart:io';
 
 import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/controller/ProfileController.dart';
+import 'package:alwan_press/controller/all_subCategory_controller.dart';
+import 'package:alwan_press/controller/home_controller.dart';
 import 'package:alwan_press/controller/order_controller.dart';
 import 'package:alwan_press/helper/api.dart';
 import 'package:alwan_press/helper/global.dart';
@@ -25,11 +27,13 @@ class IntroController extends GetxController{
   RxList<MyBanner> bannerList = <MyBanner>[].obs;
   RxList<SuggestionSearch> searchSuggestionList = <SuggestionSearch>[].obs;
   RxInt contactIndex = 0.obs;
+  HomeController homeController = Get.put(HomeController());
 
   RxBool showPhoneList = false.obs;
   RxBool showWhatsAppList = false.obs;
 
   OrderController orderController = Get.put(OrderController());
+  AllSubCategoryController allSubCategoryController = Get.put(AllSubCategoryController());
   @override
   void onInit() async{
     super.onInit();
@@ -57,6 +61,11 @@ class IntroController extends GetxController{
           customerServiceList.value = data.customerService;
           searchSuggestionList.value = data.suggestionSearch;
           bannerList.value = data.banners;
+         if(categoriesList.isNotEmpty){
+           allSubCategoryController.categoryIndex.value = 0;
+           tempCategoriesList.clear();
+           tempCategoriesList.addAll(categoriesList[0].subCategories);
+         }
           print('****************');
           Store.loadAddress();
           Global.getUserInformation().then((value) {

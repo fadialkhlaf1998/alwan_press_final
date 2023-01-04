@@ -21,7 +21,7 @@ class AllSubCategory extends StatelessWidget {
   int categoryIndex;
   IntroController introController = Get.find();
   HomeController homeController = Get.find();
-  AllSubCategoryController allSubCategoryController = Get.put(AllSubCategoryController());
+  AllSubCategoryController allSubCategoryController = Get.find();
 
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
 
@@ -353,7 +353,7 @@ class AllSubCategory extends StatelessWidget {
                           bottomLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10))),
                   child: Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     child: Text(
                         Global.langCode == "en"
                             ?

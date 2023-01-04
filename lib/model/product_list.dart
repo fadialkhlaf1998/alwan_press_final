@@ -23,6 +23,7 @@ class ProductList {
     required this.price,
     required this.ar_title,
     required this.ar_desc,
+    required this.images,
   });
 
   int id;
@@ -37,6 +38,7 @@ class ProductList {
   String description;
   String ar_desc;
   double price;
+  List<MyImage> images;
 
   factory ProductList.fromMap(Map<String, dynamic> json) => ProductList(
     id: json["id"],
@@ -51,6 +53,7 @@ class ProductList {
     rateCount: json["rate_count"],
     description: json["description"],
     price: json["price"].toDouble(),
+    images: List<MyImage>.from(json["images"].map((x) => MyImage.fromMap(x))),
   );
 
   Map<String, dynamic> toMap() => {
@@ -78,6 +81,7 @@ class ProductList {
     rateCount: json["rate_count"],
     description: json["description"],
     price: json["price"].toDouble(),
+    images: List<MyImage>.from(json["images"].map((x) => MyImage.fromMap(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -93,4 +97,32 @@ class ProductList {
     "price": price,
   };
 
+}
+
+class MyImage {
+  MyImage({
+    required this.id,
+    required this.productId,
+    required this.link,
+  });
+
+  int id;
+  int productId;
+  String link;
+
+  factory MyImage.fromJson(String str) => MyImage.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory MyImage.fromMap(Map<String, dynamic> json) => MyImage(
+    id: json["id"],
+    productId: json["product_id"],
+    link: json["link"],
+  );
+
+  Map<String, dynamic> toMap() => {
+    "id": id,
+    "product_id": productId,
+    "link": link,
+  };
 }

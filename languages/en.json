@@ -136,5 +136,9 @@
   "hold": "Hold",
   "trad_license": "Trade License",
   "no_trad_license": "No Trade License Yet",
-  "land_line": "Land Line"
+  "land_line": "Land Line",
+  "hala_welcome_back": "Hala! Welcome Back!",
+
+  "please_enter_email": "Please enter your username",
+  "please_enter_password": "Please enter your password"
 }
