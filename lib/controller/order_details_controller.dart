@@ -23,7 +23,7 @@ class OrderDetailsController extends GetxController{
   animation(){
     shippingAnimationSucc.value = true;
     Future.delayed(Duration(milliseconds: 1000)).then((value) {
-      refreshData();
+      refreshIndicater();
     });
   }
   
