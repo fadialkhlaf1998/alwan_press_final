@@ -29,10 +29,10 @@ class LanguageList extends StatelessWidget {
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.9,
-                      height: 50,
+                      height: 40,
                       decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(10)
+                          borderRadius: BorderRadius.circular(5)
                       ),
                       child: Center(
                         child: Text(

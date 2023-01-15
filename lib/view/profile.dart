@@ -55,60 +55,29 @@ class _ProfileState extends State<Profile> {
         child: Stack(
           children: [
            DarkModeBackground(),
+
             SingleChildScrollView(
               child: Column(
                 children: [
-                  _logo(context),
+                  const SizedBox(height: 70),
                   const SizedBox(height: 10),
+
                   _body(context)
                 ],
               ),
             ),
+            _logo(context),
             profileController.showChoose.value?_chooseImage(context):Center(),
           ],
         ),
       ),
     ));
   }
-  _header(BuildContext context){
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
 
-              GestureDetector(
-                onTap: () {
-                  // mainClassController.selectedIndex.value = 0;
-                  // mainClassController.pageController.animateToPage(0,
-                  //     duration: const Duration(milliseconds: 700), curve: Curves.fastOutSlowIn);
-                  mainClassController.bottomBarController.jumpToTab(0);
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.17,
-                  height: MediaQuery.of(context).size.width * 0.17,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage('assets/icons/logo2.png')
-                      )
-                  ),
-                ),
-              ),
-
-            ],
-          ),
-        ],
-      ),
-    );
-  }
   _body(BuildContext context) {
     return Container(
       // height: MediaQuery.of(context).size.height * 0.7,
+      padding: EdgeInsets.only(bottom: 50),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -182,31 +151,31 @@ class _ProfileState extends State<Profile> {
     return  Container(
 
       width: MediaQuery.of(context).size.width * 0.9,
-      height: 40,
+      height: 55,
       color: Colors.transparent,
       child: TextField(
         onChanged: (q){
           profileController.onChange();
         },
         controller: textEditingController,
-        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,height: 1),
+        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12,height: 1),
         // textAlign: TextAlign.start,
         decoration: InputDecoration(
             // prefixText: 'Nike name: ',
             // prefixStyle: TextStyle(
             //     color: Theme.of(context).dividerColor
             // ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 1, color: profileController.validate.value&&(textEditingController.text.isEmpty||!RegExp(r'\S+@\S+\.\S+').hasMatch(textEditingController.text))?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+              // borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(width: 1, color: profileController.validate.value&&(textEditingController.text.isEmpty||!RegExp(r'\S+@\S+\.\S+').hasMatch(textEditingController.text))?Colors.red:MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:  BorderSide(width: 1, color: profileController.validate.value&&(textEditingController.text.isEmpty||!RegExp(r'\S+@\S+\.\S+').hasMatch(textEditingController.text))?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            enabledBorder: UnderlineInputBorder(
+              // borderRadius: BorderRadius.circular(10),
+              borderSide:  BorderSide(width: 1, color: profileController.validate.value&&(textEditingController.text.isEmpty||!RegExp(r'\S+@\S+\.\S+').hasMatch(textEditingController.text))?Colors.red:MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)),
             ),
 
             label: Text(App_Localization.of(context).translate(hint),
-                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12))
+                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13))
         ),
       ),
     );
@@ -215,31 +184,31 @@ class _ProfileState extends State<Profile> {
     return  Container(
 
       width: MediaQuery.of(context).size.width * 0.9,
-      height: 40,
+      height: 55,
       color: Colors.transparent,
       child: TextField(
         onChanged: (q){
           profileController.onChange();
         },
         controller: textEditingController,
-        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,height: 1),
+        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12,height: 1),
         // textAlign: TextAlign.start,
         decoration: InputDecoration(
             // prefixText: 'Nike name: ',
             // prefixStyle: TextStyle(
             //     color: Theme.of(context).dividerColor
             // ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 1, color: profileController.validate.value&&(textEditingController.text.isEmpty)?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+              // borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(width: 1, color: profileController.validate.value&&(textEditingController.text.isEmpty)?Colors.red:MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:  BorderSide(width: 1, color: profileController.validate.value&&textEditingController.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            enabledBorder: UnderlineInputBorder(
+              // borderRadius: BorderRadius.circular(10),
+              borderSide:  BorderSide(width: 1, color: profileController.validate.value&&textEditingController.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)),
             ),
 
             label: Text(App_Localization.of(context).translate(hint),
-                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12))
+                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13))
         ),
       ),
     );
@@ -247,7 +216,7 @@ class _ProfileState extends State<Profile> {
   _phone(context){
     return  Container(
       width: MediaQuery.of(context).size.width * 0.9,
-      height: 40,
+      height: 55,
       color: Colors.transparent,
       child: TextField(
         onChanged: (q){
@@ -255,24 +224,24 @@ class _ProfileState extends State<Profile> {
         },
         keyboardType: TextInputType.phone,
         controller: profileController.phone,
-        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,height: 1),
+        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12,height: 1),
         maxLength: 9,
         decoration: InputDecoration(
             counterText: '',
             prefixText: '+971 ',
             prefixStyle:  TextStyle(
-              color: Theme.of(context).dividerColor,fontSize: 12,height: 1
+              color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12,height: 1
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 1, color:  profileController.validate.value&&profileController.phone.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+              // borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(width: 1, color:  profileController.validate.value&&profileController.phone.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:  BorderSide(width: 1, color:  profileController.validate.value&&profileController.phone.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            enabledBorder: UnderlineInputBorder(
+              // borderRadius: BorderRadius.circular(10),
+              borderSide:  BorderSide(width: 1, color:  profileController.validate.value&&profileController.phone.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)),
             ),
             label: Text(App_Localization.of(context).translate("phone"),
-                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black))
+                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13))
         ),
       ),
     );
@@ -280,7 +249,7 @@ class _ProfileState extends State<Profile> {
   _landLine(context){
     return  Container(
       width: MediaQuery.of(context).size.width * 0.9,
-      height: 40,
+      height: 55,
       color: Colors.transparent,
       child: TextField(
         onChanged: (q){
@@ -288,63 +257,84 @@ class _ProfileState extends State<Profile> {
         },
         keyboardType: TextInputType.phone,
         controller: profileController.landLine,
-        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,height: 1),
+        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12,height: 1),
         maxLength: 9,
         decoration: InputDecoration(
             counterText: '',
             prefixText: '+971 ',
             prefixStyle:  TextStyle(
-                color: Theme.of(context).dividerColor,fontSize: 12,height: 1
+                color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12,height: 1
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 1, color:  MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+              // borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(width: 1, color:  MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:  BorderSide(width: 1, color:  MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            enabledBorder: UnderlineInputBorder(
+              // borderRadius: BorderRadius.circular(10),
+              borderSide:  BorderSide(width: 1, color:  MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)),
             ),
             label: Text(App_Localization.of(context).translate("land_line"),
-                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black))
+                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13))
         ),
       ),
     );
   }
   _logo(context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.fastOutSlowIn,
-          width: MediaQuery.of(context).size.width * 0.12,
-          child: GestureDetector(
-            onTap: () {
-              // homeController.move();
-              // _scaffoldkey.currentState!.closeEndDrawer();
-              mainClassController.bottomBarController.jumpToTab(0);
-            },
-            child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.12,
-                height: MediaQuery.of(context).size.width * 0.12,
-                child: Image.asset(
-                  'assets/icons/Logo-Header.png',
-                  fit: BoxFit.cover,
-                )),
+    return Container(
+      height: 70,
+      color: MyTheme.isDarkTheme.value ?Colors.black:Colors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Icon(Icons.logout,color: Colors.transparent,),
           ),
-        ),
-        const SizedBox(width: 7),
-        Container(
-          height: MediaQuery.of(context).size.width * 0.1,
-          width: MediaQuery.of(context).size.width * 0.28,
-          decoration: BoxDecoration(
-            // color: Colors.red,
-              image: DecorationImage(
-                  fit: BoxFit.contain,
-                  image: MyTheme.isDarkTheme.value ? const AssetImage('assets/icons/logo_text.png') : const AssetImage('assets/icons/logo_text_black.png')
-              )),
-        )
-      ],
+          Row(
+            children: [
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.fastOutSlowIn,
+                width: MediaQuery.of(context).size.width * 0.12,
+                child: GestureDetector(
+                  onTap: () {
+                    // homeController.move();
+                    // _scaffoldkey.currentState!.closeEndDrawer();
+                    mainClassController.bottomBarController.jumpToTab(0);
+                  },
+                  child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.12,
+                      height: MediaQuery.of(context).size.width * 0.12,
+                      child: Image.asset(
+                        'assets/icons/Logo-Header.png',
+                        fit: BoxFit.cover,
+                      )),
+                ),
+              ),
+              const SizedBox(width: 7),
+              Container(
+                height: MediaQuery.of(context).size.width * 0.1,
+                width: MediaQuery.of(context).size.width * 0.28,
+                decoration: BoxDecoration(
+                  // color: Colors.red,
+                    image: DecorationImage(
+                        fit: BoxFit.contain,
+                        image: MyTheme.isDarkTheme.value ? const AssetImage('assets/icons/logo_text.png') : const AssetImage('assets/icons/logo_text_black.png')
+                    )),
+              )
+            ],
+          ),
+          GestureDetector(
+            onTap: (){
+              Global.logout();
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Icon(Icons.logout,color: App.textColor(),),
+            ),
+          )
+        ],
+      ),
     );
   }
   _loading(BuildContext context){
@@ -875,42 +865,42 @@ class _ProfileState extends State<Profile> {
                 ),
               )
           ),
-          SizedBox(height: 10,),
-          GestureDetector(
-              onTap: () {
-                Global.logout();
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: 40,
-                decoration: BoxDecoration(
-                    color: App.pink,
-                    borderRadius: BorderRadius.circular(10)
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                        width: 28,
-                        height: 28,
-                        child: const Icon(
-                          Icons.logout,
-                          color:  Colors.white,
-                          size: 28,)
-                    ),
-                    const SizedBox(width: 10),
-                    Center(
-                        child: Text(App_Localization.of(context).translate("logout"),
-                            style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold
-                            )))
-                  ],
-                ),
-              )
-          ),
+          // SizedBox(height: 10,),
+          // GestureDetector(
+          //     onTap: () {
+          //       Global.logout();
+          //     },
+          //     child: Container(
+          //       width: MediaQuery.of(context).size.width * 0.9,
+          //       height: 40,
+          //       decoration: BoxDecoration(
+          //           color: App.pink,
+          //           borderRadius: BorderRadius.circular(10)
+          //       ),
+          //       child: Row(
+          //         crossAxisAlignment: CrossAxisAlignment.center,
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         children: [
+          //           Container(
+          //               width: 28,
+          //               height: 28,
+          //               child: const Icon(
+          //                 Icons.logout,
+          //                 color:  Colors.white,
+          //                 size: 28,)
+          //           ),
+          //           const SizedBox(width: 10),
+          //           Center(
+          //               child: Text(App_Localization.of(context).translate("logout"),
+          //                   style: const TextStyle(
+          //                       fontSize: 16,
+          //                       color: Colors.white,
+          //                       fontWeight: FontWeight.bold
+          //                   )))
+          //         ],
+          //       ),
+          //     )
+          // ),
         ],
       ),
     );

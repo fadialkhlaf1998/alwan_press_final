@@ -168,6 +168,7 @@ class _HomeState extends State<Home> {
           ),
           const SizedBox(height: 15),
           _categoryBar(context),
+
           const SizedBox(height: 5),
           GestureDetector(
             onTap: () {

@@ -92,7 +92,7 @@ class _AboutUsState extends State<AboutUs> {
           Text(
             App_Localization.of(context).translate('about_us'),
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -121,7 +121,7 @@ class _AboutUsState extends State<AboutUs> {
             App_Localization.of(context).translate("alwan_printing_press"),
             style: TextStyle(
                 color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.bold
             ),
           ),
@@ -169,19 +169,19 @@ class _AboutUsState extends State<AboutUs> {
               App_Localization.of(context).translate("about_content"),
               style: TextStyle(
                 color: MyTheme.isDarkTheme.value?Colors.white.withOpacity(0.5):Colors.black.withOpacity(0.5),
-                fontSize: 14,
+                fontSize: 12,
               ),
               textAlign: TextAlign.justify,
             ),
           ),
           SizedBox(height: 20,),
-          Text(App_Localization.of(context).translate("reach_us"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold,fontSize: 18),),
+          Text(App_Localization.of(context).translate("reach_us"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),
           SizedBox(height: 10,),
           Container(
             width: MediaQuery.of(context).size.width*0.9,
             child: Row(
               children: [
-                Icon(Icons.location_on,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),
+                Icon(Icons.location_on,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,size: 20),
                 SizedBox(width: 15,),
                 Container(
                     height:40,
@@ -189,7 +189,7 @@ class _AboutUsState extends State<AboutUs> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Al- Qasis industrial city 2 - Back Side of Aster Hospital - Dubai",style: TextStyle(fontSize: 12,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
+                        Text("Al- Qasis industrial city 2 - Back Side of Aster Hospital - Dubai",style: TextStyle(fontSize: 10,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
                       ],
                     )
                 ),
@@ -205,7 +205,7 @@ class _AboutUsState extends State<AboutUs> {
               width: MediaQuery.of(context).size.width*0.9,
               child: Row(
                 children: [
-                  Icon(Icons.phone,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),
+                  Icon(Icons.phone,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,size: 20),
                   SizedBox(width: 15,),
                   Container(
                       height:40,
@@ -214,7 +214,7 @@ class _AboutUsState extends State<AboutUs> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("+971 4 267 6552",style: TextStyle(fontSize: 12,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
+                          Text("+971 4 267 6552",style: TextStyle(fontSize: 10,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
                         ],
                       )
                   ),
@@ -227,7 +227,7 @@ class _AboutUsState extends State<AboutUs> {
             width: MediaQuery.of(context).size.width*0.9,
             child: Row(
               children: [
-                Icon(Icons.mail,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),
+                Icon(Icons.mail,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,size: 20,),
                 SizedBox(width: 15,),
                 Container(
                     height:40,
@@ -236,7 +236,7 @@ class _AboutUsState extends State<AboutUs> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("P.O. Box: 234985",style: TextStyle(fontSize: 12,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
+                        Text("P.O. Box: 234985",style: TextStyle(fontSize: 10,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
                       ],
                     )
                 ),
@@ -252,7 +252,7 @@ class _AboutUsState extends State<AboutUs> {
               child: Row(
                 children: [
                   // Icon(Icons.add_photo_alternate,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),
-                  SvgPicture.asset("assets/icons/web.svg",width: 22.5,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
+                  SvgPicture.asset("assets/icons/web.svg",width: 20,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
                   SizedBox(width: 15,),
                   Container(
                       height:40,
@@ -262,7 +262,7 @@ class _AboutUsState extends State<AboutUs> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           //
-                          Text("www.alwanpress.ae",style: TextStyle(fontSize: 12,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
+                          Text("www.alwanpress.ae",style: TextStyle(fontSize: 10,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
                         ],
                       )
                   ),

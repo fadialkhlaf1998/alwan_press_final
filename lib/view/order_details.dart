@@ -87,10 +87,225 @@ class OrderDetails extends StatelessWidget {
                             // SizedBox(height: MediaQuery.of(context).size.height*0.1,),
                             Container(
                               width: MediaQuery.of(context).size.width*0.95,
+                              height: 135,
+                              decoration: BoxDecoration(
+                                color: MyTheme.isDarkTheme.value ?
+                                App.darkGrey :
+                                Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: MyTheme.isDarkTheme.value ?
+                                    Colors.transparent :
+                                    Colors.grey.withOpacity(0.5),
+                                    blurRadius: 3,
+                                    offset: const Offset(1, 1),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: Get.width * 0.95 /2 - 20,
+                                    child: Text(
+                                      orderDetailsController.order!.hold == 1?
+                                      App_Localization.of(context).translate("hold")
+                                          :orderDetailsController.order!.getState(context),
+                                      style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 15,fontWeight: FontWeight.bold,overflow: TextOverflow.clip),),
+                                  ),
+
+                                  // orderDetailsController.order!.state == 1 && orderDetailsController.order!.hold==0?
+                                  false?
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      CountdownTimer(
+                                        endTime: orderDetailsController.order!.deadline.millisecondsSinceEpoch + 1000 * 30,
+                                        widgetBuilder: (context , deadline){
+                                          return Container(
+                                            width: 100,
+                                            height: 80,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(15),
+                                                color: App.pink,
+                                                gradient: LinearGradient(colors: [Color(0xff962092),Color(0xff4d1043)],begin: Alignment.topCenter,end: Alignment.bottomCenter)
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  width: 49,
+
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        width: 49,
+                                                        height: 50,
+                                                        // color: Colors.black,
+                                                        child: Center(
+                                                          child: Text((deadline==null||deadline.days == null) ?"0": deadline.days.toString(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        height: 1,
+                                                        width: 49,
+                                                        margin: EdgeInsets.symmetric(horizontal: 5),
+                                                        color: Colors.white.withOpacity(0.5),
+                                                      ),
+                                                      Container(
+                                                        width: 49,
+                                                        height: 29,
+                                                        // color: Colors.black,
+                                                        child: Center(
+                                                          child: Text(App_Localization.of(context).translate("days").toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 10),),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Container(
+                                                  height: 80,
+                                                  width: 1,
+                                                  color: Colors.white.withOpacity(0.5),
+                                                ),
+                                                Container(
+                                                  width: 49,
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        width: 49,
+                                                        height: 50,
+                                                        // color: Colors.black,
+                                                        child: Center(
+                                                          child: Text((deadline==null||deadline.hours == null) ?"0": deadline.hours.toString(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        height: 1,
+                                                        width: 49,
+                                                        margin: EdgeInsets.symmetric(horizontal: 5),
+                                                        color: Colors.white.withOpacity(0.5),
+                                                      ),
+                                                      Container(
+                                                        width: 49,
+                                                        height: 29,
+                                                        // color: Colors.black,
+                                                        child: Center(
+                                                          child: Text(App_Localization.of(context).translate("hr").toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 10),),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                        endWidget: Container(
+                                          width: 100,
+                                          height: 80,
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(15),
+                                              color: App.pink,
+                                              gradient: LinearGradient(colors: [Color(0xff962092),Color(0xff4d1043)],begin: Alignment.topCenter,end: Alignment.bottomCenter)
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                width: 49,
+
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      width: 49,
+                                                      height: 50,
+                                                      // color: Colors.black,
+                                                      child: Center(
+                                                        child: Text("0",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 1,
+                                                      width: 49,
+                                                      margin: EdgeInsets.symmetric(horizontal: 5),
+                                                      color: Colors.white.withOpacity(0.5),
+                                                    ),
+                                                    Container(
+                                                      width: 49,
+                                                      height: 29,
+                                                      // color: Colors.black,
+                                                      child: Center(
+                                                        child: Text(App_Localization.of(context).translate("days").toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 10),),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 80,
+                                                width: 1,
+                                                color: Colors.white.withOpacity(0.5),
+                                              ),
+                                              Container(
+                                                width: 49,
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      width: 49,
+                                                      height: 50,
+                                                      // color: Colors.black,
+                                                      child: Center(
+                                                        child: Text("0",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 1,
+                                                      width: 49,
+                                                      margin: EdgeInsets.symmetric(horizontal: 5),
+                                                      color: Colors.white.withOpacity(0.5),
+                                                    ),
+                                                    Container(
+                                                      width: 49,
+                                                      height: 29,
+                                                      // color: Colors.black,
+                                                      child: Center(
+                                                        child: Text(App_Localization.of(context).translate("hr").toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 10),),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 100,
+                                        height: 100,
+                                        child: Center(
+                                          child: Lottie.asset("assets/animation/2.json"),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                      :Container(
+                                    height: 100,
+                                    width: Get.width * 0.95 /2,
+                                    child: Center(
+                                      child: _getAnimation(orderDetailsController.order!.state,orderDetailsController.order!.hold),
+                                    ),
+                                  )
+
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 20,),
+                            Container(
+                              width: MediaQuery.of(context).size.width*0.95,
                               // height: 190,
                               decoration: BoxDecoration(
                                 color: MyTheme.isDarkTheme.value ?
-                                Colors.white.withOpacity(0.05) :
+                                App.darkGrey :
                                 Colors.white,
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
@@ -113,11 +328,11 @@ class OrderDetails extends StatelessWidget {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          Text(orderDetailsController.order!.title,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),
+                                          Text(orderDetailsController.order!.title,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
                                           SizedBox(height: 5,),
                                           Text("#"+orderDetailsController.order!.orderId,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14,fontWeight: FontWeight.bold),),
                                           Text(App_Localization.of(context).translate("pleaced_on") +" "+orderController.convertTime(orderDetailsController.order!.created_at.toString()),
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),),
+                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12),),
                                         ],
                                       ),
                                     ),
@@ -127,92 +342,18 @@ class OrderDetails extends StatelessWidget {
                                       width: MediaQuery.of(context).size.width*0.9,
                                       color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)
                                     ),
-                                    SizedBox(height: 15,),
+                                    // SizedBox(height: 15,),
                                     orderDetailsController.fake.value ?Center():Center(),
-                                    orderDetailsController.order!.state != 3?Center():Container(
-                                      width: MediaQuery.of(context).size.width*0.9,
-                                      height: 94,
-                                      child: orderDetailsController.order!.shippingAddress!=null?
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
 
-                                          Text(App_Localization.of(context).translate("shipping_address") ,
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),
-
-                                          Text(orderDetailsController.order!.shippingAddress!.customer,
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),),
-                                          Text(orderDetailsController.order!.shippingAddress!.streetName+" / "+
-                                              orderDetailsController.order!.shippingAddress!.building+" / flat: "+
-                                              orderDetailsController.order!.shippingAddress!.flat+" / floor: "+orderDetailsController.order!.shippingAddress!.floor,
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14,),),
-                                          Text("Mobile: "+orderDetailsController.order!.shippingAddress!.phone,
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14,),),
-
-                                        ],
-                                      )
-                                          : orderDetailsController.shippingAnimationSucc.value?
-                                             Column(
-                                        children: [
-                                          Container(
-                                            height: 50,
-                                            width: 50,
-                                            child: Lottie.asset(
-                                                'assets/animation/Tick.json',
-                                                repeat: false,
-                                                fit: BoxFit.cover
-                                            ),
-                                          ),
-                                          Text(App_Localization.of(context).translate("your_order_will") ,
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),),
-                                        ],
-                                      ):
-
-                                          Column(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Text(App_Localization.of(context).translate("do_u_want") ,
-                                                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),),
-
-                                              GestureDetector(
-                                        onTap: (){
-                                              //todo shipping
-                                          Get.to(()=>Addresses_2(orderDetailsController.order!.id))!.then((value) {
-                                            orderDetailsController.fake.value = !orderDetailsController.fake.value;
-
-                                          });
-                                        },
-                                        child:  Container(
-                                              width: MediaQuery.of(context).size.width * 0.9/2,
-                                              height: 40,
-                                              decoration: BoxDecoration(
-                                                  color: Theme.of(context).primaryColor,
-                                                  borderRadius: BorderRadius.circular(10)
-                                              ),
-                                              child:  Center(
-                                                child:  Text(App_Localization.of(context).translate("yes_order_delivery").toUpperCase(),
-                                                    style: TextStyle(color: Colors.white,fontSize: 13)),
-                                              ),
-                                        ),
-                                      ),
-                                            ],
-                                          ),
-                                    ),
-                                    orderDetailsController.order!.state != 3?Center():SizedBox(height: 15,),
-                                    orderDetailsController.order!.state != 3?Center():Container(
-                                        height: 1,
-                                        width: MediaQuery.of(context).size.width*0.9,
-                                        color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)
-                                    ),
                                     SizedBox(height: 15,),
                                     Container(
                                       width: MediaQuery.of(context).size.width*0.9,
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
+                                          Text(App_Localization.of(context).translate("description"),style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
                                           Text(orderDetailsController.order!.description,
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14,),),
+                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12,),),
                                         ],
                                       ),
                                     ),
@@ -223,9 +364,9 @@ class OrderDetails extends StatelessWidget {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(App_Localization.of(context).translate("note")+":",
-                                            style: TextStyle(color: Colors.red.withOpacity(0.7),fontSize: 14,fontWeight: FontWeight.bold),),
+                                            style: TextStyle(color: Colors.red.withOpacity(0.7),fontSize: 12,fontWeight: FontWeight.bold),),
                                           Text(orderDetailsController.order!.note,
-                                            style: TextStyle(color: Colors.red.withOpacity(0.7),fontSize: 14,),),
+                                            style: TextStyle(color: Colors.red.withOpacity(0.7),fontSize: 12,),),
                                         ],
                                       ):Center(),
                                     ),
@@ -234,13 +375,13 @@ class OrderDetails extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 20,),
-                            Container(
+                            orderDetailsController.order!.hold == 1?Center():const SizedBox(height: 20,),
+                            orderDetailsController.order!.hold == 1?Center():Container(
                               width: MediaQuery.of(context).size.width*0.95,
-                              height: 135,
+                              // height: 190,
                               decoration: BoxDecoration(
                                 color: MyTheme.isDarkTheme.value ?
-                                Colors.white.withOpacity(0.05) :
+                                App.darkGrey :
                                 Colors.white,
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
@@ -254,194 +395,125 @@ class OrderDetails extends StatelessWidget {
                                 ],
                               ),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(orderDetailsController.order!.getState(context),
-                                    style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 12,fontWeight: FontWeight.bold),),
-                                  orderDetailsController.order!.state == 1 && orderDetailsController.order!.hold==0?
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          CountdownTimer(
-                                            endTime: orderDetailsController.order!.deadline.millisecondsSinceEpoch + 1000 * 30,
-                                            widgetBuilder: (context , deadline){
-                                              return Container(
-                                                width: 100,
-                                                height: 80,
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(15),
-                                                  color: App.pink,
-                                                  gradient: LinearGradient(colors: [Color(0xff962092),Color(0xff4d1043)],begin: Alignment.topCenter,end: Alignment.bottomCenter)
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    Container(
-                                                      width: 49,
+                                  SizedBox(height: 10,),
 
-                                                      child: Column(
-                                                        children: [
-                                                          Container(
-                                                            width: 49,
-                                                            height: 50,
-                                                            // color: Colors.black,
-                                                            child: Center(
-                                                              child: Text((deadline==null||deadline.days == null) ?"0": deadline.days.toString(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            height: 1,
-                                                            width: 49,
-                                                            margin: EdgeInsets.symmetric(horizontal: 5),
-                                                            color: Colors.white.withOpacity(0.5),
-                                                          ),
-                                                          Container(
-                                                            width: 49,
-                                                            height: 29,
-                                                            // color: Colors.black,
-                                                            child: Center(
-                                                              child: Text(App_Localization.of(context).translate("days").toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 10),),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      height: 80,
-                                                      width: 1,
-                                                      color: Colors.white.withOpacity(0.5),
-                                                    ),
-                                                    Container(
-                                                      width: 49,
-                                                      child: Column(
-                                                        children: [
-                                                          Container(
-                                                            width: 49,
-                                                            height: 50,
-                                                            // color: Colors.black,
-                                                            child: Center(
-                                                              child: Text((deadline==null||deadline.hours == null) ?"0": deadline.hours.toString(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            height: 1,
-                                                            width: 49,
-                                                            margin: EdgeInsets.symmetric(horizontal: 5),
-                                                            color: Colors.white.withOpacity(0.5),
-                                                          ),
-                                                          Container(
-                                                            width: 49,
-                                                            height: 29,
-                                                            // color: Colors.black,
-                                                            child: Center(
-                                                              child: Text(App_Localization.of(context).translate("hr").toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 10),),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                            endWidget: Container(
-                                              width: 100,
-                                              height: 80,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(15),
-                                                color: App.pink,
-                                                gradient: LinearGradient(colors: [Color(0xff962092),Color(0xff4d1043)],begin: Alignment.topCenter,end: Alignment.bottomCenter)
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    width: 49,
+                                  Container(
+                                    width: MediaQuery.of(context).size.width*0.9,
+                                    // height: 130,
+                                    child: orderDetailsController.order!.shippingAddress!=null?
+                                    Column(
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            // Icon(Icons.location_on_outlined,color: App.textColor()),
+                                            SvgPicture.asset("assets/icons/location.svg",color: App.textColor(),width: 22,),
+                                            SizedBox(width: 5,),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
 
-                                                    child: Column(
-                                                      children: [
-                                                        Container(
-                                                          width: 49,
-                                                          height: 50,
-                                                          // color: Colors.black,
-                                                          child: Center(
-                                                            child: Text("0",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          height: 1,
-                                                          width: 49,
-                                                          margin: EdgeInsets.symmetric(horizontal: 5),
-                                                          color: Colors.white.withOpacity(0.5),
-                                                        ),
-                                                        Container(
-                                                          width: 49,
-                                                          height: 29,
-                                                          // color: Colors.black,
-                                                          child: Center(
-                                                            child: Text(App_Localization.of(context).translate("days").toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 10),),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    height: 80,
-                                                    width: 1,
-                                                    color: Colors.white.withOpacity(0.5),
-                                                  ),
-                                                  Container(
-                                                    width: 49,
-                                                    child: Column(
-                                                      children: [
-                                                        Container(
-                                                          width: 49,
-                                                          height: 50,
-                                                          // color: Colors.black,
-                                                          child: Center(
-                                                            child: Text("0",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 25),),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          height: 1,
-                                                          width: 49,
-                                                          margin: EdgeInsets.symmetric(horizontal: 5),
-                                                          color: Colors.white.withOpacity(0.5),
-                                                        ),
-                                                        Container(
-                                                          width: 49,
-                                                          height: 29,
-                                                          // color: Colors.black,
-                                                          child: Center(
-                                                            child: Text(App_Localization.of(context).translate("hr").toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 10),),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                                Text(App_Localization.of(context).translate("shipping_address") ,
+                                                  style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14,fontWeight: FontWeight.bold),),
+
+                                                Text(orderDetailsController.order!.shippingAddress!.customer,
+                                                  style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12),),
+                                                Text(orderDetailsController.order!.shippingAddress!.streetName+" / "+
+                                                    orderDetailsController.order!.shippingAddress!.building+" / flat: "+
+                                                    orderDetailsController.order!.shippingAddress!.flat+" / floor: "+orderDetailsController.order!.shippingAddress!.floor,
+                                                  style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12,),),
+
+
+
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 10,),
+                                        Container(
+                                            height: 1,
+                                            width: MediaQuery.of(context).size.width*0.9,
+                                            color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)
+                                        ),
+                                        SizedBox(height: 10,),
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            // Icon(Icons.call,color: App.textColor()),
+                                            SvgPicture.asset("assets/icons/call.svg",color: App.textColor(),width: 22,),
+                                            SizedBox(width: 5,),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(App_Localization.of(context).translate("mobile_number"),
+                                                  style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14,fontWeight: FontWeight.bold),),
+                                                Text(orderDetailsController.order!.shippingAddress!.phone,
+                                                  style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12,),),
+                                              ],
+                                            ),
+
+                                          ],
+                                        ),
+                                        SizedBox(height: 5,),
+                                      ],
+                                    )
+                                        : orderDetailsController.shippingAnimationSucc.value?
+                                    Column(
+                                      children: [
+                                        Container(
+                                          height: 50,
+                                          width: 50,
+                                          child: Lottie.asset(
+                                              'assets/animation/Tick.json',
+                                              repeat: false,
+                                              fit: BoxFit.cover
+                                          ),
+                                        ),
+                                        Text(App_Localization.of(context).translate("your_order_will") ,
+                                          style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),),
+                                        SizedBox(height: 10,),
+                                      ],
+                                    ):
+
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(App_Localization.of(context).translate("do_u_want") ,
+                                          style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),),
+
+                                        GestureDetector(
+                                          onTap: (){
+                                            //todo shipping
+                                            Get.to(()=>Addresses_2(orderDetailsController.order!.id))!.then((value) {
+                                              orderDetailsController.fake.value = !orderDetailsController.fake.value;
+                                            });
+                                          },
+                                          child:  Container(
+                                            width: MediaQuery.of(context).size.width * 0.9/2,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                                color: Theme.of(context).primaryColor,
+                                                borderRadius: BorderRadius.circular(10)
+                                            ),
+                                            child:  Center(
+                                              child:  Text(App_Localization.of(context).translate("yes_order_delivery").toUpperCase(),
+                                                  style: TextStyle(color: Colors.white,fontSize: 13)),
                                             ),
                                           ),
-                                          Container(
-                                            width: 100,
-                                            height: 100,
-                                            child: Center(
-                                              child: Lottie.asset("assets/animation/2.json"),
-                                            ),
-                                          )
-                                        ],
-                                      )
-                                  :Container(
-                                    height: 100,
-                                    width: 100,
-                                    child: Center(
-                                      child: _getAnimation(orderDetailsController.order!.state,orderDetailsController.order!.hold),
+                                        ),
+                                        SizedBox(height: 10,),
+                                      ],
                                     ),
-                                  )
+                                  ),
+
 
                                 ],
                               ),
                             ),
                             const SizedBox(height: 20,),
+
                             Stack(
                               children: [
                                 Container(
@@ -452,7 +524,7 @@ class OrderDetails extends StatelessWidget {
                                       height: 135,
                                       decoration: BoxDecoration(
                                         color: MyTheme.isDarkTheme.value ?
-                                        Colors.white.withOpacity(0.05) :
+                                        App.darkGrey :
                                         Colors.white,
                                         borderRadius: BorderRadius.circular(5),
                                         boxShadow: [
@@ -519,26 +591,11 @@ class OrderDetails extends StatelessWidget {
                                                       SvgPicture.asset("assets/icons/tax_invoice.svg",width: 22,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
                                                       const SizedBox(width: 7,),
                                                       Text(App_Localization.of(context).translate("tax_invoices"),
-                                                        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 2,),),
+                                                        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 2,),),
                                                     ],
                                                   ),
                                                 ),
-                                                // GestureDetector(
-                                                //   onTap: (){
-                                                //     orderDetailsController.reorder(context);
-                                                //   },
-                                                //   child: Row(
-                                                //     children: [
-                                                //       SvgPicture.asset("assets/icons/reorder.svg",width: 16,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
-                                                //       const SizedBox(width: 7,),
-                                                //       Container(
-                                                //         child: Center(
-                                                //           child: Text(App_Localization.of(context).translate('reorder')),
-                                                //         ),
-                                                //       )
-                                                //     ],
-                                                //   ),
-                                                // )
+
                                                 ],
                                               ),
                                               Row(
@@ -597,7 +654,7 @@ class OrderDetails extends StatelessWidget {
                               height: 170,
                               decoration: BoxDecoration(
                                 color: MyTheme.isDarkTheme.value ?
-                                Colors.white.withOpacity(0.05) :
+                                App.darkGrey :
                                 Colors.white,
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
@@ -620,14 +677,14 @@ class OrderDetails extends StatelessWidget {
 
                                       SizedBox(height: 1,),
                                       Text(App_Localization.of(context).translate("order_summery"),
-                                        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),
+                                        style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(App_Localization.of(context).translate("sub_total"),
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 14),),
+                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),),
                                           Text(App_Localization.of(context).translate("aed")+" "+orderDetailsController.order!.price.toString(),
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 14),),
+                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),),
                                         ],
                                       ),
 
@@ -635,23 +692,23 @@ class OrderDetails extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(App_Localization.of(context).translate("vat"),
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 14),),
+                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),),
                                           Text(App_Localization.of(context).translate("aed")+" "+orderDetailsController.order!.vat.toString(),
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 14),),
+                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),),
                                         ],
                                       ),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(App_Localization.of(context).translate("shipping"),
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 14),),
+                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),),
                                           orderDetailsController.order!.shippingRequestCount > 0
                                               ? orderDetailsController.order!.shippingState == 0?Text(App_Localization.of(context).translate("free"),
-                                                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 14),)
+                                                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),)
                                               :Text(App_Localization.of(context).translate("aed")+" "+orderDetailsController.order!.shippingPrice.toString(),
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 14),)
+                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),)
                                          : Text(App_Localization.of(context).translate("calculating_when_request"),
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 14),),
+                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),),
                                         ],
                                       ),
                                       SizedBox(height: 15,),
@@ -787,7 +844,7 @@ class OrderDetails extends StatelessWidget {
     );
   }
   noStatementDialog(BuildContext context){
-    Get.back();
+    // Get.back();
     return  showDialog(
       context: context,
       builder: (ctx) => AlertDialog(

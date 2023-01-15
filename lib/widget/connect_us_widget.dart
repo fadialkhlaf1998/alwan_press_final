@@ -1,4 +1,5 @@
 import 'package:alwan_press/app_localization.dart';
+import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class ConnectUsWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
         color: MyTheme.isDarkTheme.value ?
-        Colors.white.withOpacity(0.05) : Colors.white,
+        App.darkGrey : Colors.white,
         boxShadow: [
           BoxShadow(
             color: MyTheme.isDarkTheme.value ?

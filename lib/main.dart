@@ -135,7 +135,7 @@ class _MyAppState extends State<MyApp> {
                     playSound: true,
                     icon: "@mipmap/ic_launcher"
                 )
-            )
+            ),
         );
       }
     });

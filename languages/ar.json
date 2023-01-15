@@ -138,5 +138,8 @@
   "trad_license": "الرخصة التجارية",
   "no_trad_license": "لا يوجد رخصة تجارية حالياً",
   "land_line": "الهاتف الأرضي",
-  "hala_welcome_back": "اهلاً بعودتك"
+  "hala_welcome_back": "اهلاً بعودتك",
+  "please_enter_email": "الرجاء إدخال اسم المستخدم",
+  "please_enter_password": "الرجاء إدخال كلمة المرور",
+  "mobile_number": "رقم الهاتف"
 }

@@ -6,6 +6,7 @@ import 'package:alwan_press/controller/order_controller.dart';
 import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
+import 'package:alwan_press/model/order.dart';
 import 'package:alwan_press/view/address_2.dart';
 import 'package:alwan_press/view/order_details.dart';
 import 'package:alwan_press/view/pdf_viwer.dart';
@@ -71,26 +72,255 @@ class OrderPage extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.08),
-        height: MediaQuery.of(context).size.height * 0.8,
+        // height: MediaQuery.of(context).size.height * 0.8,
         color: !MyTheme.isDarkTheme.value ?  Colors.white : Colors.black,
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 600),
           child:  orderController.loading.value
               ? const Center(child: CircularProgressIndicator(),)
               :Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: ListView.builder(
-            padding: EdgeInsets.only(bottom: 0),
-            itemCount: orderController.myOrders.length,
-            itemBuilder: (context, index){
-                // var dateTime = orderController.calculateTime(index);
-                // orderController.setOrderState(index);
-                return _orderItem(context,index);
-            },
-          ),
+                padding: const EdgeInsets.only(bottom: 20 ,left: 10,right: 10),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20,),
+                      _hold(context),
+                      SizedBox(height: 20,),
+                      _waitingAdvanced(context),
+                      SizedBox(height: 20,),
+                      _waitingFinal(context),
+                      SizedBox(height: 20,),
+                      _inProgress(context),
+                      SizedBox(height: 20,),
+                      _ready(context),
+                      SizedBox(height: 20,),
+                      _delivered(context),
+                    ],
+                  ),
+                )
+                
+          //       ListView.builder(
+          //   padding: EdgeInsets.only(bottom: 0),
+          //   itemCount: orderController.myOrders.length,
+          //   itemBuilder: (context, index){
+          //       // var dateTime = orderController.calculateTime(index);
+          //       // orderController.setOrderState(index);
+          //       return _orderItem(context,index);
+          //   },
+          // ),
               ),
         ),
       )
+    );
+  }
+
+  _hold(BuildContext context){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(App_Localization.of(context).translate("hold"),style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 15,fontWeight: FontWeight.bold),),
+        Container(
+          height: 130,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: orderController.hold.length,
+              itemBuilder: (context,index){
+                return _orderCard(context, orderController.hold[index]);
+              }),
+        ),
+      ],
+    );
+  }
+  _waitingAdvanced(BuildContext context){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(App_Localization.of(context).translate("state0"),style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 15,fontWeight: FontWeight.bold),),
+        Container(
+          height: 130,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: orderController.waitingAdvance.length,
+              itemBuilder: (context,index){
+                return _orderCard(context, orderController.waitingAdvance[index]);
+              }),
+        ),
+      ],
+    );
+  }
+
+  _inProgress(BuildContext context){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(App_Localization.of(context).translate("state1"),style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 15,fontWeight: FontWeight.bold),),
+        Container(
+          height: 130,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: orderController.inProgress.length,
+              itemBuilder: (context,index){
+                return _orderCard(context, orderController.inProgress[index]);
+              }),
+        ),
+      ],
+    );
+  }
+
+  _waitingFinal(BuildContext context){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(App_Localization.of(context).translate("state2"),style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 15,fontWeight: FontWeight.bold),),
+        Container(
+          height: 130,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: orderController.waitingFinal.length,
+              itemBuilder: (context,index){
+                return _orderCard(context, orderController.waitingFinal[index]);
+              }),
+        ),
+      ],
+    );
+  }
+
+  _ready(BuildContext context){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(App_Localization.of(context).translate("state3"),style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 15,fontWeight: FontWeight.bold),),
+        Container(
+          height: 130,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: orderController.ready.length,
+              itemBuilder: (context,index){
+                return _orderCard(context, orderController.ready[index]);
+              }),
+        ),
+      ],
+    );
+  }
+
+  _delivered(BuildContext context){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(App_Localization.of(context).translate("state4"),style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 15,fontWeight: FontWeight.bold),),
+        Container(
+          height: 130,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: orderController.delivered.length,
+              itemBuilder: (context,index){
+                return _orderCard(context, orderController.delivered[index]);
+              }),
+        ),
+      ],
+    );
+  }
+
+  _orderCard(BuildContext context,Order order){
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 5),
+      child: GestureDetector(
+        onTap: (){
+          Get.to(()=>OrderDetails(order.id));
+        },
+        child: Column(
+
+          children: [
+
+            const SizedBox(height: 10),
+            Container(
+              width: MediaQuery.of(context).size.width*0.6,
+              decoration: BoxDecoration(
+                color: MyTheme.isDarkTheme.value ?
+                App.darkGrey :
+                Colors.black.withOpacity(0.075),
+                borderRadius: BorderRadius.circular(5),
+
+              ),
+              child: Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width*0.6 - 20 ,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const SizedBox(height: 8),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.95,
+                        child: Text(App_Localization.of(context).translate("pleaced_on") +" "+orderController.convertTime(order.created_at.toString()),
+                          style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 10),
+                        ),
+                      ),
+                      const SizedBox(height: 3),
+                      Text(order.title,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
+                      Text("#"+order.orderId,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12),),
+                      const SizedBox(height: 3),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              order.hold == 1
+                                  ? Text(App_Localization.of(context).translate("hold"),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 12),)
+                                  :order.state == 0
+                                  ? Text(order.getStateManual(context,0),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 12),)
+                                  :order.state == 2
+                                  ?Text(order.getStateManual(context,2),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 12),)
+                                  :Text(App_Localization.of(context).translate("ready_on"),
+                                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13,fontWeight: FontWeight.bold),
+                              ),
+
+                              order.state == 0
+                                  || order.state == 2
+                                  || order.hold == 1
+                                  ?Center()
+                                  : Text(" "+orderController.convertTime(order.deadline.toString()),
+                                style: TextStyle(color: Colors.green,fontSize: 13,fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+
+                        ],
+                      ),
+                      const SizedBox(height: 3),
+                      Container(
+                        width: Get.width * 0.6,
+                        decoration: BoxDecoration(
+                          // color: App.pink,
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: Center(
+                          child: GestureDetector(
+                            onTap: (){
+                              Get.to(()=>OrderDetails(order.id));
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(App_Localization.of(context).translate("view_details"),style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 11,fontWeight: FontWeight.bold),),
+                                SizedBox(width: 10,),
+                                Icon(Icons.arrow_forward_ios,color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),size: 13,)
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 8,)
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+
+          ],
+        ),
+      ),
     );
   }
 

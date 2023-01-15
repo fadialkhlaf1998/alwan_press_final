@@ -100,6 +100,7 @@ class AddressController_2 extends GetxController {
           if(value){
             OrderDetailsController orderDetailsController = Get.find();
             orderDetailsController.animation();
+
             String title = App_Localization.of(context).translate("req_shipping_succ_t");
             String desc = App_Localization.of(context).translate("req_shipping_succ_d");
             Get.back();

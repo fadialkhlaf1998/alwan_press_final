@@ -14,6 +14,12 @@ import 'package:path_provider/path_provider.dart';
 class OrderController extends GetxController{
 
   RxList <Order> myOrders = <Order>[].obs;
+  RxList <Order> hold = <Order>[].obs;
+  RxList <Order> ready = <Order>[].obs;
+  RxList <Order> inProgress = <Order>[].obs;
+  RxList <Order> delivered = <Order>[].obs;
+  RxList <Order> waitingAdvance = <Order>[].obs;
+  RxList <Order> waitingFinal = <Order>[].obs;
   RxBool loading = false.obs;
   RxBool fake = false.obs;
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
@@ -24,6 +30,30 @@ class OrderController extends GetxController{
     getOrderData();
   }
 
+  filterOrders(List<Order>  orders){
+    hold.clear();
+    ready.clear();
+    inProgress.clear();
+    waitingAdvance.clear();
+    waitingFinal.clear();
+    delivered.clear();
+    for(var elm in orders){
+      if(elm.hold == 1){
+        hold.add(elm);
+      }else if(elm.state == 0){
+        waitingAdvance.add(elm);
+      }else if(elm.state == 1){
+        inProgress.add(elm);
+      }else if(elm.state == 2){
+        waitingFinal.add(elm);
+      }else if(elm.state == 3){
+        ready.add(elm);
+      }else {
+        delivered.add(elm);
+      }
+      // orders.remove(elm);
+    }
+  }
 
   Future<File> loadPdf(String url) async {
     Completer<File> completer = Completer();
@@ -48,6 +78,8 @@ class OrderController extends GetxController{
           if(value.isNotEmpty){
             print('done orders');
             myOrders.value = value;
+            List<Order> temp = value;
+            filterOrders(temp);
             loading.value = false;
           }else{
             print('no orders');
@@ -68,6 +100,8 @@ class OrderController extends GetxController{
         if(value.isNotEmpty){
           print('done orders');
           myOrders.value = value;
+          List<Order> temp = value;
+          filterOrders(temp);
           loading.value = false;
         }else{
           print('no orders');

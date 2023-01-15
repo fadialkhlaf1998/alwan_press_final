@@ -92,7 +92,7 @@ class MainClass extends StatelessWidget {
           ),
         title: App_Localization.of(context).translate('home'),
         activeColorSecondary: Colors.white,
-        activeColorPrimary: Theme.of(context).primaryColor,
+        activeColorPrimary: Color(0xffEC008C),
         inactiveColorPrimary: App.grey,
         inactiveIcon: SvgPicture.asset(
           'assets/icons/home.svg',
@@ -106,7 +106,7 @@ class MainClass extends StatelessWidget {
         ),
         title: Global.langCode=="ar"?"   "+App_Localization.of(context).translate('orders'):App_Localization.of(context).translate('orders'),
         activeColorSecondary: Colors.white,
-        activeColorPrimary: Theme.of(context).primaryColor,
+        activeColorPrimary: Color(0xff0072BC),
         inactiveColorPrimary: App.grey,
         inactiveIcon: SvgPicture.asset(
           'assets/icons/order.svg',
@@ -120,7 +120,7 @@ class MainClass extends StatelessWidget {
         ),
         title: App_Localization.of(context).translate('profile'),
         activeColorSecondary: Colors.white,
-        activeColorPrimary: Theme.of(context).primaryColor,
+        activeColorPrimary:  Color(0xffA3228E),
         inactiveColorPrimary: App.grey,
         inactiveIcon: SvgPicture.asset(
           'assets/icons/profile.svg',
@@ -135,8 +135,9 @@ class MainClass extends StatelessWidget {
           color: Colors.white,
         ),
         title: App_Localization.of(context).translate('settings'),
+        // textStyle: TextStyle(shadows: [Shadow(color: Colors.black,blurRadius: 18)],fontSize: 12),
         activeColorSecondary: Colors.white,
-        activeColorPrimary: Theme.of(context).primaryColor,
+        activeColorPrimary:  Color(0xffBED82D).withOpacity(0.7),
         inactiveColorPrimary: App.grey,
         inactiveIcon: SvgPicture.asset(
           'assets/icons/setting.svg',
