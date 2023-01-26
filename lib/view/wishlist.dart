@@ -31,39 +31,47 @@ class Wishlist extends StatelessWidget {
                 _header(context),
                 wishlistController.fake.value?
                 const SizedBox(height: 10,):const SizedBox(height: 10,),
-                SizedBox(
-                  width: Get.width * 0.9,
-                  child: Expanded(child:
+                Expanded(
+
+                  child: Container(child:
                   wishlistController.wishlist.isEmpty
-                      ?Column(
+                      ?Center(
+                        child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: Get.height * 0.2,),
-                      Text(App_Localization.of(context).translate("no_wishlist")+" ",style:TextStyle( color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black, fontSize: 12,) ,),
+                        // SizedBox(height: Get.height * 0.2,),
+                        Text(App_Localization.of(context).translate("no_wishlist")+" ",style:TextStyle( color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black, fontSize: 12,) ,),
 
-                      GestureDetector(
-                          onTap: (){
-                            mainClassController.bottomBarController.jumpToTab(0);
-                          },
-                          child: Text(App_Localization.of(context).translate("continue_shopping"),style:TextStyle( color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black, fontSize: 12,fontWeight: FontWeight.bold) ,))
+                        GestureDetector(
+                            onTap: (){
+                              mainClassController.bottomBarController.jumpToTab(0);
+                            },
+                            child: Text(App_Localization.of(context).translate("continue_shopping"),style:TextStyle( color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black, fontSize: 12,fontWeight: FontWeight.bold) ,))
                     ],
-                  )
-                      :GridView.builder(
+                  ),
+                      )
+                      :Container(
+                    width: Get.width * 0.95,
+                        child: GridView.builder(
+                          padding: EdgeInsets.only(bottom: 50),
                     shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
+
+                    // physics: const NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: MediaQuery.of(context).size.shortestSide < 600
-                          ? MediaQuery.of(context).size.width * 0.5
-                          : MediaQuery.of(context).size.width * 0.3,
-                      childAspectRatio: 4 / 6,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
+                        maxCrossAxisExtent: MediaQuery.of(context).size.shortestSide < 600
+                            ? MediaQuery.of(context).size.width * 0.5
+                            : MediaQuery.of(context).size.width * 0.3,
+                        childAspectRatio: 4 / 6,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
                     ),
                     itemCount:  wishlistController.wishlist.length ,
+                    // itemCount:  10 ,
                     itemBuilder: (context, index) {
-                      return  _product(context, index);
+                        return  _product(context, index);
                     },
-                  ),),
+                  ),
+                      ),),
                 )
               ],
             )

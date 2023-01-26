@@ -93,16 +93,13 @@ class _HomeState extends State<Home> {
               MyTheme.isDarkTheme.value?const DarkModeBackground():Center(),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child: SingleChildScrollView(
-                  physics: NeverScrollableScrollPhysics(),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 10),
-                      _header(context),
-                      const SizedBox(height: 10),
-                      _body(context)
-                    ],
-                  ),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    _header(context),
+                    const SizedBox(height: 10),
+                    _body(context)
+                  ],
                 ),
               ),
             ],
@@ -258,8 +255,8 @@ class _HomeState extends State<Home> {
   }
 
   _body(context) {
-    return Container(
-      height: 500,
+    return Expanded(
+      // height: 300,
       child: SingleChildScrollView(
         child: Column(
           children: [
