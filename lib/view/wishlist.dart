@@ -66,7 +66,6 @@ class Wishlist extends StatelessWidget {
                         mainAxisSpacing: 10,
                     ),
                     itemCount:  wishlistController.wishlist.length ,
-                    // itemCount:  10 ,
                     itemBuilder: (context, index) {
                         return  _product(context, index);
                     },

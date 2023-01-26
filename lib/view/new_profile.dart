@@ -554,6 +554,7 @@ class _NewProfileState extends State<NewProfile> {
                 child: Container(
                   width: Get.width - 20,
                   height: 52,
+                  color: Colors.transparent,
                   child: Column(
                     children: [
                       SizedBox(height: 15,),
@@ -587,6 +588,7 @@ class _NewProfileState extends State<NewProfile> {
                 },
                 child: Container(
                   width: Get.width - 20,
+                  color: Colors.transparent,
                   height: 52,
                   child: Column(
                     children: [
@@ -622,6 +624,7 @@ class _NewProfileState extends State<NewProfile> {
                 child: Container(
                   width: Get.width - 20,
                   height: 52,
+                  color: Colors.transparent,
                   child: Column(
                     children: [
                       SizedBox(height: 15,),
@@ -654,6 +657,7 @@ class _NewProfileState extends State<NewProfile> {
                   _languageBottomSheet();
                 },
                 child: Container(
+                  color: Colors.transparent,
                   width: Get.width - 20,
                   height: 52,
                   child: Column(
@@ -690,6 +694,7 @@ class _NewProfileState extends State<NewProfile> {
                 },
                 child: Container(
                   width: Get.width - 20,
+                  color: Colors.transparent,
                   height: 52,
                   child: Column(
                     children: [
@@ -733,6 +738,7 @@ class _NewProfileState extends State<NewProfile> {
                 },
                 child: Container(
                   width: Get.width - 20,
+                  color: Colors.transparent,
                   height: 52,
                   child: Column(
                     children: [
@@ -767,6 +773,7 @@ class _NewProfileState extends State<NewProfile> {
                 },
                 child: Container(
                   width: Get.width - 20,
+                  color: Colors.transparent,
                   // height: 50,
                   child: Column(
                     children: [
@@ -905,6 +912,7 @@ class _NewProfileState extends State<NewProfile> {
                 child: Container(
                   width: Get.width - 20,
                   height: 52,
+                  color: Colors.transparent,
                   child: Column(
                     children: [
                       SizedBox(height: 15,),
@@ -936,13 +944,18 @@ class _NewProfileState extends State<NewProfile> {
           ),
         ),
         SizedBox(height: 10,),
-        Row(
-          children: [
-            SizedBox(width: 10,),
-            Icon(Icons.power_settings_new_outlined,color: App.textColor().withOpacity(0.5),size: 20,),
-            SizedBox(width: 10,),
-            Text(App_Localization.of(context).translate("sign_out"),style: TextStyle(color: App.textColor().withOpacity(0.5),fontSize: 13),)
-          ],
+        GestureDetector(
+          onTap: (){
+            Global.logout();
+          },
+          child: Row(
+            children: [
+              SizedBox(width: 10,),
+              Icon(Icons.power_settings_new_outlined,color: App.textColor().withOpacity(0.5),size: 20,),
+              SizedBox(width: 10,),
+              Text(App_Localization.of(context).translate("sign_out"),style: TextStyle(color: App.textColor().withOpacity(0.5),fontSize: 13),)
+            ],
+          ),
         ),
         SizedBox(height: 10,),
       ],
