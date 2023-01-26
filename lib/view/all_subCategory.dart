@@ -288,7 +288,7 @@ class AllSubCategory extends StatelessWidget {
           maxCrossAxisExtent: MediaQuery.of(context).size.shortestSide < 600
               ? MediaQuery.of(context).size.width * 0.5
               : MediaQuery.of(context).size.width * 0.3,
-          childAspectRatio: 4 / 5,
+          childAspectRatio: 4 / 6,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
         ),
@@ -317,9 +317,7 @@ class AllSubCategory extends StatelessWidget {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10)),
+                    borderRadius: BorderRadius.circular(10),
                     child: Hero(
                       transitionOnUserGestures: true,
                       tag: introController
@@ -348,12 +346,12 @@ class AllSubCategory extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   width: MediaQuery.of(context).size.width * 0.5,
                   decoration: BoxDecoration(
-                      color: MyTheme.isDarkTheme.value ? App.darkGrey : App.lightGrey,
+                      // color: MyTheme.isDarkTheme.value ? App.darkGrey : App.lightGrey,
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10))),
                   child: Align(
-                    alignment: Alignment.center,
+                    alignment: Global.langCode == "en"?Alignment.centerLeft:Alignment.centerRight,
                     child: Text(
                         Global.langCode == "en"
                             ?
@@ -362,7 +360,7 @@ class AllSubCategory extends StatelessWidget {
                         maxLines: 2,
                         style: TextStyle(
                             color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
-                            fontSize: 12,
+                            fontSize: 13,
                             overflow: TextOverflow.ellipsis
                         )
                     ),

@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/helper/api.dart';
 import 'package:alwan_press/helper/global.dart';
+import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/model/order.dart';
 import 'package:alwan_press/view/success.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:foloosi_plugins/foloosi_plugins.dart';
 import 'package:get/get.dart';
 
 class OrderDetailsController extends GetxController{
@@ -26,30 +31,7 @@ class OrderDetailsController extends GetxController{
       refreshIndicater();
     });
   }
-  
-  refreshData(){
-    loading.value = true;
-    Api.getOrderInfo(order!.id).then((order) {
-      if(order != null){
 
-        order = order;
-        if(order.shippingRequestCount > 0){
-          shippingSucc.value = true;
-          shippingAnimationSucc.value = true;
-        }
-        totalForPayment = order.price.toDouble() - order.paid_amount.toDouble() + order.vat;
-        if(order.shippingState != 0 && order.state != 0 && order.shippingRequestCount > 0){
-          totalForPayment += order.shippingPrice;
-        }
-        if(order.state == 0 ){
-          totalForPayment = totalForPayment / 4 ;
-        }
-        loading.value = false;
-      }else{
-        Get.back();
-      }
-    });
-  }
   Future<void> refreshIndicater()async{
     // loading.value = true;
     var orderRes = await Api.getOrderInfo(order!.id);
@@ -70,7 +52,8 @@ class OrderDetailsController extends GetxController{
         fake.value = ! fake.value;
         print('check');
         print(order!.shippingAddress);
-        // loading.value = false;
+        loading.value = true;
+        loading.value = false;
         return ;
       }else{
         return refreshIndicater();
@@ -96,6 +79,56 @@ class OrderDetailsController extends GetxController{
       margin: EdgeInsets.only(top: 30,left: 25,right: 25),
       colorText: Colors.white,
     );
+  }
+
+  Future<void> initFolosiPlatformState() async {
+    if (totalForPayment > 0) {
+      try {
+        var initData = {
+          "merchantKey": "test_\$2y\$10\$9c6MQOTsB58aZwOFiznk0.qPCwUnaEdxFbr-9sWHDAO9yvzqEXbWy",
+          "customColor": MyTheme.isDarkTheme.value?"#ffffff":"#2C2B2B",
+        };
+        await FoloosiPlugins.init(json.encode(initData));
+
+        FoloosiPlugins.setLogVisible(true);
+        var res = {
+          "orderId":  order!.quickBookId,
+          "orderDescription": order!.description,
+          "orderAmount": totalForPayment,
+          "state": "",
+          "postalCode": "",
+          "country": "ARE",
+          "currencyCode": "AED",
+          "customerUniqueReference": Global.user!.quickBookId,
+          "customer": {
+            "name": Global.user!.name,
+            "email": Global.user!.email,
+            "mobile": Global.user!.phone,
+            "code": "",
+            "address": "",
+            "city": "",
+          },
+        };
+        var result = await FoloosiPlugins.makePayment(json.encode(res));
+        // var referenceToken = "";
+        // var result = await FoloosiPlugins.makePaymentWithReferenceToken(referenceToken);
+        if (kDebugMode) {
+          print("Payment Response: $result");
+        }
+      } on Exception catch (exception) {
+        exception.runtimeType;
+      }
+    } else {
+      if (kDebugMode) {
+        print("Error: Please enter amount");
+      }
+    }
+
+    /// Platform messages may fail, so we use a try/catch PlatformException.
+
+    /// If the widget was removed from the tree while the asynchronous platform
+    /// message was in flight, we want to discard the reply rather than calling
+    /// setState to update our non-existent appearance.
   }
 
 }

@@ -47,17 +47,17 @@ class Api {
 
   }
 
-  static Future<Product> getProductDetails(int productId) async {
+  static Future<ProductList> getProductDetails(int productId) async {
     var request = http.MultipartRequest('GET', Uri.parse(url + 'api/product/$productId'));
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
       String data = await response.stream.bytesToString();
-      return Product.fromJson(jsonDecode(data));
+      return ProductList.fromJson(jsonDecode(data));
     }
     else {
-      return Product(id: -1, subCategoryId: -1, title: "", subTitle: "", search: "", image: "", rate: 0, rateCount: 0, description: "", price: -1, images: [], reviews: [],ar_desc: "",ar_title: "");
+      return ProductList(id: -1, subCategoryId: -1, title: "", subTitle: "", search: "", image: "", rate: 0, rateCount: 0, description: "", price: -1, images: [],ar_desc: "",ar_title: "");
     }
   }
 

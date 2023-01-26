@@ -37,6 +37,7 @@ class Order {
     required this.vat,
     required this.hold,
     required this.note,
+    required this.advanced_amount,
   });
 
   int id;
@@ -51,6 +52,7 @@ class Order {
   double price;
   int shippingState;
   double shippingPrice;
+  double advanced_amount;
   String invoice;
   String orderId;
   int pickUp;
@@ -76,6 +78,7 @@ class Order {
     title: json["title"],
     description: json["description"],
     price: double.parse(json["price"].toString()),
+    advanced_amount: double.parse(json["advanced_amount"].toString()),
     shippingState: json["shipping_state"],
     shippingPrice: double.parse(json["shipping_price"].toString()),
     invoice: json["invoice"],

@@ -5,10 +5,13 @@ import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/main.dart';
 import 'package:alwan_press/view/home.dart';
+import 'package:alwan_press/view/new_profile.dart';
 import 'package:alwan_press/view/order.dart';
 import 'package:alwan_press/view/profile.dart';
 import 'package:alwan_press/view/settings.dart';
+import 'package:alwan_press/view/wishlist.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,13 +42,14 @@ class MainClass extends StatelessWidget {
           screens: [
             Home(),
             OrderPage(),
-            Profile(),
-            Settings()
+            Wishlist(),
+            NewProfile()
           ],
           items: _navBarsItems(context),
           resizeToAvoidBottomInset: false,
+
           controller: mainClassController.bottomBarController,
-          navBarStyle: NavBarStyle.style7,
+          navBarStyle: NavBarStyle.style12,
           backgroundColor: MyTheme.isDarkTheme.value ? App.darkGrey : Colors.white,
           decoration: NavBarDecoration(
             borderRadius: const BorderRadius.only(
@@ -69,10 +73,12 @@ class MainClass extends StatelessWidget {
             ],
             colorBehindNavBar: Colors.white,
           ),
+
           itemAnimationProperties: const ItemAnimationProperties(
             duration: Duration(milliseconds: 600),
             curve: Curves.fastOutSlowIn,
           ),
+
           screenTransitionAnimation: const ScreenTransitionAnimation(
             animateTabTransition: true,
             curve: Curves.fastOutSlowIn,
@@ -87,13 +93,71 @@ class MainClass extends StatelessWidget {
   List<PersistentBottomNavBarItem> _navBarsItems(context){
     return [
       PersistentBottomNavBarItem(
+      icon: SvgPicture.asset(
+      'assets/icons/home.svg',
+          color: App.lightPink
+      ),
+      title: App_Localization.of(context).translate('home'),
+      activeColorSecondary: App.lightPink,
+      activeColorPrimary: Color(0xffEC008C),
+      inactiveColorPrimary: App.grey,
+
+      inactiveIcon: SvgPicture.asset(
+      'assets/icons/home.svg',
+      color:  App.grey,
+      ),
+      ),
+      PersistentBottomNavBarItem(
+      icon:  SvgPicture.asset(
+      'assets/icons/order.svg',
+      color: App.lightPink,
+      ),
+      title: Global.langCode=="ar"?"   "+App_Localization.of(context).translate('orders'):App_Localization.of(context).translate('orders'),
+      activeColorSecondary: App.lightPink,
+      activeColorPrimary: Color(0xff0072BC),
+      inactiveColorPrimary: App.grey,
+      inactiveIcon: SvgPicture.asset(
+      'assets/icons/order.svg',
+      color:  App.grey,
+      ),
+      ),
+      PersistentBottomNavBarItem(
+      icon: Icon(Icons.favorite_border,color: App.lightPink,),
+      title: App_Localization.of(context).translate('wishlist'),
+      activeColorSecondary: App.lightPink,
+      activeColorPrimary:  Color(0xffA3228E),
+      inactiveColorPrimary: App.grey,
+      inactiveIcon: Icon(Icons.favorite_border,color: App.grey,),
+      ),
+      PersistentBottomNavBarItem(
+      icon: SvgPicture.asset(
+      'assets/icons/profile.svg',
+        color: App.lightPink,
+      ),
+      title: App_Localization.of(context).translate('profile'),
+      activeColorSecondary: App.lightPink,
+      activeColorPrimary:  App.yellow,
+      inactiveColorPrimary: App.grey,
+      inactiveIcon: SvgPicture.asset(
+      'assets/icons/profile.svg',
+      color:  App.grey,
+      ),
+      ),
+    ];
+  }
+
+
+  List<PersistentBottomNavBarItem> _oldNavBarsItems(context){
+    return [
+      PersistentBottomNavBarItem(
         icon: SvgPicture.asset(
-              'assets/icons/home.svg',
-          ),
+          'assets/icons/home.svg',
+        ),
         title: App_Localization.of(context).translate('home'),
         activeColorSecondary: Colors.white,
         activeColorPrimary: Color(0xffEC008C),
         inactiveColorPrimary: App.grey,
+
         inactiveIcon: SvgPicture.asset(
           'assets/icons/home.svg',
           color:  App.grey,
@@ -101,7 +165,7 @@ class MainClass extends StatelessWidget {
       ),
       PersistentBottomNavBarItem(
         icon:  SvgPicture.asset(
-              'assets/icons/order.svg',
+          'assets/icons/order.svg',
           color: Colors.white,
         ),
         title: Global.langCode=="ar"?"   "+App_Localization.of(context).translate('orders'):App_Localization.of(context).translate('orders'),
@@ -114,39 +178,30 @@ class MainClass extends StatelessWidget {
         ),
       ),
       PersistentBottomNavBarItem(
-        icon:  SvgPicture.asset(
-          'assets/icons/profile.svg',
-          color: Colors.white,
-        ),
-        title: App_Localization.of(context).translate('profile'),
+        icon: Icon(Icons.favorite_border,color: Colors.white,),
+        title: App_Localization.of(context).translate('wishlist'),
         activeColorSecondary: Colors.white,
         activeColorPrimary:  Color(0xffA3228E),
         inactiveColorPrimary: App.grey,
-        inactiveIcon: SvgPicture.asset(
-          'assets/icons/profile.svg',
-          color:  App.grey,
-        ),
+        inactiveIcon: Icon(Icons.favorite_border,color: App.grey,),
       ),
       PersistentBottomNavBarItem(
-        icon:  SvgPicture.asset(
-          'assets/icons/setting.svg',
-          width: 30,
-          height: 30,
-          color: Colors.white,
+        icon: SvgPicture.asset(
+          'assets/icons/profile.svg',
+          color: App.darkGrey,
         ),
-        title: App_Localization.of(context).translate('settings'),
-        // textStyle: TextStyle(shadows: [Shadow(color: Colors.black,blurRadius: 18)],fontSize: 12),
-        activeColorSecondary: Colors.white,
-        activeColorPrimary:  Color(0xffBED82D).withOpacity(0.7),
+        title: App_Localization.of(context).translate('profile'),
+        activeColorSecondary: App.darkGrey,
+        activeColorPrimary:  App.yellow,
         inactiveColorPrimary: App.grey,
         inactiveIcon: SvgPicture.asset(
-          'assets/icons/setting.svg',
-          width: 30,
-          height: 30,
+          'assets/icons/profile.svg',
           color:  App.grey,
         ),
       ),
     ];
   }
+
+
 
 }

@@ -22,6 +22,10 @@ class OrderPage extends StatelessWidget {
   IntroController introController = Get.find();
   OrderController orderController = Get.find();
   MainClassController mainClassController = Get.find();
+  FocusNode focusNode = FocusNode();
+  OrderPage(){
+    orderController.dropdownvalue.value = "";
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -49,20 +53,7 @@ class OrderPage extends StatelessWidget {
     });
   }
 
-  _header(context){
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.1,
-      decoration: BoxDecoration(
-        color: MyTheme.isDarkTheme.value ?  Colors.black : Colors.white,
-      ),
-      child: Center(
-        child: Text(App_Localization.of(context).translate("orders"),
-          style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 24),
-        ),
-      ),
-    );
-  }
+
 
   _orderList(context){
     return RefreshIndicator(
@@ -71,46 +62,153 @@ class OrderPage extends StatelessWidget {
          return await orderController.getOrderDataIndicater();
       },
       child: Container(
-        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.08),
+        margin: EdgeInsets.only(top: 70),
         // height: MediaQuery.of(context).size.height * 0.8,
-        color: !MyTheme.isDarkTheme.value ?  Colors.white : Colors.black,
+        // color: !MyTheme.isDarkTheme.value ?  Colors.white : Colors.black,
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 600),
           child:  orderController.loading.value
               ? const Center(child: CircularProgressIndicator(),)
               :Padding(
-                padding: const EdgeInsets.only(bottom: 20 ,left: 10,right: 10),
+                padding: const EdgeInsets.only(bottom: 20),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(height: 20,),
-                      _hold(context),
-                      SizedBox(height: 20,),
-                      _waitingAdvanced(context),
-                      SizedBox(height: 20,),
-                      _waitingFinal(context),
-                      SizedBox(height: 20,),
-                      _inProgress(context),
-                      SizedBox(height: 20,),
-                      _ready(context),
-                      SizedBox(height: 20,),
-                      _delivered(context),
+                      _filteredOrderList(context,orderController.filteredData),
+
                     ],
                   ),
                 )
-                
-          //       ListView.builder(
-          //   padding: EdgeInsets.only(bottom: 0),
-          //   itemCount: orderController.myOrders.length,
-          //   itemBuilder: (context, index){
-          //       // var dateTime = orderController.calculateTime(index);
-          //       // orderController.setOrderState(index);
-          //       return _orderItem(context,index);
-          //   },
-          // ),
               ),
         ),
       )
+    );
+  }
+
+  _header(BuildContext context){
+    return Container(
+      width: Get.width,
+      height: 60,
+      color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+      child: Column(
+        children: [
+          Container(
+            height: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(width: Get.width * 0.05,),
+                App.logo(context),
+                SizedBox(width: Get.width * 0.05,),
+                Container(
+                    width: Get.width *0.85 - 112,
+                    height: 30,
+                    decoration: BoxDecoration(
+                        color: App.textColor().withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(5)
+                    ),
+                    child: TextField(
+                      controller: orderController.search,
+                      focusNode: focusNode,
+                      style: TextStyle(color: App.textColor()),
+                      onChanged: (val){
+                        orderController.searchForData();
+                      },
+                      decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(0),
+                            borderSide:  BorderSide(width: 1, color:Colors.transparent),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(0),
+                            borderSide:  BorderSide(width: 1, color:Colors.transparent),
+                          ),
+                          suffixIcon: GestureDetector(
+                            onTap: (){
+                              orderController.search.clear();
+                              orderController.searchForData();
+                              focusNode.unfocus();
+                            },
+                            child: Icon(Icons.close,color:orderController.search.text.isEmpty?Colors.transparent:App.textColor().withOpacity(0.5),size: 20,),
+                          ),
+                          prefixIcon: Icon(Icons.search,color:App.textColor().withOpacity(0.5),size: 20,),
+                          hintText: App_Localization.of(context).translate("search"),
+                          hintStyle: TextStyle(color:App.textColor().withOpacity(0.5),fontSize: 10),
+                          floatingLabelBehavior: FloatingLabelBehavior.always
+                        // alignLabelWithHint: true,
+                      ),
+                      // autofocus: true,
+                    )
+                ),
+                SizedBox(width: Get.width * 0.05,),
+
+
+                // Expanded(
+                //   child: Container(
+                //     height: 35,
+                //     decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(2),
+                //       border: Border.all(color: App.textColor().withOpacity(0.3))
+                //     ),
+                //     child:  Padding(
+                //       padding: const EdgeInsets.symmetric(horizontal: 5),
+                //       child: DropdownButton(
+                //
+                //         // Initial Value
+                //         value: orderController.dropdownvalue.value == ""?App_Localization.of(context).translate("all"):orderController.dropdownvalue.value,
+                //
+                //         // Down Arrow Icon
+                //         icon: Icon(Icons.keyboard_arrow_down,color: App.textColor()),
+                //         dropdownColor: App.containerColor(),
+                //         // Array list of items
+                //         items: [
+                //           App_Localization.of(context).translate("all"),
+                //           App_Localization.of(context).translate("state0"),
+                //           App_Localization.of(context).translate("state1"),
+                //           App_Localization.of(context).translate("state2"),
+                //           App_Localization.of(context).translate("state3"),
+                //           App_Localization.of(context).translate("state4"),
+                //           App_Localization.of(context).translate("hold"),
+                //         ].map((String items) {
+                //           return DropdownMenuItem(
+                //             value: items,
+                //             child: Text(items,style: TextStyle(color: App.textColor(),fontSize: 10)),
+                //           );
+                //         }).toList(),
+                //         // After selecting the desired option,it will
+                //         // change button value to selected value
+                //         onChanged: (newValue) {
+                //           print(newValue);
+                //           orderController.dropdownvalue.value = newValue.toString();
+                //           orderController.filteredData.value =
+                //           orderController.dropdownvalue.value == App_Localization.of(context).translate("all") || orderController.dropdownvalue.value == ""?
+                //           orderController.myOrders.value:
+                //           orderController.dropdownvalue.value == App_Localization.of(context).translate("state0")?
+                //           orderController.waitingAdvance.value:
+                //           orderController.dropdownvalue.value == App_Localization.of(context).translate("state1")?
+                //           orderController.inProgress.value:
+                //           orderController.dropdownvalue.value == App_Localization.of(context).translate("state2")?
+                //           orderController.waitingFinal.value:
+                //           orderController.dropdownvalue.value == App_Localization.of(context).translate("state3")?
+                //           orderController.ready.value:
+                //           orderController.dropdownvalue.value == App_Localization.of(context).translate("state4")?
+                //           orderController.delivered.value:
+                //           orderController.hold.value;
+                //         },
+                //         underline: Center(),
+                //         hint: Text(orderController.dropdownvalue.value,style: TextStyle(color: App.textColor(),fontSize: 10),),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+
+
+              ],
+            ),
+          ),
+
+        ],
+      ),
     );
   }
 
@@ -220,106 +318,123 @@ class OrderPage extends StatelessWidget {
       ],
     );
   }
+  _filteredOrderList(BuildContext context,List<Order> orders){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount:orders.length,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context,index){
+                return _orderCard(context, orders[index]);
+              }),
+        ),
+      ],
+    );
+  }
 
   _orderCard(BuildContext context,Order order){
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 5),
-      child: GestureDetector(
-        onTap: (){
-          Get.to(()=>OrderDetails(order.id));
-        },
-        child: Column(
+    return GestureDetector(
+      onTap: (){
+        Get.to(()=>OrderDetails(order.id));
+      },
+      child: Column(
 
-          children: [
-
-            const SizedBox(height: 10),
-            Container(
-              width: MediaQuery.of(context).size.width*0.6,
-              decoration: BoxDecoration(
-                color: MyTheme.isDarkTheme.value ?
-                App.darkGrey :
-                Colors.black.withOpacity(0.075),
-                borderRadius: BorderRadius.circular(5),
-
-              ),
-              child: Center(
-                child: Container(
-                  width: MediaQuery.of(context).size.width*0.6 - 20 ,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const SizedBox(height: 8),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.95,
-                        child: Text(App_Localization.of(context).translate("pleaced_on") +" "+orderController.convertTime(order.created_at.toString()),
-                          style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 10),
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              color: MyTheme.isDarkTheme.value ?
+              App.darkGrey :
+              Colors.white,
+            ),
+            child: Center(
+              child: Container(
+                width: MediaQuery.of(context).size.width-20 ,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("#"+order.quickBookId.toString(),style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 11,fontWeight: FontWeight.bold),),
+                            Text(App_Localization.of(context).translate("pleaced_on") +" "+orderController.convertTime(order.created_at.toString()),
+                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 10),
+                            ),
+                          ],
                         ),
-                      ),
-                      const SizedBox(height: 3),
-                      Text(order.title,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
-                      Text("#"+order.orderId,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12),),
-                      const SizedBox(height: 3),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              order.hold == 1
-                                  ? Text(App_Localization.of(context).translate("hold"),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 12),)
-                                  :order.state == 0
-                                  ? Text(order.getStateManual(context,0),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 12),)
-                                  :order.state == 2
-                                  ?Text(order.getStateManual(context,2),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 12),)
-                                  :Text(App_Localization.of(context).translate("ready_on"),
-                                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13,fontWeight: FontWeight.bold),
-                              ),
-
-                              order.state == 0
-                                  || order.state == 2
-                                  || order.hold == 1
-                                  ?Center()
-                                  : Text(" "+orderController.convertTime(order.deadline.toString()),
-                                style: TextStyle(color: Colors.green,fontSize: 13,fontWeight: FontWeight.bold),
-                              ),
-                            ],
+                        Container(
+                          width: 100,
+                          decoration: BoxDecoration(
+                            // color: App.pink,
+                              borderRadius: BorderRadius.circular(10)
                           ),
-
-                        ],
-                      ),
-                      const SizedBox(height: 3),
-                      Container(
-                        width: Get.width * 0.6,
-                        decoration: BoxDecoration(
-                          // color: App.pink,
-                            borderRadius: BorderRadius.circular(10)
-                        ),
-                        child: Center(
-                          child: GestureDetector(
-                            onTap: (){
-                              Get.to(()=>OrderDetails(order.id));
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(App_Localization.of(context).translate("view_details"),style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 11,fontWeight: FontWeight.bold),),
-                                SizedBox(width: 10,),
-                                Icon(Icons.arrow_forward_ios,color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),size: 13,)
-                              ],
+                          child: Center(
+                            child: GestureDetector(
+                              onTap: (){
+                                Get.to(()=>OrderDetails(order.id));
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(App_Localization.of(context).translate("view_details"),style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 11,fontWeight: FontWeight.bold),),
+                                  SizedBox(width: 5,),
+                                  Icon(Icons.arrow_forward_ios,color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),size: 13,)
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 8,)
-                    ],
-                  ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Container(width: Get.width - 20 ,color: App.textColor().withOpacity(0.3),height: 1,),
+                    const SizedBox(height: 10),
+                    Text(order.title,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 16,fontWeight: FontWeight.bold),),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            order.hold == 1
+                                ? Text(App_Localization.of(context).translate("hold"),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 12),)
+                                :order.state == 0
+                                ? Text(order.getStateManual(context,0),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 12),)
+                                :order.state == 2
+                                ?Text(order.getStateManual(context,2),style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 12),)
+                                :Text(App_Localization.of(context).translate("ready_on"),
+                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 13,fontWeight: FontWeight.bold),
+                            ),
+
+                            order.state == 0
+                                || order.state == 2
+                                || order.hold == 1
+                                ?Center()
+                                : Text(" "+orderController.convertTime(order.deadline.toString()),
+                              style: TextStyle(color: Colors.green,fontSize: 13,fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                  ],
                 ),
               ),
             ),
-
-
-          ],
-        ),
+          ),
+          SizedBox(height: 10,)
+        ],
       ),
     );
   }

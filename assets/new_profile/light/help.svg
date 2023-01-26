@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17">
+  <g id="Group_36377" data-name="Group 36377" transform="translate(-2683.162 -2186.5)">
+    <g id="info-circle-Regular" transform="translate(2683.162 2186.5)">
+      <path id="info-circle-Regular_1_" d="M357.75,1084.25a8.5,8.5,0,1,0,8.5,8.5A8.51,8.51,0,0,0,357.75,1084.25Zm0,15.692a7.192,7.192,0,1,1,7.192-7.192A7.2,7.2,0,0,1,357.75,1099.942Zm.872-10.679a.872.872,0,1,1-.872-.872A.872.872,0,0,1,358.622,1089.263Zm-.218,3.487v3.487a.654.654,0,1,1-1.308,0v-3.487a.654.654,0,0,1,1.308,0Z" transform="translate(-349.25 -1084.25)" fill="#51535b"/>
+    </g>
+    <g id="info-circle-Regular-2" data-name="info-circle-Regular" transform="translate(2690.79 2190.641)">
+      <path id="info-circle-Regular_1_2" data-name="info-circle-Regular_1_" d="M358.622,1089.263a.872.872,0,1,1-.872-.872A.872.872,0,0,1,358.622,1089.263Zm-.218,3.487v3.487a.654.654,0,1,1-1.308,0v-3.487a.654.654,0,0,1,1.308,0Z" transform="translate(-356.878 -1088.391)" fill="#e70089"/>
+    </g>
+  </g>
+</svg>

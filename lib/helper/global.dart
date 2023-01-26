@@ -78,11 +78,14 @@ class Global {
 
   }
 
-  static logout(){
+  static logout()async{
     storeUserInformation(-1, "", "");
     // IntroController introController = Get.find();
     // Get.delete<IntroController>();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("address");
     Get.to(()=>SignIn());
+    Store.loadAddress();
     Global.user = null;
   }
 

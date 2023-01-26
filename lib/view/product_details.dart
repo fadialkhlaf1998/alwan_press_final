@@ -5,6 +5,7 @@ import 'package:alwan_press/controller/intro_controller.dart';
 import 'package:alwan_press/controller/product_details_controller.dart';
 import 'package:alwan_press/controller/product_list_controller.dart';
 import 'package:alwan_press/controller/sign_in_controller.dart';
+import 'package:alwan_press/controller/wishlist_controller.dart';
 import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
@@ -27,6 +28,7 @@ class ProductDetails extends StatelessWidget {
   ProductList product;
   // ProductDetails(this.product, {Key? key}) : super(key: key);
   ProductDetailsController productDetailsController = Get.put(ProductDetailsController());
+
   // HomeController homeController = Get.find();
   IntroController introController = Get.find();
   ProductDetails(this.product) {
@@ -243,12 +245,36 @@ class ProductDetails extends StatelessWidget {
         children: [
 
           Divider(height: 30,color: Theme.of(context).dividerColor),
-          Text(App_Localization.of(context).translate("description"),
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(App_Localization.of(context).translate("description"),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black
+                ),
+              ),
+              Container(
+                width: 25,
+                height: 25,
+                decoration: BoxDecoration(
+                  border: Border.all(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : App.grey),
+                  shape: BoxShape.circle
+                ),
+                child: Center(
+                  child: Obx(() => GestureDetector(
+                    onTap: (){
+                      productDetailsController.wishlistController.wishlistFunction(productDetailsController.productDetails.value);
+                    },
+                    child:
+                    productDetailsController.productDetails.value.wishlist.value
+                        ?Icon(Icons.favorite,size: 18,color: App.lightPink,)
+                        :Icon(Icons.favorite_border,size: 18,),
+                  )),
+                ),
+              )
+            ],
           ),
           const SizedBox(height: 5,),
           AnimatedSwitcher(

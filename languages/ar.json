@@ -65,7 +65,7 @@
   "aed": "درهم إماراتي",
   "state0": "في انتظار الدفع المسبق",
   "state1": "قيد التنفيذ",
-  "state2": "في انتظار الدفع النهائي",
+  "state2": "جاهز-في انتظار الدفع النهائي",
   "state3": "جاهز",
   "state4": "تم التسليم",
   "req_shipping_succ_t": "تم طلب الشحن",
@@ -141,5 +141,18 @@
   "hala_welcome_back": "اهلاً بعودتك",
   "please_enter_email": "الرجاء إدخال اسم المستخدم",
   "please_enter_password": "الرجاء إدخال كلمة المرور",
-  "mobile_number": "رقم الهاتف"
+  "mobile_number": "رقم الهاتف",
+
+  "wishlist": "المفضلة",
+  "item": "عنصر",
+  "items": "عناصر",
+  "no_wishlist": "قائمة الرغبات الخاصة بك فارغة ماذا تنتظر",
+  "continue_shopping": "متابعة التسوق",
+  "all": "الكل",
+  "my_account": "حسابي",
+  "reach_out_to_us": "تواصل معنا",
+  "sign_out": "تسجيل الخروج",
+  "hala": "اهلاً",
+  "edit_profile": "تعديل الملف الشخصي",
+  "profile_saved_successfully": "تم حفظ الملف الشخصي بنجاح"
 }

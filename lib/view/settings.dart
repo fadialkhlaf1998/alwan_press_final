@@ -36,7 +36,7 @@ class Settings extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            MyTheme.isDarkTheme.value? const DarkModeBackground():Center(),
+            const DarkModeBackground(),
             Column(
               children: [
                 _header(context),

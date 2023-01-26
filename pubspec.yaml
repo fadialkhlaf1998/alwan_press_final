@@ -66,6 +66,8 @@ dependencies:
   image_picker: ^0.8.5+3
   intl_phone_number_input: ^0.7.0+2
   google_maps_flutter: ^2.2.0
+  modal_bottom_sheet: ^2.1.2
+  foloosi_plugins: ^1.0.14
 
 dev_dependencies:
   flutter_test:
@@ -111,6 +113,9 @@ flutter:
     - assets/orderIcons/
     - languages/en.json
     - languages/ar.json
+    - assets/new_profile/dark/
+    - assets/new_profile/light/
+    - assets/new_profile/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -97,6 +97,7 @@ class ProfileController extends GetxController {
 
               Api.updateCustomerData(email.text,phone.text,name.text,landLine.text, Global.user!.id).then((value) {
                 if(value){
+
                   Api.login(Global.user!.username, Global.user!.password).then((value) {
                     if(value.id != -1){
 

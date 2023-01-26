@@ -7,9 +7,11 @@ import 'package:alwan_press/controller/ProfileController.dart';
 import 'package:alwan_press/controller/all_subCategory_controller.dart';
 import 'package:alwan_press/controller/home_controller.dart';
 import 'package:alwan_press/controller/order_controller.dart';
+import 'package:alwan_press/controller/wishlist_controller.dart';
 import 'package:alwan_press/helper/api.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/store.dart';
+import 'package:alwan_press/model/product_list.dart';
 import 'package:alwan_press/model/start_up.dart';
 import 'package:alwan_press/view/main_class.dart';
 import 'package:alwan_press/view/sign_in.dart';
@@ -28,6 +30,7 @@ class IntroController extends GetxController{
   RxList<SuggestionSearch> searchSuggestionList = <SuggestionSearch>[].obs;
   RxInt contactIndex = 0.obs;
   HomeController homeController = Get.put(HomeController());
+  WishlistController wishlistController = Get.put(WishlistController());
 
   RxBool showPhoneList = false.obs;
   RxBool showWhatsAppList = false.obs;
@@ -53,6 +56,8 @@ class IntroController extends GetxController{
   getData()async{
     /// todo
     /// no internet
+    // Store.saveWishlist(<ProductList>[]);
+    wishlistController.wishlist = await Store.loadWishlist();
     Api.checkInternet().then((value){
       if(value){
         print('internet-------------------');

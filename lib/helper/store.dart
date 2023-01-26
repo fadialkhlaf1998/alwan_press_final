@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/model/address.dart';
+import 'package:alwan_press/model/product.dart';
+import 'package:alwan_press/model/product_list.dart';
 import 'package:alwan_press/view/address.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,7 +41,32 @@ class Store {
       Global.ad_desc = a.adDesc;
       return a;
     }else{
+      Global.nick_name ="";
+      Global.street_name ="";
+      Global.building ="";
+      Global.floor ="";
+      Global.flat ="";
+      Global.phone ="";
+      Global.ad_desc ="";
       return Address(nickName: "", streetName: "", building: "", floor: "", flat: "", adDesc: "", phone: "");
     }
+  }
+
+  static Future<List<ProductList>> loadWishlist()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String data = prefs.getString("wishlist")??"non";
+    if(data == "non"){
+      return <ProductList>[];
+    }else{
+      List<ProductList> prods = Wishlist.fromJson(data).wishlist;
+      prods.forEach((element) {element.wishlist(true);});
+      return prods;
+    }
+  }
+
+  static saveWishlist(List<ProductList> myWishlist)async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Wishlist wishlist = Wishlist(wishlist: myWishlist);
+    prefs.setString("wishlist",wishlist.toJson());
   }
 }

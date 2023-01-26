@@ -2,6 +2,7 @@ import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/controller/home_controller.dart';
 import 'package:alwan_press/controller/intro_controller.dart';
 import 'package:alwan_press/controller/product_list_controller.dart';
+import 'package:alwan_press/controller/wishlist_controller.dart';
 import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/view/contact_information.dart';
@@ -22,6 +23,7 @@ class ProductList extends StatelessWidget {
   ProductList(){
     productListController.getData();
   }
+
 
   ProductListController productListController = Get.put(ProductListController());
   HomeController homeController = Get.find();
@@ -194,7 +196,7 @@ class ProductList extends StatelessWidget {
           maxCrossAxisExtent: MediaQuery.of(context).size.shortestSide < 600
               ? MediaQuery.of(context).size.width * 0.5
               : MediaQuery.of(context).size.width * 0.3,
-          childAspectRatio: 4 / 5,
+          childAspectRatio: 4 / 6,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
         ),
@@ -209,7 +211,9 @@ class ProductList extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         // productListController.productId.value = productListController.productsList[index].id;
-        Get.to(()=>ProductDetails(productListController.tempProductsList[index]));
+        Get.to(()=>ProductDetails(productListController.tempProductsList[index]))!.then((value) async {
+          productListController.wishlistUpdate();
+        });
       },
       child: SizedBox(
         child: Column(
@@ -221,9 +225,7 @@ class ProductList extends StatelessWidget {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5,
                 child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10)),
+                  borderRadius: BorderRadius.circular(10),
                   child: Hero(
                     transitionOnUserGestures: true,
                     tag: productListController.tempProductsList[index],
@@ -250,24 +252,36 @@ class ProductList extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   width: MediaQuery.of(context).size.width * 0.5,
                   decoration: BoxDecoration(
-                      color: MyTheme.isDarkTheme.value ? App.darkGrey : App.lightGrey,
-                      borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10))),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                        Global.langCode == "en"
-                            ?
-                        productListController.tempProductsList[index].title
-                        :productListController.tempProductsList[index].ar_title,
-                        maxLines: 2,
-                        style: TextStyle(
-                            color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
-                            fontSize: 12,
-                            overflow: TextOverflow.ellipsis
-                        )
+                      // color: MyTheme.isDarkTheme.value ? App.darkGrey : App.lightGrey,
+                      // borderRadius: BorderRadius.circular(10)
                     ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(height: 5,),
+                      Text(
+                          Global.langCode == "en"
+                              ?
+                          productListController.tempProductsList[index].title
+                          :productListController.tempProductsList[index].ar_title,
+                          maxLines: 1,
+                          style: TextStyle(
+                              color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
+                              fontSize: 12,
+                              overflow: TextOverflow.ellipsis
+                          )
+                      ),
+                      Obx(() => GestureDetector(
+                        onTap: (){
+                          productListController.wishlistController.wishlistFunction(productListController.tempProductsList[index]);
+                        },
+                        child:
+                        productListController.tempProductsList[index].wishlist.value
+                            ?Icon(Icons.favorite,size: 20,color: App.lightPink,)
+                            :Icon(Icons.favorite_border,size: 20,),
+                      ))
+                    ],
                   )
               ),
             ),

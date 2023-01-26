@@ -65,7 +65,7 @@
   "aed": "AED",
   "state0": "Waiting For Advance Payment",
   "state1": "In Progress",
-  "state2": "Waiting For Final Payment",
+  "state2": "Ready-Waiting For Final Payment",
   "state3": "Ready",
   "state4": "Delivered",
   "req_shipping_succ_t": "Shipping Has Been Requested Successfully",
@@ -141,5 +141,18 @@
 
   "please_enter_email": "Please enter your username",
   "please_enter_password": "Please enter your password",
-  "mobile_number": "Mobile Number"
+  "mobile_number": "Mobile Number",
+
+  "wishlist": "Wishlist",
+  "item": "Item",
+  "items": "Items",
+  "no_wishlist": "Your Wishlist is Empty What Are You Waiting For",
+  "continue_shopping": "Continue Shopping",
+  "all": "All",
+  "my_account": "My Account",
+  "reach_out_to_us": "Reach Out To Us",
+  "sign_out": "Sign Out",
+  "hala": "hala",
+  "edit_profile": "Edit Profile",
+  "profile_saved_successfully": "Profile Saved Successfully"
 }

@@ -14,20 +14,38 @@ import 'package:path_provider/path_provider.dart';
 class OrderController extends GetxController{
 
   RxList <Order> myOrders = <Order>[].obs;
+  RxList <Order> tempOrders = <Order>[].obs;
   RxList <Order> hold = <Order>[].obs;
   RxList <Order> ready = <Order>[].obs;
   RxList <Order> inProgress = <Order>[].obs;
   RxList <Order> delivered = <Order>[].obs;
   RxList <Order> waitingAdvance = <Order>[].obs;
   RxList <Order> waitingFinal = <Order>[].obs;
+  RxList <Order> filteredData = <Order>[].obs;
   RxBool loading = false.obs;
   RxBool fake = false.obs;
+  RxString dropdownvalue = "".obs;
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
+  TextEditingController search = TextEditingController();
+
 
   @override
   void onInit() {
     super.onInit();
     getOrderData();
+  }
+
+  searchForData(){
+    if(search.text.isEmpty){
+      filteredData.value.addAll(myOrders);
+    }else{
+      filteredData.clear();
+      for(int i=0;i<myOrders.length;i++){
+        if(myOrders[i].title.toLowerCase().contains(search.text.toLowerCase())||myOrders[i].quickBookId.toLowerCase().contains(search.text.toLowerCase())){
+          filteredData.add(myOrders[i]);
+        }
+      }
+    }
   }
 
   filterOrders(List<Order>  orders){
@@ -51,6 +69,7 @@ class OrderController extends GetxController{
       }else {
         delivered.add(elm);
       }
+      filteredData.add(elm);
       // orders.remove(elm);
     }
   }
@@ -100,8 +119,8 @@ class OrderController extends GetxController{
         if(value.isNotEmpty){
           print('done orders');
           myOrders.value = value;
-          List<Order> temp = value;
-          filterOrders(temp);
+          tempOrders.value = value;
+          filterOrders(tempOrders);
           loading.value = false;
         }else{
           print('no orders');

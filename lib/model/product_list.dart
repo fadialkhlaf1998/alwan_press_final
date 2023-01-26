@@ -2,6 +2,7 @@
 //
 //     final productList = productListFromMap(jsonString);
 
+import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
@@ -39,6 +40,7 @@ class ProductList {
   String ar_desc;
   double price;
   List<MyImage> images;
+  Rx<bool> wishlist = false.obs;
 
   factory ProductList.fromMap(Map<String, dynamic> json) => ProductList(
     id: json["id"],
@@ -67,6 +69,9 @@ class ProductList {
     "rate_count": rateCount,
     "description": description,
     "price": price,
+    "ar_desc":ar_desc,
+    "ar_title":ar_title,
+    "images":List<dynamic>.from(images.map((e) => e.toMap())),
   };
   factory ProductList.fromJson(Map<String, dynamic> json) => ProductList(
     id: json["id"],
@@ -95,6 +100,9 @@ class ProductList {
     "rate_count": rateCount,
     "description": description,
     "price": price,
+    "ar_desc":ar_desc,
+    "ar_title":ar_title,
+    "images":List<dynamic>.from(images.map((e) => e.toMap())),
   };
 
 }

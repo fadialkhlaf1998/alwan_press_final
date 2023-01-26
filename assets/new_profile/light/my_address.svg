@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20.369" height="20.369" viewBox="0 0 20.369 20.369">
+  <g id="Group_36372" data-name="Group 36372" transform="translate(-1436.815 -2417.786)">
+    <g id="Group_36367" data-name="Group 36367" transform="translate(1421 2076)">
+      <g id="pin_drop_black_24dp" transform="translate(15.815 341.786)">
+        <path id="Path_7061" data-name="Path 7061" d="M0,0H20.369V20.369H0Z" fill="none"/>
+        <path id="Path_7062" data-name="Path 7062" d="M16.033,7.092a5.092,5.092,0,0,0-10.185,0c0,3.819,5.092,9.336,5.092,9.336S16.033,10.911,16.033,7.092Zm-6.79,0a1.7,1.7,0,1,1,1.7,1.7A1.7,1.7,0,0,1,9.244,7.092ZM5,17.277v1.7H16.882v-1.7Z" transform="translate(-0.756 -0.303)" fill="#51535b"/>
+      </g>
+      <g id="pin_drop_black_24dp-2" data-name="pin_drop_black_24dp" transform="translate(15.815 341.786)">
+        <path id="Path_7061-2" data-name="Path 7061" d="M0,0H20.369V20.369H0Z" fill="none"/>
+        <path id="Path_7062-2" data-name="Path 7062" d="M5,17.277v1.7H16.882v-1.7Z" transform="translate(-0.756 -0.303)" fill="#ec008c"/>
+      </g>
+    </g>
+  </g>
+</svg>

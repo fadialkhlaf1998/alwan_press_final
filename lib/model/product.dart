@@ -3,6 +3,9 @@
 //     final product = productFromJson(jsonString);
 import 'dart:convert';
 
+import 'package:alwan_press/model/product_list.dart';
+import 'package:get/get.dart';
+
 Product productFromJson(String str) => Product.fromJson(json.decode(str));
 
 String productToJson(Product data) => json.encode(data.toJson());
@@ -39,6 +42,7 @@ class Product {
   double price;
   List<ProductImage> images;
   List<dynamic> reviews;
+  Rx<bool> wishlist = false.obs;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
     id: json["id"],
@@ -140,5 +144,25 @@ class ProductImage {
     "id": id,
     "product_id": productId,
     "link": link,
+  };
+}
+
+class Wishlist {
+  Wishlist({
+    required this.wishlist,
+  });
+
+  List<ProductList> wishlist;
+
+  factory Wishlist.fromJson(String str) => Wishlist.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Wishlist.fromMap(Map<String, dynamic> json) => Wishlist(
+    wishlist: List<ProductList>.from(json["wishlist"].map((x) => ProductList.fromMap(x))),
+  );
+
+  Map<String, dynamic> toMap() => {
+    "wishlist": List<dynamic>.from(wishlist.map((x) => x.toMap())),
   };
 }
