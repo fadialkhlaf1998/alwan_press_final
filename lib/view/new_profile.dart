@@ -10,6 +10,7 @@ import 'package:alwan_press/helper/store.dart';
 import 'package:alwan_press/view/about_us.dart';
 import 'package:alwan_press/view/address_2.dart';
 import 'package:alwan_press/view/connect_us.dart';
+import 'package:alwan_press/view/contact_information.dart';
 import 'package:alwan_press/view/pdf_viwer.dart';
 import 'package:alwan_press/view/sign_in.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
@@ -64,6 +65,8 @@ class _NewProfileState extends State<NewProfile> {
           children: [
             DarkModeBackground(),
 
+            Global.user == null?
+            _notLogin():
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -79,6 +82,32 @@ class _NewProfileState extends State<NewProfile> {
         ),
       ),
     ));
+  }
+  _notLogin(){
+    return  Container(
+      height: MediaQuery.of(context).size.height*0.7,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // SizedBox(height: 100,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(onTap:(){
+                Get.to(()=>SignIn());
+              } ,child: Text(App_Localization.of(context).translate("sign_in"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 1),)),
+              SizedBox(width: 5,),
+              Text(App_Localization.of(context).translate("or"),style: TextStyle(color: Colors.grey),),
+              SizedBox(width: 5,),
+              GestureDetector(onTap:(){
+                Get.to(()=>ContactInformation());
+              } ,child: Text(App_Localization.of(context).translate("sign_up"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 1),)),
+
+            ],
+          )
+        ],
+      ),
+    );
   }
   _customerDetails(context){
     return Container(
