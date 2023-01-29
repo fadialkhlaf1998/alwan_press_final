@@ -599,10 +599,10 @@ class _NewProfileState extends State<NewProfile> {
                                 height: 18,
                               ),
                               SizedBox(width: 10,),
-                              Text(App_Localization.of(context).translate("my_statement"),style: TextStyle(color: App.textColor(),fontSize: 12),)
+                              Text(App_Localization.of(context).translate("my_statement"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
                             ],
                           ),
-                          Icon(Icons.arrow_forward_ios,size: 12, color: App.textColor(),)
+                          Icon(Icons.arrow_forward_ios,size: 12, color: App.textLgColor(),)
                         ],
                       ),
                       SizedBox(height: 15,),
@@ -634,10 +634,10 @@ class _NewProfileState extends State<NewProfile> {
                                 height: 19,
                               ),
                               SizedBox(width: 10,),
-                              Text(App_Localization.of(context).translate("my_address"),style: TextStyle(color: App.textColor(),fontSize: 12),)
+                              Text(App_Localization.of(context).translate("my_address"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
                             ],
                           ),
-                          Icon(Icons.arrow_forward_ios,size: 12, color: App.textColor(),)
+                          Icon(Icons.arrow_forward_ios,size: 12, color: App.textLgColor(),)
                         ],
                       ),
                       SizedBox(height: 15,),
@@ -669,10 +669,10 @@ class _NewProfileState extends State<NewProfile> {
                                 height: 18,
                               ),
                               SizedBox(width: 10,),
-                              Text(App_Localization.of(context).translate("profile"),style: TextStyle(color: App.textColor(),fontSize: 12),)
+                              Text(App_Localization.of(context).translate("profile"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
                             ],
                           ),
-                          Icon(Icons.arrow_forward_ios,size: 12, color: App.textColor(),)
+                          Icon(Icons.arrow_forward_ios,size: 12, color: App.textLgColor(),)
                         ],
                       ),
                       SizedBox(height: 15,),
@@ -704,10 +704,10 @@ class _NewProfileState extends State<NewProfile> {
                                 height: 18,
                               ),
                               SizedBox(width: 10,),
-                              Text(App_Localization.of(context).translate("language"),style: TextStyle(color: App.textColor(),fontSize: 12),)
+                              Text(App_Localization.of(context).translate("language"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
                             ],
                           ),
-                          Text(settingsController.languageName.value,style: TextStyle(color: App.textColor(),fontSize: 10),)
+                          Text(settingsController.languageName.value,style: TextStyle(color: App.textLgColor(),fontSize: 10),)
 
                         ],
                       ),
@@ -740,7 +740,7 @@ class _NewProfileState extends State<NewProfile> {
                                 height: 18,
                               ),
                               SizedBox(width: 10,),
-                              Text(App_Localization.of(context).translate("connect_with_us"),style: TextStyle(color: App.textColor(),fontSize: 12),)
+                              Text(App_Localization.of(context).translate("connect_with_us"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
                             ],
                           ),
                           // Icon(Icons.arrow_forward_ios,size: 12, color: App.textColor(),)
@@ -784,7 +784,7 @@ class _NewProfileState extends State<NewProfile> {
                                 height: 18,
                               ),
                               SizedBox(width: 10,),
-                              Text(App_Localization.of(context).translate("req_last_state"),style: TextStyle(color: App.textColor(),fontSize: 12),)
+                              Text(App_Localization.of(context).translate("req_last_state"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
                             ],
                           ),
                           // Icon(Icons.arrow_forward_ios,size: 12, color: App.textColor(),)
@@ -818,7 +818,7 @@ class _NewProfileState extends State<NewProfile> {
                               SizedBox(width: 10,),
                               Text(MyTheme.isDarkTheme.value?
                               App_Localization.of(context).translate("dark_mode")
-                                :App_Localization.of(context).translate("light_mode"),style: TextStyle(color: App.textColor(),fontSize: 12),)
+                                :App_Localization.of(context).translate("light_mode"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
                             ],
                           ),
                           SizedBox(
@@ -957,10 +957,10 @@ class _NewProfileState extends State<NewProfile> {
                                 height: 18,
                               ),
                               SizedBox(width: 10,),
-                              Text(App_Localization.of(context).translate("about_us"),style: TextStyle(color: App.textColor(),fontSize: 12),)
+                              Text(App_Localization.of(context).translate("about_us"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
                             ],
                           ),
-                          Icon(Icons.arrow_forward_ios,size: 12, color: App.textColor(),)
+                          Icon(Icons.arrow_forward_ios,size: 12, color: App.textLgColor(),)
                         ],
                       ),
                       SizedBox(height: 15,),

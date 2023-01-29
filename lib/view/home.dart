@@ -11,6 +11,7 @@ import 'package:alwan_press/view/order_details.dart';
 import 'package:alwan_press/view/products_list.dart';
 import 'package:alwan_press/view/search_text_field.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
+import 'package:alwan_press/widget/light_mode_background.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -90,7 +91,7 @@ class _HomeState extends State<Home> {
         body: SafeArea(
           child: Stack(
             children: [
-              MyTheme.isDarkTheme.value?const DarkModeBackground():Center(),
+              MyTheme.isDarkTheme.value?const DarkModeBackground():const LightModeBackground(),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Column(
@@ -188,13 +189,15 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Icon(Icons.search),
+                  Icon(Icons.search, color: MyTheme.isDarkTheme.value
+                      ? App.lightLight
+                      : Colors.grey,),
                   const SizedBox(width: 10),
                   Text(App_Localization.of(context).translate("search"),
                       style: TextStyle(
                         fontSize: 14,
                         color: MyTheme.isDarkTheme.value
-                            ? Colors.white.withOpacity(0.2)
+                            ? App.lightLight
                             : Colors.grey,
                       )),
                 ],
@@ -482,7 +485,7 @@ class _HomeState extends State<Home> {
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).disabledColor.withOpacity(0.5))),
+                  color: App.textMediumColor())),
         ),
         SizedBox(height: 15,),
         SizedBox(

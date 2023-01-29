@@ -22,6 +22,33 @@ class App{
       return Colors.black;
     }
   }
+  static Color lightLight = Color(0xffc4c4c4);
+  static Color textLightColor(){
+    if(MyTheme.isDarkTheme.value){
+      return Colors.white.withOpacity(0.5);
+    }else{
+      return lightLight;
+    }
+  }
+
+  static Color lightMed = Color(0xff7D7D7D);
+  static Color textMediumColor(){
+    if(MyTheme.isDarkTheme.value){
+      return Colors.white.withOpacity(0.5);
+    }else{
+      return lightMed;
+    }
+  }
+
+
+  static Color lightLG = Color(0xff7D7D7D);
+  static Color textLgColor(){
+    if(MyTheme.isDarkTheme.value){
+      return Colors.white.withOpacity(0.5);
+    }else{
+      return lightLG;
+    }
+  }
 
   static Color containerColor(){
     return MyTheme.isDarkTheme.value ?

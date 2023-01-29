@@ -365,9 +365,9 @@ class OrderPage extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("#"+order.quickBookId.toString(),style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 11,fontWeight: FontWeight.bold),),
+                            Text("#"+order.quickBookId.toString(),style:  TextStyle(color: App.textColor(),fontSize: 11,fontWeight: FontWeight.bold),),
                             Text(App_Localization.of(context).translate("pleaced_on") +" "+orderController.convertTime(order.created_at.toString()),
-                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 10),
+                              style: TextStyle(color: App.textMediumColor(),fontSize: 10),
                             ),
                           ],
                         ),
@@ -385,9 +385,9 @@ class OrderPage extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(App_Localization.of(context).translate("view_details"),style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 11,fontWeight: FontWeight.bold),),
+                                  Text(App_Localization.of(context).translate("view_details"),style:  TextStyle(color: App.textLightColor(),fontSize: 11,fontWeight: FontWeight.bold),),
                                   SizedBox(width: 5,),
-                                  Icon(Icons.arrow_forward_ios,color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),size: 13,)
+                                  Icon(Icons.arrow_forward_ios,color: App.textLightColor(),size: 13,)
                                 ],
                               ),
                             ),
@@ -396,9 +396,9 @@ class OrderPage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    Container(width: Get.width - 20 ,color: App.textColor().withOpacity(0.3),height: 1,),
+                    Container(width: Get.width - 20 ,color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Color(0xffA1A1A1),height: 0.5,),
                     const SizedBox(height: 10),
-                    Text(order.title,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 16,fontWeight: FontWeight.bold),),
+                    Text(order.title,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Color(0xffA1A1A1),fontSize: 16,fontWeight: FontWeight.bold),),
                     const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -9,6 +9,7 @@ import 'package:alwan_press/view/forget_password.dart';
 import 'package:alwan_press/view/home.dart';
 import 'package:alwan_press/view/main_class.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
+import 'package:alwan_press/widget/light_mode_background.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,7 @@ class _SignInState extends State<SignIn> {
         body: Stack(
           alignment: Alignment.center,
           children: [
-            DarkModeBackground(),
+            MyTheme.isDarkTheme.value?DarkModeBackground():LightModeBackground(),
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -108,7 +109,6 @@ class _SignInState extends State<SignIn> {
                 ],
               ),
             ),
-
           ],
         ),
       );
@@ -203,15 +203,15 @@ class _SignInState extends State<SignIn> {
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
                 borderRadius: BorderRadius.circular(0),
-                borderSide:  BorderSide(width: 1, color:App.textColor().withOpacity(0.5)),
+                borderSide:  BorderSide(width: 1, color:App.textLightColor()),
               ),
               enabledBorder: UnderlineInputBorder(
                 borderRadius: BorderRadius.circular(0),
-                borderSide:  BorderSide(width: 1, color:App.textColor().withOpacity(0.5)),
+                borderSide:  BorderSide(width: 1, color:App.textLightColor()),
               ),
-              label: Text(App_Localization.of(context).translate("username"), style: TextStyle(color:App.textColor(),fontSize: 15)),
+              label: Text(App_Localization.of(context).translate("username"), style: TextStyle(color:App.textColor(),fontSize: 15,fontWeight: FontWeight.bold)),
               hintText: App_Localization.of(context).translate("please_enter_email"),
-              hintStyle: TextStyle(color:App.textColor().withOpacity(0.5),fontSize: 10),
+              hintStyle: TextStyle(color:App.textLightColor(),fontSize: 10),
               floatingLabelBehavior: FloatingLabelBehavior.always
               // alignLabelWithHint: true,
             ),
@@ -233,26 +233,26 @@ class _SignInState extends State<SignIn> {
                 onTap: (){
                   signInController.showPassword.value = !signInController.showPassword.value;
                 },
-                child: Icon(Icons.visibility_outlined, color: App.textColor().withOpacity(0.5),size: 20),
+                child: Icon(Icons.visibility_outlined, color: App.textLightColor(),size: 20),
               )
                 : GestureDetector(
                 onTap: (){
                   signInController.showPassword.value = !signInController.showPassword.value;
                 },
-                child: Icon(Icons.visibility_off_outlined, color:App.textColor().withOpacity(0.5),size: 20),
+                child: Icon(Icons.visibility_off_outlined, color: App.textLightColor(),size: 20),
               ),
                 focusedBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.circular(0),
-                  borderSide:  BorderSide(width: 1, color:App.textColor().withOpacity(0.5)),
+                  borderSide:  BorderSide(width: 1, color: App.textLightColor()),
                 ),
                 enabledBorder: UnderlineInputBorder(
                   borderRadius: BorderRadius.circular(0),
-                  borderSide:  BorderSide(width: 1, color:App.textColor().withOpacity(0.5)),
+                  borderSide:  BorderSide(width: 1, color: App.textLightColor()),
                 ),
 
-                label: Text(App_Localization.of(context).translate("password"), style: TextStyle(color:App.textColor(),fontSize: 15)),
+                label: Text(App_Localization.of(context).translate("password"), style: TextStyle(color:App.textColor(),fontSize: 15,fontWeight: FontWeight.bold)),
                 hintText: App_Localization.of(context).translate("please_enter_password"),
-                hintStyle: TextStyle(color:App.textColor().withOpacity(0.5),fontSize: 10),
+                hintStyle: TextStyle(color: App.textLightColor(),fontSize: 10),
                 floatingLabelBehavior: FloatingLabelBehavior.always
             ),
           ),
@@ -311,12 +311,12 @@ class _SignInState extends State<SignIn> {
             width: MediaQuery.of(context).size.width * 0.9,
             height: 40,
             decoration: BoxDecoration(
-                color: App.darkGrey,
+                color: MyTheme.isDarkTheme.value?App.darkGrey:Color(0xffededed),
                 borderRadius: BorderRadius.circular(5)
             ),
             child:  Center(
               child: Text(App_Localization.of(context).translate("login_us_guest").toUpperCase(),
-                  style: TextStyle(color: Colors.white,fontSize: 16)),
+                  style: TextStyle(color: App.textMediumColor(),fontSize: 16)),
             ),
           ),
         ),

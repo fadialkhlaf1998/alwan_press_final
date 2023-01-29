@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-class DarkModeBackground extends StatelessWidget {
-  const DarkModeBackground({Key? key}) : super(key: key);
+class LightModeBackground extends StatelessWidget {
+  const LightModeBackground({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  Obx(() => Container(
+    return  Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
 
-      color: MyTheme.isDarkTheme.value ?Colors.black:Color(0xffededed),
+      color: Colors.white,
       // child: Lottie.asset(
       //     'assets/animation/BG.json',
       //   fit: BoxFit.cover
       // ),
-    ));
+    );
   }
 }

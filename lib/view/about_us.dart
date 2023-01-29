@@ -83,7 +83,7 @@ class _AboutUsState extends State<AboutUs> {
             onTap: (){
               Get.back();
             },
-            child:  Icon(Icons.arrow_back_ios,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
+            child:  Icon(Icons.arrow_back_ios,color: App.textLightColor(),),
           ),
           SizedBox(width: 10,),
           App.logo(context),
@@ -134,7 +134,7 @@ class _AboutUsState extends State<AboutUs> {
                     child: Text(
                       App_Localization.of(context).translate("about_content"),
                       style: TextStyle(
-                        color: MyTheme.isDarkTheme.value?Colors.white.withOpacity(0.5):Colors.black.withOpacity(0.5),
+                        color: App.textLightColor(),
                         fontSize: 11,
                       ),
                       textAlign: TextAlign.justify,
@@ -159,7 +159,7 @@ class _AboutUsState extends State<AboutUs> {
                     width: MediaQuery.of(context).size.width*0.9,
                     child: Row(
                       children: [
-                        Icon(Icons.location_on,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,size: 20),
+                        Icon(Icons.location_on,color: App.textLightColor(),size: 20),
                         SizedBox(width: 15,),
                         Container(
                             height:40,
@@ -167,7 +167,7 @@ class _AboutUsState extends State<AboutUs> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Al- Qasis industrial city 2 - Back Side of Aster Hospital - Dubai",style: TextStyle(fontSize: 10,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
+                                Text("Al- Qasis industrial city 2 - Back Side of Aster Hospital - Dubai",style: TextStyle(fontSize: 10,color: App.textLightColor(),fontWeight: FontWeight.bold),maxLines: 2,),
                               ],
                             )
                         ),
@@ -176,7 +176,7 @@ class _AboutUsState extends State<AboutUs> {
                   ),
 
                   SizedBox(height: 5,),
-                  Container(width: Get.width - 20,color: App.textColor().withOpacity(0.3),height: 1,),
+                  Container(width: Get.width - 20,color: App.textLightColor().withOpacity(0.3),height: 1,),
                   SizedBox(height: 5,),
 
                   GestureDetector(
@@ -187,7 +187,7 @@ class _AboutUsState extends State<AboutUs> {
                       width: MediaQuery.of(context).size.width*0.9,
                       child: Row(
                         children: [
-                          Icon(Icons.phone,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,size: 20),
+                          Icon(Icons.phone,color: App.textLightColor(),size: 20),
                           SizedBox(width: 15,),
                           Container(
                               height:40,
@@ -196,7 +196,7 @@ class _AboutUsState extends State<AboutUs> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("+971 4 267 6552",style: TextStyle(fontSize: 10,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
+                                  Text("+971 4 267 6552",style: TextStyle(fontSize: 10,color: App.textLightColor(),fontWeight: FontWeight.bold),maxLines: 2,),
                                 ],
                               )
                           ),
@@ -205,13 +205,13 @@ class _AboutUsState extends State<AboutUs> {
                     ),
                   ),
                   SizedBox(height: 5,),
-                  Container(width: Get.width - 20,color: App.textColor().withOpacity(0.3),height: 1,),
+                  Container(width: Get.width - 20,color: App.textLightColor().withOpacity(0.3),height: 1,),
                   SizedBox(height: 5,),
                   Container(
                     width: MediaQuery.of(context).size.width*0.9,
                     child: Row(
                       children: [
-                        Icon(Icons.mail,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,size: 20,),
+                        Icon(Icons.mail,color: App.textLightColor(),size: 20,),
                         SizedBox(width: 15,),
                         Container(
                             height:40,
@@ -220,7 +220,7 @@ class _AboutUsState extends State<AboutUs> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("P.O. Box: 234985",style: TextStyle(fontSize: 10,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
+                                Text("P.O. Box: 234985",style: TextStyle(fontSize: 10,color: App.textLightColor(),fontWeight: FontWeight.bold),maxLines: 2,),
                               ],
                             )
                         ),
@@ -228,7 +228,7 @@ class _AboutUsState extends State<AboutUs> {
                     ),
                   ),
                   SizedBox(height: 5,),
-                  Container(width: Get.width - 20,color: App.textColor().withOpacity(0.3),height: 1,),
+                  Container(width: Get.width - 20,color: App.textLightColor().withOpacity(0.3),height: 1,),
                   SizedBox(height: 5,),
                   GestureDetector(
                     onTap: ()async{
@@ -239,7 +239,7 @@ class _AboutUsState extends State<AboutUs> {
                       child: Row(
                         children: [
                           // Icon(Icons.add_photo_alternate,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),
-                          SvgPicture.asset("assets/icons/web.svg",width: 20,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,),
+                          SvgPicture.asset("assets/icons/web.svg",width: 20,color: App.textLightColor(),),
                           SizedBox(width: 15,),
                           Container(
                               height:40,
@@ -249,7 +249,7 @@ class _AboutUsState extends State<AboutUs> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   //
-                                  Text("www.alwanpress.ae",style: TextStyle(fontSize: 10,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold),maxLines: 2,),
+                                  Text("www.alwanpress.ae",style: TextStyle(fontSize: 10,color: App.textLightColor(),fontWeight: FontWeight.bold),maxLines: 2,),
                                 ],
                               )
                           ),

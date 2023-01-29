@@ -61,7 +61,7 @@ class ProductDetails extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: MyTheme.isDarkTheme.value ? Colors.white : App.grey)
+                                  color: App.textColor())
                               ,textAlign: TextAlign.justify,),
                           ],
                         ),
@@ -304,7 +304,7 @@ class ProductDetails extends StatelessWidget {
               style: TextStyle(
                 height: 1.2,
                   fontSize: 13,
-                  color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : App.grey),
+                  color: App.textLightColor()),
               textAlign: TextAlign.justify,
             ),
             ),

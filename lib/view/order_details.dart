@@ -97,15 +97,15 @@ class OrderDetails extends StatelessWidget {
                                   App.darkGrey :
                                   Colors.white,
                                   // borderRadius: BorderRadius.circular(5),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: MyTheme.isDarkTheme.value ?
-                                      Colors.transparent :
-                                      Colors.grey.withOpacity(0.5),
-                                      blurRadius: 3,
-                                      offset: const Offset(1, 1),
-                                    ),
-                                  ],
+                                  // boxShadow: [
+                                  //   BoxShadow(
+                                  //     color: MyTheme.isDarkTheme.value ?
+                                  //     Colors.transparent :
+                                  //     Colors.grey.withOpacity(0.5),
+                                  //     blurRadius: 3,
+                                  //     offset: const Offset(1, 1),
+                                  //   ),
+                                  // ],
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -312,15 +312,15 @@ class OrderDetails extends StatelessWidget {
                                   App.darkGrey :
                                   Colors.white,
                                   // borderRadius: BorderRadius.circular(5),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: MyTheme.isDarkTheme.value ?
-                                      Colors.transparent :
-                                      Colors.grey.withOpacity(0.5),
-                                      blurRadius: 3,
-                                      offset: const Offset(1, 1),
-                                    ),
-                                  ],
+                                  // boxShadow: [
+                                  //   BoxShadow(
+                                  //     color: MyTheme.isDarkTheme.value ?
+                                  //     Colors.transparent :
+                                  //     Colors.grey.withOpacity(0.5),
+                                  //     blurRadius: 3,
+                                  //     offset: const Offset(1, 1),
+                                  //   ),
+                                  // ],
                                 ),
                                 child: Center(
                                   child: Column(
@@ -334,9 +334,9 @@ class OrderDetails extends StatelessWidget {
                                           children: [
                                             Text(orderDetailsController.order!.title,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
                                             SizedBox(height: 5,),
-                                            Text("#"+orderDetailsController.order!.orderId,style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14,fontWeight: FontWeight.bold),),
+                                            Text("#"+orderDetailsController.order!.orderId,style:  TextStyle(color: App.textLgColor(),fontSize: 14,fontWeight: FontWeight.bold),),
                                             Text(App_Localization.of(context).translate("pleaced_on") +" "+orderController.convertTime(orderDetailsController.order!.created_at.toString()),
-                                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12),),
+                                              style: TextStyle(color:  App.textLgColor(),fontSize: 12),),
                                           ],
                                         ),
                                       ),
@@ -344,7 +344,7 @@ class OrderDetails extends StatelessWidget {
                                       Container(
                                           height: 1,
                                           width: MediaQuery.of(context).size.width*0.9,
-                                          color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)
+                                          color:  App.textLgColor().withOpacity(0.3)
                                       ),
                                       // SizedBox(height: 15,),
                                       orderDetailsController.fake.value ?Center():Center(),
@@ -357,7 +357,7 @@ class OrderDetails extends StatelessWidget {
                                           children: [
                                             Text(App_Localization.of(context).translate("description"),style:  TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
                                             Text(orderDetailsController.order!.description,
-                                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12,),),
+                                              style: TextStyle(color:  App.textLgColor(),fontSize: 12,),),
                                           ],
                                         ),
                                       ),
@@ -388,15 +388,15 @@ class OrderDetails extends StatelessWidget {
                                   App.darkGrey :
                                   Colors.white,
                                   // borderRadius: BorderRadius.circular(5),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: MyTheme.isDarkTheme.value ?
-                                      Colors.transparent :
-                                      Colors.grey.withOpacity(0.5),
-                                      blurRadius: 3,
-                                      offset: const Offset(1, 1),
-                                    ),
-                                  ],
+                                  // boxShadow: [
+                                  //   BoxShadow(
+                                  //     color: MyTheme.isDarkTheme.value ?
+                                  //     Colors.transparent :
+                                  //     Colors.grey.withOpacity(0.5),
+                                  //     blurRadius: 3,
+                                  //     offset: const Offset(1, 1),
+                                  //   ),
+                                  // ],
                                 ),
                                 child: Column(
                                   children: [
@@ -423,11 +423,11 @@ class OrderDetails extends StatelessWidget {
                                                     style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14,fontWeight: FontWeight.bold),),
 
                                                   Text(orderDetailsController.order!.shippingAddress!.customer,
-                                                    style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12),),
+                                                    style: TextStyle(color:  App.textLgColor(),fontSize: 12),),
                                                   Text(orderDetailsController.order!.shippingAddress!.streetName+" / "+
                                                       orderDetailsController.order!.shippingAddress!.building+" / flat: "+
                                                       orderDetailsController.order!.shippingAddress!.flat+" / floor: "+orderDetailsController.order!.shippingAddress!.floor,
-                                                    style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12,),),
+                                                    style: TextStyle(color:  App.textLgColor(),fontSize: 12,),),
 
 
 
@@ -439,7 +439,7 @@ class OrderDetails extends StatelessWidget {
                                           Container(
                                               height: 1,
                                               width: MediaQuery.of(context).size.width*0.9,
-                                              color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)
+                                              color:  App.textLgColor().withOpacity(0.3)
                                           ),
                                           SizedBox(height: 10,),
                                           Row(
@@ -454,7 +454,7 @@ class OrderDetails extends StatelessWidget {
                                                   Text(App_Localization.of(context).translate("mobile_number"),
                                                     style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14,fontWeight: FontWeight.bold),),
                                                   Text(orderDetailsController.order!.shippingAddress!.phone,
-                                                    style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 12,),),
+                                                    style: TextStyle(color:  App.textLgColor(),fontSize: 12,),),
                                                 ],
                                               ),
 
@@ -476,7 +476,7 @@ class OrderDetails extends StatelessWidget {
                                             ),
                                           ),
                                           Text(App_Localization.of(context).translate("your_order_will") ,
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),),
+                                            style: TextStyle(color:  App.textLgColor(),fontSize: 14),),
                                           SizedBox(height: 10,),
                                         ],
                                       ):
@@ -485,7 +485,7 @@ class OrderDetails extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Text(App_Localization.of(context).translate("do_u_want") ,
-                                            style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 14),),
+                                            style: TextStyle(color:  App.textLgColor(),fontSize: 14),),
 
                                           GestureDetector(
                                             onTap: (){
@@ -531,15 +531,15 @@ class OrderDetails extends StatelessWidget {
                                           App.darkGrey :
                                           Colors.white,
                                           // borderRadius: BorderRadius.circular(5),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: MyTheme.isDarkTheme.value ?
-                                              Colors.transparent :
-                                              Colors.grey.withOpacity(0.5),
-                                              blurRadius: 3,
-                                              offset: const Offset(1, 1),
-                                            ),
-                                          ],
+                                          // boxShadow: [
+                                          //   BoxShadow(
+                                          //     color: MyTheme.isDarkTheme.value ?
+                                          //     Colors.transparent :
+                                          //     Colors.grey.withOpacity(0.5),
+                                          //     blurRadius: 3,
+                                          //     offset: const Offset(1, 1),
+                                          //   ),
+                                          // ],
                                         ),
                                         child: Center(
                                           child: Container(
@@ -634,15 +634,15 @@ class OrderDetails extends StatelessWidget {
                                           ),
                                           color: MyTheme.isDarkTheme.value?Colors.black.withAlpha(150):Colors.black.withAlpha(50),
                                           // borderRadius: BorderRadius.circular(5),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: MyTheme.isDarkTheme.value ?
-                                              Colors.transparent :
-                                              Colors.grey.withOpacity(0.5),
-                                              blurRadius: 3,
-                                              offset: const Offset(1, 1),
-                                            ),
-                                          ],
+                                          // boxShadow: [
+                                          //   BoxShadow(
+                                          //     color: MyTheme.isDarkTheme.value ?
+                                          //     Colors.transparent :
+                                          //     Colors.grey.withOpacity(0.5),
+                                          //     blurRadius: 3,
+                                          //     offset: const Offset(1, 1),
+                                          //   ),
+                                          // ],
                                         ),
                                         child: Center(child: Text(App_Localization.of(context).translate("hold"),style: TextStyle( color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),)),
                                       ),
@@ -661,15 +661,15 @@ class OrderDetails extends StatelessWidget {
                                   App.darkGrey :
                                   Colors.white,
                                   // borderRadius: BorderRadius.circular(5),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: MyTheme.isDarkTheme.value ?
-                                      Colors.transparent :
-                                      Colors.grey.withOpacity(0.5),
-                                      blurRadius: 3,
-                                      offset: const Offset(1, 1),
-                                    ),
-                                  ],
+                                  // boxShadow: [
+                                  //   BoxShadow(
+                                  //     color: MyTheme.isDarkTheme.value ?
+                                  //     Colors.transparent :
+                                  //     Colors.grey.withOpacity(0.5),
+                                  //     blurRadius: 3,
+                                  //     offset: const Offset(1, 1),
+                                  //   ),
+                                  // ],
                                 ),
                                 child: Center(
                                   child: Container(
@@ -686,9 +686,9 @@ class OrderDetails extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(App_Localization.of(context).translate("sub_total"),
-                                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),),
+                                              style: TextStyle(color:  App.textLgColor() ,fontSize: 12),),
                                             Text(App_Localization.of(context).translate("aed")+" "+orderDetailsController.order!.price.toString(),
-                                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),),
+                                              style: TextStyle(color:  App.textLgColor() ,fontSize: 12),),
                                           ],
                                         ),
 
@@ -696,30 +696,30 @@ class OrderDetails extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(App_Localization.of(context).translate("vat"),
-                                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),),
+                                              style: TextStyle(color:  App.textLgColor() ,fontSize: 12),),
                                             Text(App_Localization.of(context).translate("aed")+" "+orderDetailsController.order!.vat.toString(),
-                                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),),
+                                              style: TextStyle(color:  App.textLgColor() ,fontSize: 12),),
                                           ],
                                         ),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(App_Localization.of(context).translate("shipping"),
-                                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),),
+                                              style: TextStyle(color:  App.textLgColor() ,fontSize: 12),),
                                             orderDetailsController.order!.shippingRequestCount > 0
                                                 ? orderDetailsController.order!.shippingState == 0?Text(App_Localization.of(context).translate("free"),
-                                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),)
+                                              style: TextStyle(color: App.textLgColor() ,fontSize: 12),)
                                                 :Text(App_Localization.of(context).translate("aed")+" "+orderDetailsController.order!.shippingPrice.toString(),
-                                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),)
+                                              style: TextStyle(color: App.textLgColor() ,fontSize: 12),)
                                                 : Text(App_Localization.of(context).translate("calculating_when_request"),
-                                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 12),),
+                                              style: TextStyle(color: App.textLgColor() ,fontSize: 12),),
                                           ],
                                         ),
                                         SizedBox(height: 15,),
                                         Container(
                                             height: 1,
                                             width: MediaQuery.of(context).size.width*0.9,
-                                            color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5)
+                                            color: App.textLgColor()
                                         ),
                                         SizedBox(height: 15,),
                                         Row(
@@ -731,13 +731,13 @@ class OrderDetails extends StatelessWidget {
                                                   style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black ,fontSize: 18,fontWeight: FontWeight.bold),),
                                                 SizedBox(width: 7,),
                                                 Text(App_Localization.of(context).translate("inclusive_vat"),
-                                                  style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 10,fontWeight: FontWeight.bold),)
+                                                  style: TextStyle(color:  App.textLgColor() ,fontSize: 10,fontWeight: FontWeight.bold),)
                                               ],
                                             ),
                                             Text( orderDetailsController.order!.shippingPrice>0&&orderDetailsController.order!.shippingState==1&&orderDetailsController.order!.shippingRequestCount>0?App_Localization.of(context).translate("aed")+" "+
                                                 (orderDetailsController.order!.shippingPrice+orderDetailsController.order!.price+orderDetailsController.order!.vat).toString():
                                             App_Localization.of(context).translate("aed")+" "+(orderDetailsController.order!.price+orderDetailsController.order!.vat).toString(),
-                                              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5) ,fontSize: 14),)
+                                              style: TextStyle(color:  App.textLgColor() ,fontSize: 14),)
                                           ],
                                         ),
                                         SizedBox(height: 1,),
@@ -838,7 +838,7 @@ class OrderDetails extends StatelessWidget {
             child: SvgPicture.asset('assets/icons/$icon.svg'),
           ),
           Text(orderDetailsController.order!.getStateManual(context,state),
-              style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),fontSize: 8,fontWeight: FontWeight.bold,),maxLines: 2,textAlign: TextAlign.center),
+              style: TextStyle(color: App.textLgColor(),fontSize: 8,fontWeight: FontWeight.bold,),maxLines: 2,textAlign: TextAlign.center),
           Container(
             height: 5,
             width: MediaQuery.of(context).size.width*0.9/5 - 10,

@@ -84,6 +84,7 @@ class OrderDetailsController extends GetxController{
   Future<void> initFolosiPlatformState() async {
     if (totalForPayment > 0) {
       try {
+
         var initData = {
           "merchantKey": "test_\$2y\$10\$9c6MQOTsB58aZwOFiznk0.qPCwUnaEdxFbr-9sWHDAO9yvzqEXbWy",
           "customColor": MyTheme.isDarkTheme.value?"#ffffff":"#2C2B2B",

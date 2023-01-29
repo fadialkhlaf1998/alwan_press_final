@@ -104,7 +104,7 @@ class MainClass extends StatelessWidget {
 
       inactiveIcon: SvgPicture.asset(
       'assets/icons/home.svg',
-      color:  App.grey,
+      color:  App.lightLight,
       ),
       ),
       PersistentBottomNavBarItem(
@@ -118,7 +118,7 @@ class MainClass extends StatelessWidget {
       inactiveColorPrimary: App.grey,
       inactiveIcon: SvgPicture.asset(
       'assets/icons/order.svg',
-      color:  App.grey,
+      color:  App.lightLight,
       ),
       ),
       PersistentBottomNavBarItem(
@@ -127,7 +127,7 @@ class MainClass extends StatelessWidget {
       activeColorSecondary: App.lightPink,
       activeColorPrimary:  Color(0xffA3228E),
       inactiveColorPrimary: App.grey,
-      inactiveIcon: Icon(Icons.favorite_border,color: App.grey,),
+      inactiveIcon: Icon(Icons.favorite_border,color: App.lightLight,),
       ),
       PersistentBottomNavBarItem(
       icon: SvgPicture.asset(
@@ -140,7 +140,7 @@ class MainClass extends StatelessWidget {
       inactiveColorPrimary: App.grey,
       inactiveIcon: SvgPicture.asset(
       'assets/icons/profile.svg',
-      color:  App.grey,
+      color:  App.lightLight,
       ),
       ),
     ];
