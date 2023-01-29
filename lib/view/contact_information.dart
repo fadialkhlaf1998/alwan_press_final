@@ -6,6 +6,7 @@ import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/search_text_field.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
+import 'package:alwan_press/widget/light_mode_background.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,100 +40,108 @@ class ContactInformation extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             const DarkModeBackground(),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  _header(context),
-                  const SizedBox(height: 50),
-                  Column(
-                    children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        child: Text(
-                          App_Localization.of(context).translate('choose_your_language_and_contact_us'),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black
+            SafeArea(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    _header(context),
+                    const SizedBox(height: 10),
+                    Expanded(child: Container(
+                      width: Get.width,
+                      color: App.containerColor(),
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 20),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            child: Text(
+                              App_Localization.of(context).translate('choose_your_language_and_contact_us'),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        width: MediaQuery.of(context).size.width  * 0.9,
-                        height: MediaQuery.of(context).size.height * 0.6,
-                        child:  ListView.builder(
-                            itemCount: introController.customerServiceList.length,
-                            itemBuilder: (BuildContext context, index){
-                              return Container(
-                                margin: const EdgeInsets.symmetric(vertical: 5),
-                                width: MediaQuery.of(context).size.width * 0.9,
-                                height: 70,
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          const SizedBox(height: 20),
+                          Container(
+                            width: MediaQuery.of(context).size.width  * 0.9,
+                            // height: MediaQuery.of(context).size.height * 0.6,
+                            child:  ListView.builder(
+                                itemCount: introController.customerServiceList.length,
+                                shrinkWrap: true,
+                                itemBuilder: (BuildContext context, index){
+                                  return Container(
+                                    margin: const EdgeInsets.symmetric(vertical: 5),
+                                    width: MediaQuery.of(context).size.width * 0.9,
+                                    height: 60,
+                                    child: Column(
                                       children: [
                                         Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Container(
-                                              margin: const EdgeInsets.symmetric(horizontal: 10),
-                                              width: 50,
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                image: DecorationImage(
-                                                    image: NetworkImage(introController.customerServiceList[index].image)
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                                                  width: 40,
+                                                  height: 40,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: DecorationImage(
+                                                        image: NetworkImage(introController.customerServiceList[index].image)
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                                Text(
+                                                  introController.customerServiceList[index].language,
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Theme.of(context).dividerColor
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                            Text(
-                                                introController.customerServiceList[index].language,
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: Theme.of(context).dividerColor
-                                              ),
-                                            )
+                                            Row(
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: (){
+                                                    Global.openwhatsapp(context,introController.customerServiceList[index].phone);
+                                                  },
+                                                  child: SvgPicture.asset('assets/icons/whatsapp-green.svg',width: 26,height: 26),
+                                                ),
+                                                const SizedBox(width: 10),
+                                                GestureDetector(
+                                                  onTap: (){
+                                                    Global.openUrl("tel://"+introController.customerServiceList[index].phone);
+                                                  },
+                                                  child: SizedBox(
+                                                    width: 35,
+                                                    height: 35,
+                                                    child: Icon(Icons.phone,size: 20,
+                                                      color:  Theme.of(context).dividerColor,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ],
                                         ),
-                                        Row(
-                                          children: [
-                                            GestureDetector(
-                                                onTap: (){
-                                                  Global.openwhatsapp(context,introController.customerServiceList[index].phone);
-                                                },
-                                                child: SvgPicture.asset('assets/icons/whatsapp-green.svg',width: 26,height: 26),
-                                            ),
-                                            const SizedBox(width: 10),
-                                            GestureDetector(
-                                              onTap: (){
-                                                Global.openUrl("tel://"+introController.customerServiceList[index].phone);
-                                              },
-                                              child: SizedBox(
-                                                width: 35,
-                                                height: 35,
-                                                child: Icon(Icons.phone,size: 20,
-                                                  color:  Theme.of(context).dividerColor,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                        Divider(color: Theme.of(context).dividerColor.withOpacity(0.4), indent: 10)
                                       ],
                                     ),
-                                    Divider(color: Theme.of(context).dividerColor.withOpacity(0.4), indent: 10)
-                                  ],
-                                ),
-                              );
-                            }
-                        ),
-                      ),
+                                  );
+                                }
+                            ),
+                          ),
 
-                    ],
-                  ),
-                ],
+                        ],
+                      ),
+                    ),)
+                  ],
+                ),
               ),
             )
           ],
@@ -141,7 +150,30 @@ class ContactInformation extends StatelessWidget {
     );
   }
 
-  _header(context) {
+  _header(BuildContext context){
+    return Container(
+      width: Get.width,
+      height: 60,
+      color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(width: Get.width * 0.05,),
+          GestureDetector(
+            onTap: (){
+              Get.back();
+            },
+            child:  Icon(Icons.arrow_back_ios,color: App.textLightColor(),),
+          ),
+          SizedBox(width: 10,),
+          App.logo(context),
+
+        ],
+      ),
+    );
+  }
+
+  _oldHeader(context) {
     return Container(
       padding: const EdgeInsets.only(top: 30),
       width: MediaQuery.of(context).size.width * 0.9,

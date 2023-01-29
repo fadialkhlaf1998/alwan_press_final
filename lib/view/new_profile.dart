@@ -1,3 +1,5 @@
+
+
 import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/controller/ProfileController.dart';
 import 'package:alwan_press/controller/intro_controller.dart';
@@ -11,6 +13,7 @@ import 'package:alwan_press/view/about_us.dart';
 import 'package:alwan_press/view/address_2.dart';
 import 'package:alwan_press/view/connect_us.dart';
 import 'package:alwan_press/view/contact_information.dart';
+import 'package:alwan_press/view/notidication.dart';
 import 'package:alwan_press/view/pdf_viwer.dart';
 import 'package:alwan_press/view/sign_in.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
@@ -74,6 +77,7 @@ class _NewProfileState extends State<NewProfile> {
                   _customerDetails(context),
                   _myAccount(context),
                   _reachOutToUs(),
+                  _appDetails(),
                 ],
               ),
             ),
@@ -683,6 +687,43 @@ class _NewProfileState extends State<NewProfile> {
               ),
               GestureDetector(
                 onTap: (){
+                  Get.to(()=>MyNotification());
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  width: Get.width - 20,
+                  height: 52,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 15,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              SvgPicture.asset(
+                                MyTheme.isDarkTheme.value
+                                    ? "assets/new_profile/dark/notification.svg"
+                                    : "assets/new_profile/light/notification.svg",
+                                height: 18,
+                              ),
+                              SizedBox(width: 10,),
+                              Text(App_Localization.of(context).translate("notifications"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
+                            ],
+                          ),
+                          Icon(Icons.arrow_forward_ios,size: 12, color: App.textLgColor(),)
+
+                        ],
+                      ),
+                      SizedBox(height: 15,),
+                      Container(color: App.textColor().withOpacity(0.05),width: Get.width - 20 ,height: 1,)
+                    ],
+                  ),
+                ),
+              ),
+
+              GestureDetector(
+                onTap: (){
                   _languageBottomSheet();
                 },
                 child: Container(
@@ -717,9 +758,11 @@ class _NewProfileState extends State<NewProfile> {
                   ),
                 ),
               ),
+
               GestureDetector(
                 onTap: (){
-                  Get.to(()=> ConnectUs());
+                  // Get.to(()=> ConnectUs());
+                  Get.to(()=>ContactInformation());
                 },
                 child: Container(
                   width: Get.width - 20,
@@ -855,6 +898,87 @@ class _NewProfileState extends State<NewProfile> {
           ),
         ),
       ],
+    );
+  }
+  _appDetails(){
+    return Container(
+      child: Column(
+        children: [
+          SizedBox(height: 20,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+              GestureDetector(
+                onTap: (){
+                  Global.openUrl(Global.facebook);
+                },
+                child: SvgPicture.asset("assets/icons/facebook.svg",color: App.textLgColor(),height: 15,),),
+              SizedBox(width: 30,),
+              GestureDetector(
+                onTap: (){
+                  Global.openUrl(Global.insta);
+                },
+                child: SvgPicture.asset("assets/icons/instagram.svg",color: App.textLgColor(),height: 15,),),
+              SizedBox(width: 30,),
+              GestureDetector(
+                onTap: (){
+                  Global.openUrl(Global.twitter);
+                },
+                child: SvgPicture.asset("assets/icons/twitter.svg",color: App.textLgColor(),height: 15,),
+              ),
+
+            ],
+          ),
+          SizedBox(height: 10,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Privacy Policy",style: TextStyle(color: App.textLgColor(),fontSize: 10),),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Text(".",style: TextStyle(color: App.textLgColor(),fontSize: 10),),
+              ),
+              Text("Term Of Sales",style: TextStyle(color: App.textLgColor(),fontSize: 10),),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Text(".",style: TextStyle(color: App.textLgColor(),fontSize: 10),),
+              ),
+              Text("Term Of Use",style: TextStyle(color: App.textLgColor(),fontSize: 10),),
+            ],
+          ),
+          SizedBox(height: 10,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Return Policy",style: TextStyle(color: App.textLgColor(),fontSize: 10),),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Text(".",style: TextStyle(color: App.textLgColor(),fontSize: 10),),
+              ),
+              Text("Warranty Policy",style: TextStyle(color: App.textLgColor(),fontSize: 10),),
+            ],
+          ),
+          SizedBox(height: 10,),
+
+          GestureDetector(
+            onTap: (){
+              Global.openUrl("https://www.maxart.ae/");
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Developed By ",style: TextStyle(color: App.textLgColor(),fontSize: 10),),
+                Text("Maxart",style: TextStyle(color: App.textLgColor(),fontSize: 10,decoration: TextDecoration.underline,fontWeight: FontWeight.bold),),
+              ],
+            ),
+          ),
+          SizedBox(height: 10,),
+          SizedBox(height: 10,),
+          SizedBox(height: 10,),
+          SizedBox(height: 10,),
+        ],
+      ),
     );
   }
   submit(){

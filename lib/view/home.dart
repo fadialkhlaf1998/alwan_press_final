@@ -154,11 +154,11 @@ class _HomeState extends State<Home> {
                 onTap: (){
                   print('*-*-*');
                   // Get.to(()=>ContactInformation());
-                  _scaffoldkey.currentState!.openEndDrawer();
+                  // _scaffoldkey.currentState!.openEndDrawer();
                 },
                 child: Container(
                   color: Colors.transparent,
-                  child: const Icon(Icons.menu, size: 25),
+                  child: const Icon(Icons.menu, size: 25,color: Colors.transparent,),
                 ),
 
               ),

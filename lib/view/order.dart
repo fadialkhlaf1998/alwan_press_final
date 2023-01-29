@@ -110,10 +110,11 @@ class OrderPage extends StatelessWidget {
                     child: TextField(
                       controller: orderController.search,
                       focusNode: focusNode,
-                      style: TextStyle(color: App.textColor()),
+                      style: TextStyle(color: App.textColor(),fontSize: 12,height: 1,),
                       onChanged: (val){
                         orderController.searchForData();
                       },
+                      textAlignVertical: TextAlignVertical.bottom,
                       decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(0),

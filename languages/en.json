@@ -154,5 +154,8 @@
   "sign_out": "Sign Out",
   "hala": "hala",
   "edit_profile": "Edit Profile",
-  "profile_saved_successfully": "Profile Saved Successfully"
+  "profile_saved_successfully": "Profile Saved Successfully",
+  "notifications": "Notifications",
+  "open_notification_setting": "Open Notification Setting",
+  "never_miss": "Never miss a message, click the link below to easily enable notifications from us"
 }

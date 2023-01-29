@@ -37,14 +37,18 @@ class OrderController extends GetxController{
 
   searchForData(){
     if(search.text.isEmpty){
+      loading(true);
       filteredData.value.addAll(myOrders);
+      loading(false);
     }else{
+      loading(true);
       filteredData.clear();
       for(int i=0;i<myOrders.length;i++){
         if(myOrders[i].title.toLowerCase().contains(search.text.toLowerCase())||myOrders[i].quickBookId.toLowerCase().contains(search.text.toLowerCase())){
           filteredData.add(myOrders[i]);
         }
       }
+      loading(false);
     }
   }
 
