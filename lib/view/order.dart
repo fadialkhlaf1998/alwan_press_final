@@ -778,8 +778,9 @@ class OrderPage extends StatelessWidget {
               SizedBox(width: 5,),
               GestureDetector(
                 onTap: (){
-                  mainClassController.selectedIndex.value = 0;
-                  mainClassController.pageController.animateToPage(0,  duration: const Duration(milliseconds: 700), curve: Curves.fastOutSlowIn);
+                  // mainClassController.selectedIndex.value = 0;
+                  // mainClassController.pageController.animateToPage(0,  duration: const Duration(milliseconds: 700), curve: Curves.fastOutSlowIn);
+                  mainClassController.selectedIndex(0);
                 },
                 child: Text(App_Localization.of(context).translate("start_shopping"),
                   style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14,fontWeight: FontWeight.normal),

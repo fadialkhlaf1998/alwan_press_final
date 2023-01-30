@@ -300,7 +300,8 @@ class _ProfileState extends State<Profile> {
                   onTap: () {
                     // homeController.move();
                     // _scaffoldkey.currentState!.closeEndDrawer();
-                    mainClassController.bottomBarController.jumpToTab(0);
+                    // mainClassController.bottomBarController.jumpToTab(0);
+                    mainClassController.selectedIndex(0);
                   },
                   child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.12,

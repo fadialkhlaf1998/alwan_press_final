@@ -44,7 +44,8 @@ class Wishlist extends StatelessWidget {
 
                         GestureDetector(
                             onTap: (){
-                              mainClassController.bottomBarController.jumpToTab(0);
+                              // mainClassController.bottomBarController.jumpToTab(0);
+                              mainClassController.selectedIndex(0);
                             },
                             child: Text(App_Localization.of(context).translate("continue_shopping"),style:TextStyle( color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black, fontSize: 12,fontWeight: FontWeight.bold) ,))
                     ],

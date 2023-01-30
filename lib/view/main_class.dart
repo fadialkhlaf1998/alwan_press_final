@@ -128,7 +128,7 @@ class MainClass extends StatelessWidget {
           ],
           items: _navBarsItems(context),
           resizeToAvoidBottomInset: false,
-          controller: mainClassController.bottomBarController,
+          // controller: mainClassController.bottomBarController,
           navBarStyle: NavBarStyle.style6,
           backgroundColor: MyTheme.isDarkTheme.value ? App.darkGrey : Colors.white,
           decoration: NavBarDecoration(

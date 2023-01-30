@@ -81,7 +81,8 @@ class MyDrawer extends StatelessWidget {
                       onTap: (){
                         _scaffoldkey.currentState!.closeEndDrawer();
                         Get.back();
-                        mainClassController.bottomBarController.jumpToTab(0);
+                        // mainClassController.bottomBarController.jumpToTab(0);
+                        mainClassController.selectedIndex(0);
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width*0.75*0.75,
@@ -175,7 +176,8 @@ class MyDrawer extends StatelessWidget {
                       onTap: (){
                         _scaffoldkey.currentState!.closeEndDrawer();
                         Get.back();
-                        mainClassController.bottomBarController.jumpToTab(1);
+                        // mainClassController.bottomBarController.jumpToTab(1);
+                        mainClassController.selectedIndex(1);
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width*0.75*0.75,

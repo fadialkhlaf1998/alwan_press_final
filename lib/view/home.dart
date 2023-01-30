@@ -125,7 +125,8 @@ class _HomeState extends State<Home> {
               Global.user!=null?
               GestureDetector(
                 onTap: (){
-                  mainClassController.bottomBarController.jumpToTab(3);
+                  // mainClassController.bottomBarController.jumpToTab(3);
+                  mainClassController.selectedIndex(3);
                 },
                 child: Container(
                   width: 40,

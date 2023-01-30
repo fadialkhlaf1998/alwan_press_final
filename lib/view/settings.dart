@@ -63,7 +63,8 @@ class Settings extends StatelessWidget {
           Global.langCode == 'en' ?
           GestureDetector(
             onTap: (){
-              mainClassController.bottomBarController.jumpToTab(0);
+              // mainClassController.bottomBarController.jumpToTab(0);
+              mainClassController.selectedIndex(0);
             },
             child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.1,
@@ -78,7 +79,8 @@ class Settings extends StatelessWidget {
           _logo(context)
           : GestureDetector(
             onTap: (){
-              mainClassController.bottomBarController.jumpToTab(0);
+              // mainClassController.bottomBarController.jumpToTab(0);
+              mainClassController.selectedIndex(0);
             },
             child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.1,
@@ -95,7 +97,8 @@ class Settings extends StatelessWidget {
   _logo(context) {
     return  GestureDetector(
       onTap: (){
-        mainClassController.bottomBarController.jumpToTab(0);
+        // mainClassController.bottomBarController.jumpToTab(0);
+        mainClassController.selectedIndex(0);
       },
       child: Container(
         height: MediaQuery.of(context).size.width * 0.1,
