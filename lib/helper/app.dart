@@ -56,6 +56,8 @@ class App{
     Colors.white;
   }
 
+  static BoxShadow myBoxShadow =  BoxShadow(color: MyTheme.isDarkTheme.value ?Colors.transparent:Colors.black26, spreadRadius: 0, blurRadius: 10);
+
   static logo(context) {
     return GestureDetector(
       onTap: (){

@@ -586,7 +586,7 @@ class _NewProfileState extends State<NewProfile> {
                 },
                 child: Container(
                   width: Get.width - 20,
-                  height: 52,
+                  height: 53,
                   color: Colors.transparent,
                   child: Column(
                     children: [
@@ -622,7 +622,7 @@ class _NewProfileState extends State<NewProfile> {
                 child: Container(
                   width: Get.width - 20,
                   color: Colors.transparent,
-                  height: 52,
+                  height: 53,
                   child: Column(
                     children: [
                       SizedBox(height: 15,),
@@ -656,7 +656,7 @@ class _NewProfileState extends State<NewProfile> {
                 },
                 child: Container(
                   width: Get.width - 20,
-                  height: 52,
+                  height: 53,
                   color: Colors.transparent,
                   child: Column(
                     children: [
@@ -692,7 +692,7 @@ class _NewProfileState extends State<NewProfile> {
                 child: Container(
                   color: Colors.transparent,
                   width: Get.width - 20,
-                  height: 52,
+                  height: 53,
                   child: Column(
                     children: [
                       SizedBox(height: 15,),
@@ -729,7 +729,7 @@ class _NewProfileState extends State<NewProfile> {
                 child: Container(
                   color: Colors.transparent,
                   width: Get.width - 20,
-                  height: 52,
+                  height: 53,
                   child: Column(
                     children: [
                       SizedBox(height: 15,),
@@ -767,7 +767,7 @@ class _NewProfileState extends State<NewProfile> {
                 child: Container(
                   width: Get.width - 20,
                   color: Colors.transparent,
-                  height: 52,
+                  height: 53,
                   child: Column(
                     children: [
                       SizedBox(height: 15,),
@@ -811,7 +811,7 @@ class _NewProfileState extends State<NewProfile> {
                 child: Container(
                   width: Get.width - 20,
                   color: Colors.transparent,
-                  height: 52,
+                  height: 53,
                   child: Column(
                     children: [
                       SizedBox(height: 15,),
@@ -1064,7 +1064,7 @@ class _NewProfileState extends State<NewProfile> {
                 },
                 child: Container(
                   width: Get.width - 20,
-                  height: 52,
+                  height: 53,
                   color: Colors.transparent,
                   child: Column(
                     children: [

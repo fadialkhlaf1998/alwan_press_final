@@ -76,6 +76,7 @@ class OrderDetails extends StatelessWidget {
                   :Column(
                     children: [
                       _header(context),
+                      SizedBox(height: 2,),
                       Expanded(child: RefreshIndicator(
                         key: orderDetailsController.refreshIndicatorKey,
                         onRefresh: () async {
@@ -327,7 +328,7 @@ class OrderDetails extends StatelessWidget {
                                     children: [
                                       Container(
                                         width: MediaQuery.of(context).size.width*0.9,
-                                        height: 77,
+                                        height: 85,
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -400,7 +401,7 @@ class OrderDetails extends StatelessWidget {
                                 ),
                                 child: Column(
                                   children: [
-                                    SizedBox(height: 10,),
+                                    SizedBox(height: 15,),
 
                                     Container(
                                       width: MediaQuery.of(context).size.width*0.9,
@@ -511,7 +512,7 @@ class OrderDetails extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-
+                                    SizedBox(height: 10,),
 
                                   ],
                                 ),
@@ -758,8 +759,8 @@ class OrderDetails extends StatelessWidget {
                                   // });
                                 },
                                 child:  Container(
-                                  width: MediaQuery.of(context).size.width * 0.8,
-                                  height: 40,
+                                  width: MediaQuery.of(context).size.width * 0.9,
+                                  height: 45,
                                   decoration: BoxDecoration(
                                       color: Theme.of(context).primaryColor,
                                       borderRadius: BorderRadius.circular(10)
@@ -767,7 +768,7 @@ class OrderDetails extends StatelessWidget {
                                   child:  Center(
                                     child:  Text(
                                         App_Localization.of(context).translate("pay").toUpperCase()+" "+orderDetailsController.totalForPayment.toStringAsFixed(2)+App_Localization.of(context).translate("aed"),
-                                        style: const TextStyle(color: Colors.white,fontSize: 13,fontWeight: FontWeight.bold)),
+                                        style: const TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.bold)),
                                   ),
                                 ),
                               )
@@ -790,7 +791,12 @@ class OrderDetails extends StatelessWidget {
     return Container(
       width: Get.width,
       height: 60,
-      color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+      decoration: BoxDecoration(
+        color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+        boxShadow: [
+          App.myBoxShadow,
+        ]
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

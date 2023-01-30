@@ -89,7 +89,12 @@ class OrderPage extends StatelessWidget {
     return Container(
       width: Get.width,
       height: 60,
-      color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+      decoration: BoxDecoration(
+        color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+        boxShadow: [
+          App.myBoxShadow
+        ]
+      ),
       child: Column(
         children: [
           Container(
@@ -359,14 +364,14 @@ class OrderPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("#"+order.quickBookId.toString(),style:  TextStyle(color: App.textColor(),fontSize: 11,fontWeight: FontWeight.bold),),
+                            Text("#"+order.quickBookId.toString(),style:  TextStyle(color: App.textColor(),fontSize: 12,fontWeight: FontWeight.bold),),
                             Text(App_Localization.of(context).translate("pleaced_on") +" "+orderController.convertTime(order.created_at.toString()),
                               style: TextStyle(color: App.textMediumColor(),fontSize: 10),
                             ),
@@ -428,7 +433,7 @@ class OrderPage extends StatelessWidget {
 
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 15),
                   ],
                 ),
               ),

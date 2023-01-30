@@ -5,6 +5,8 @@ import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/helper/store.dart';
 import 'package:alwan_press/model/address.dart';
+import 'package:alwan_press/widget/darkModeBackground.dart';
+import 'package:alwan_press/widget/light_mode_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -36,16 +38,8 @@ class Addresses_2 extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            MyTheme.isDarkTheme.value ? Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/image/background.png')
-                    )
-                )
-            ) : Text(''),
+            MyTheme.isDarkTheme.value?DarkModeBackground():LightModeBackground(),
+            // DarkModeBackground(),
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -60,7 +54,35 @@ class Addresses_2 extends StatelessWidget {
     ));
   }
 
-  _header(context){
+  _header(BuildContext context){
+    return Container(
+      width: Get.width,
+      height: 60,
+      decoration: BoxDecoration(
+          color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+          boxShadow: [
+            App.myBoxShadow
+          ]
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(width: Get.width * 0.05,),
+          GestureDetector(
+            onTap: (){
+              Get.back();
+            },
+            child:  Icon(Icons.arrow_back_ios,color: App.textLightColor(),),
+          ),
+          SizedBox(width: 10,),
+          App.logo(context),
+
+        ],
+      ),
+    );
+  }
+
+  _old_header(context){
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.1,
@@ -116,12 +138,16 @@ class Addresses_2 extends StatelessWidget {
           _ad_desc(context),
           const SizedBox(height: 50),
           _saveButton(context),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           _cancelButton(context),
           const SizedBox(height: 50),
         ],
       ),
     );
+  }
+
+  Color getColor(){
+    return MyTheme.isDarkTheme.value ?Color(0xff3B3B3B):Color(0xffDFDFDF);
   }
 
   _nickName(context){
@@ -137,17 +163,16 @@ class Addresses_2 extends StatelessWidget {
             prefixStyle: TextStyle(
               color: Theme.of(context).dividerColor
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 1, color: addressController.validate.value&&addressController.nick_name!.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(width: 1, color: addressController.validate.value&&addressController.nick_name!.text.isEmpty?Colors.red:getColor()),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:  BorderSide(width: 1, color:  addressController.validate.value&&addressController.nick_name!.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            enabledBorder: UnderlineInputBorder(
+              borderSide:  BorderSide(width: 1, color:  addressController.validate.value&&addressController.nick_name!.text.isEmpty?Colors.red:getColor()),
             ),
 
+            floatingLabelBehavior: FloatingLabelBehavior.always,
             label: Text(App_Localization.of(context).translate("nick_name"),
-                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black))
+                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14))
         ),
       ),
     );
@@ -162,16 +187,18 @@ class Addresses_2 extends StatelessWidget {
         controller: addressController.street_name,
         style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
         decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 1, color:  addressController.validate.value&&addressController.street_name!.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+              
+              borderSide: BorderSide(width: 1, color:  addressController.validate.value&&addressController.street_name!.text.isEmpty?Colors.red:getColor()),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:  BorderSide(width: 1, color:  addressController.validate.value&&addressController.street_name!.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            enabledBorder: UnderlineInputBorder(
+              
+              borderSide:  BorderSide(width: 1, color:  addressController.validate.value&&addressController.street_name!.text.isEmpty?Colors.red:getColor()),
             ),
+
+            floatingLabelBehavior: FloatingLabelBehavior.always,
             label: Text(App_Localization.of(context).translate("street_name"),
-                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black))
+                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14))
         ),
       ),
     );
@@ -187,16 +214,17 @@ class Addresses_2 extends StatelessWidget {
         controller: addressController.building,
         style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
         decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 1, color:  addressController.validate.value&&addressController.building!.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(width: 1, color:  addressController.validate.value&&addressController.building!.text.isEmpty?Colors.red:getColor()),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:  BorderSide(width: 1, color: addressController.validate.value&&addressController.building!.text.isEmpty?Colors.red: MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            enabledBorder: UnderlineInputBorder(
+              
+              // borderSide:  BorderSide(width: 1, color: addressController.validate.value&&addressController.building!.text.isEmpty?Colors.red: MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+              borderSide:  BorderSide(width: 1, color: addressController.validate.value&&addressController.building!.text.isEmpty?Colors.red:getColor()),
             ),
+            floatingLabelBehavior: FloatingLabelBehavior.always,
             label: Text(App_Localization.of(context).translate("building"),
-                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black))
+                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14))
         ),
       ),
     );
@@ -215,16 +243,17 @@ class Addresses_2 extends StatelessWidget {
               controller: addressController.floor,
               style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
               decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(width: 1, color:  addressController.validate.value&&addressController.floor!.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+                  focusedBorder: UnderlineInputBorder(
+                    
+                    borderSide: BorderSide(width: 1, color:  addressController.validate.value&&addressController.floor!.text.isEmpty?Colors.red:getColor()),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide:  BorderSide(width: 1, color:  addressController.validate.value&&addressController.floor!.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+                  enabledBorder: UnderlineInputBorder(
+                    
+                    borderSide:  BorderSide(width: 1, color:  addressController.validate.value&&addressController.floor!.text.isEmpty?Colors.red:getColor()),
                   ),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
                   label: Text(App_Localization.of(context).translate("floor"),
-                      style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black))
+                      style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14))
               ),
             ),
           ),
@@ -236,16 +265,17 @@ class Addresses_2 extends StatelessWidget {
               controller: addressController.flat,
               style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
               decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(width: 1, color:  addressController.validate.value&&addressController.flat!.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+                  focusedBorder: UnderlineInputBorder(
+                    
+                    borderSide: BorderSide(width: 1, color:  addressController.validate.value&&addressController.flat!.text.isEmpty?Colors.red:getColor()),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide:  BorderSide(width: 1, color:  addressController.validate.value&&addressController.flat!.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+                  enabledBorder: UnderlineInputBorder(
+                    
+                    borderSide:  BorderSide(width: 1, color:  addressController.validate.value&&addressController.flat!.text.isEmpty?Colors.red:getColor()),
                   ),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
                   label: Text(App_Localization.of(context).translate("flat"),
-                      style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black))
+                      style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14))
               ),
             ),
           ),
@@ -270,16 +300,17 @@ class Addresses_2 extends StatelessWidget {
             prefixStyle:  TextStyle(
               color: Theme.of(context).dividerColor,
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 1, color:  addressController.validate.value&&addressController.phone!.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+              
+              borderSide: BorderSide(width: 1, color:  addressController.validate.value&&addressController.phone!.text.isEmpty?Colors.red:getColor()),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:  BorderSide(width: 1, color:  addressController.validate.value&&addressController.phone!.text.isEmpty?Colors.red:MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            enabledBorder: UnderlineInputBorder(
+              
+              borderSide:  BorderSide(width: 1, color:  addressController.validate.value&&addressController.phone!.text.isEmpty?Colors.red:getColor()),
             ),
+            floatingLabelBehavior: FloatingLabelBehavior.always,
             label: Text(App_Localization.of(context).translate("phone"),
-                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black))
+                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14))
         ),
       ),
     );
@@ -295,16 +326,17 @@ class Addresses_2 extends StatelessWidget {
         controller: addressController.ad_desc,
         style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
         decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 1, color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+              
+              borderSide: BorderSide(width: 1, color: getColor()),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:  BorderSide(width: 1, color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black),
+            enabledBorder: UnderlineInputBorder(
+              
+              borderSide:  BorderSide(width: 1, color: getColor()),
             ),
+            floatingLabelBehavior: FloatingLabelBehavior.always,
             label: Text(App_Localization.of(context).translate("ad_desc"),
-                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black))
+                style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 14))
         ),
       ),
     );
@@ -330,9 +362,9 @@ class Addresses_2 extends StatelessWidget {
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        height: 55,
+        height: 40,
         decoration: BoxDecoration(
-            color: App.pink,
+            color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(10)
         ),
         child:  Center(
@@ -341,7 +373,7 @@ class Addresses_2 extends StatelessWidget {
               width: 25,
               height: 25,
               child: CircularProgressIndicator(color: Colors.white,strokeWidth: 2.5)))
-              : Text(App_Localization.of(context).translate("submit"),
+              : Text(App_Localization.of(context).translate("submit").toUpperCase(),
               style: TextStyle(color: Colors.white,fontSize: 16)),
         ),
       ),
@@ -357,14 +389,14 @@ class Addresses_2 extends StatelessWidget {
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        height: 55,
+        height: 40,
         decoration: BoxDecoration(
-            color: App.darkGrey,
+            color: MyTheme.isDarkTheme.value?App.darkGrey:Color(0xffededed),
             borderRadius: BorderRadius.circular(10)
         ),
         child:  Center(
           child: Text(App_Localization.of(context).translate("cancel").toUpperCase(),
-              style: const TextStyle(color: Colors.white,fontSize: 16)),
+              style: TextStyle(color: App.textMediumColor(),fontSize: 16)),
         ),
       ),
     );

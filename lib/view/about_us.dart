@@ -74,7 +74,12 @@ class _AboutUsState extends State<AboutUs> {
     return Container(
       width: Get.width,
       height: 60,
-      color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+      decoration: BoxDecoration(
+          color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+          boxShadow: [
+            App.myBoxShadow
+          ]
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

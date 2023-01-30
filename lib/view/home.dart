@@ -278,39 +278,49 @@ class _HomeState extends State<Home> {
     return Stack(
       children: [
         Container(
-            width: MediaQuery.of(context).size.width*0.9,
-            height: MediaQuery.of(context).size.width*0.9 * 40 / 100,
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(10)
-            ),
-            child: CarouselSlider(
-              options: CarouselOptions(
-                  autoPlay: true,
-                  viewportFraction: 1,
-                  autoPlayAnimationDuration: const Duration(milliseconds: 1000),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  onPageChanged: (index, _) {
-                    homeController.sliderIndex.value = index;
-                  }),
-              items: introController.bannerList
-                  .map((e) => SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: CachedNetworkImage(
-                          imageUrl: e.image,
-                          imageBuilder: (context, imageProvider) => Container(
-                            decoration: BoxDecoration(
-                               borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.contain,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: MyTheme.isDarkTheme.value?Colors.transparent:Colors.white,
+              border: Border.all(color: MyTheme.isDarkTheme.value?Colors.transparent:Colors.black26.withOpacity(0.1))
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(1),
+            child: Container(
+                width: MediaQuery.of(context).size.width*0.9,
+                height: MediaQuery.of(context).size.width*0.9 * 40 / 100,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                      autoPlay: true,
+                      viewportFraction: 1,
+                      autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      onPageChanged: (index, _) {
+                        homeController.sliderIndex.value = index;
+                      }),
+                  items: introController.bannerList
+                      .map((e) => SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: CachedNetworkImage(
+                              imageUrl: e.image,
+                              imageBuilder: (context, imageProvider) => Container(
+                                decoration: BoxDecoration(
+                                   borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ))
-                  .toList(),
-            )),
+                          ))
+                      .toList(),
+                )),
+          ),
+        ),
         Positioned(
           bottom: 5,
           child: SizedBox(

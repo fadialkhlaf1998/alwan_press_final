@@ -49,6 +49,7 @@ class AddressController_2 extends GetxController {
 
   saveAddress(BuildContext context) async {
     // loading.value = true;
+    validate(true);
     if(nick_name!.text.isNotEmpty&&street_name!.text.isNotEmpty&&building!.text.isNotEmpty&&floor!.text.isNotEmpty&&flat!.text.isNotEmpty&&phone!.text.isNotEmpty){
       Address address = Address(nickName: nick_name!.text, streetName: street_name!.text,
           building: building!.text, floor: floor!.text, flat: flat!.text,
