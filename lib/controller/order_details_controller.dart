@@ -122,6 +122,7 @@ class OrderDetailsController extends GetxController{
               backgroundColor: MyTheme.isDarkTheme.value ? Colors.grey.withOpacity(0.5) : Colors.black.withOpacity(0.5),
               colorText: Colors.white
           );
+          addToDashboard(int.parse(order!.quickBookId),totalForPayment);
         }
         if (kDebugMode) {
           print("Payment Response: $result");
@@ -150,8 +151,10 @@ class OrderDetailsController extends GetxController{
   }
 
   addToDashboard(int order_id,double amount)async{
+    loading(true);
     var succ  = await Api.pay(order_id, amount);
     if(succ){
+      refreshIndicater();
       // Get.back();
       // Get.back();
       // Get.snackbar("Suxx", "payment not succ").show();
