@@ -41,7 +41,7 @@ class OrderDetails extends StatelessWidget {
         }
         print(orderDetailsController.totalForPayment);
         if(order.state == 0 ){
-          orderDetailsController.totalForPayment = orderDetailsController.totalForPayment / 4 ;
+          orderDetailsController.totalForPayment = orderDetailsController.totalForPayment / (100/orderDetailsController.order!.advanced_amount);
         }
         print(orderDetailsController.totalForPayment);
         orderDetailsController.loading.value = false;
@@ -656,7 +656,7 @@ class OrderDetails extends StatelessWidget {
                               const SizedBox(height: 10,),
                               Container(
                                 width: MediaQuery.of(context).size.width,
-                                height: 170,
+                                // height: 170,
                                 decoration: BoxDecoration(
                                   color: MyTheme.isDarkTheme.value ?
                                   App.darkGrey :
@@ -680,7 +680,7 @@ class OrderDetails extends StatelessWidget {
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
 
-                                        SizedBox(height: 1,),
+                                        SizedBox(height: 15,),
                                         Text(App_Localization.of(context).translate("order_summery"),
                                           style: TextStyle(color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,fontSize: 16,fontWeight: FontWeight.bold),),
                                         Row(
@@ -702,6 +702,17 @@ class OrderDetails extends StatelessWidget {
                                               style: TextStyle(color:  App.textLgColor() ,fontSize: 12),),
                                           ],
                                         ),
+
+                                        orderDetailsController.order!.paid_amount>0?Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(App_Localization.of(context).translate("paid_amount"),
+                                              style: TextStyle(color:  App.textLgColor() ,fontSize: 12),),
+                                            Text(App_Localization.of(context).translate("aed")+" "+orderDetailsController.order!.paid_amount.toString(),
+                                              style: TextStyle(color:  App.textLgColor() ,fontSize: 12),),
+                                          ],
+                                        ):Center(),
+
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
@@ -741,14 +752,15 @@ class OrderDetails extends StatelessWidget {
                                               style: TextStyle(color:  App.textLgColor() ,fontSize: 14),)
                                           ],
                                         ),
-                                        SizedBox(height: 1,),
+                                        SizedBox(height: 15,),
                                       ],
                                     ),
                                   ),
                                 ),
                               ),
                               const SizedBox(height: 20,),
-                              orderDetailsController.totalForPayment > 0 ?
+                              (orderDetailsController.order!.paid_amount > 0 &&orderDetailsController.order!.state == 0)?Center()
+                              :orderDetailsController.totalForPayment > 0 ?
                               GestureDetector(
                                 onTap: (){
                                   orderDetailsController.initFolosiPlatformState(context);

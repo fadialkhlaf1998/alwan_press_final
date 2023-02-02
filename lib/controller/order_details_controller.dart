@@ -48,7 +48,7 @@ class OrderDetailsController extends GetxController{
           totalForPayment += order!.shippingPrice;
         }
         if(order!.state == 0 ){
-          totalForPayment = totalForPayment / 4 ;
+          totalForPayment = totalForPayment / (100/order!.advanced_amount) ;
         }
         fake.value = ! fake.value;
         print('check');
@@ -115,14 +115,7 @@ class OrderDetailsController extends GetxController{
         // var referenceToken = "";
         // var result = await FoloosiPlugins.makePaymentWithReferenceToken(referenceToken);
         if(result["success"]){
-          Get.snackbar(
-              App_Localization.of(context).translate("payment"),
-              App_Localization.of(context).translate("you_payment_completed_successfully"),
-              margin: EdgeInsets.only(top: 30,left: 25,right: 25),
-              backgroundColor: MyTheme.isDarkTheme.value ? Colors.grey.withOpacity(0.5) : Colors.black.withOpacity(0.5),
-              colorText: Colors.white
-          );
-          addToDashboard(int.parse(order!.quickBookId),totalForPayment);
+          addToDashboard(order!.id,totalForPayment,context);
         }
         if (kDebugMode) {
           print("Payment Response: $result");
@@ -150,15 +143,22 @@ class OrderDetailsController extends GetxController{
     /// setState to update our non-existent appearance.
   }
 
-  addToDashboard(int order_id,double amount)async{
+  addToDashboard(int order_id,double amount,BuildContext context)async{
     loading(true);
     var succ  = await Api.pay(order_id, amount);
     if(succ){
       refreshIndicater();
+      Get.snackbar(
+          App_Localization.of(context).translate("payment"),
+          App_Localization.of(context).translate("you_payment_completed_successfully"),
+          margin: EdgeInsets.only(top: 30,left: 25,right: 25),
+          backgroundColor: MyTheme.isDarkTheme.value ? Colors.grey.withOpacity(0.5) : Colors.black.withOpacity(0.5),
+          colorText: Colors.white
+      );
       return true;
     }
     else{
-      return addToDashboard(order_id,amount);
+      return addToDashboard(order_id,amount,context);
     }
   }
 
