@@ -708,7 +708,7 @@ class OrderDetails extends StatelessWidget {
                                           children: [
                                             Text(App_Localization.of(context).translate("paid_amount"),
                                               style: TextStyle(color:  App.textLgColor() ,fontSize: 12),),
-                                            Text(App_Localization.of(context).translate("aed")+" "+orderDetailsController.order!.paid_amount.toString(),
+                                            Text(App_Localization.of(context).translate("aed")+" -"+orderDetailsController.order!.paid_amount.toString(),
                                               style: TextStyle(color:  App.textLgColor() ,fontSize: 12),),
                                           ],
                                         ):Center(),
@@ -746,9 +746,13 @@ class OrderDetails extends StatelessWidget {
                                                   style: TextStyle(color:  App.textLgColor() ,fontSize: 10,fontWeight: FontWeight.bold),)
                                               ],
                                             ),
-                                            Text( orderDetailsController.order!.shippingPrice>0&&orderDetailsController.order!.shippingState==1&&orderDetailsController.order!.shippingRequestCount>0?App_Localization.of(context).translate("aed")+" "+
-                                                (orderDetailsController.order!.shippingPrice+orderDetailsController.order!.price+orderDetailsController.order!.vat).toString():
-                                            App_Localization.of(context).translate("aed")+" "+(orderDetailsController.order!.price+orderDetailsController.order!.vat).toString(),
+                                            // Text( orderDetailsController.order!.shippingPrice>0&&orderDetailsController.order!.shippingState==1&&orderDetailsController.order!.shippingRequestCount>0?App_Localization.of(context).translate("aed")+" "+
+                                            //     (orderDetailsController.order!.shippingPrice+orderDetailsController.order!.price+orderDetailsController.order!.vat).toString():
+                                            // App_Localization.of(context).translate("aed")+" "+(orderDetailsController.order!.price+orderDetailsController.order!.vat).toString(),
+                                            //   style: TextStyle(color:  App.textLgColor() ,fontSize: 14),)
+
+                                            Text(
+                                            App_Localization.of(context).translate("aed")+" "+(orderDetailsController.totalForPayment.toString()).toString(),
                                               style: TextStyle(color:  App.textLgColor() ,fontSize: 14),)
                                           ],
                                         ),
