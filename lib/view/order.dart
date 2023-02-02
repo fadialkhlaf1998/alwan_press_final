@@ -57,7 +57,7 @@ class OrderPage extends StatelessWidget {
 
   _orderList(context){
     return RefreshIndicator(
-        key: orderController.refreshIndicatorKey,
+        // key: orderController.refreshIndicatorKey,
         onRefresh: () async {
          return await orderController.getOrderDataIndicater();
       },

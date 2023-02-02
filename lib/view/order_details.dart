@@ -751,7 +751,7 @@ class OrderDetails extends StatelessWidget {
                               orderDetailsController.totalForPayment > 0 ?
                               GestureDetector(
                                 onTap: (){
-                                  orderDetailsController.initFolosiPlatformState();
+                                  orderDetailsController.initFolosiPlatformState(context);
                                   //todo pay
                                   // Get.to(()=>MyFatoraahPage("Payment", orderDetailsController.totalForPayment.toStringAsFixed(2)))!.then((value) {
                                   //   orderDetailsController.refreshIndicater();

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:alwan_press/app_localization.dart';
 import 'package:alwan_press/helper/api.dart';
+import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/model/order.dart';
@@ -81,13 +82,13 @@ class OrderDetailsController extends GetxController{
     );
   }
 
-  Future<void> initFolosiPlatformState() async {
+  Future<void> initFolosiPlatformState(BuildContext context) async {
     if (totalForPayment > 0) {
       try {
 
         var initData = {
           "merchantKey": "test_\$2y\$10\$9c6MQOTsB58aZwOFiznk0.qPCwUnaEdxFbr-9sWHDAO9yvzqEXbWy",
-          "customColor": MyTheme.isDarkTheme.value?"#ffffff":"#2C2B2B",
+          "customColor": MyTheme.isDarkTheme.value?"#2C2B2B":"#2C2B2B",
         };
         await FoloosiPlugins.init(json.encode(initData));
 
@@ -113,11 +114,27 @@ class OrderDetailsController extends GetxController{
         var result = await FoloosiPlugins.makePayment(json.encode(res));
         // var referenceToken = "";
         // var result = await FoloosiPlugins.makePaymentWithReferenceToken(referenceToken);
+        if(result["success"]){
+          Get.snackbar(
+              App_Localization.of(context).translate("payment"),
+              App_Localization.of(context).translate("you_payment_completed_successfully"),
+              margin: EdgeInsets.only(top: 30,left: 25,right: 25),
+              backgroundColor: MyTheme.isDarkTheme.value ? Colors.grey.withOpacity(0.5) : Colors.black.withOpacity(0.5),
+              colorText: Colors.white
+          );
+        }
         if (kDebugMode) {
           print("Payment Response: $result");
         }
       } on Exception catch (exception) {
-        exception.runtimeType;
+        Get.snackbar(
+            App_Localization.of(context).translate("payment"),
+            App_Localization.of(context).translate("oops_d"),
+            margin: EdgeInsets.only(top: 30,left: 25,right: 25),
+            backgroundColor: MyTheme.isDarkTheme.value ? Colors.grey.withOpacity(0.5) : Colors.black.withOpacity(0.5),
+            colorText: Colors.white
+        );
+        // exception.runtimeType;
       }
     } else {
       if (kDebugMode) {
@@ -130,6 +147,19 @@ class OrderDetailsController extends GetxController{
     /// If the widget was removed from the tree while the asynchronous platform
     /// message was in flight, we want to discard the reply rather than calling
     /// setState to update our non-existent appearance.
+  }
+
+  addToDashboard(int order_id,double amount)async{
+    var succ  = await Api.pay(order_id, amount);
+    if(succ){
+      // Get.back();
+      // Get.back();
+      // Get.snackbar("Suxx", "payment not succ").show();
+      return true;
+    }
+    else{
+      return addToDashboard(order_id,amount);
+    }
   }
 
 }

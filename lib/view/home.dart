@@ -86,8 +86,8 @@ class _HomeState extends State<Home> {
               ? const Color(0XFF181818)
               : Colors.white));
       return Scaffold(
-        endDrawer: MyDrawer(_scaffoldkey),
-        key: _scaffoldkey,
+        // endDrawer: MyDrawer(_scaffoldkey),
+        // key: _scaffoldkey,
         body: SafeArea(
           child: Stack(
             children: [

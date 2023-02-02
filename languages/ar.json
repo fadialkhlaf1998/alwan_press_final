@@ -157,5 +157,7 @@
   "profile_saved_successfully": "تم حفظ الملف الشخصي بنجاح",
   "notifications": "الأشعارات",
   "open_notification_setting": "فتح إعداد الأشعارات",
-  "never_miss": "لا تفوت أي رسالة ، انقر على الرابط أدناه لتمكين الإشعارات منا بسهولة"
+  "never_miss": "لا تفوت أي رسالة ، انقر على الرابط أدناه لتمكين الإشعارات منا بسهولة",
+  "payment": "الدفع",
+  "you_payment_completed_successfully": "تم إكمال دفعتك بنجاح"
 }

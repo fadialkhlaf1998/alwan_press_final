@@ -157,5 +157,7 @@
   "profile_saved_successfully": "Profile Saved Successfully",
   "notifications": "Notifications",
   "open_notification_setting": "Open Notification Setting",
-  "never_miss": "Never miss a message, click the link below to easily enable notifications from us"
+  "never_miss": "Never miss a message, click the link below to easily enable notifications from us",
+  "payment": "Payment",
+  "you_payment_completed_successfully": "Your Payment Has Been Completed Successfully"
 }
