@@ -155,9 +155,6 @@ class OrderDetailsController extends GetxController{
     var succ  = await Api.pay(order_id, amount);
     if(succ){
       refreshIndicater();
-      // Get.back();
-      // Get.back();
-      // Get.snackbar("Suxx", "payment not succ").show();
       return true;
     }
     else{
