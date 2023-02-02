@@ -87,7 +87,7 @@ class OrderDetailsController extends GetxController{
       try {
 
         var initData = {
-          "merchantKey": "test_\$2y\$10\$9c6MQOTsB58aZwOFiznk0.qPCwUnaEdxFbr-9sWHDAO9yvzqEXbWy",
+          "merchantKey": "",
           "customColor": MyTheme.isDarkTheme.value?"#2C2B2B":"#2C2B2B",
         };
         await FoloosiPlugins.init(json.encode(initData));
