@@ -16,7 +16,7 @@ class Store {
 
   static Future<bool> loadTheme() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool("light") ?? true;
+    return prefs.getBool("light") ?? false;
   }
 
   static saveAddress(Address address)async{

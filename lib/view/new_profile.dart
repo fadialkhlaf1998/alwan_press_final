@@ -89,11 +89,12 @@ class _NewProfileState extends State<NewProfile> {
   }
   _notLogin(){
     return  Container(
-      height: MediaQuery.of(context).size.height*0.7,
+      height: MediaQuery.of(context).size.height,
+      color: App.containerColor(),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // SizedBox(height: 100,),
+          SizedBox(height: 100,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -108,7 +109,18 @@ class _NewProfileState extends State<NewProfile> {
               } ,child: Text(App_Localization.of(context).translate("sign_up"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 1),)),
 
             ],
-          )
+          ),
+          Column(
+            children: [
+              _language(context),
+              _notification(context),
+              _contactWithUs(context),
+              _aboutUs(context),
+              _lightDarkMode(context),
+              _appDetails()
+            ],
+          ),
+
         ],
       ),
     );
@@ -685,116 +697,12 @@ class _NewProfileState extends State<NewProfile> {
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: (){
-                  Get.to(()=>MyNotification());
-                },
-                child: Container(
-                  color: Colors.transparent,
-                  width: Get.width - 20,
-                  height: 53,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 15,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                MyTheme.isDarkTheme.value
-                                    ? "assets/new_profile/dark/notification.svg"
-                                    : "assets/new_profile/light/notification.svg",
-                                height: 18,
-                              ),
-                              SizedBox(width: 10,),
-                              Text(App_Localization.of(context).translate("notifications"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
-                            ],
-                          ),
-                          Icon(Icons.arrow_forward_ios,size: 12, color: App.textLgColor(),)
+              _notification(context),
 
-                        ],
-                      ),
-                      SizedBox(height: 15,),
-                      Container(color: App.textColor().withOpacity(0.05),width: Get.width - 20 ,height: 1,)
-                    ],
-                  ),
-                ),
-              ),
 
-              GestureDetector(
-                onTap: (){
-                  _languageBottomSheet();
-                },
-                child: Container(
-                  color: Colors.transparent,
-                  width: Get.width - 20,
-                  height: 53,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 15,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                MyTheme.isDarkTheme.value
-                                    ? "assets/new_profile/dark/language.svg"
-                                    : "assets/new_profile/light/language.svg",
-                                height: 18,
-                              ),
-                              SizedBox(width: 10,),
-                              Text(App_Localization.of(context).translate("language"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
-                            ],
-                          ),
-                          Text(settingsController.languageName.value,style: TextStyle(color: App.textLgColor(),fontSize: 10),)
+              _language(context),
+              _contactWithUs(context),
 
-                        ],
-                      ),
-                      SizedBox(height: 15,),
-                      Container(color: App.textColor().withOpacity(0.05),width: Get.width - 20 ,height: 1,)
-                    ],
-                  ),
-                ),
-              ),
-
-              GestureDetector(
-                onTap: (){
-                  // Get.to(()=> ConnectUs());
-                  Get.to(()=>ContactInformation());
-                },
-                child: Container(
-                  width: Get.width - 20,
-                  color: Colors.transparent,
-                  height: 53,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 15,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                MyTheme.isDarkTheme.value
-                                    ? "assets/new_profile/dark/call.svg"
-                                    : "assets/new_profile/light/call.svg",
-                                height: 18,
-                              ),
-                              SizedBox(width: 10,),
-                              Text(App_Localization.of(context).translate("connect_with_us"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
-                            ],
-                          ),
-                          // Icon(Icons.arrow_forward_ios,size: 12, color: App.textColor(),)
-                        ],
-                      ),
-                      SizedBox(height: 15,),
-                      Container(color: App.textColor().withOpacity(0.05),width: Get.width - 20 ,height: 1,)
-                    ],
-                  ),
-                ),
-              ),
               GestureDetector(
                 onTap: (){
                   if(Global.user == null){
@@ -839,61 +747,7 @@ class _NewProfileState extends State<NewProfile> {
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: (){
-                  //todo
-                },
-                child: Container(
-                  width: Get.width - 20,
-                  color: Colors.transparent,
-                  // height: 50,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 15,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              MyTheme.isDarkTheme.value ?
-                              const Icon(Icons.dark_mode,color: Colors.white,size: 22,) :
-                              const Icon(Icons.light_mode,color: Colors.black,size: 22),
-                              SizedBox(width: 10,),
-                              Text(MyTheme.isDarkTheme.value?
-                              App_Localization.of(context).translate("dark_mode")
-                                :App_Localization.of(context).translate("light_mode"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
-                            ],
-                          ),
-                          SizedBox(
-                            height: 30,
-                            child: Switch(
-                              activeColor: App.pink,
-                              value: MyTheme.isDarkTheme.value,
-                              onChanged: (value){
-                                settingsController.changeMode(context);
-                                Store.saveTheme(!value);
-                              },
-                            ),
-                            // child: CupertinoSwitch(
-                            //
-                            //   activeColor: App.pink,
-                            //   thumbColor: Theme.of(context).dividerColor,
-                            //   value: MyTheme.isDarkTheme.value,
-                            //   onChanged: (bool value) {
-                            //     settingsController.changeMode(context);
-                            //     Store.saveTheme(!value);
-                            //   },
-                            // ),
-                          )
-                          // Icon(Icons.arrow_forward_ios,size: 12, color: App.textColor(),)
-                        ],
-                      ),
-                      SizedBox(height: 15,),
-                      // Container(color: App.textColor().withOpacity(0.05),width: Get.width - 20 ,height: 1,)
-                    ],
-                  ),
-                ),
-              ),
+              _lightDarkMode(context)
             ],
           ),
         ),
@@ -1053,49 +907,7 @@ class _NewProfileState extends State<NewProfile> {
           ],
         ),
         SizedBox(height: 10,),
-        Container(
-          width: Get.width,
-          color: App.containerColor(),
-          child: Column(
-            children: [
-              GestureDetector(
-                onTap: (){
-                  Get.to(()=>AboutUs());
-                },
-                child: Container(
-                  width: Get.width - 20,
-                  height: 53,
-                  color: Colors.transparent,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 15,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                MyTheme.isDarkTheme.value
-                                    ? "assets/new_profile/dark/help.svg"
-                                    : "assets/new_profile/light/help.svg",
-                                height: 18,
-                              ),
-                              SizedBox(width: 10,),
-                              Text(App_Localization.of(context).translate("about_us"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
-                            ],
-                          ),
-                          Icon(Icons.arrow_forward_ios,size: 12, color: App.textLgColor(),)
-                        ],
-                      ),
-                      SizedBox(height: 15,),
-                      Container(color: App.textColor().withOpacity(0.05),width: Get.width - 20 ,height: 1,)
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        _aboutUs(context),
         SizedBox(height: 10,),
         GestureDetector(
           onTap: (){
@@ -1112,6 +924,222 @@ class _NewProfileState extends State<NewProfile> {
         ),
         SizedBox(height: 10,),
       ],
+    );
+  }
+  _aboutUs(BuildContext context){
+    return Container(
+      width: Get.width,
+      color: App.containerColor(),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: (){
+              Get.to(()=>AboutUs());
+            },
+            child: Container(
+              width: Get.width - 20,
+              height: 53,
+              color: Colors.transparent,
+              child: Column(
+                children: [
+                  SizedBox(height: 15,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            MyTheme.isDarkTheme.value
+                                ? "assets/new_profile/dark/help.svg"
+                                : "assets/new_profile/light/help.svg",
+                            height: 18,
+                          ),
+                          SizedBox(width: 10,),
+                          Text(App_Localization.of(context).translate("about_us"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
+                        ],
+                      ),
+                      Icon(Icons.arrow_forward_ios,size: 12, color: App.textLgColor(),)
+                    ],
+                  ),
+                  SizedBox(height: 15,),
+                  Container(color: App.textColor().withOpacity(0.05),width: Get.width - 20 ,height: 1,)
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  _notification(BuildContext context){
+    return  GestureDetector(
+      onTap: (){
+        Get.to(()=>MyNotification());
+      },
+      child: Container(
+        color: Colors.transparent,
+        width: Get.width - 20,
+        height: 53,
+        child: Column(
+          children: [
+            SizedBox(height: 15,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      MyTheme.isDarkTheme.value
+                          ? "assets/new_profile/dark/notification.svg"
+                          : "assets/new_profile/light/notification.svg",
+                      height: 18,
+                    ),
+                    SizedBox(width: 10,),
+                    Text(App_Localization.of(context).translate("notifications"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
+                  ],
+                ),
+                Icon(Icons.arrow_forward_ios,size: 12, color: App.textLgColor(),)
+
+              ],
+            ),
+            SizedBox(height: 15,),
+            Container(color: App.textColor().withOpacity(0.05),width: Get.width - 20 ,height: 1,)
+          ],
+        ),
+      ),
+    );
+  }
+  _lightDarkMode(BuildContext context){
+    return  GestureDetector(
+      onTap: (){
+        //todo
+      },
+      child: Container(
+        width: Get.width - 20,
+        color: Colors.transparent,
+        // height: 50,
+        child: Column(
+          children: [
+            SizedBox(height: 15,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    MyTheme.isDarkTheme.value ?
+                    const Icon(Icons.dark_mode,color: Colors.white,size: 22,) :
+                    const Icon(Icons.light_mode,color: Colors.black,size: 22),
+                    SizedBox(width: 10,),
+                    Text(MyTheme.isDarkTheme.value?
+                    App_Localization.of(context).translate("dark_mode")
+                        :App_Localization.of(context).translate("light_mode"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                  child: Switch(
+                    activeColor: App.pink,
+                    value: MyTheme.isDarkTheme.value,
+                    onChanged: (value){
+                      settingsController.changeMode(context);
+                      Store.saveTheme(!value);
+                    },
+                  ),
+                  // child: CupertinoSwitch(
+                  //
+                  //   activeColor: App.pink,
+                  //   thumbColor: Theme.of(context).dividerColor,
+                  //   value: MyTheme.isDarkTheme.value,
+                  //   onChanged: (bool value) {
+                  //     settingsController.changeMode(context);
+                  //     Store.saveTheme(!value);
+                  //   },
+                  // ),
+                )
+                // Icon(Icons.arrow_forward_ios,size: 12, color: App.textColor(),)
+              ],
+            ),
+            SizedBox(height: 15,),
+            // Container(color: App.textColor().withOpacity(0.05),width: Get.width - 20 ,height: 1,)
+          ],
+        ),
+      ),
+    );
+  }
+  _language(BuildContext context){
+    return  GestureDetector(
+      onTap: (){
+        _languageBottomSheet();
+      },
+      child: Container(
+        color: Colors.transparent,
+        width: Get.width - 20,
+        height: 53,
+        child: Column(
+          children: [
+            SizedBox(height: 15,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      MyTheme.isDarkTheme.value
+                          ? "assets/new_profile/dark/language.svg"
+                          : "assets/new_profile/light/language.svg",
+                      height: 18,
+                    ),
+                    SizedBox(width: 10,),
+                    Text(App_Localization.of(context).translate("language"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
+                  ],
+                ),
+                Text(settingsController.languageName.value,style: TextStyle(color: App.textLgColor(),fontSize: 10),)
+
+              ],
+            ),
+            SizedBox(height: 15,),
+            Container(color: App.textColor().withOpacity(0.05),width: Get.width - 20 ,height: 1,)
+          ],
+        ),
+      ),
+    );
+  }
+  _contactWithUs(BuildContext context){
+    return  GestureDetector(
+      onTap: (){
+        // Get.to(()=> ConnectUs());
+        Get.to(()=>ContactInformation());
+      },
+      child: Container(
+        width: Get.width - 20,
+        color: Colors.transparent,
+        height: 53,
+        child: Column(
+          children: [
+            SizedBox(height: 15,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      MyTheme.isDarkTheme.value
+                          ? "assets/new_profile/dark/call.svg"
+                          : "assets/new_profile/light/call.svg",
+                      height: 18,
+                    ),
+                    SizedBox(width: 10,),
+                    Text(App_Localization.of(context).translate("connect_with_us"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
+                  ],
+                ),
+                // Icon(Icons.arrow_forward_ios,size: 12, color: App.textColor(),)
+              ],
+            ),
+            SizedBox(height: 15,),
+            Container(color: App.textColor().withOpacity(0.05),width: Get.width - 20 ,height: 1,)
+          ],
+        ),
+      ),
     );
   }
   _chooseImage(BuildContext context){

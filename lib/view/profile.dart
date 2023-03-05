@@ -87,30 +87,7 @@ class _ProfileState extends State<Profile> {
               profileController.loading.value
                   ? _loading(context)
                   : Global.user == null?
-                    Container(
-                      height: MediaQuery.of(context).size.height*0.7,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // SizedBox(height: 100,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GestureDetector(onTap:(){
-                                Get.to(()=>SignIn());
-                              } ,child: Text(App_Localization.of(context).translate("sign_in"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 1),)),
-                              SizedBox(width: 5,),
-                              Text(App_Localization.of(context).translate("or"),style: TextStyle(color: Colors.grey),),
-                              SizedBox(width: 5,),
-                              GestureDetector(onTap:(){
-                                Get.to(()=>ContactInformation());
-                              } ,child: Text(App_Localization.of(context).translate("sign_up"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 1),)),
-
-                            ],
-                          )
-                        ],
-                      ),
-                    )
+                   _noLogIn(context)
                   :Column(
                       children: [
                         _slider(context),
@@ -123,6 +100,33 @@ class _ProfileState extends State<Profile> {
                         _contactHelp(context),
                       ],
                    )
+
+            ],
+          ),
+
+        ],
+      ),
+    );
+  }
+  _noLogIn(BuildContext context){
+    return Container(
+      height: MediaQuery.of(context).size.height*0.7,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(onTap:(){
+                Get.to(()=>SignIn());
+              } ,child: Text(App_Localization.of(context).translate("sign_in"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 1),)),
+              SizedBox(width: 5,),
+              Text(App_Localization.of(context).translate("or"),style: TextStyle(color: Colors.grey),),
+              SizedBox(width: 5,),
+              GestureDetector(onTap:(){
+                Get.to(()=>ContactInformation());
+              } ,child: Text(App_Localization.of(context).translate("sign_up"),style: TextStyle(color: MyTheme.isDarkTheme.value?Colors.white:Colors.black,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,height: 1),)),
 
             ],
           ),
@@ -866,42 +870,7 @@ class _ProfileState extends State<Profile> {
                 ),
               )
           ),
-          // SizedBox(height: 10,),
-          // GestureDetector(
-          //     onTap: () {
-          //       Global.logout();
-          //     },
-          //     child: Container(
-          //       width: MediaQuery.of(context).size.width * 0.9,
-          //       height: 40,
-          //       decoration: BoxDecoration(
-          //           color: App.pink,
-          //           borderRadius: BorderRadius.circular(10)
-          //       ),
-          //       child: Row(
-          //         crossAxisAlignment: CrossAxisAlignment.center,
-          //         mainAxisAlignment: MainAxisAlignment.center,
-          //         children: [
-          //           Container(
-          //               width: 28,
-          //               height: 28,
-          //               child: const Icon(
-          //                 Icons.logout,
-          //                 color:  Colors.white,
-          //                 size: 28,)
-          //           ),
-          //           const SizedBox(width: 10),
-          //           Center(
-          //               child: Text(App_Localization.of(context).translate("logout"),
-          //                   style: const TextStyle(
-          //                       fontSize: 16,
-          //                       color: Colors.white,
-          //                       fontWeight: FontWeight.bold
-          //                   )))
-          //         ],
-          //       ),
-          //     )
-          // ),
+
         ],
       ),
     );
