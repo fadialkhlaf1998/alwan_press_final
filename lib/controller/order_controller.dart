@@ -38,6 +38,7 @@ class OrderController extends GetxController{
   searchForData(){
     if(search.text.isEmpty){
       loading(true);
+      filteredData.value.clear();
       filteredData.value.addAll(myOrders);
       loading(false);
     }else{
@@ -59,6 +60,7 @@ class OrderController extends GetxController{
     waitingAdvance.clear();
     waitingFinal.clear();
     delivered.clear();
+    filteredData.clear();
     for(var elm in orders){
       if(elm.hold == 1){
         hold.add(elm);
@@ -122,9 +124,10 @@ class OrderController extends GetxController{
      var value = await Api.getCustomerOrder(Global.userId.toString());
         if(value.isNotEmpty){
           print('done orders');
+          print(value.length);
           myOrders.value = value;
-          tempOrders.value = value;
-          filterOrders(tempOrders);
+          List<Order> temp = value;
+          filterOrders(temp);
           loading.value = false;
         }else{
           print('no orders');

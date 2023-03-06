@@ -56,32 +56,39 @@ class OrderPage extends StatelessWidget {
 
 
   _orderList(context){
-    return RefreshIndicator(
-        // key: orderController.refreshIndicatorKey,
+    return Container(
+      margin: EdgeInsets.only(top: 70),
+      child: RefreshIndicator(
         onRefresh: () async {
-         return await orderController.getOrderDataIndicater();
-      },
-      child: Container(
-        margin: EdgeInsets.only(top: 70),
-        // height: MediaQuery.of(context).size.height * 0.8,
-        // color: !MyTheme.isDarkTheme.value ?  Colors.white : Colors.black,
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 600),
-          child:  orderController.loading.value
-              ? const Center(child: CircularProgressIndicator(),)
-              :Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      _filteredOrderList(context,orderController.filteredData),
+          return await orderController.getOrderDataIndicater();
+        },
 
-                    ],
+        child: Container(
+          constraints: BoxConstraints(
+              minHeight: MediaQuery.of(context).size.height * 0.75,
+          ),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Container(
+              // duration: const Duration(milliseconds: 600),
+              child:  orderController.loading.value
+                  ? SizedBox(
+                    height: Get.height * 0.75 ,
+                    child:const Center(child: CircularProgressIndicator(),),
+                  )
+                  :Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        _filteredOrderList(context,orderController.filteredData),
+                      ],
+                    )
                   ),
-                )
-              ),
+            ),
+          ),
         ),
-      )
+      ),
     );
   }
 
@@ -329,14 +336,19 @@ class OrderPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount:orders.length,
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (context,index){
-                return _orderCard(context, orders[index]);
-              }),
+          child: RefreshIndicator(
+            onRefresh: () async {
+              return await orderController.getOrderDataIndicater();
+            },
+            child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount:orders.length,
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context,index){
+                  return _orderCard(context, orders[index]);
+                }),
+          ),
         ),
       ],
     );
