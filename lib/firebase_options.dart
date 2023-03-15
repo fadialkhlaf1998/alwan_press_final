@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDJ0Vey-wSVOL2gpYCr35aICpE9goMJhrM',
-    appId: '1:29903051542:android:cbe09266d8959a50b44e37',
+    appId: '1:29903051542:android:1da2276ade9cc8feb44e37',
     messagingSenderId: '29903051542',
     projectId: 'alwan-press',
     storageBucket: 'alwan-press.appspot.com',
