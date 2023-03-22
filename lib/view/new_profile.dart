@@ -82,10 +82,21 @@ class _NewProfileState extends State<NewProfile> {
               ),
             ),
             profileController.showChoose.value?_chooseImage(context):Center(),
+            profileController.loading.value?_loading(context):Center(),
           ],
         ),
       ),
     ));
+  }
+  _loading(BuildContext context){
+    return Container(
+      color: App.containerColor().withOpacity(0.3),
+      width: Get.width,
+      height: Get.height,
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
   _notLogin(){
     return  Container(
@@ -908,7 +919,21 @@ class _NewProfileState extends State<NewProfile> {
         ),
         SizedBox(height: 10,),
         _aboutUs(context),
-        SizedBox(height: 10,),
+        SizedBox(height: 15,),
+        GestureDetector(
+          onTap: (){
+            confirmDeleteAccount();
+          },
+          child: Row(
+            children: [
+              SizedBox(width: 10,),
+              Icon(Icons.delete,color: App.textColor().withOpacity(0.5),size: 20,),
+              SizedBox(width: 10,),
+              Text(App_Localization.of(context).translate("delete_account"),style: TextStyle(color: App.textColor().withOpacity(0.5),fontSize: 13),)
+            ],
+          ),
+        ),
+        SizedBox(height: 15,),
         GestureDetector(
           onTap: (){
             Global.logout();
@@ -1220,6 +1245,43 @@ class _NewProfileState extends State<NewProfile> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(App_Localization.of(context).translate('no_statement')),
+        titleTextStyle: const TextStyle(
+            fontSize: 16,
+            color: Colors.black,
+            fontWeight: FontWeight.bold
+        ),
+        content: Text(
+          App_Localization.of(context).translate('request_last_statement'),
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
+  }
+
+  confirmDeleteAccount(){
+    return  showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(App_Localization.of(context).translate('no_statement')),
+        actions: <Widget>[
+          TextButton(
+            child: Text(App_Localization.of(context).translate("delete_account"),style: TextStyle(color: Colors.red)),
+            onPressed: () {
+              Get.back();
+              profileController.deleteAccount(context);
+            },
+          ),
+
+          TextButton(
+            child: Text(App_Localization.of(context).translate("cancel"),style: TextStyle(color: Colors.grey),),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+        ],
         titleTextStyle: const TextStyle(
             fontSize: 16,
             color: Colors.black,

@@ -160,5 +160,8 @@
   "never_miss": "Never miss a message, click the link below to easily enable notifications from us",
   "payment": "Payment",
   "you_payment_completed_successfully": "Your Payment Has Been Completed Successfully",
-  "paid_amount": "Paid Amount"
+  "paid_amount": "Paid Amount",
+  "delete_account": "Delete Account",
+  "confirm_dialog": "Confirm Dialog",
+  "are_u_sure_for_delete_account": "Are You Sure For Delete Account"
 }

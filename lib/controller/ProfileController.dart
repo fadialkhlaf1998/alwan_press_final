@@ -174,7 +174,6 @@ class ProfileController extends GetxController {
       await file.writeAsBytes(bytes, flush: true);
       completer.complete(file);
       return completer.future;
-
     }
 
     Future<File> loadPdfTradLicence() async {
@@ -191,5 +190,27 @@ class ProfileController extends GetxController {
       completer.complete(file);
       return completer.future;
 
+    }
+
+    deleteAccount(BuildContext context){
+      Api.checkInternet().then((internet) {
+        if(internet){
+          loading.value = true;
+          try{
+            Api.deleteAccount(Global.user!.id).then((value) {
+              if(value){
+                Global.logout();
+              }else{
+                loading.value = false;
+                mySnackBar(App_Localization.of(context).translate("Please_try_again"),App_Localization.of(context).translate("something_wrong"));
+              }
+
+            });
+          }catch(err){
+            loading.value = false;
+            mySnackBar(App_Localization.of(context).translate("Please_try_again"),App_Localization.of(context).translate("something_wrong"));
+          }
+        }
+      });
     }
 }

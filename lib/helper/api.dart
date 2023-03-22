@@ -289,7 +289,7 @@ class Api {
 
   static Future<Order?> getOrderInfo(int id)async{
 
-    var request = http.Request('GET', Uri.parse(url+'/api/order-info/$id'));
+    var request = http.Request('GET', Uri.parse(url+'api/order-info/$id'));
 
 
     http.StreamedResponse response = await request.send();
@@ -312,7 +312,7 @@ class Api {
     var headers = {
       'Content-Type': 'application/json'
     };
-    var request = http.Request('PUT', Uri.parse(url+'/api/pay'));
+    var request = http.Request('PUT', Uri.parse(url+'api/pay'));
     request.body = json.encode({
       "id": order_id,
       "amount": amount,
@@ -339,7 +339,7 @@ class Api {
     var headers = {
       'Content-Type': 'application/json'
     };
-    var request = http.Request('POST', Uri.parse(url+'/api/re-order'));
+    var request = http.Request('POST', Uri.parse(url+'api/re-order'));
     request.body = json.encode({
       "customer_id": customer_id,
       "order_id": order_id,
@@ -360,8 +360,31 @@ class Api {
 
   }
 
+  static Future<bool> deleteAccount(int customer_id)async{
+    var headers = {
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request('DELETE', Uri.parse(url+'api/customer-account'));
+    request.body = json.encode({
+      "id": customer_id
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      return true;
+    }
+    else {
+      print(response.reasonPhrase);
+      return false;
+    }
+
+  }
+
   static Future<bool> uploadAvatar(String path,int customer_id)async{
-    var request = http.MultipartRequest('PUT', Uri.parse(url+'/api/customer-upload-image'));
+    var request = http.MultipartRequest('PUT', Uri.parse(url+'api/customer-upload-image'));
     request.fields.addAll({
       'id': customer_id.toString()
     });
@@ -384,7 +407,7 @@ class Api {
     var headers = {
       'Content-Type': 'application/json'
     };
-    var request = http.Request('PUT', Uri.parse(url+'/api/customer-data'));
+    var request = http.Request('PUT', Uri.parse(url+'api/customer-data'));
     request.body = json.encode({
       "email": email,
       "phone": "+971"+phone,

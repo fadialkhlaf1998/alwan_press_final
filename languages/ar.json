@@ -160,5 +160,8 @@
   "never_miss": "لا تفوت أي رسالة ، انقر على الرابط أدناه لتمكين الإشعارات منا بسهولة",
   "payment": "الدفع",
   "you_payment_completed_successfully": "تم إكمال دفعتك بنجاح",
-  "paid_amount": "المبلغ المدفوع"
+  "paid_amount": "المبلغ المدفوع",
+  "delete_account": "حذف الحساب" ,
+  "Confirm_dialog": "رسالة تأكيد" ,
+  "are_u_sure_for_delete_account": "هل أنت متأكد من حذف الحساب"
 }
