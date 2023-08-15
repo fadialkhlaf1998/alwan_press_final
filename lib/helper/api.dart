@@ -1,8 +1,7 @@
 import 'dart:convert';
-
 import 'package:alwan_press/helper/global.dart';
+import 'package:alwan_press/model/clients.dart';
 import 'package:alwan_press/model/order.dart';
-import 'package:alwan_press/model/product.dart';
 import 'package:alwan_press/model/product_list.dart';
 import 'package:alwan_press/model/start_up.dart';
 import 'package:alwan_press/model/user.dart';
@@ -27,11 +26,14 @@ class Api {
     }else if(result == ConnectivityResult.none){
       print("No internet connection");
       return false;
+    }else{
+      print(result.name);
+      return false;
     }
   }
 
   static Future getStartUpData() async {
-    print('request begin');
+
     var request = http.Request('GET', Uri.parse(url + 'api/new/start-up'));
 
     http.StreamedResponse response = await request.send();
@@ -60,7 +62,23 @@ class Api {
       return ProductList(id: -1, subCategoryId: -1, title: "", subTitle: "", search: "", image: "", rate: 0, rateCount: 0, description: "", price: -1, images: [],ar_desc: "",ar_title: "");
     }
   }
+  static Future<List<Client>> getClients(int subCategoryId) async {
+    var request = http.Request('GET', Uri.parse(url + 'api/clients'));
 
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      String data = await response.stream.bytesToString();
+      var list = jsonDecode(data) as List;
+      List<Client> clients = <Client>[];
+      for(var c in list){
+        clients.add(Client.fromMap(c));
+      }
+      return clients;
+    } else {
+      return [];
+    }
+  }
   static Future<List<ProductList>> getProductList(int subCategoryId) async {
     var request = http.Request('GET', Uri.parse(url + 'api/sub-category/$subCategoryId/product'));
 

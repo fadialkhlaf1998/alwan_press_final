@@ -40,7 +40,13 @@ class OrderPage extends StatelessWidget {
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
-              const DarkModeBackground(),
+              MyTheme.isDarkTheme.value?DarkModeBackground()
+                  :Container(
+                width: Get.width,
+                height: Get.height,
+                color: App.lightGrey,
+              )
+               ,
               Global.userId == -1?_notLogedIn(context):
               orderController.myOrders.isNotEmpty
                   ? _orderList(context)
@@ -97,7 +103,7 @@ class OrderPage extends StatelessWidget {
       width: Get.width,
       height: 60,
       decoration: BoxDecoration(
-        color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+        color: MyTheme.isDarkTheme.value?App.newDarkGrey:Colors.white,
         boxShadow: [
           App.myBoxShadow
         ]
@@ -366,7 +372,7 @@ class OrderPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: MyTheme.isDarkTheme.value ?
-              App.darkGrey :
+              App.newDarkGrey :
               Colors.white,
             ),
             child: Center(

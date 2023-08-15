@@ -23,7 +23,7 @@ class InvoicePage extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            const DarkModeBackground(),
+             DarkModeBackground(),
             _invoiceList(context),
             _header(context),
           ],

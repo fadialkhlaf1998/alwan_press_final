@@ -59,7 +59,7 @@ class Addresses_2 extends StatelessWidget {
       width: Get.width,
       height: 60,
       decoration: BoxDecoration(
-          color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+          color: MyTheme.isDarkTheme.value?App.newDarkGrey:Colors.white,
           boxShadow: [
             App.myBoxShadow
           ]

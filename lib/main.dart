@@ -152,7 +152,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF300A2A):Colors.white
+        statusBarColor: MyTheme.isDarkTheme.value?Color(0XFF43c3b1):Colors.white
     ));
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -181,7 +181,6 @@ class _MyAppState extends State<MyApp> {
           return supportedLocales.first;
         },
         home: Intro()
-      // home: Addresses_2()
     );
   }
 }

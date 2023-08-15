@@ -48,7 +48,7 @@ class _AboutUsState extends State<AboutUs> {
         child: Container(
           child: Stack(
             children: [
-              const DarkModeBackground(),
+               DarkModeBackground(),
               Container(
                 // height: MediaQuery.of(context).size.height,
                 child:  SingleChildScrollView(
@@ -75,7 +75,7 @@ class _AboutUsState extends State<AboutUs> {
       width: Get.width,
       height: 60,
       decoration: BoxDecoration(
-          color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+          color: MyTheme.isDarkTheme.value?App.newDarkGrey:Colors.white,
           boxShadow: [
             App.myBoxShadow
           ]
@@ -164,7 +164,7 @@ class _AboutUsState extends State<AboutUs> {
                     width: MediaQuery.of(context).size.width*0.9,
                     child: Row(
                       children: [
-                        Icon(Icons.location_on,color: App.textLightColor(),size: 20),
+                        Icon(Icons.location_on,color: App.textColor(),size: 20),
                         SizedBox(width: 15,),
                         Container(
                             height:40,
@@ -192,7 +192,7 @@ class _AboutUsState extends State<AboutUs> {
                       width: MediaQuery.of(context).size.width*0.9,
                       child: Row(
                         children: [
-                          Icon(Icons.phone,color: App.textLightColor(),size: 20),
+                          Icon(Icons.phone,color: App.textColor(),size: 20),
                           SizedBox(width: 15,),
                           Container(
                               height:40,
@@ -216,7 +216,7 @@ class _AboutUsState extends State<AboutUs> {
                     width: MediaQuery.of(context).size.width*0.9,
                     child: Row(
                       children: [
-                        Icon(Icons.mail,color: App.textLightColor(),size: 20,),
+                        Icon(Icons.mail,color: App.textColor(),size: 20,),
                         SizedBox(width: 15,),
                         Container(
                             height:40,
@@ -244,7 +244,7 @@ class _AboutUsState extends State<AboutUs> {
                       child: Row(
                         children: [
                           // Icon(Icons.add_photo_alternate,color: MyTheme.isDarkTheme.value?Colors.white:Colors.black),
-                          SvgPicture.asset("assets/icons/web.svg",width: 20,color: App.textLightColor(),),
+                          SvgPicture.asset("assets/icons/web.svg",width: 20,color: App.textColor(),),
                           SizedBox(width: 15,),
                           Container(
                               height:40,

@@ -16,7 +16,7 @@ class ConnectUs extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            const DarkModeBackground(),
+            DarkModeBackground(),
             Column(
               children: [
                 _header(context),

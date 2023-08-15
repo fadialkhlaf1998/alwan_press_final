@@ -2,10 +2,12 @@ import 'dart:ffi';
 
 import 'package:alwan_press/controller/intro_controller.dart';
 import 'package:alwan_press/helper/myTheme.dart';
+import 'package:alwan_press/widget/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class Intro extends StatefulWidget {
 
@@ -68,17 +70,24 @@ class _IntroState extends State<Intro> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              child: SvgPicture.asset('assets/image/gredient.svg',fit: BoxFit.cover)
+              decoration: BoxDecoration(
+                color: Colors.white,
+                image: DecorationImage(image: AssetImage("assets/image/intro.png"),fit: BoxFit.cover)
+              ),
             ),
-            Container(
-                width: MediaQuery.of(context).size.width * 0.4,
-                height: MediaQuery.of(context).size.height * 0.4,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/icons/logo.png')
-                  )
-                ),
-            ),
+            // Column(
+            //   children: [
+            //     SizedBox(height: 100,),
+            //     Container(
+            //       height: MediaQuery.of(context).size.width * 0.4,
+            //       width: MediaQuery.of(context).size.width * 0.4,
+            //       child: Lottie.asset("assets/icons/LogoAnimation.json"),
+            //     ),
+            //     // Logo(MediaQuery.of(context).size.width * 0.4),
+            //   ],
+            // )
+
+
           ],
         ),
       ),

@@ -8,6 +8,7 @@ import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/products_list.dart';
 import 'package:alwan_press/view/search_text_field.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
+import 'package:alwan_press/widget/logo_text.dart';
 import 'package:alwan_press/widget/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +17,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+// ignore: must_be_immutable
 class AllSubCategory extends StatelessWidget {
 
   int categoryIndex;
@@ -44,7 +46,7 @@ class AllSubCategory extends StatelessWidget {
         body: SafeArea(
           child: Stack(
             children: [
-              const DarkModeBackground(),
+               DarkModeBackground(),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: SingleChildScrollView(
@@ -88,18 +90,18 @@ class AllSubCategory extends StatelessWidget {
                 ),
               )
                   : GestureDetector(
-                onTap: (){
-                  _scaffoldkey.currentState!.openEndDrawer();
-                },
-                child: Container(
-                width: MediaQuery.of(context).size.width * 0.15,
-                color: Colors.transparent,
-                child: const Align(
-                      alignment: Alignment.centerRight,
-                      child: Icon(Icons.menu, size: 25)),
-              ),
+                    onTap: (){
+                      _scaffoldkey.currentState!.openEndDrawer();
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.15,
+                      color: Colors.transparent,
+                      child: const Align(
+                            alignment: Alignment.centerRight,
+                            child: Icon(Icons.menu, size: 25)),
+                    ),
                   ),
-              _logo(context),
+              LogoText(Get.width*0.25,height: 40),
               Global.langCode == 'en' ?
               GestureDetector(
                 onTap: (){
@@ -339,7 +341,8 @@ class AllSubCategory extends StatelessWidget {
                           }),
                     ),
                   ),
-                )),
+                ),
+            ),
             Expanded(
               flex: 1,
               child: Container(
@@ -367,24 +370,11 @@ class AllSubCategory extends StatelessWidget {
                   )
               ),
             ),
-            // Expanded(
-            //   flex: 1,
-            //   child: Text(
-            //     introController.categoriesList[categoryIndex].subCategories[index].title,
-            //     maxLines: 2,
-            //       style: TextStyle(
-            //       color: MyTheme.isDarkTheme.value ? Colors.white : Colors.black,
-            //       fontSize: 12,
-            //       overflow: TextOverflow.ellipsis
-            //     )
-            //   ),
-            // )
           ],
         ),
       ),
     );
   }
-
 
   _header1(context){
     return Container(

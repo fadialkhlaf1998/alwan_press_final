@@ -39,7 +39,7 @@ class ContactInformation extends StatelessWidget {
         body: Stack(
           alignment: Alignment.center,
           children: [
-            const DarkModeBackground(),
+             DarkModeBackground(),
             SafeArea(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
@@ -155,7 +155,7 @@ class ContactInformation extends StatelessWidget {
       width: Get.width,
       height: 60,
       decoration: BoxDecoration(
-          color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+          color: MyTheme.isDarkTheme.value?App.newDarkGrey:Colors.white,
           boxShadow: [
             App.myBoxShadow
           ]

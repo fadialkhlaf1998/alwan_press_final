@@ -17,7 +17,7 @@ class LanguageList extends StatelessWidget {
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
-              const DarkModeBackground(),
+              DarkModeBackground(),
               Column(
                 children: [
                   _header(context),

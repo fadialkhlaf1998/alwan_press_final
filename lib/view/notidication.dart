@@ -16,7 +16,12 @@ class MyNotification extends StatelessWidget {
         child: Container(
           child: Stack(
             children: [
-              const DarkModeBackground(),
+              MyTheme.isDarkTheme.value?DarkModeBackground()
+                  :Container(
+                width: Get.width,
+                height: Get.height,
+                color: App.lightGrey,
+              ),
               Container(
                 // height: MediaQuery.of(context).size.height,
                   child:  SingleChildScrollView(
@@ -72,7 +77,7 @@ class MyNotification extends StatelessWidget {
       width: Get.width,
       height: 60,
       decoration: BoxDecoration(
-          color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+          color: MyTheme.isDarkTheme.value?App.newDarkGrey:Colors.white,
           boxShadow: [
             App.myBoxShadow
           ]

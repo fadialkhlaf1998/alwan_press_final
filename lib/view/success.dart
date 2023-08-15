@@ -25,7 +25,7 @@ class Success extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            MyTheme.isDarkTheme.value? const DarkModeBackground():Center(),
+            MyTheme.isDarkTheme.value? DarkModeBackground():Center(),
             SingleChildScrollView(
               child: Container(
                 height: MediaQuery.of(context).size.height*0.9,

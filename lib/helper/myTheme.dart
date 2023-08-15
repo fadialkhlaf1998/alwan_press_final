@@ -17,9 +17,9 @@ class MyTheme with ChangeNotifier {
   static ThemeData get lightTheme {
 
     return ThemeData(
-        primarySwatch: generateMaterialColor(const Color(0XFF0f6db3)),
+        primarySwatch: generateMaterialColor(const Color(0XFF43c3b1)),
         fontFamily: "Poppins",
-        primaryColor: const Color(0XFF0f6db3),
+        primaryColor: const Color(0XFF43c3b1),
         dividerColor: const Color(0XFF8e8e8e),
         disabledColor: Colors.black,
         iconTheme: const IconThemeData(color: Color(0XFF8e8e8e)),
@@ -39,9 +39,9 @@ class MyTheme with ChangeNotifier {
 
   static ThemeData get darkTheme {
     return ThemeData(
-        primarySwatch: generateMaterialColor(const Color(0XFF0f6db3)),
+        primarySwatch: generateMaterialColor(const Color(0XFF43c3b1)),
         fontFamily: "Poppins",
-        primaryColor: const Color(0XFF0f6db3),
+        primaryColor: const Color(0XFF43c3b1),
         dividerColor: Colors.white,
         disabledColor: Colors.white,
         iconTheme: const IconThemeData(color: Color(0XFF8e8e8e)),

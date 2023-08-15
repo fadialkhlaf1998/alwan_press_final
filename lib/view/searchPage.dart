@@ -30,7 +30,7 @@ class SearchPage extends StatelessWidget {
         body: SafeArea(
           child: Stack(
             children: [
-              const DarkModeBackground(),
+               DarkModeBackground(),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: SingleChildScrollView(

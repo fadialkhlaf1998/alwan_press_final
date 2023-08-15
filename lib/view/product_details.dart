@@ -52,7 +52,6 @@ class ProductDetails extends StatelessWidget {
                   child: Column(
                     children: [
                       _categoryBar(context),
-
                       Container(
                         width: Get.width * 0.9,
                         child: Row(

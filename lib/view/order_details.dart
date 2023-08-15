@@ -62,7 +62,12 @@ class OrderDetails extends StatelessWidget {
         body: SafeArea(
           child: Stack(
             children: [
-              const DarkModeBackground(),
+              MyTheme.isDarkTheme.value?DarkModeBackground()
+                  :Container(
+                width: Get.width,
+                height: Get.height,
+                color: App.lightGrey,
+              ),
               orderDetailsController.loading.value?
               Container(
                 width: MediaQuery.of(context).size.width,
@@ -95,7 +100,7 @@ class OrderDetails extends StatelessWidget {
                                 height: 135,
                                 decoration: BoxDecoration(
                                   color: MyTheme.isDarkTheme.value ?
-                                  App.darkGrey :
+                                  App.newDarkGrey :
                                   Colors.white,
                                   // borderRadius: BorderRadius.circular(5),
                                   // boxShadow: [
@@ -310,7 +315,7 @@ class OrderDetails extends StatelessWidget {
                                 // height: 190,
                                 decoration: BoxDecoration(
                                   color: MyTheme.isDarkTheme.value ?
-                                  App.darkGrey :
+                                  App.newDarkGrey :
                                   Colors.white,
                                   // borderRadius: BorderRadius.circular(5),
                                   // boxShadow: [
@@ -386,7 +391,7 @@ class OrderDetails extends StatelessWidget {
                                 // height: 190,
                                 decoration: BoxDecoration(
                                   color: MyTheme.isDarkTheme.value ?
-                                  App.darkGrey :
+                                  App.newDarkGrey :
                                   Colors.white,
                                   // borderRadius: BorderRadius.circular(5),
                                   // boxShadow: [
@@ -529,7 +534,7 @@ class OrderDetails extends StatelessWidget {
                                         height: 135,
                                         decoration: BoxDecoration(
                                           color: MyTheme.isDarkTheme.value ?
-                                          App.darkGrey :
+                                          App.newDarkGrey :
                                           Colors.white,
                                           // borderRadius: BorderRadius.circular(5),
                                           // boxShadow: [
@@ -659,7 +664,7 @@ class OrderDetails extends StatelessWidget {
                                 // height: 170,
                                 decoration: BoxDecoration(
                                   color: MyTheme.isDarkTheme.value ?
-                                  App.darkGrey :
+                                  App.newDarkGrey :
                                   Colors.white,
                                   // borderRadius: BorderRadius.circular(5),
                                   // boxShadow: [
@@ -808,7 +813,7 @@ class OrderDetails extends StatelessWidget {
       width: Get.width,
       height: 60,
       decoration: BoxDecoration(
-        color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+        color: MyTheme.isDarkTheme.value?App.newDarkGrey:Colors.white,
         boxShadow: [
           App.myBoxShadow,
         ]

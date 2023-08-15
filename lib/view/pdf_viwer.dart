@@ -2,6 +2,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
@@ -25,7 +26,10 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(''),
-        backgroundColor: const Color(0XFF181818),
+        backgroundColor: App.containerColor(),
+        iconTheme: IconThemeData(
+          color: App.textColor()
+        ),
       ),
       body: Center(
           child:  PDFView(

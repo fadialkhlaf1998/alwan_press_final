@@ -66,7 +66,12 @@ class _NewProfileState extends State<NewProfile> {
       body: SafeArea(
         child: Stack(
           children: [
-            DarkModeBackground(),
+            MyTheme.isDarkTheme.value?DarkModeBackground()
+                :Container(
+              width: Get.width,
+              height: Get.height,
+              color: App.lightGrey,
+            ),
 
             Global.user == null?
             _notLogin():

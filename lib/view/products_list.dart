@@ -11,6 +11,7 @@ import 'package:alwan_press/view/all_subCategory.dart';
 import 'package:alwan_press/view/product_details.dart';
 import 'package:alwan_press/view/search_text_field.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
+import 'package:alwan_press/widget/logo_text.dart';
 import 'package:alwan_press/widget/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,7 +42,7 @@ class ProductList extends StatelessWidget {
         body: SafeArea(
           child: Stack(
             children: [
-             const DarkModeBackground(),
+              DarkModeBackground(),
               Container(
                 padding: const EdgeInsets.only(top: 20),
                 width: MediaQuery.of(context).size.width,
@@ -96,7 +97,7 @@ class ProductList extends StatelessWidget {
                       child: Icon(Icons.menu, size: 25)),
                 ),
               ),
-              _logo(context),
+              LogoText(Get.width*0.25,height: 40),
               Global.langCode == 'en' ?
               Container(
                 width: MediaQuery.of(context).size.width * 0.15,
@@ -221,7 +222,7 @@ class ProductList extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 5,
+              flex: 4,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5,
                 child: ClipRRect(
@@ -247,7 +248,7 @@ class ProductList extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   width: MediaQuery.of(context).size.width * 0.5,

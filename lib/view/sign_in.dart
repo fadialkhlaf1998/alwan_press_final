@@ -10,6 +10,8 @@ import 'package:alwan_press/view/home.dart';
 import 'package:alwan_press/view/main_class.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:alwan_press/widget/light_mode_background.dart';
+import 'package:alwan_press/widget/logo.dart';
+import 'package:alwan_press/widget/logo_text.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +71,7 @@ class _SignInState extends State<SignIn> {
         body: Stack(
           alignment: Alignment.center,
           children: [
-            MyTheme.isDarkTheme.value?DarkModeBackground():LightModeBackground(),
+            MyTheme.isDarkTheme.value?DarkModeBackground(withBackground: true,):LightModeBackground(withBackground: true),
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -134,26 +136,11 @@ class _SignInState extends State<SignIn> {
             onTap: () {
               introController.move();
             },
-            child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.12,
-                height: MediaQuery.of(context).size.width * 0.12,
-                child: Image.asset(
-                  'assets/icons/Logo-Header.png',
-                  fit: BoxFit.cover,
-                )),
+            child: Logo(MediaQuery.of(context).size.width * 0.12),
           ),
         ),
         const SizedBox(width: 7),
-        Container(
-          height: MediaQuery.of(context).size.width * 0.1,
-          width: MediaQuery.of(context).size.width * 0.28,
-          decoration: BoxDecoration(
-            // color: Colors.red,
-              image: DecorationImage(
-                  fit: BoxFit.contain,
-                  image: MyTheme.isDarkTheme.value ? const AssetImage('assets/icons/logo_text.png') : const AssetImage('assets/icons/logo_text_black.png')
-              )),
-        )
+        LogoText(MediaQuery.of(context).size.width * 0.3)
       ],
     );
   }

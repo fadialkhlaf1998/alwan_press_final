@@ -8,6 +8,8 @@ import 'package:alwan_press/view/about_us.dart';
 import 'package:alwan_press/view/contact_information.dart';
 import 'package:alwan_press/view/pdf_viwer.dart';
 import 'package:alwan_press/view/sign_in.dart';
+import 'package:alwan_press/widget/logo.dart';
+import 'package:alwan_press/widget/logo_text.dart';
 import 'package:flutter/material.dart';
 import 'package:alwan_press/controller/main_class_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -273,22 +275,14 @@ class MyDrawer extends StatelessWidget {
             child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.12,
                 height: MediaQuery.of(context).size.width * 0.12,
-                child: Image.asset(
-                  'assets/icons/Logo-Header.png',
-                  fit: BoxFit.cover,
-                )),
+                child: Logo( MediaQuery.of(context).size.width * 0.1)),
           ),
         ),
         const SizedBox(width: 7),
         Container(
           height: MediaQuery.of(context).size.width * 0.1,
-          width: MediaQuery.of(context).size.width * 0.28,
-          decoration: BoxDecoration(
-            // color: Colors.red,
-              image: DecorationImage(
-                  fit: BoxFit.contain,
-                  image: MyTheme.isDarkTheme.value ? const AssetImage('assets/icons/logo_text.png') : const AssetImage('assets/icons/logo_text_black.png')
-              )),
+          // width: MediaQuery.of(context).size.width * 0.28,
+          child: LogoText(MediaQuery.of(context).size.width * 0.26),
         )
       ],
     );

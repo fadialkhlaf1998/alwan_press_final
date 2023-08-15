@@ -25,7 +25,7 @@ class Wishlist extends StatelessWidget {
       body: Obx(() => SafeArea(
         child: Stack(
           children: [
-            MyTheme.isDarkTheme.value? const DarkModeBackground():Center(),
+            MyTheme.isDarkTheme.value?  DarkModeBackground():Center(),
             Column(
               children: [
                 _header(context),
@@ -168,7 +168,7 @@ class Wishlist extends StatelessWidget {
       width: Get.width,
       height: 60,
       decoration: BoxDecoration(
-        color: MyTheme.isDarkTheme.value?App.darkGrey:Colors.white,
+        color: MyTheme.isDarkTheme.value?App.newDarkGrey:Colors.white,
         boxShadow: [
           App.myBoxShadow
         ]

@@ -6,19 +6,19 @@ import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/all_subCategory.dart';
-import 'package:alwan_press/view/contact_information.dart';
 import 'package:alwan_press/view/order_details.dart';
 import 'package:alwan_press/view/products_list.dart';
 import 'package:alwan_press/view/search_text_field.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
 import 'package:alwan_press/widget/light_mode_background.dart';
+import 'package:alwan_press/widget/logo.dart';
+import 'package:alwan_press/widget/logo_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -86,12 +86,12 @@ class _HomeState extends State<Home> {
               ? const Color(0XFF181818)
               : Colors.white));
       return Scaffold(
-        // endDrawer: MyDrawer(_scaffoldkey),
-        // key: _scaffoldkey,
+        endDrawer: MyDrawer(_scaffoldkey),
+        key: _scaffoldkey,
         body: SafeArea(
           child: Stack(
             children: [
-              MyTheme.isDarkTheme.value?const DarkModeBackground():const LightModeBackground(),
+              MyTheme.isDarkTheme.value? DarkModeBackground(): LightModeBackground(),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Column(
@@ -155,11 +155,11 @@ class _HomeState extends State<Home> {
                 onTap: (){
                   print('*-*-*');
                   // Get.to(()=>ContactInformation());
-                  // _scaffoldkey.currentState!.openEndDrawer();
+                  _scaffoldkey.currentState!.openEndDrawer();
                 },
                 child: Container(
                   color: Colors.transparent,
-                  child: const Icon(Icons.menu, size: 25,color: Colors.transparent,),
+                  child: Icon(Icons.menu, size: 25,color: App.textColor(),),
                 ),
 
               ),
@@ -218,9 +218,8 @@ class _HomeState extends State<Home> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AnimatedContainer(
-            duration: const Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 800),
             curve: Curves.fastOutSlowIn,
-
             width: homeController.logoMove.value
                 ? MediaQuery.of(context).size.width * 0.25
                 : MediaQuery.of(context).size.width * 0.1,
@@ -229,30 +228,17 @@ class _HomeState extends State<Home> {
                     height: MediaQuery.of(context).size.width * 0.1,
                     child: Lottie.asset('assets/icons/ICONS.json',
                         fit: BoxFit.cover))
-                : GestureDetector(
-                    onTap: () {
-                      homeController.move();
-                    },
-                    child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.1,
-                        height: MediaQuery.of(context).size.width * 0.1,
-                        child: Image.asset(
-                          'assets/icons/Logo-Header.png',
-                          fit: BoxFit.cover,
-                        )),
-                  ),
+                : Center(
+                  child: GestureDetector(
+                      onTap: () {
+                        homeController.move();
+                      },
+                      child: Logo(MediaQuery.of(context).size.width * 0.1),
+                    ),
+                ),
           ),
           const SizedBox(width: 7),
-          Container(
-            height: MediaQuery.of(context).size.width * 0.08,
-            width: MediaQuery.of(context).size.width * 0.23,
-            decoration: BoxDecoration(
-                // color: Colors.red,
-                image: DecorationImage(
-                    fit: BoxFit.contain,
-                    image: MyTheme.isDarkTheme.value ? const AssetImage('assets/icons/logo_text.png') : const AssetImage('assets/icons/logo_text_black.png')
-                )),
-          )
+          LogoText(MediaQuery.of(context).size.width * 0.25),
         ],
       ),
     );
@@ -572,8 +558,7 @@ class _HomeState extends State<Home> {
                           return child;
                         } else {
                           return Center(
-                            child:
-                                Lottie.asset('assets/icons/LogoAnimation.json'),
+                            child: Lottie.asset('assets/icons/LogoAnimation.json'),
                             // child: CircularProgressIndicator(),
                           );
                         }
