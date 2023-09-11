@@ -12,7 +12,7 @@ class ProductDetailsController extends GetxController{
 
   Rx<ProductList> productDetails = ProductList(id: -1, subCategoryId: -1, title: "", subTitle: "", search: "", image: "", rate: -1, rateCount: -1, description: "", price: -1, images: [],ar_desc: "",ar_title: "").obs;
   RxBool loading = false.obs;
-
+  RxInt slectedSlider = 0.obs;
   getData(itemId) async {
     loading.value = true;
     Api.getProductDetails(itemId).then((value){

@@ -189,37 +189,66 @@ class ProductDetails extends StatelessWidget {
       return Hero(tag: product, child: _image(context, product.image));
     }else{
       return Hero(tag: product,
-          child: Container(
-            width: MediaQuery.of(context).size.width * 0.9,
-            height: MediaQuery.of(context).size.width * 0.9,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10)
-            ),
-            child: CarouselSlider(
-              options: CarouselOptions(
-                  autoPlay: true,
-                  viewportFraction: 1,
-                  // width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.width * 0.9,
-                  autoPlayAnimationDuration: const Duration(milliseconds: 1000),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  onPageChanged: (index, _) {
-                    // homeController.sliderIndex.value = index;
-                  }),
-              items: product.images
-                  .map((e) => Container(
+          child: Stack(
+            children: [
+              Container(
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: MediaQuery.of(context).size.width * 0.9,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: NetworkImage(e.link),
-                    fit: BoxFit.cover,
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                      autoPlay: true,
+                      viewportFraction: 1,
+                      // width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.width * 0.9,
+                      autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      onPageChanged: (index, _) {
+                        productDetailsController.slectedSlider.value = index;
+                      }),
+                  items: product.images
+                      .map((e) => Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.width * 0.9,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: NetworkImage(e.link),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ))
+                      .toList(),
+                ),
+              ),
+              Positioned(
+                bottom: 5,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width*0.9,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: product.images.map((e) {
+                      return Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Container(
+                          width: 5,
+                          height: 5,
+                          decoration: BoxDecoration(
+                            color: productDetailsController.slectedSlider.value ==
+                                product.images.indexOf(e)
+                                ? App.blue
+                                : Colors.grey,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   ),
                 ),
-              ))
-                  .toList(),
-            ),
+              ),
+            ],
           )
       );
     }

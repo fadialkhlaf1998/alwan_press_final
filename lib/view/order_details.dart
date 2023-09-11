@@ -837,7 +837,7 @@ class OrderDetails extends StatelessWidget {
 
   _getAnimation(int state, int hold){
     if(hold == 1){
-      return Lottie.asset("assets/animation/6.json");
+      return Lottie.asset("assets/animation/new_hold.json");
     }else if (state == 0){
       return Lottie.asset("assets/animation/1.json");
     }else if (state == 1){

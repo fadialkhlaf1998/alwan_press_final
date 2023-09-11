@@ -70,6 +70,7 @@ dependencies:
   foloosi_plugins: ^1.0.14
   bottom_bar_page_transition: ^2.0.0
   app_settings: ^4.2.0
+  flutter_speed_dial: ^7.0.0
 
 dev_dependencies:
   flutter_test:

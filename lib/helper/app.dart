@@ -42,7 +42,14 @@ class App{
       return lightMed;
     }
   }
-
+  static mySnackBar(title, description){
+    return Get.snackbar(
+      title,
+      description,
+      margin: EdgeInsets.only(top: 30,left: 25,right: 25),
+      colorText: Colors.white,
+    );
+  }
 
   static Color lightLG = Color(0xff7D7D7D);
   static Color textLgColor(){

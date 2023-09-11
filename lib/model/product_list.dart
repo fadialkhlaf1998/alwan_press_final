@@ -55,7 +55,7 @@ class ProductList {
     rateCount: json["rate_count"],
     description: json["description"],
     price: json["price"].toDouble(),
-    images: List<MyImage>.from(json["images"].map((x) => MyImage.fromMap(x))),
+    images: json["images"]== null?[]:List<MyImage>.from(json["images"].map((x) => MyImage.fromMap(x))),
   );
 
   Map<String, dynamic> toMap() => {

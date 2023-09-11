@@ -163,5 +163,13 @@
   "paid_amount": "Paid Amount",
   "delete_account": "Delete Account",
   "confirm_dialog": "Confirm Dialog",
-  "are_u_sure_for_delete_account": "Are You Sure For Delete Account"
+  "are_u_sure_for_delete_account": "Are You Sure For Delete Account",
+  "our_clients": "Our Clients",
+  "our_clients_description": "We’ve had the good fortune of being involved with some pretty fantastic brands and agencies, most of our clients are operating on the national consumer market.\nTogether with Alwan Printing Press they set out on a journey to explore new design and product opportunities. Here are some we’ve recently added to our growing list of Clients:",
+  "inquiry": "Inquiry",
+  "message": "Message",
+  "quantity": "Quantity",
+  "person": "Person",
+  "company": "Company",
+  "attachment": "Attachment"
 }

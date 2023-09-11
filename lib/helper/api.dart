@@ -7,6 +7,7 @@ import 'package:alwan_press/model/start_up.dart';
 import 'package:alwan_press/model/user.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
 
 class Api {
@@ -48,7 +49,33 @@ class Api {
     }
 
   }
+  static Future<bool> addInquery(XFile? image,int isPerson,String name,
+      String customerMSG, String quantity, String phone, String code, String email)async{
+    var request = http.MultipartRequest('POST', Uri.parse(url+'api/inquery'));
+    request.fields.addAll({
+      'is_person': isPerson.toString(),
+      'name': name,
+      'customer_msg': customerMSG,
+      'quantity': quantity.toString(),
+      'phone_number': phone,
+      'phone_code': code,
+      'email': email
+    });
+    if(image != null){
+      request.files.add(await http.MultipartFile.fromPath('file', image.path));
+    }
+    http.StreamedResponse response = await request.send();
 
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      return true;
+    }
+    else {
+      print(response.reasonPhrase);
+      return false;
+    }
+
+  }
   static Future<ProductList> getProductDetails(int productId) async {
     var request = http.MultipartRequest('GET', Uri.parse(url + 'api/product/$productId'));
 
@@ -62,7 +89,7 @@ class Api {
       return ProductList(id: -1, subCategoryId: -1, title: "", subTitle: "", search: "", image: "", rate: 0, rateCount: 0, description: "", price: -1, images: [],ar_desc: "",ar_title: "");
     }
   }
-  static Future<List<Client>> getClients(int subCategoryId) async {
+  static Future<List<Client>> getClients() async {
     var request = http.Request('GET', Uri.parse(url + 'api/clients'));
 
     http.StreamedResponse response = await request.send();

@@ -16,6 +16,7 @@ import 'package:alwan_press/model/start_up.dart';
 import 'package:alwan_press/view/main_class.dart';
 import 'package:alwan_press/view/sign_in.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -23,6 +24,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class IntroController extends GetxController{
   RxBool logoMove = false.obs;
+  RxBool openSpeedDail = false.obs;
+  ValueNotifier<bool> isDialOpen = ValueNotifier(false);
   RxList<Category> categoriesList = <Category>[].obs;
   RxList<SubCategories> tempCategoriesList = <SubCategories>[].obs;
   RxList<CustomerService> customerServiceList = <CustomerService>[].obs;

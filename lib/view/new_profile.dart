@@ -14,6 +14,7 @@ import 'package:alwan_press/view/address_2.dart';
 import 'package:alwan_press/view/connect_us.dart';
 import 'package:alwan_press/view/contact_information.dart';
 import 'package:alwan_press/view/notidication.dart';
+import 'package:alwan_press/view/our_clients.dart';
 import 'package:alwan_press/view/pdf_viwer.dart';
 import 'package:alwan_press/view/sign_in.dart';
 import 'package:alwan_press/widget/darkModeBackground.dart';
@@ -130,6 +131,7 @@ class _NewProfileState extends State<NewProfile> {
             children: [
               _language(context),
               _notification(context),
+              _ourClients(context),
               _contactWithUs(context),
               _aboutUs(context),
               _lightDarkMode(context),
@@ -717,6 +719,7 @@ class _NewProfileState extends State<NewProfile> {
 
 
               _language(context),
+              _ourClients(context),
               _contactWithUs(context),
 
               GestureDetector(
@@ -1125,6 +1128,44 @@ class _NewProfileState extends State<NewProfile> {
                 ),
                 Text(settingsController.languageName.value,style: TextStyle(color: App.textLgColor(),fontSize: 10),)
 
+              ],
+            ),
+            SizedBox(height: 15,),
+            Container(color: App.textColor().withOpacity(0.05),width: Get.width - 20 ,height: 1,)
+          ],
+        ),
+      ),
+    );
+  }
+  _ourClients(BuildContext context){
+    return  GestureDetector(
+      onTap: (){
+        // todo our clients
+        Get.to(()=>OurClients());
+      },
+      child: Container(
+        width: Get.width - 20,
+        color: Colors.transparent,
+        height: 53,
+        child: Column(
+          children: [
+            SizedBox(height: 15,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      MyTheme.isDarkTheme.value
+                          ? "assets/new_profile/dark/clients.svg"
+                          : "assets/new_profile/light/clients.svg",
+                      height: 18,
+                    ),
+                    SizedBox(width: 10,),
+                    Text(App_Localization.of(context).translate("our_clients"),style: TextStyle(color: App.textLgColor(),fontSize: 12),)
+                  ],
+                ),
+                // Icon(Icons.arrow_forward_ios,size: 12, color: App.textColor(),)
               ],
             ),
             SizedBox(height: 15,),

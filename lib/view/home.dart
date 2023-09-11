@@ -6,6 +6,8 @@ import 'package:alwan_press/helper/app.dart';
 import 'package:alwan_press/helper/global.dart';
 import 'package:alwan_press/helper/myTheme.dart';
 import 'package:alwan_press/view/all_subCategory.dart';
+import 'package:alwan_press/view/contact_information.dart';
+import 'package:alwan_press/view/inquery.dart';
 import 'package:alwan_press/view/order_details.dart';
 import 'package:alwan_press/view/products_list.dart';
 import 'package:alwan_press/view/search_text_field.dart';
@@ -18,6 +20,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:lottie/lottie.dart';
@@ -86,6 +89,45 @@ class _HomeState extends State<Home> {
               ? const Color(0XFF181818)
               : Colors.white));
       return Scaffold(
+        floatingActionButton: SpeedDial(
+          // isOpenOnStart: true,
+          openCloseDial: introController.isDialOpen,
+          onClose: (){
+            introController.openSpeedDail(false);
+            introController.isDialOpen.value = false;
+          },
+          onPress: (){
+            print('**************');
+            introController.openSpeedDail(!introController.openSpeedDail.value);
+            introController.isDialOpen.value = introController.openSpeedDail.value;
+            print(introController.openSpeedDail.value);
+          },
+          overlayColor: App.containerColor(),
+          child:AnimatedSwitcher(
+            duration: Duration(milliseconds: 300),
+            child: introController.openSpeedDail.value
+            ?Icon(Icons.keyboard_arrow_down_outlined,color: Colors.white,)
+            :Icon(Icons.keyboard_arrow_up,color: Colors.white),
+          ),
+          children: [
+            SpeedDialChild(
+              child: Icon(Icons.perm_phone_msg_outlined),
+              backgroundColor: App.pink,
+              foregroundColor: Colors.white,
+              onTap: (){
+                Get.to(()=>ContactInformation());
+              }
+            ),
+            SpeedDialChild(
+              backgroundColor: App.pink,
+              foregroundColor: Colors.white,
+              child: Icon(Icons.chat),
+              onTap: (){
+                Get.to(()=>InQuery());
+              }
+            )
+          ],
+        ),
         endDrawer: MyDrawer(_scaffoldkey),
         key: _scaffoldkey,
         body: SafeArea(

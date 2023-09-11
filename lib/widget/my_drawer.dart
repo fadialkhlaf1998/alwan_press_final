@@ -69,12 +69,9 @@ class MyDrawer extends StatelessWidget {
                     Container(
                       width: MediaQuery.of(context).size.width*0.75,
                       height: MediaQuery.of(context).size.width/2*0.75,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           image: DecorationImage(
-                              image:
-                                  ///dark mode
-                                  AssetImage("assets/drawer/dark_new_about_us.jpg"),
-                                  // :AssetImage("assets/drawer/new_about_us.jpg"),
+                              image: AssetImage("assets/drawer/dark_new_about_us.jpg"),
                               fit: BoxFit.cover
                           )
                       ),
@@ -83,7 +80,6 @@ class MyDrawer extends StatelessWidget {
                       onTap: (){
                         _scaffoldkey.currentState!.closeEndDrawer();
                         Get.back();
-                        // mainClassController.bottomBarController.jumpToTab(0);
                         mainClassController.selectedIndex(0);
                       },
                       child: Container(
